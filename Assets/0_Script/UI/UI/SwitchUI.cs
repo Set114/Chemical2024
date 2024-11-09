@@ -10,7 +10,7 @@ public class SwitchUI : MonoBehaviour
     [SerializeField] GameObject LearnUI;
     [SerializeField] GameObject TestUI;
 
-    [Header("Buttons")]
+    [Header("下一關的案紐")]//但只負責關掉UI
     [SerializeField] Button learnUI_Close;
     [SerializeField] Button testUI_Close;
 
@@ -18,26 +18,26 @@ public class SwitchUI : MonoBehaviour
     [SerializeField] GameObject[] levelUIs; 
     [SerializeField] GameObject items; 
 
-    [Header("TestIndex")]
+    [Header("輸入測驗的第一個UI在第幾個Element")]
     [SerializeField] int TestIndex;
     private int levelCount = -1;
-    private int chapterMode = 0; // 假設的初始值
+    private int chapterMode = 0; 
+    // 假設關卡一開始是教學模式，0 = 教學 ，1 = 測驗
 
-    private LevelManager levelManager;
-    private SwitchItem switchItem;
-    public LearnDataManager learnDataManager;
-    public TestDataManager testDataManager;
-    private GameManager gameManager;
+    private LevelManager levelManager; // 查看與紀錄關卡是否已做過
+    private SwitchItem switchItem; // 切換關卡物品
+    public LearnDataManager learnDataManager; // 紀錄學生的 教學 資料
+    private GameManager gameManager; // 讀取玩家資料
 
     void Start()
     {
-        // 初始化 LevelManager
         levelManager = new LevelManager(levelUIs.Length);
+
         gameManager = GameManager.Instance;
         chapterMode = gameManager.GetChapterMode();
-
-        // 確保 SwitchItem 已初始化
+        
         switchItem = GetComponent<SwitchItem>();
+
         if (switchItem == null)
         {
             Debug.LogError("SwitchItem component not found!");
@@ -67,7 +67,7 @@ public class SwitchUI : MonoBehaviour
         
     }
 
-    // 關閉當前活動的 UI
+    // 關閉當前活動的 UI ( UI 全關 )
     public void CloseCurrentUI()
     {
         foreach (GameObject ui in levelUIs)
@@ -91,7 +91,7 @@ public class SwitchUI : MonoBehaviour
             CloseCurrentUI();
             items.SetActive(false);
 
-            // 使用 LevelManager 來檢查通關狀態
+            // 使用 LevelManager 來檢查通關狀態(此關卡是否已做過)
             do
             {
                 levelCount++;
@@ -103,20 +103,18 @@ public class SwitchUI : MonoBehaviour
                 if (levelCount < TestIndex)
                 {
                     LearnUI.SetActive(true);
+                    // 紀錄學生關卡的學習歷程資料
                     learnDataManager.GetsId(levelCount);
                     learnDataManager.StartLevel();
                 }
                 else
                 {
-                    
-                    gameManager.UpdateChapterMode(1);
                     TestUI.SetActive(true);
-                    // int testindex = levelCount % TestIndex;
-                    // testDataManager.GetsId(testindex);
-                    // testDataManager.StartLevel();
+                    gameManager.UpdateChapterMode(1);
                 }
+                //換關
                 switchItem.SetCurrentLevel(levelCount);
-                //Debug.Log("ShowUIFinish");
+                //Debug.Log("ShowNextUI is Finish");
             }
             else
             {
@@ -129,23 +127,27 @@ public class SwitchUI : MonoBehaviour
         }
     }
 
+    // 顯示測驗關卡
     public void ShowTestLevel()
     {
         levelCount = TestIndex - 1;
         ShowNextUI();
     }
 
+    // 顯示跳關
     public void ListChangeLevel(int levelindex)
     {
         levelCount = levelindex - 1;
         ShowNextUI();
     }
 
+    // 取得目前在第幾關的值
     public int GetLevelCount()
     {
         return levelCount;
     }
 
+    // 標記某個關卡為通關
     public void CompletedState(int levelIndex)
     {
         levelManager.CompleteLevel(levelIndex);

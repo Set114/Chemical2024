@@ -30,13 +30,8 @@ public class SwitchItem : MonoBehaviour
     [SerializeField] public TMP_Text showLevelText;
     [SerializeField] public GameObject item;
 
-    //public CameraController cameraController;
-
-
     void Start()
     {
-        //cameraController = FindObjectOfType<CameraController>();
-
         if (changeLevelButtons != null)
         {
             foreach (Button button in changeLevelButtons)
@@ -70,12 +65,6 @@ public class SwitchItem : MonoBehaviour
     // 切換到下一關的物品
     public void ChangeLevel()
     {
-
-        // if (cameraController != null)
-        // {
-        //    cameraController.ResetCameraSize();
-        // }
-
         CloseAllItem();
         item.SetActive(true);
 
@@ -114,13 +103,4 @@ public class SwitchItem : MonoBehaviour
     {
         currentLevelIndex = levelindex;
     }
-
-
-    // public void ListSwitch(int index)
-    // {
-    //     //playSpeechAudio.SetCurrentLevel(index);
-    //     cameraController.SetCurrentLevel(index);
-    //     stage5_UIManager.SetCurrentLevel(index);
-    //     currentLevelIndex = index;
-    // }
 }
