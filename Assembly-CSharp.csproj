@@ -59,198 +59,235 @@
     <UnityVersion>2021.3.36f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\pinky\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\pinky\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.4\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\TargetProjectionMatrix.cs" />
-    <Compile Include="Assets\Script\MyGameManager.cs" />
+    <Compile Include="Assets\0_Script\Script\MyGameManager.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\GameViewEncoder.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage5\SwitchLevelObjects_5.cs" />
-    <Compile Include="Assets\0_Script\ChangeMaterial0Collision.cs" />
+    <Compile Include="Assets\0_Script\UI\OLD_Stage5\SwitchLevelObjects_5.cs" />
+    <Compile Include="Assets\0_Script\Script\ChangeMaterial0Collision.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\EnergySaving\FPSManager.cs" />
-    <Compile Include="Assets\0_Script\ShowBubbleChangeColor.cs" />
-    <Compile Include="Assets\0_Script\LockRigidbodyPosition.cs" />
+    <Compile Include="Assets\0_Script\Script\ShowBubbleChangeColor.cs" />
+    <Compile Include="Assets\0_Script\stage3\part0run.cs" />
+    <Compile Include="Assets\0_Script\Script\LockRigidbodyPosition.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Control\UIControl.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\DemoObjectAnimation.cs" />
-    <Compile Include="Assets\Script\AnimationEventMediator3.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationEventMediator3.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\SceneManager_helper.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\Demo Assets\CFXR_Demo.cs" />
-    <Compile Include="Assets\0_Script\CollisionDetector.cs" />
+    <Compile Include="Assets\0_Script\Script\CollisionDetector.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\FMClient.cs" />
-    <Compile Include="Assets\0_Script\UI\ElzManager.cs" />
-    <Compile Include="Assets\0_Script\PickupAndEffect.cs" />
-    <Compile Include="Assets\0_Script\ObjectTargetAttachment.cs" />
-    <Compile Include="Assets\zz\FireInteraction.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\UI\ButtonAnimation.cs" />
+    <Compile Include="Assets\0_Script\stage3\backp1.cs" />
+    <Compile Include="Assets\0_Script\ELF\ElzManager.cs" />
+    <Compile Include="Assets\0_Script\Script\PickupAndEffect.cs" />
+    <Compile Include="Assets\0_Script\Script\ObjectTargetAttachment.cs" />
+    <Compile Include="Assets\0_Script\Script\FireInteraction.cs" />
     <Compile Include="Assets\0_Script\GameManager.cs" />
-    <Compile Include="Assets\0_Script\UI\CheckAnswer.cs" />
+    <Compile Include="Assets\zz\AnimationController_Unit3.cs" />
     <Compile Include="Assets\Pc Player\Script\InteractionController.cs" />
-    <Compile Include="Assets\0_Script\ReturnToStartPosition.cs" />
+    <Compile Include="Assets\0_Script\Data\LearnDataManager.cs" />
+    <Compile Include="Assets\0_Script\Script\ReturnToStartPosition.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\FMSocketIOManager.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\Le1CheckAnswer.cs" />
     <Compile Include="Assets\FMETP_STREAM\Common\Scripts\Loom.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\Demo Assets\CFXR_Demo_Translate.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_Event\Ack.cs" />
+    <Compile Include="Assets\0_Script\Script\CollisionDetection1.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\PlaySpeechAudio.cs" />
-    <Compile Include="Assets\Model\vr cartoon hand\scripts\handanimations.cs" />
+    <Compile Include="Assets\0_Script\Audio\PlaySpeechAudio.cs" />
+    <Compile Include="Assets\3_Model\VRHand\vr cartoon hand\scripts\handanimations.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\SwitchUI.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Scripts\CFXR_ParticleText.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\SocketIOException.cs" />
-    <Compile Include="Assets\Model\Security Systems\Free Version\Scripts\TabletInput.cs" />
+    <Compile Include="Assets\0_Script\UI\Stage1\IceBlockCollisionStage1UI.cs" />
+    <Compile Include="Assets\3_Model\Props\Security Systems\Free Version\Scripts\TabletInput.cs" />
     <Compile Include="Assets\Pc Player\Script\ControllerMovement3D.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\ConnectionDebugText.cs" />
-    <Compile Include="Assets\0_Script\FDGradientRadial.cs" />
-    <Compile Include="Assets\0_Script\BlendShapeControl.cs" />
-    <Compile Include="Assets\GasCan.cs" />
+    <Compile Include="Assets\0_Script\Script\FDGradientRadial.cs" />
+    <Compile Include="Assets\0_Script\AnimationController\C6H12O6_0624ShowController.cs" />
+    <Compile Include="Assets\0_Script\Script\BlendShapeControl.cs" />
+    <Compile Include="Assets\GAS\GasCan.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_Packet\Packet.cs" />
-    <Compile Include="Assets\0_Script\UI\SwitchLevelObjects.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\Interactive\WorldSpaceButton\OffScreenTrigger.cs" />
-    <Compile Include="Assets\0_Script\XR\InputManager_L.cs" />
+    <Compile Include="Assets\0_Script\VRHandController\XR\InputManager_L.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\Interactive\TouchVisualization.cs" />
-    <Compile Include="Assets\Script\Card.cs" />
-    <Compile Include="Assets\Script\Spill.cs" />
-    <Compile Include="Assets\0_Script\ShowOnCFXR.cs" />
-    <Compile Include="Assets\Model\Security Systems\Free Version\Scripts\TabletDisplayController.cs" />
-    <Compile Include="Assets\Script\HintController.cs" />
+    <Compile Include="Assets\0_Script\Script\Card.cs" />
+    <Compile Include="Assets\0_Script\Script\Spill.cs" />
+    <Compile Include="Assets\0_Script\Script\ShowOnCFXR.cs" />
+    <Compile Include="Assets\3_Model\Props\Security Systems\Free Version\Scripts\TabletDisplayController.cs" />
+    <Compile Include="Assets\0_Script\Script\HintController.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\FMPCStreamEncoder.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\Lvl1tutorialGM.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_Event\SocketIOEvent.cs" />
-    <Compile Include="Assets\0_Script\ShowOnCollision.cs" />
+    <Compile Include="Assets\0_Script\Script\ShowOnCollision.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\TextureEncoder.cs" />
-    <Compile Include="Assets\zz\SphereDetection.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\AudioManager.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction6.cs" />
-    <Compile Include="Assets\Script\DisplayText.cs" />
-    <Compile Include="Assets\zz\ObjectDuplicator.cs" />
-    <Compile Include="Assets\0_Script\UI\TEST_Temp.cs" />
-    <Compile Include="Assets\0_Script\XR\InputHandler.cs" />
+    <Compile Include="Assets\0_Script\Script\SphereDetection.cs" />
+    <Compile Include="Assets\0_Script\Audio\AudioManager.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction6.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\LevelManager.cs" />
+    <Compile Include="Assets\0_Script\Script\WaterandGlass.cs" />
+    <Compile Include="Assets\0_Script\Script\DisplayText.cs" />
+    <Compile Include="Assets\0_Script\stage3\Allcalculationlevels.cs" />
+    <Compile Include="Assets\0_Script\Script\ObjectDuplicator.cs" />
+    <Compile Include="Assets\0_Script\TEST\TEST_Temp.cs" />
+    <Compile Include="Assets\0_Script\VRHandController\XR\InputHandler.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\0_Script\VRHandController\HandAnimatorController.cs" />
+    <Compile Include="Assets\zz\DetectBall.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\Interactive\ZoomManager.cs" />
     <Compile Include="Assets\0_Script\UI\Stage0\LogInSystem.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\AnimatorStartStage1.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimatorStartStage1.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\LargeFileDecoder.cs" />
-    <Compile Include="Assets\Model\Security Systems\Free Version\Scripts\FreebieCameraHookupScript.cs" />
+    <Compile Include="Assets\3_Model\Props\Security Systems\Free Version\Scripts\FreebieCameraHookupScript.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\Interactive\WorldSpaceButton\WorldToScreenSpace.cs" />
+    <Compile Include="Assets\0_Script\stage3\calculateManager.cs" />
     <Compile Include="Assets\0_Script\UI\Stage0\ReadDatas.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\FillCameraBackground.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction3.cs" />
-    <Compile Include="Assets\0_Script\LockjPosition.cs" />
-    <Compile Include="Assets\0_Script\AnimationTrue.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction3.cs" />
+    <Compile Include="Assets\0_Script\Script\LockjPosition.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Character\Parts.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationTrue.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\GameViewDecoder.cs" />
-    <Compile Include="Assets\0_Script\HammerIronInteraction.cs" />
+    <Compile Include="Assets\0_Script\stage3\AtomicDetection.cs" />
+    <Compile Include="Assets\0_Script\Script\HammerIronInteraction.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\LargeFileEncoder.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\Lvl1TestGM.cs" />
     <Compile Include="Assets\Pc Player\Script\PlayerController2.cs" />
-    <Compile Include="Assets\0_Script\CameraZoom.cs" />
-    <Compile Include="Assets\Script\WaterScaleCube.cs" />
-    <Compile Include="Assets\Script\CubeScaleDisplay.cs" />
+    <Compile Include="Assets\0_Script\Script\CameraZoom.cs" />
+    <Compile Include="Assets\0_Script\Script\WaterScaleCube.cs" />
+    <Compile Include="Assets\zz\RealBall.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeScaleDisplay.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\NetworkAction\NetworkActionDemo.cs" />
-    <Compile Include="Assets\0_Script\MoveObject.cs" />
-    <Compile Include="Assets\0_Script\UI\ELFStatus.cs" />
+    <Compile Include="Assets\0_Script\Script\MoveObject.cs" />
+    <Compile Include="Assets\0_Script\ELF\ELFStatus.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\NetworkAction\NetworkActions_Debug.cs" />
-    <Compile Include="Assets\SoftKitty\LiquidContainer\Scripts\LiquidControl.cs" />
-    <Compile Include="Assets\0_Script\IceBlockCollision.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction6.cs" />
-    <Compile Include="Assets\0_Script\test.cs" />
+    <Compile Include="Assets\0_Script\Data\CheckAnswer.cs" />
+    <Compile Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Scripts\LiquidControl.cs" />
+    <Compile Include="Assets\zz\FakeBall.cs" />
+    <Compile Include="Assets\0_Script\UI\Stage0\LoginForPeiHsin.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Control\DemoControl.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction6.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\UI\ButtonParts.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\SwitchT.cs" />
+    <Compile Include="Assets\0_Script\Data\DataWrite.cs" />
     <Compile Include="Assets\Pc Player\Script\IInteractable.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\Parser.cs" />
+    <Compile Include="Assets\0_Script\Data\TestDataManager.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\EnergySaving\EnergySavingManager.cs" />
-    <Compile Include="Assets\0_Script\change.cs" />
+    <Compile Include="Assets\0_Script\Script\change.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RotateCamera.cs" />
-    <Compile Include="Assets\Script\AnimationController.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage3\stage3_setting.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationController.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\UI\AnimationUI.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\AudioDecoder.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage5\Stage5Setting.cs" />
-    <Compile Include="Assets\0_Script\CorrectPosition.cs" />
-    <Compile Include="Assets\0_Script\BotTrigger.cs" />
+    <Compile Include="Assets\0_Script\UI\OLD_Stage5\Stage5Setting.cs" />
+    <Compile Include="Assets\zz\Whiteboard.cs" />
+    <Compile Include="Assets\0_Script\Script\CorrectPosition.cs" />
+    <Compile Include="Assets\0_Script\Script\BotTrigger.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\FMNetworkManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\Demo Assets\Kino Bloom\Bloom.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_Packet\SocketPacketType.cs" />
-    <Compile Include="Assets\0_Script\CollisionTest.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\Stage1_UIManager.cs" />
-    <Compile Include="Assets\0_Script\Moveitem.cs" />
+    <Compile Include="Assets\0_Script\Script\CollisionTest.cs" />
+    <Compile Include="Assets\0_Script\Script\Moveitem.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\Demo Assets\CFXR_Demo_Rotate.cs" />
-    <Compile Include="Assets\0_Script\XR\ButtonHandler_L.cs" />
-    <Compile Include="Assets\0_Script\PlayAnimationOnPickup.cs" />
-    <Compile Include="Assets\Script\ScaleCubeCalculate.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Character\PartsItem.cs" />
+    <Compile Include="Assets\0_Script\VRHandController\XR\ButtonHandler_L.cs" />
+    <Compile Include="Assets\0_Script\Script\PlayAnimationOnPickup.cs" />
+    <Compile Include="Assets\0_Script\Script\ScaleCubeCalculate.cs" />
     <Compile Include="Assets\0_Script\UI\Stage0\MenuUIManager.cs" />
-    <Compile Include="Assets\0_Script\ChangeColor.cs" />
-    <Compile Include="Assets\0_Script\VRControllerKeyboardInput.cs" />
+    <Compile Include="Assets\0_Script\Script\ChangeColor.cs" />
+    <Compile Include="Assets\0_Script\Script\VRControllerKeyboardInput.cs" />
+    <Compile Include="Assets\0_Script\TEST\Test_ItemLevel.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\FMPCStreamDecoder.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction2.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction2.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\DemoScreenshot.cs" />
-    <Compile Include="Assets\0_Script\CTrigger.cs" />
+    <Compile Include="Assets\zz\CanvasController_Unit3.cs" />
+    <Compile Include="Assets\0_Script\Script\CTrigger.cs" />
+    <Compile Include="Assets\0_Script\stage3\OkButtonHandler.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\GyroController.cs" />
-    <Compile Include="Assets\0_Script\PositionLockManager.cs" />
-    <Compile Include="Assets\Script\AnimationEnable.cs" />
+    <Compile Include="Assets\0_Script\Script\PositionLockManager.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationEnable.cs" />
+    <Compile Include="Assets\zz\ElementDisplay.cs" />
     <Compile Include="Assets\Image\Sci-Fi UI\Demo_Assets\scripts\GUI_Demo.cs" />
-    <Compile Include="Assets\0_Script\PCCameraMove.cs" />
-    <Compile Include="Assets\XR\NewBehaviourScript.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\CheckImage.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\PlaySpeechAudio_M.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction.cs" />
-    <Compile Include="Assets\0_Script\UI\QuestionCheck.cs" />
+    <Compile Include="Assets\0_Script\Script\PCCameraMove.cs" />
+    <Compile Include="Assets\0_Script\VRHandController\XR\NewBehaviourScript.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\CheckImage.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\UI\ViewModel.cs" />
+    <Compile Include="Assets\0_Script\UI\Stage0\Test.cs" />
+    <Compile Include="Assets\0_Script\stage3\ButtonHandler.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\LevelEndSequence.cs" />
+    <Compile Include="Assets\0_Script\Audio\PlaySpeechAudio_M.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction.cs" />
+    <Compile Include="Assets\0_Script\AnimationController\FeAniAnimationController.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\QuestionCheck.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\NetworkAction\NetworkActionServer.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\NetworkDiscovery.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\VolumeController.cs" />
-    <Compile Include="Assets\Model\Security Systems\Free Version\Scripts\ObjectRotator.cs" />
+    <Compile Include="Assets\0_Script\Audio\VolumeController.cs" />
+    <Compile Include="Assets\3_Model\Props\Security Systems\Free Version\Scripts\ObjectRotator.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\MicEncoder.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\Sound.cs" />
+    <Compile Include="Assets\0_Script\Audio\Sound.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
-    <Compile Include="Assets\0_Script\ScopeLimit.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction.cs" />
+    <Compile Include="Assets\0_Script\Script\ScopeLimit.cs" />
+    <Compile Include="Assets\0_Script\Audio\ButtonArrayStopAudio.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\UI\PartsUI.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_Packet\EnginePacketType.cs" />
-    <Compile Include="Assets\Xin\IceBlockCollision2.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction3.cs" />
-    <Compile Include="Assets\0_Script\ControllerHaptics.cs" />
-    <Compile Include="Assets\0_Script\show.cs" />
-    <Compile Include="Assets\0_Script\AnimationEventMediator.cs" />
+    <Compile Include="Assets\0_Script\Script\IceBlockCollision.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction3.cs" />
+    <Compile Include="Assets\0_Script\Script\ControllerHaptics.cs" />
+    <Compile Include="Assets\0_Script\Script\show.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationEventMediator.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Character\CharacterBase.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Scripts\CFXR_Effect.cs" />
-    <Compile Include="Assets\Script\Ignition.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction4.cs" />
+    <Compile Include="Assets\0_Script\Script\Ignition.cs" />
+    <Compile Include="Assets\0_Script\UI\Stage0\Login.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction4.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\Demo\FMNetwork_DemoAnimation.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\VolumeControl.cs" />
+    <Compile Include="Assets\0_Script\Audio\VolumeControl.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\WebcamManager.cs" />
-    <Compile Include="Assets\0_Script\CollisionDetection.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction2.cs" />
+    <Compile Include="Assets\0_Script\Script\CollisionDetection.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction2.cs" />
     <Compile Include="Assets\Scripts\react.cs" />
-    <Compile Include="Assets\zz\ButtonInteraction5.cs" />
-    <Compile Include="Assets\0_Script\UI\Audio\Level3AudioSet.cs" />
+    <Compile Include="Assets\zz\ElementalBallCounter.cs" />
+    <Compile Include="Assets\0_Script\Script\ButtonInteraction5.cs" />
+    <Compile Include="Assets\0_Script\Audio\Level3AudioSet.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\SocketIOComponentWebGL.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\FMServer.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage1\CameraController.cs" />
+    <Compile Include="Assets\0_Script\UI\CameraController.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Mapper\AudioEncoder.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\Demo\FMNetwork_Demo.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Scripts\CFXR_EmissionBySurface.cs" />
     <Compile Include="Assets\Pc Player\Script\ObjectPickable.cs" />
-    <Compile Include="Assets\Script\Timer.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Scripts\Character\EquipSlot.cs" />
+    <Compile Include="Assets\0_Script\Script\Timer.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Networking\NetworkAction\NetworkActionClient.cs" />
-    <Compile Include="Assets\Xin\AnimationEventMediator2.cs" />
+    <Compile Include="Assets\0_Script\Script\AnimationEventMediator2.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\SwitchItem.cs" />
     <Compile Include="Assets\0_Script\UI\ScreenShow.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\FMWebSocketNetwork_debug.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Scripts\CFXR_ParticleTextFontAsset.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\SocketIOComponent.cs" />
-    <Compile Include="Assets\0_Script\UI\PCTestUI.cs" />
-    <Compile Include="Assets\0_Script\UI\SettingUIManager.cs" />
+    <Compile Include="Assets\0_Script\TEST\PCTestUI.cs" />
+    <Compile Include="Assets\0_Script\UI\UI\SettingUIManager.cs" />
     <Compile Include="Assets\FMETP_STREAM\Common\Scripts\Events\UnityEventClass.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction5.cs" />
-    <Compile Include="Assets\0_Script\ShowCapOnFireCollision.cs" />
-    <Compile Include="Assets\Script\Flow.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction5.cs" />
+    <Compile Include="Assets\0_Script\Script\ShowCapOnFireCollision.cs" />
+    <Compile Include="Assets\0_Script\Script\Flow.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\Decoder.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
-    <Compile Include="Assets\Script\GlucoseScaleCube.cs" />
-    <Compile Include="Assets\Script\OpenObject.cs" />
-    <Compile Include="Assets\0_Script\UI\Stage5\Stage5_UIManager.cs" />
+    <Compile Include="Assets\0_Script\Script\GlucoseScaleCube.cs" />
+    <Compile Include="Assets\0_Script\Script\OpenObject.cs" />
+    <Compile Include="Assets\0_Script\UI\OLD_Stage5\Stage5_UIManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Scripts\CFXR_Effect.CameraShake.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\SocketIO\FM_IO\Encoder.cs" />
-    <Compile Include="Assets\Script\ParticleCollider.cs" />
-    <Compile Include="Assets\0_Script\ScaleOverTime.cs" />
-    <Compile Include="Assets\zz\CubeSphereInteraction4.cs" />
+    <Compile Include="Assets\0_Script\Script\ParticleCollider.cs" />
+    <Compile Include="Assets\0_Script\Script\ScaleOverTime.cs" />
+    <Compile Include="Assets\0_Script\Script\CubeSphereInteraction4.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Features\Interactive\PointerEvents.cs" />
-    <Compile Include="Assets\0_Script\IronDetection.cs" />
+    <Compile Include="Assets\0_Script\Script\IronDetection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\FMTurboJpegWrapper\FMTurbojpegWrapper.dll" />
@@ -264,20 +301,19 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\CircleShader.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\FMPCStream\FMPCStreamDecoder.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Liquid.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Liquid.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-    <None Include="Assets\ChemLabEquipment\Shaders\TransparentBlendColorLiquid.shader" />
+    <None Include="Assets\3_Model\Props\ChemLabEquipment2\Shaders\TransparentBlendColorLiquid.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\NewUnlitShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Particle.shader" />
-    <None Include="Assets\ChemLabEquipment\Shaders\TransparentBlendWater.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Particle.shader" />
+    <None Include="Assets\3_Model\Props\ChemLabEquipment2\Shaders\TransparentBlendWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\Mac\ReadMe_Mac.txt" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\UWP\arm-uwp\turbojpeg.dll" />
     <None Include="Assets\_Creepy_Cat\_Docs\Doc.txt" />
-    <None Include="Assets\PU.txt" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Ponding.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Ponding.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -287,12 +323,12 @@
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\Windows\x64\turbojpeg.dll" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\UWP\arm64-uwp\turbojpeg.dll" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Glass.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Glass.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\FlowMobile.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\PondingMobile.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\FlowMobile.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\PondingMobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\ParticleAboveWater.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\ParticleAboveWater.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\FMCubemapToEquirect.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMZip\FMSharpZip.dll" />
@@ -306,8 +342,8 @@
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMTurboJpeg\iOS\FMTurbojpegWrapper.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Hovl Studio\Procedural fire\Shaders\FireSphere.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Flow.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\LiquidMobile.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Flow.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\LiquidMobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMDesktop\x86\FMDesktop.dll" />
@@ -316,7 +352,7 @@
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\FMETPColorAdjustment.shader" />
     <None Include="Assets\FMETP_STREAM\FMCore\Shaders\multiTiles4x1.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\SoftKitty\LiquidContainer\Shaders\Mask.shader" />
+    <None Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Shaders\Mask.shader" />
     <None Include="Assets\Hovl Studio\Procedural fire\Demo scene\Readme.txt" />
     <None Include="Assets\FMETP_STREAM\FMCore\Plugins\FMDesktop\Resources\Shaders\FMDesktopMask.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -1171,16 +1207,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.Essence.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.Essence.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.OpenXR">
-      <HintPath>Library\ScriptAssemblies\Wave.OpenXR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
@@ -1201,10 +1229,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.OpenXR.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.OpenXR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
@@ -1233,10 +1257,6 @@
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.Essence">
-      <HintPath>Library\ScriptAssemblies\Wave.Essence.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
@@ -1275,10 +1295,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.XRSDK">
-      <HintPath>Library\ScriptAssemblies\Wave.XRSDK.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1307,16 +1323,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.XR.Interaction.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.XRSDK.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.XRSDK.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.Native">
-      <HintPath>Library\ScriptAssemblies\Wave.Native.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
@@ -1395,18 +1403,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.Native.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.Native.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Wave.Essence.Controller.Model.csproj" />
-    <ProjectReference Include="Wave.Essence.InputModule.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
-    <ProjectReference Include="Wave.Essence.Hand.Model.csproj" />
-    <ProjectReference Include="Wave.Essence.Interaction.Mode.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />

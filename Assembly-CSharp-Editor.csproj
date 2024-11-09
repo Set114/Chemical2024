@@ -59,11 +59,12 @@
     <UnityVersion>2021.3.36f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\pinky\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\pinky\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.4\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Editor\CFXR_ShaderImporter.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Editor\CFXR_Styles.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Editor\PartsEditor.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Editor\CFXR_MaterialInspector.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Editor\AudioEncoder_Editor.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\Editor\FMWebSocketBuildPostProcessor.cs" />
@@ -76,11 +77,12 @@
     <Compile Include="Assets\FMETP_STREAM\FMNetwork\Scripts\Editor\FMNetworkManager_Editor.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Editor\MicEncoder_Editor.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Editor\FMETPBuildPostProcessor.cs" />
+    <Compile Include="Assets\3_Model\Layer lab\3D Casual Character\Demo\Editor\CharacterBaseEditor.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMWebSocket\Scripts\Editor\FMSocketIOManager_Editor.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Editor\TextureEncoder_Editor.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\Demo Assets\Kino Bloom\Editor\BloomGraphDrawer.cs" />
     <Compile Include="Assets\FMETP_STREAM\FMCore\Scripts\Editor\FMPCStreamDecoder_Editor.cs" />
-    <Compile Include="Assets\SoftKitty\LiquidContainer\Editor\LiquidControlEditor.cs" />
+    <Compile Include="Assets\3_Model\Props\SoftKitty\LiquidContainer\Editor\LiquidControlEditor.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Editor\CFXR_ExpressionParser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1000,16 +1002,8 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.Essence.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.Essence.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.OpenXR">
-      <HintPath>Library\ScriptAssemblies\Wave.OpenXR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
@@ -1030,10 +1024,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.OpenXR.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.OpenXR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
@@ -1062,10 +1052,6 @@
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.MetaQuestSupport">
       <HintPath>Library\ScriptAssemblies\Unity.XR.OpenXR.Features.MetaQuestSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.Essence">
-      <HintPath>Library\ScriptAssemblies\Wave.Essence.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
@@ -1104,10 +1090,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.XRSDK">
-      <HintPath>Library\ScriptAssemblies\Wave.XRSDK.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1136,16 +1118,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.XR.Interaction.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.XRSDK.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.XRSDK.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Wave.Native">
-      <HintPath>Library\ScriptAssemblies\Wave.Native.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
@@ -1224,19 +1198,11 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Wave.Native.Editor">
-      <HintPath>Library\ScriptAssemblies\Wave.Native.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj" />
-    <ProjectReference Include="Wave.Essence.Controller.Model.csproj" />
-    <ProjectReference Include="Wave.Essence.InputModule.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
-    <ProjectReference Include="Wave.Essence.Hand.Model.csproj" />
-    <ProjectReference Include="Wave.Essence.Interaction.Mode.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
