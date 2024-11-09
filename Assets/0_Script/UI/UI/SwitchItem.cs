@@ -19,14 +19,17 @@ public class SwitchItem : MonoBehaviour
 {
     [Header("切換關卡按鈕")]
     [SerializeField] private Button[] changeLevelButtons; // 切換關卡按鈕陣列
-    [SerializeField] private Button test_btn; // 切換關卡按鈕
 
     [Header("關卡數據")]
     [SerializeField] private LevData[] levelsData; // 每個關卡的數據陣列
+
+    
+    [Header("測試用")]
+    [SerializeField] private Button test_btn; // 切換關卡按鈕
     
     private int currentLevelIndex = -1;
     
-    [Header("Text")]
+    [Header("關卡文字顯示")]
     [SerializeField] public TMP_Text showLevelText;
     [SerializeField] public GameObject item;
 
@@ -73,10 +76,10 @@ public class SwitchItem : MonoBehaviour
 
 
         // 更新顯示關卡名稱
-        if (showLevelText != null)
-        {
-            showLevelText.text = levelsData[currentLevelIndex].levelName;
-        }
+        // if (showLevelText != null)
+        // {
+        //     showLevelText.text = levelsData[currentLevelIndex].levelName;
+        // }
     }
 
     // 設置物件活動狀態
@@ -91,6 +94,7 @@ public class SwitchItem : MonoBehaviour
         }
     }
 
+    // 關閉所有物件
     void CloseAllItem()
     {
         for (int i = 0; i < levelsData.Length; i++)
@@ -99,8 +103,18 @@ public class SwitchItem : MonoBehaviour
         }
     }
 
+    // 獲取目前在第幾關
     public void SetCurrentLevel(int levelindex)
     {
         currentLevelIndex = levelindex;
+    }
+
+    // 獲取目前在第幾關
+    public void UpdateLevelName(int levelindex)
+    {
+        if (showLevelText != null)
+        {
+            showLevelText.text = levelsData[levelindex].levelName;
+        }
     }
 }

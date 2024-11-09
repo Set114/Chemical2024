@@ -16,10 +16,12 @@ public class SwitchUI : MonoBehaviour
 
     [Header("UI Panels")]
     [SerializeField] GameObject[] levelUIs; 
-    [SerializeField] GameObject items; 
 
     [Header("輸入測驗的第一個UI在第幾個Element")]
     [SerializeField] int TestIndex;
+    
+    [SerializeField] GameObject items; 
+
     private int levelCount = -1;
     private int chapterMode = 0; 
     // 假設關卡一開始是教學模式，0 = 教學 ，1 = 測驗
@@ -112,6 +114,7 @@ public class SwitchUI : MonoBehaviour
                     TestUI.SetActive(true);
                     gameManager.UpdateChapterMode(1);
                 }
+                switchItem.UpdateLevelName(levelCount);
                 //換關
                 switchItem.SetCurrentLevel(levelCount);
                 //Debug.Log("ShowNextUI is Finish");

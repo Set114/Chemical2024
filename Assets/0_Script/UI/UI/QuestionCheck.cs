@@ -15,7 +15,7 @@ public class QuestionCheck : MonoBehaviour
     public GameObject correctObject;  // 正確的物件
     public GameObject wrongObject;    // 錯誤的物件
 
-    [Header("Buttons")]
+    [Header("答案按鈕陣列")]
     public Button[] correctButtons;   // 正確答案按鈕陣列
     public Button[] wrongButtons;     // 錯誤答案按鈕陣列
     public Button closeHintButton;    // 提示UI的關閉按鈕

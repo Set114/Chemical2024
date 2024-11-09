@@ -71884,7 +71884,6 @@ MonoBehaviour:
   changeLevelButtons:
   - {fileID: 514309268}
   - {fileID: 932564923}
-  test_btn: {fileID: 0}
   levelsData:
   - levelName: 1-1
     levelObjects:
@@ -71916,6 +71915,7 @@ MonoBehaviour:
   - levelName: 1-2
     levelObjects:
     - {fileID: 1579753606}
+  test_btn: {fileID: 0}
   showLevelText: {fileID: 950201977}
   item: {fileID: 1677887023}
 --- !u!114 &1638835883
@@ -71943,10 +71943,9 @@ MonoBehaviour:
   - {fileID: 606815302}
   - {fileID: 1917120197}
   - {fileID: 181242911}
-  items: {fileID: 1677887023}
   TestIndex: 6
+  items: {fileID: 1677887023}
   learnDataManager: {fileID: 1150556284}
-  testDataManager: {fileID: 1150556285}
 --- !u!4 &1638835884
 Transform:
   m_ObjectHideFlags: 0
@@ -71983,8 +71982,6 @@ MonoBehaviour:
   - {fileID: 1167383010}
   - {fileID: 739846084}
   - {fileID: 1133786332}
-  sprite1: {fileID: 21300000, guid: dea940d47c25ad24cb075ef873f3d5b0, type: 3}
-  sprite2: {fileID: 21300000, guid: a6fc6d4eb34db524c89d9f695058b6e2, type: 3}
   buttonsToDisable:
   - {fileID: 1284676065}
   - {fileID: 1245030406}
@@ -71994,6 +71991,8 @@ MonoBehaviour:
   - {fileID: 1988258343}
   - {fileID: 2089148813}
   - {fileID: 1550330360}
+  sprite1: {fileID: 21300000, guid: dea940d47c25ad24cb075ef873f3d5b0, type: 3}
+  sprite2: {fileID: 21300000, guid: a6fc6d4eb34db524c89d9f695058b6e2, type: 3}
 --- !u!114 &1638835886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72006,19 +72005,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b71004d7d72db04d9ff018be12b76e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraController: {fileID: 174225517}
-  switchUI: {fileID: 1638835883}
-  checkImage: {fileID: 1638835885}
-  elfStatus: {fileID: 313321595}
   learnEndUI: {fileID: 606700475}
   testEndUI: {fileID: 799366539}
   loading_sign: {fileID: 699522008}
   learnUI: {fileID: 1379677422}
   testUI: {fileID: 1466597675}
+  switchUI: {fileID: 1638835883}
+  switchT: {fileID: 1638835889}
+  checkImage: {fileID: 1638835885}
+  elfStatus: {fileID: 313321595}
   learnDataManager: {fileID: 1150556284}
   testDataManager: {fileID: 1150556285}
   playSpeechAudio: {fileID: 313321593}
-  switchT: {fileID: 1638835889}
 --- !u!114 &1638835887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72848,7 +72846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1677887024
 Transform:
   m_ObjectHideFlags: 0

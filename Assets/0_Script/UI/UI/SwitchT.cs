@@ -16,7 +16,7 @@ public class LevTData
 
 public class SwitchT : MonoBehaviour
 {
-    [Header("ModeUI")]
+    [Header("Canvas_ElF_T")]
     [SerializeField] GameObject TUI;
 
     [Header("提示數據")]

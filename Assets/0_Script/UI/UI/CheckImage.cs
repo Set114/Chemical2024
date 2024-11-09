@@ -7,22 +7,16 @@ using TMPro;
 
 public class CheckImage : MonoBehaviour
 {
-    [Header("Images")]
-    public Image[] imagesToSwitch; // 把單一圖片變成陣列
-    
-    [Header("Sprites")]
-    public Sprite sprite1; // 第一張圖片
-    public Sprite sprite2; // 第二張圖片
+    [Header("需要改變的清單圖項")]
+    public Image[] imagesToSwitch; 
 
-    [Header("Buttons")]
+    [Header("切換關卡的清單案紐")]
     public Button[] buttonsToDisable; // 按鈕陣列
     
-
-    void Start()
-    {
-        
-    }
-
+    [Header("Sprites")]
+    public Sprite sprite1; // 未完成
+    public Sprite sprite2; // 完成
+    
     // 使用索引切換到第二張圖片 (sprite2) 並禁用相應的按鈕
     public void SwitchImage(int index)
     {
@@ -36,7 +30,7 @@ public class CheckImage : MonoBehaviour
         }
     }
 
-    // 使用索引將圖片切換回第一張圖片 (sprite1) 並啟用相應的按鈕
+    // 不會用到但保留
     public void SwitchToFirstImage(int index)
     {
         if (index >= 0 && index < imagesToSwitch.Length)
