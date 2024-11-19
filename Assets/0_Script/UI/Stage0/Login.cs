@@ -369,6 +369,8 @@ public class Login : MonoBehaviour
         // Debug.Log($"選擇的城市: {selectedCity}, 代號: {key}");
         CityDataID = key;
         CityData = selectedCity;
+        
+        areaData.Clear();
         StartCoroutine(GetAreaData());
     }
 
@@ -377,6 +379,8 @@ public class Login : MonoBehaviour
 
     private IEnumerator GetAreaData()
     {
+        Dictionary<string, string> tempAreaData = new Dictionary<string, string>();
+        
         API_URL = "https://script.google.com/macros/s/AKfycbzbG9biT7taipSCbSLUVAbsyJna_40ekqC1d10KO1GQOUw9aMELpWZQ6oyH8fJ8quvSbg/exec";
         WWWForm form = new WWWForm();
         form.AddField("method", "areaReadSheet");
@@ -396,13 +400,25 @@ public class Login : MonoBehaviour
                 // 處理返回的資料
                 // Debug.Log("檢查結果: " + responseText);
                 // 手動解析 JSON 字符串
-                areaData = ParseJsonToDictionary(responseText);
+                tempAreaData = ParseJsonToDictionary(responseText);
 
+                // int count = 0;
                 // 顯示解析的結果
-                // foreach (var entry in areaData)
-                // {
-                //     Debug.Log($"代號: {entry.Key}, 區域: {entry.Value}");
-                // }
+                foreach (var entry in tempAreaData)
+                {
+                    Debug.Log($"代號: {entry.Key}, 區域: {entry.Value}");
+                    foreach (string data in areaList)
+                    {
+                        // Debug.Log("count" + count);
+                        // Debug.Log("data" + data);
+                        // Debug.Log("AreaDataID" +entry.Key);
+                        if (data == (entry.Key))
+                        {
+                            areaData.Add(entry.Key, entry.Value);
+                        }
+                        // count++;
+                    }
+                }
                 AreaFillDropdown(areaData);
                 AreaDropdownValueChanged(areaDropdown);
             }
@@ -437,9 +453,10 @@ public class Login : MonoBehaviour
         Loading_sign.SetActive(true);
         string selectedArea = dropdown.options[dropdown.value].text;
         string key = areaData.FirstOrDefault(x => x.Value == selectedArea).Key;  
-        // Debug.Log($"選擇的區域: {selectedArea}, 代號: {key}");
+        Debug.Log($"選擇的區域: {selectedArea}, 代號: {key}");
         AreaDataID = key;
         AreaData = selectedArea;
+        schoolData.Clear();
         StartCoroutine(GetSchoolData());
     }
 
@@ -447,25 +464,26 @@ public class Login : MonoBehaviour
     #region School
     private IEnumerator GetSchoolData()
     {
-        bool flag = false;
-        foreach (string data in areaList)
-        {
-            Debug.Log("data" + data);
-            Debug.Log("AreaDataID" + AreaDataID);
-            if (data == AreaDataID)
-            flag = true;
-        }
-        if(flag)
-        {
+        // bool flag = false;
+        // foreach (string data in areaList)
+        // {
+        //     Debug.Log("data" + data);
+        //     Debug.Log("AreaDataID" + AreaDataID);
+        //     if (data == AreaDataID)
+        //     flag = true;
+        // }
+        // if(flag)
+        // {
+            Dictionary<string, string> tempSchoolData = new Dictionary<string, string>();
             API_URL = "https://script.google.com/macros/s/AKfycbwy9hDMJHYrc5lmZ1mfU-R7oMvGFCwovC2gdGGqqVEYOnN13snWqYIMKQJHkDwBQlFtxA/exec";
             WWWForm form = new WWWForm();
             form.AddField("method", "schoolReadSheet");
             form.AddField("areaData", AreaDataID);
+            Debug.Log("data" + AreaDataID);
 
             using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
             {
                 yield return www.SendWebRequest();
-
                 if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)        
                 {
                     Debug.Log(www.error);
@@ -476,20 +494,30 @@ public class Login : MonoBehaviour
                     // 處理返回的資料
                     // Debug.Log("檢查結果: " + responseText);
                     // 手動解析 JSON 字符串
-                    schoolData = ParseJsonToDictionary(responseText);
+                    tempSchoolData = ParseJsonToDictionary(responseText);
 
                     // 顯示解析的結果
-                    // foreach (var entry in schoolData)
-                    // {
-                    //     Debug.Log($"代號: {entry.Key}, 學校: {entry.Value}");
-                    // }
+                    foreach (var entry in tempSchoolData)
+                    {
+                        // Debug.Log($"代號: {entry.Key}, 學校: {entry.Value}");
+                        foreach (string data in schoolidList)
+                        {
+                            // Debug.Log("data" + data);
+                            // Debug.Log("AreaDataID" +entry.Key);
+                            if (data == (entry.Key))
+                            {
+                                schoolData.Add(entry.Key, entry.Value);
+                            }
+                        }
+                    }
                     SchoolFillDropdown(schoolData);
                     SchoolDropdownValueChanged(schoolDropdown);
                 }
                 
-            }
+            // }
         }
     }
+
     private void SchoolFillDropdown(Dictionary<string, string> schoolData)
     {
         schoolDropdown.ClearOptions();
@@ -512,16 +540,16 @@ public class Login : MonoBehaviour
     #region Class
     private IEnumerator GetClassData()
     {
-        bool flag = false;
-        foreach (string data in schoolidList)
-        {
-            Debug.Log("data" + data);
-            Debug.Log("SchoolDataID" + SchoolDataID);
-            if (data == SchoolDataID)
-            flag = true;
-        }
-        if(flag)
-        {
+        // bool flag = false;
+        // foreach (string data in schoolidList)
+        // {
+        //     Debug.Log("data" + data);
+        //     Debug.Log("SchoolDataID" + SchoolDataID);
+        //     if (data == SchoolDataID)
+        //     flag = true;
+        // }
+        // if(flag)
+        // {
             //class
             API_URL = "https://script.google.com/macros/s/AKfycbw24_cKIaIOlRuosTJPcJueQVJumqXC1pWyNpGK-ekBBIUE8Df2O1HgYysR_LkTUmZj/exec";
             WWWForm form = new WWWForm();
@@ -545,7 +573,7 @@ public class Login : MonoBehaviour
                     ClassParseJsonData(responseText);
                 }
             }
-        }
+        // }
     }
         
 
