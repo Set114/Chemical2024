@@ -12075,7 +12075,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: S2.a1
+  - name: 2-1
     clip: {fileID: 8300000, guid: cbc8f80f8939d10418cf12d95bace365, type: 3}
     volume: 1
     pitch: 1
@@ -41762,11 +41762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 879b8a9d264255a419b8a7995697ce29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00004144885
+      value: 0.00039
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 879b8a9d264255a419b8a7995697ce29, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0015891538
+      value: 0.00159
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 879b8a9d264255a419b8a7995697ce29, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42372,7 +42372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625449822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.00015, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -42409,8 +42409,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.001, y: 0.0010000004, z: 0.0038008704}
-  m_Center: {x: 0, y: -9.999211e-18, z: 0.0014004328}
+  m_Size: {x: 0.0012401465, y: 0.001274289, z: 0.0038008706}
+  m_Center: {x: 0.000120073324, y: 0.00013714426, z: 0.001400433}
 --- !u!1 &1629418928
 GameObject:
   m_ObjectHideFlags: 0
@@ -68286,6 +68286,7 @@ MonoBehaviour:
   uiText: {fileID: 157579736}
   initialText: 20G
   finalText: 30G
+  levelEndSequence: {fileID: 1638835886}
 --- !u!65 &5521283702311388751
 BoxCollider:
   m_ObjectHideFlags: 0

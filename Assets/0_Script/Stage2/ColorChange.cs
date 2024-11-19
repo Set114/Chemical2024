@@ -19,6 +19,7 @@ public class ColorChange : MonoBehaviour
     private bool isTransitioning = false; // 是否正在进行过渡
     private int transitionStage = 0; // 当前过渡阶段：0 - 未启动，1 - 银色到橙色，2 - 橙色到黑色
 
+    public LevelEndSequence levelEndSequence;
     void Start()
     {
         if (targetMaterial != null)
@@ -97,6 +98,10 @@ public class ColorChange : MonoBehaviour
         {
             uiText.text = finalText; // 修改为目标文字
             Debug.Log($"文字更新为：{finalText}");
+        }
+        if (finalText == "30G")
+        {
+            levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
         }
     }
 }
