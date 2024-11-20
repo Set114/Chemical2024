@@ -6,6 +6,7 @@ using UnityEngine;
 public class Weighing : MonoBehaviour
 {
     public GameObject Text_UI;
+    public LevelEndSequence levelEndSequence;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Equals("Vial_fake"))
@@ -17,8 +18,9 @@ public class Weighing : MonoBehaviour
             }
             else
             {
-                other.GetComponentInChildren<PourSolution>().audioSource5.Play();
-                other.GetComponentInChildren<PourSolution>().text.text = other.GetComponentInChildren<PourSolution>().Text[4];
+               // other.GetComponentInChildren<PourSolution>().audioSource5.Play();
+                //other.GetComponentInChildren<PourSolution>().text.text = other.GetComponentInChildren<PourSolution>().Text[4];
+                levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
             }
         }
     }
