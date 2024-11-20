@@ -8,6 +8,7 @@ public class RotationStateChecker : MonoBehaviour
     public GameObject DefultLiquid2;
     public GameObject AfterLiquid;
     public GameObject image;
+    public GameObject ball;
     public enum RotationState
     {
         None,       // 无状态
@@ -38,6 +39,10 @@ public class RotationStateChecker : MonoBehaviour
 
     private void SetState(RotationState newState)
     {
+        if (ball != null)
+        {
+            ball.GetComponent<balloon>().StartScaling();
+        }
         DefultLiquid.SetActive(false);
         DefultLiquid2.SetActive(false);
         AfterLiquid.SetActive(true);
