@@ -16,7 +16,8 @@ public class PourSolution : MonoBehaviour
         }
         else if (other.gameObject.name.Equals("TestTube") && TestTube.transform.Find("Liquid").gameObject.activeSelf)
         {
-            isputed = true;
+            isputed = true;          
+           
         }
     }
 
