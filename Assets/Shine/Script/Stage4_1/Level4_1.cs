@@ -30,7 +30,7 @@ public class Level4_1 : MonoBehaviour
     [Header("粒子移動速度")]
     public float Speed;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
     }
@@ -124,20 +124,19 @@ public class Level4_1 : MonoBehaviour
         for (int i = 0; i < TotalO2.Count; i++)
         {
             Destroy(TotalO2[i]);
+            Destroy(TotalO2UI[i]);
+
         }
         TotalO2.Clear();
-        for (int j = 0; j < TotalO2UI.Count; j++)
-        {
-            Destroy(TotalO2UI[j]);
-            Destroy(TotalCO2UI[j]);
-        }
         TotalO2UI.Clear();
-        TotalCO2UI.Clear();
         for (int k = 0; k < TotalCO2.Count; k++)
         {
             Destroy(TotalCO2[k]);
+            Destroy(TotalCO2UI[k]);
+
         }
         TotalCO2.Clear();
+        TotalCO2UI.Clear();
 
         for (int l = 0; l < CObject.Length; l++)
         {
@@ -146,6 +145,10 @@ public class Level4_1 : MonoBehaviour
         }
         ClickPartitionObj = false;
         PartitionObj.SetBool("Click", ClickPartitionObj);
+
+        ClickHeaterObj = false;
+        FindObjectOfType<NumberJump>().Clear();
+        HeaterText.SetActive(ClickHeaterObj);
 
     }
     public void CreateCO2(Vector3 pos) {
