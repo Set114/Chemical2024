@@ -656,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.28400004
+      value: -0.395
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -786,11 +786,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27013502}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.03742758, y: 0.021007549, z: 0.01}
+  m_Center: {x: -0.013713808, y: -0.0055037774, z: -6.286926e-12}
 --- !u!1 &29973997
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 29974002}
   - component: {fileID: 29974003}
   - component: {fileID: 29974004}
+  - component: {fileID: 29974005}
   m_Layer: 0
   m_Name: VialLid
   m_TagString: Untagged
@@ -1073,6 +1074,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &29974005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29973997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &33751596
 GameObject:
   m_ObjectHideFlags: 0
@@ -14860,6 +14873,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3270718037383645894, guid: 443a36348494db740b96f35df605d5fc, type: 3}
   m_PrefabInstance: {fileID: 1401830008}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &548773654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548773644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &555918718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 26a6ab549f404e2499836e18976bfbfb, type: 3}
@@ -19107,6 +19132,7 @@ GameObject:
   - component: {fileID: 775558261}
   - component: {fileID: 775558260}
   - component: {fileID: 775558266}
+  - component: {fileID: 775558267}
   m_Layer: 0
   m_Name: Vial_fake
   m_TagString: Untagged
@@ -19167,7 +19193,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 48
   m_CollisionDetection: 0
 --- !u!65 &775558262
 BoxCollider:
@@ -19397,6 +19423,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &775558267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775558258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &788075210
 GameObject:
   m_ObjectHideFlags: 0
@@ -19587,7 +19625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788075210}
   m_LocalRotation: {x: -0, y: -0.00020255658, z: -0, w: 1}
-  m_LocalPosition: {x: 0.292, y: -0.4239998, z: 0.381}
+  m_LocalPosition: {x: 0.292, y: -0.284, z: 0.034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23158,6 +23196,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &947478012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947478005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &950201974
 GameObject:
   m_ObjectHideFlags: 0
@@ -24316,6 +24366,7 @@ GameObject:
   - component: {fileID: 1033096131}
   - component: {fileID: 1033096133}
   - component: {fileID: 1033096132}
+  - component: {fileID: 1033096134}
   m_Layer: 0
   m_Name: Vial_fake
   m_TagString: Untagged
@@ -24354,8 +24405,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04, y: 0.0021012074, z: 0.04}
-  m_Center: {x: 0, y: 0.07067386, z: 0}
+  m_Size: {x: 0.06284828, y: 0.0021012074, z: 0.04}
+  m_Center: {x: 0.0015273857, y: 0.07067386, z: 0}
 --- !u!23 &1033096127
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24603,8 +24654,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
+--- !u!114 &1033096134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033096124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1034755403
 GameObject:
   m_ObjectHideFlags: 0
@@ -32531,11 +32594,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172848770}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.055844557, y: 0.01, z: 0.042003542}
+  m_Center: {x: -0.022922339, y: 0, z: -0.016001878}
 --- !u!1 &1185834295
 GameObject:
   m_ObjectHideFlags: 0
@@ -37873,8 +37936,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1475569411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475569399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1480411383
 GameObject:
   m_ObjectHideFlags: 0
@@ -44957,7 +45032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1577888762
 Transform:
   m_ObjectHideFlags: 0
@@ -54168,11 +54243,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738833286}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.055510588, y: 0.01, z: 0.01}
+  m_Center: {x: -0.022755355, y: 0, z: 4.7800014e-11}
 --- !u!1 &1739314941
 GameObject:
   m_ObjectHideFlags: 0
@@ -56120,8 +56195,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1800272226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800272215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1805008430
 GameObject:
   m_ObjectHideFlags: 0
@@ -56754,8 +56841,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1823057450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823057436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1833510923
 GameObject:
   m_ObjectHideFlags: 0
@@ -56922,7 +57021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.271
+      value: -0.386
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58162,11 +58261,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911378269}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.028425854, y: 0.017148916, z: 0.01}
+  m_Center: {x: -0.009212937, y: -0.003574527, z: -3.8581794e-12}
 --- !u!1 &1913665654
 GameObject:
   m_ObjectHideFlags: 0
@@ -59172,8 +59271,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1952114090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952114079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1954719553
 GameObject:
   m_ObjectHideFlags: 0
@@ -74030,6 +74141,7 @@ GameObject:
   - component: {fileID: 5576551598865643615}
   - component: {fileID: 5576551598865643616}
   - component: {fileID: 5576551598865643617}
+  - component: {fileID: 5576551598865643618}
   m_Layer: 0
   m_Name: bomb-a
   m_TagString: Untagged
@@ -74544,6 +74656,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &5576551598865643618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123153844196039374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f8777abb64eb48913d9ce16d0e585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5803546975773375294
 Transform:
   m_ObjectHideFlags: 0
