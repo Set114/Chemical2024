@@ -35,9 +35,8 @@ public class Level4_1 : MonoBehaviour
     [Header("4-1±Ð¾Çµ²§ô")]
     public GameObject Finish4_1;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        ReButton();
     }
 
     // Update is called once per frame
@@ -200,5 +199,22 @@ public class Level4_1 : MonoBehaviour
     IEnumerator WaitFinish() {
         yield return new WaitForSeconds(10f);
         Finish4_1.SetActive(true);
+    }
+
+    public void Finish4_1Obj() {
+
+        for (int i = 0; i < TotalO2.Count; i++)
+        {
+            TotalO2[i].SetActive(false);
+        }
+        for (int k = 0; k < TotalCO2.Count; k++)
+        {
+            TotalCO2[k].SetActive(false);
+        }
+
+        for (int l = 0; l < CObject.Length; l++)
+        {
+            CObject[l].SetActive(false);
+        }
     }
 }
