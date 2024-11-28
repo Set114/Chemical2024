@@ -29,10 +29,15 @@ public class Level4_1 : MonoBehaviour
     public bool ClickHeaterObj;
     [Header("粒子移動速度")]
     public float Speed;
-    // Start is called before the first frame update
-    void Awake()
-    {
 
+    [Header("說明解說")]
+    public GameObject[] Infos;
+    [Header("4-1教學結束")]
+    public GameObject Finish4_1;
+    // Start is called before the first frame update
+    void Start()
+    {
+        ReButton();
     }
 
     // Update is called once per frame
@@ -49,7 +54,7 @@ public class Level4_1 : MonoBehaviour
         {
             ReButton();
         }
-        if (ClickPartitionObj && ClickHeaterObj) {
+        if (ClickPartitionObj ) {
             float step = Speed * Time.deltaTime;
                 for (int i = 0; i < TotalO2.Count; i++)
                 {
@@ -58,16 +63,44 @@ public class Level4_1 : MonoBehaviour
                     if (TotalO2UI[i].transform.position == CUIObject[i].transform.position) {
                     if (TotalO2UI[i].active)
                     {
-                        GameObject CO2UIPrefab = Instantiate(CO2PrefabUI) as GameObject;
-                        CO2UIPrefab.transform.parent = O2PrefabParent;
-                        CO2UIPrefab.transform.localScale = new Vector3(1, 1, 1);
-                        CO2UIPrefab.transform.localEulerAngles = new Vector3(0, -180, 0);
-                        CO2UIPrefab.transform.localPosition = TotalO2UI[i].transform.localPosition;
-                        CO2UIPrefab.SetActive(true);
+                        //有開啟加熱器
+                        if (ClickHeaterObj&& TotalO2.Count>= CObject.Length)
+                        {
+                            GameObject CO2UIPrefab = Instantiate(CO2PrefabUI) as GameObject;
+                            CO2UIPrefab.transform.parent = O2PrefabParent;
+                            CO2UIPrefab.transform.localScale = new Vector3(1, 1, 1);
+                            CO2UIPrefab.transform.localEulerAngles = new Vector3(0, -180, 0);
+                            CO2UIPrefab.transform.localPosition = TotalO2UI[i].transform.localPosition;
+                            CO2UIPrefab.SetActive(true);
 
-                        TotalO2UI[i].SetActive(false);
-                        CUIObject[i].SetActive(false);
-                        TotalCO2UI.Add(CO2UIPrefab);
+                            TotalO2UI[i].SetActive(false);
+                            CUIObject[i].SetActive(false);
+                            TotalCO2UI.Add(CO2UIPrefab);
+                            Infos[1].SetActive(true);
+                            StartCoroutine(WaitFinish());
+                        }
+                        //沒有開啟加熱器
+                        else {
+                            if (TotalO2.Count < CObject.Length && !ClickHeaterObj) {
+                                Infos[3].SetActive(true);
+
+                            }
+                            else {
+                                
+                                    if (ClickHeaterObj && TotalO2.Count < CObject.Length)
+                                    {
+                                        //出現語音解說3
+                                        Infos[2].SetActive(true);
+                                    }
+                                    if (!ClickHeaterObj&& TotalO2.Count >= CObject.Length)
+                                    {
+                                        //出現語音解說1
+                                        Infos[0].SetActive(true);
+
+                                    }
+                                }
+                        }
+                        
                     }
                 }
             }
@@ -121,6 +154,12 @@ public class Level4_1 : MonoBehaviour
     }
 
     public void ReButton() {
+        Infos[0].SetActive(false);
+        Infos[1].SetActive(false);
+        Infos[2].SetActive(false);
+        Infos[3].SetActive(false);
+
+
         for (int i = 0; i < TotalO2.Count; i++)
         {
             Destroy(TotalO2[i]);
@@ -132,6 +171,7 @@ public class Level4_1 : MonoBehaviour
         for (int k = 0; k < TotalCO2.Count; k++)
         {
             Destroy(TotalCO2[k]);
+            if(TotalCO2UI.Count>0)
             Destroy(TotalCO2UI[k]);
 
         }
@@ -156,5 +196,9 @@ public class Level4_1 : MonoBehaviour
         CO2Prefab.SetActive(true);
         TotalCO2.Add(CO2Prefab);
 
+    }
+    IEnumerator WaitFinish() {
+        yield return new WaitForSeconds(10f);
+        Finish4_1.SetActive(true);
     }
 }
