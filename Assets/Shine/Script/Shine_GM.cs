@@ -5,15 +5,19 @@ using UnityEngine;
 public class Shine_GM : MonoBehaviour
 {
     public GameObject TestMode, TeachMode;
+    public GameObject TestModeButton, TeachModeButton;
+
     // Start is called before the first frame update
     void Start()
     {
         switch (MenuUIManager.SharedChapterModeData) {
             case 0:
                 TeachMode.SetActive(true);
+                TestModeButton.SetActive(true);
                 break;
             case 1:
                 TestMode.SetActive(true);
+                TeachModeButton.SetActive(true);
                 break;
         }
     }
