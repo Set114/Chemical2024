@@ -49,7 +49,6 @@ public class ScaleCubeCalculate : MonoBehaviour
 
         // 设置目标值
         float targetValue = MapScaleToDisplayValue(scaleValueY);
-
         while (elapsedTime < lerpDuration)
         {
             float t = elapsedTime / lerpDuration;
@@ -82,17 +81,17 @@ public class ScaleCubeCalculate : MonoBehaviour
     {
         if (Mathf.Approximately(scaleValue, 0.1f))
         {
-            return 0.825f;
+            return 0.25f;
         }
 
-        if (Mathf.Approximately(scaleValue, 0.05f))
+        if (Mathf.Approximately(scaleValue, 0.03f))
         {
-            return 0.8226f;
+            return 0.26f;
         }
 
         if (Mathf.Approximately(scaleValue, -0.05f))
         {
-            return 0.515f;
+            return 0.15f;
         }
 
         if (Mathf.Approximately(scaleValue, 0.12f))
