@@ -6,18 +6,22 @@ public class Shine_GM : MonoBehaviour
 {
     public GameObject TestMode, TeachMode;
     public GameObject TestModeButton, TeachModeButton;
-
+    public GameObject ELF;
     // Start is called before the first frame update
     void Start()
     {
+        MenuUIManager.SharedChapterModeData = 1;
         switch (MenuUIManager.SharedChapterModeData) {
             case 0:
                 TeachMode.SetActive(true);
                 TestModeButton.SetActive(true);
+                ELF.SetActive(true);
                 break;
             case 1:
                 TestMode.SetActive(true);
                 TeachModeButton.SetActive(true);
+                ELF.SetActive(false);
+
                 break;
         }
     }
