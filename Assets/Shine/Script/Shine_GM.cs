@@ -10,7 +10,7 @@ public class Shine_GM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MenuUIManager.SharedChapterModeData = 1;
+      //  MenuUIManager.SharedChapterModeData = 1;
         switch (MenuUIManager.SharedChapterModeData) {
             case 0:
                 TeachMode.SetActive(true);
