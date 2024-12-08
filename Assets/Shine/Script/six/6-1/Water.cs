@@ -85,7 +85,6 @@ public class Water : MonoBehaviour
             ChemicalImage[1].SetActive(true);
             ChemicalImage[0].SetActive(false);
             ChemicalImage[2].SetActive(false);
-            StartCoroutine(FinalCheck());
 
         }
         if (other.gameObject.name == "Potassium")
@@ -107,7 +106,7 @@ public class Water : MonoBehaviour
     }
 
     IEnumerator FinalCheck() {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(6f);
         if (!TackObjs[0].active && !TackObjs[1].active && !TackObjs[2].active) {
             Final.SetActive(true);
         }
