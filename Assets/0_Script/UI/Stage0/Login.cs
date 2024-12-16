@@ -113,6 +113,13 @@ public class Login : MonoBehaviour
     public MenuUIManager menuUIManager;
     public GameManager gameManager;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoginButton();
+        }
+    }
     void OnEnable()
     {
         // StartCoroutine(GetCityData());

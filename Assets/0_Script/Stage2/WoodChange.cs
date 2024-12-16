@@ -34,7 +34,8 @@ public class WoodChange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isScaling && targetObject != null && objectToActivate != null && other.gameObject.name.Equals("GAS"))
+        //  修改了指定物件名稱
+        if (!isScaling && targetObject != null && objectToActivate != null && other.gameObject.name.Equals("fire"))
         {
             StartScaling(); // 开始缩小
         }

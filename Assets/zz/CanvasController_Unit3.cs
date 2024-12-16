@@ -12,12 +12,6 @@ public class CanvasController_Unit3 : MonoBehaviour
     public GameObject Tutorial;
     public GameObject Ball;
     public GameObject Atom;
-    public GameObject W_part0;
-    public GameObject W_part1;
-    public GameObject W_part2;
-    public GameObject W_part3;
-    public GameObject W_part4;
-    public GameObject W_part5;
     public GameObject Screen;
     public GameObject Trash;
 
@@ -33,13 +27,27 @@ public class CanvasController_Unit3 : MonoBehaviour
     // 当前关卡的索引
     private int currentPartIndex = 1;
     // 关卡物件数组
-    private GameObject[] parts;
+    public GameObject[] questions;
+    public GameObject[] answers;
+
+    private int chapterMode = 0;
+    // 假設關卡一開始是教學模式，0 = 教學 ，1 = 測驗
+    private GameManager gameManager; // 讀取玩家資料
+    private calculateManager calculate;
 
     void Start()
     {
-        // 初始化关卡物件数组
-        parts = new GameObject[] { W_part0, W_part1, W_part2, W_part3, W_part4, W_part5 };
-
+        gameManager = GameManager.Instance;
+        calculate = GetComponent<calculateManager>();
+        chapterMode = gameManager.GetChapterMode();
+        if (chapterMode == 0)
+        {
+            currentPartIndex = 0;
+        }
+        else
+        {
+            currentPartIndex = 1;
+        }
         // 为按钮添加点击事件监听
         Tutorialbtn.onClick.AddListener(OnTutorialButtonClick);
         Correct.onClick.AddListener(OnCorrectButtonClick);
@@ -47,6 +55,7 @@ public class CanvasController_Unit3 : MonoBehaviour
 
         Screen.SetActive(false);
         Trash.SetActive(false);
+        questions[currentPartIndex].SetActive(true);
     }
 
     public void Buy()
@@ -57,15 +66,31 @@ public class CanvasController_Unit3 : MonoBehaviour
         Screen.SetActive(true);
         Ball.SetActive(true);
         Trash.SetActive(false);
-        parts[0].SetActive(true); // 显示第一关卡 (W_part0)
+        answers[currentPartIndex].SetActive(true);
     }
-
+    public void BackToBuy()
+    {
+        Atom.SetActive(false);
+        Tutorial.SetActive(false);
+        Correctpage.SetActive(false);
+        NotEnough.SetActive(false);
+        Buypage.SetActive(true);
+        Screen.SetActive(false);
+        Ball.SetActive(false);
+        questions[currentPartIndex].SetActive(true);
+        for (int i = 0; i <= 5; i++)
+        {
+            // 關閉 parts[0] 到 parts[5]
+            answers[i].SetActive(false);
+        } 
+    }
     public void ShowTutorial()
     {
         Trash.SetActive(true);
         Atom.SetActive(false);
         Tutorial.SetActive(true);
-        W_part0.SetActive(false);
+        questions[0].SetActive(false);
+        answers[0].SetActive(false);
         elementDisplay.UpdateDisplay();
     }
 
@@ -73,34 +98,39 @@ public class CanvasController_Unit3 : MonoBehaviour
     {
         Trash.SetActive(true);
         Atom.SetActive(false);
-        W_part1.SetActive(false);
+        questions[1].SetActive(false);
+        answers[1].SetActive(false);
         Correctpage.SetActive(true);
     }
 
     public void part2()
     {
-        W_part2.SetActive(false);
+        questions[2].SetActive(false);
+        answers[2].SetActive(false);
         Correctpage.SetActive(true);
     }
 
     public void part3()
     {
         Atom.SetActive(false);
-        W_part3.SetActive(false);
+        questions[3].SetActive(false);
+        answers[3].SetActive(false);
         Correctpage.SetActive(true);
     }
 
     public void part4()
     {
         Atom.SetActive(false);
-        W_part4.SetActive(false);
+        questions[4].SetActive(false);
+        answers[4].SetActive(false);
         Correctpage.SetActive(true);
     }
 
     public void part5()
     {
         Atom.SetActive(false);
-        W_part5.SetActive(false);
+        questions[5].SetActive(false);
+        answers[5].SetActive(false);
         Sussespage.SetActive(true);
     }
 
@@ -113,7 +143,8 @@ public class CanvasController_Unit3 : MonoBehaviour
         Ball.SetActive(false);
         for (int i = 0; i <= 5; i++)
         {
-            parts[i].SetActive(false); // 關閉 parts[0] 到 parts[5]
+            // 關閉 parts[0] 到 parts[5]
+            answers[i].SetActive(false);
         }
     }
     public void Wrongsituation()
@@ -125,21 +156,21 @@ public class CanvasController_Unit3 : MonoBehaviour
     // Tutorial按钮点击处理
     private void OnTutorialButtonClick()
     {
-        Atom.SetActive(true);
-        Tutorial.SetActive(false);
-        W_part1.SetActive(true);
-        detectBall.CheckRequiredElementQuantities();
+        currentPartIndex++; // 增加当前关卡索引
+        calculate.ResetAllCounts();
+        BackToBuy();
+        //detectBall.CheckRequiredElementQuantities();
         StartCoroutine(b());
     }
 
     // Correct按钮点击处理
     private void OnCorrectButtonClick()
     {
-        Atom.SetActive(true);
-        Correctpage.SetActive(false);
+        currentPartIndex++; // 增加当前关卡索引
+        BackToBuy();
         StartCoroutine(b());
-        detectBall.CheckRequiredElementQuantities();
-        HideCurrentPartAndShowNext();
+        //detectBall.CheckRequiredElementQuantities();
+        //HideCurrentPartAndShowNext();
     }
 
     private void OnWrongButtonClick()
@@ -148,13 +179,17 @@ public class CanvasController_Unit3 : MonoBehaviour
         Atom.SetActive(true);
     }
 
-    // 隐藏当前关卡并显示下一个关卡
+    /*// 隐藏当前关卡并显示下一个关卡
     private void HideCurrentPartAndShowNext()
     {
-        parts[currentPartIndex].SetActive(false); // 隐藏当前关卡
+        // 隐藏当前关卡
+        questions[currentPartIndex].SetActive(false);
+        answers[currentPartIndex].SetActive(false);
         currentPartIndex++; // 增加当前关卡索引
-        parts[currentPartIndex].SetActive(true); // 显示下一个关卡
-    }
+        // 显示下一个关卡
+        questions[currentPartIndex].SetActive(true);
+        answers[currentPartIndex].SetActive(true);
+    }*/
 
     private IEnumerator b()
     {

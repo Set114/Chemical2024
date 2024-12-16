@@ -20,7 +20,7 @@ public class SwitchUI : MonoBehaviour
     [Header("輸入測驗的第一個UI在第幾個Element")]
     [SerializeField] int TestIndex;
     
-    [SerializeField] GameObject items; 
+    [SerializeField] GameObject items;
 
     private int levelCount = -1;
     private int chapterMode = 0; 

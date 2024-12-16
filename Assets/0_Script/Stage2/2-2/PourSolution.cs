@@ -8,15 +8,17 @@ public class PourSolution : MonoBehaviour
     [SerializeField] GameObject Liquid;
     [SerializeField] GameObject putpoint;
     [SerializeField] GameObject TestTube;
-    public AudioSource audioSource1;
-    public AudioSource audioSource2;
-    public AudioSource audioSource3;
-    public AudioSource audioSource4;
-    public AudioSource audioSource5;
-
+    public string audioSource1, audioSource2, audioSource3, audioSource4, audioSource5;
     public string[] Text;
     public Text text;
     bool isputed = false;
+
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Equals("mouth"))
@@ -25,7 +27,7 @@ public class PourSolution : MonoBehaviour
         }
         else if (other.gameObject.name.Equals("TestTube") && TestTube.transform.Find("Liquid").gameObject.activeSelf)
         {
-            isputed = true;          
+            isputed = true;
             StartCoroutine(WaitForAudioToEnd());
         }
     }
@@ -38,14 +40,19 @@ public class PourSolution : MonoBehaviour
             TestTube.gameObject.transform.rotation = putpoint.transform.rotation;
         }
     }
-
+    public float Play(string audioSource)
+    {
+        float waitSeconds = audioManager.PlayAndReturnClipLength(audioSource);
+        return waitSeconds;
+    }
     private IEnumerator WaitForAudioToEnd()
     {
-        audioSource1.Play(); // 播放音频
+        //audioSource1.Play(); // 播放音频
+        float waitSeconds =  audioManager.PlayAndReturnClipLength(audioSource1);
         text.text = Text[0];
 
         // 等待音频播放完成
-        yield return new WaitForSeconds(audioSource1.clip.length);
+        yield return new WaitForSeconds(waitSeconds);
 
         // audioSource2.Play();
     }

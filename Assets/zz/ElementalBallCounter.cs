@@ -2,34 +2,40 @@ using UnityEngine;
 
 public class ElementalBallCounter : MonoBehaviour
 {
-    private int carbonCount;
-    private int nitrogenCount;
-    private int oxygenCount;
-    private int hydrogenCount;
-    private int ironCount;
-
+    [SerializeField] private int carbonCount;
+    [SerializeField] private int nitrogenCount;
+    [SerializeField] private int oxygenCount;
+    [SerializeField] private int hydrogenCount;
+    [SerializeField] private int ironCount;
+    private DetectBall detectBall;
     private void Start()
     {
-        // 初始化各元素的數量
+        // 嚙踝蕭l嚙複各嚙踝蕭嚙踝蕭嚙踝蕭嚙複量
         carbonCount = 0;
         nitrogenCount = 0;
         oxygenCount = 0;
         hydrogenCount = 0;
         ironCount = 0;
+        detectBall = FindObjectOfType<DetectBall>();
     }
 
-    public void GetCounts(int carbonCount, int nitrogenCount, int oxygenCount, int hydrogenCount, int ironCount)
+    public void GetCounts(int carbon, int nitrogen, int oxygen, int hydrogen, int iron)
     {
-        // 更新各元素的數量
-        AddBalls("c", carbonCount);
+        /*AddBalls("c", carbonCount);
         AddBalls("n", nitrogenCount);
         AddBalls("o", oxygenCount);
         AddBalls("h", hydrogenCount);
         AddBalls("fe", ironCount);
+        */
+        carbonCount = carbon - detectBall.c;
+        nitrogenCount = nitrogen - detectBall.n;
+        oxygenCount = oxygen - detectBall.o;
+        hydrogenCount = hydrogen - detectBall.h;
+        ironCount = iron - detectBall.fe;
     }
 
-        // 增加球的數量
-        public void AddBalls(string element, int amount)
+    // 嚙磕嚙稼嚙緙嚙踝蕭嚙複量
+    public void AddBalls(string element, int amount)
     {
         switch (element.ToLower())
         {
@@ -38,28 +44,29 @@ public class ElementalBallCounter : MonoBehaviour
                 Debug.Log($"Added {amount} Carbon balls. Total: {carbonCount}");
                 break;
             case "n":
-                nitrogenCount += amount;
+                nitrogenCount = amount;
                 Debug.Log($"Added {amount} Nitrogen balls. Total: {nitrogenCount}");
                 break;
             case "o":
-                oxygenCount += amount;
+                oxygenCount = amount;
                 Debug.Log($"Added {amount} Oxygen balls. Total: {oxygenCount}");
                 break;
             case "h":
-                hydrogenCount += amount;
+                hydrogenCount = amount;
                 Debug.Log($"Added {amount} Hydrogen balls. Total: {hydrogenCount}");
                 break;
             case "fe":
-                ironCount += amount;
+                ironCount = amount;
                 Debug.Log($"Added {amount} Iron balls. Total: {ironCount}");
                 break;
             default:
                 Debug.LogWarning("Unknown element: " + element);
                 break;
         }
+        detectBall.SpawnFakeBall();
     }
 
-    // 減少球的數量
+    // 嚙踝蕭眵y嚙踝蕭嚙複量
     public void RemoveBalls(string element, int amount)
     {
         switch (element.ToLower())
@@ -93,9 +100,10 @@ public class ElementalBallCounter : MonoBehaviour
                 Debug.LogWarning("Unknown element: " + element);
                 break;
         }
+        detectBall.SpawnFakeBall();
     }
 
-    // 獲取當前某種元素的數量
+    // 嚙踝蕭嚙踝蕭嚙踝蕭e嚙磐嚙諍歹蕭嚙踝蕭嚙踝蕭嚙複量
     public int GetBallCount(string element)
     {
         switch (element.ToLower())

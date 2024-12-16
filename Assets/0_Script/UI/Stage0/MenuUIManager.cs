@@ -122,12 +122,15 @@ public class MenuUIManager : MonoBehaviour
 
     void EnterChapter(int chapterIndex)
     {
+        // 第三章 教學題目與測驗題目應該是分開的步驟
+        /*
         if(chapterIndex == 3)
         {
             TestButton.SetActive(false);
         }else{
             TestButton.SetActive(true);
         }
+        */
         if (gameManager == null)
         {
             Debug.Log("GameManager is null. Please ensure it is properly initialized.");

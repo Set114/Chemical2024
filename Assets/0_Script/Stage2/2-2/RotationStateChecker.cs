@@ -50,7 +50,8 @@ public class RotationStateChecker : MonoBehaviour
         currentState = newState;
         hasTriggered = true; // 标记为已触发，避免重复
         Debug.Log($"状态更新为: {currentState}");
-        GetComponentInChildren<PourSolution>().audioSource4.Play();
+        PourSolution pourSolution = GetComponentInChildren<PourSolution>();
+        pourSolution.Play(pourSolution.audioSource4);
         GetComponentInChildren<PourSolution>().text.text = GetComponentInChildren<PourSolution>().Text[3];
     }
 

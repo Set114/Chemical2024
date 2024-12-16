@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18388174, g: 0.22897552, b: 0.30280173, a: 1}
+  m_IndirectSpecularColor: {r: 0.18388127, g: 0.22897506, b: 0.30280057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2670,6 +2670,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148612756}
   m_CullTransparentMesh: 1
+--- !u!1 &152787079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 152787080}
+  - component: {fileID: 152787081}
+  m_Layer: 0
+  m_Name: BGM Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &152787080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152787079}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 490415500}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &152787081
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152787079}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &157795693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1535349196944292822, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
@@ -7936,6 +8064,7 @@ MonoBehaviour:
     initialScale: {x: 1, y: 1, z: 1}
     targetScale: {x: 1.2, y: 1.2, z: 1.2}
     targetPosition: {x: -0.528, y: 0.025, z: -0.086}
+  switchUI: {fileID: 0}
 --- !u!20 &174225518
 Camera:
   m_ObjectHideFlags: 0
@@ -14600,12 +14729,11 @@ MonoBehaviour:
   canva4: {fileID: 1651735381}
   ELF1_3_1: {fileID: 1453593992}
   levelIndex: {fileID: 950201977}
-  stage5_UIManager: {fileID: 1295408222}
-  screenShow: {fileID: 276384190}
   elfStatus: {fileID: 313321595}
   glucoseScaleCube1: {fileID: 1594756986}
   glucoseScaleCube2: {fileID: 2042385826}
-  displayText: {fileID: 1321318151}
+  levelEndSequence: {fileID: 0}
+  scale2: {x: 0, y: 0.1, z: 0}
 --- !u!114 &276384190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20561,7 +20689,9 @@ Transform:
   m_LocalPosition: {x: 0.5474782, y: 5.4521594, z: -0.4812466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 152787080}
+  - {fileID: 714243030}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20674,6 +20804,8 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  bgmSource: {fileID: 152787081}
+  seSource: {fileID: 714243029}
   bgmClip: {fileID: 8300000, guid: 469e2841ce6de4844b670f9d7ac85616, type: 3}
   soundsSlider: {fileID: 606937462}
   bgmSlider: {fileID: 666506447}
@@ -24118,6 +24250,134 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f305896960553374b8f5e649e4aaf0ac, type: 3}
+--- !u!1 &714243028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714243030}
+  - component: {fileID: 714243029}
+  m_Layer: 0
+  m_Name: SE Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &714243029
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714243028}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &714243030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714243028}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 490415500}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717562075
 GameObject:
   m_ObjectHideFlags: 0
@@ -26308,9 +26568,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardComparison: []
   matchedCardsCount: 0
+  TimerCount: {fileID: 0}
   Canvas: {fileID: 111330536}
   Timer: {fileID: 811870099}
+  checkAnswer: {fileID: 0}
   hapticsController: {fileID: 811870101}
+  levelEndSequence: {fileID: 0}
+  testDataManager: {fileID: 0}
 --- !u!114 &811870101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28866,9 +29130,9 @@ MonoBehaviour:
   h2oNo: {fileID: 1519369002}
   canva1: {fileID: 100441440}
   canva2: {fileID: 807094335}
-  stage5_UIManager: {fileID: 1295408222}
-  screenShow: {fileID: 917137756}
-  elfStatus: {fileID: 313321595}
+  levelEndSequence: {fileID: 0}
+  feAniAnimationController1: {fileID: 0}
+  feAniAnimationController2: {fileID: 0}
 --- !u!114 &917137756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29162,6 +29426,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 276384188}
   hint: {fileID: 780324152}
+  percentagescript: {fileID: 0}
+  GlucoseScaleCube1: {fileID: 0}
+  GlucoseScaleCube2: {fileID: 0}
+  scale1: {x: 0, y: 0.1, z: 0}
+  scale2: {x: 0, y: 0.1, z: 0}
+  targetLiquid: {fileID: 0}
 --- !u!114 &924578235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37175,13 +37445,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glucoseScaleCubeScript: {fileID: 1594756986}
-  Button: {fileID: 617135700}
-  Text: {fileID: 1321318152}
+  text: {fileID: 0}
+  temperature_text: {fileID: 0}
   displayText1: 0%
   displayText2: 53%
   displayText3: 91%
   displayText4: 230%
   displayText5: 91%
+  scale: {x: 0, y: 0.1, z: 0}
+  levelindex: 0
+  switchUI: {fileID: 0}
 --- !u!114 &1321318152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41073,9 +41346,9 @@ MonoBehaviour:
   h2oNo: {fileID: 1519369002}
   canva1: {fileID: 100441440}
   canva2: {fileID: 807094335}
-  stage5_UIManager: {fileID: 1295408222}
-  screenShow: {fileID: 917137756}
-  elfStatus: {fileID: 313321595}
+  levelEndSequence: {fileID: 0}
+  feAniAnimationController1: {fileID: 0}
+  feAniAnimationController2: {fileID: 0}
 --- !u!65 &1584779151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41553,11 +41826,17 @@ MonoBehaviour:
   hint1: {fileID: 487130376}
   hint2: {fileID: 29234426}
   Button: {fileID: 617135700}
+  parameterDisplayText: {fileID: 0}
   scale1: {x: 0, y: 0.15, z: 0}
   scale2: {x: 0, y: -0.05, z: 0}
-  Citem: {fileID: 276384186}
+  levelindex: 0
+  switchUI: {fileID: 0}
+  isMove: 0
   a1: 0
   isParticleTriggered: 0
+  tempflag: 1
+  isToBeReturn: 0
+  returnScale: {x: 0, y: 0.1, z: 0}
 --- !u!114 &1594756987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41571,6 +41850,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpDuration: 4
+  parameterDisplayText: {fileID: 0}
+  unit: '%'
+  decimalPlaces: 0
 --- !u!65 &1594756988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41687,24 +41969,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1619084842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8248298092138567565, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
-  m_PrefabInstance: {fileID: 1884119061}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1619084844
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619084842}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.012572582, y: 0.012572581, z: 0.1769525}
-  m_Center: {x: 0, y: -0.0000000074635835, z: -0.00898818}
 --- !u!1 &1622980143
 GameObject:
   m_ObjectHideFlags: 0
@@ -43697,9 +43961,9 @@ MonoBehaviour:
   h2oNo: {fileID: 1519369002}
   canva1: {fileID: 100441440}
   canva2: {fileID: 807094335}
-  stage5_UIManager: {fileID: 1295408222}
-  screenShow: {fileID: 0}
-  elfStatus: {fileID: 313321595}
+  levelEndSequence: {fileID: 0}
+  feAniAnimationController1: {fileID: 0}
+  feAniAnimationController2: {fileID: 0}
 --- !u!65 &1735143996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46509,6 +46773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpDuration: 1
+  parameterDisplayText: {fileID: 0}
+  unit: '%'
+  decimalPlaces: 0
 --- !u!114 &1888586385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46526,12 +46793,16 @@ MonoBehaviour:
   cover: {fileID: 973244689}
   liquid: {fileID: 188518772}
   h2o: {fileID: 2142437367}
+  H2ONo: {fileID: 0}
+  parameterDisplayText: {fileID: 0}
   isMove: 0
+  scale0: {x: 0, y: 0, z: 0}
   scale1: {x: 0, y: 0.1, z: 0}
   scale2: {x: 0, y: 0.05, z: 0}
-  stage5_UIManager: {fileID: 1295408222}
-  elfStatus: {fileID: 313321595}
-  screenShow: {fileID: 917137756}
+  levelindex: 0
+  flag1: 0
+  flag2: 0
+  switchUI: {fileID: 0}
 --- !u!65 &1888586386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50053,11 +50324,17 @@ MonoBehaviour:
   hint1: {fileID: 487130376}
   hint2: {fileID: 29234426}
   Button: {fileID: 617135700}
+  parameterDisplayText: {fileID: 0}
   scale1: {x: 0, y: 0.03, z: 0}
   scale2: {x: 0, y: 0.07, z: 0}
-  Citem: {fileID: 276384186}
+  levelindex: 0
+  switchUI: {fileID: 0}
+  isMove: 0
   a1: 0
   isParticleTriggered: 0
+  tempflag: 1
+  isToBeReturn: 0
+  returnScale: {x: 0, y: 0.1, z: 0}
 --- !u!114 &2042385827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50071,6 +50348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpDuration: 4
+  parameterDisplayText: {fileID: 0}
+  unit: '%'
+  decimalPlaces: 0
 --- !u!65 &2042385828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51374,6 +51654,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpDuration: 1
+  parameterDisplayText: {fileID: 0}
+  unit: '%'
+  decimalPlaces: 0
 --- !u!114 &2104892072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51391,12 +51674,16 @@ MonoBehaviour:
   cover: {fileID: 973244689}
   liquid: {fileID: 188518772}
   h2o: {fileID: 2142437367}
+  H2ONo: {fileID: 0}
+  parameterDisplayText: {fileID: 0}
   isMove: 0
+  scale0: {x: 0, y: 0, z: 0}
   scale1: {x: 0, y: 0.1, z: 0}
   scale2: {x: 0, y: -0.05, z: 0}
-  stage5_UIManager: {fileID: 1295408222}
-  elfStatus: {fileID: 313321595}
-  screenShow: {fileID: 917137756}
+  levelindex: 0
+  flag1: 0
+  flag2: 0
+  switchUI: {fileID: 0}
 --- !u!65 &2104892073
 BoxCollider:
   m_ObjectHideFlags: 0

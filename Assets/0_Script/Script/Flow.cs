@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using SoftKitty.LiquidContainer;
 
 public class Flow : MonoBehaviour
 {
@@ -13,15 +14,30 @@ public class Flow : MonoBehaviour
     public Vector3 scale2 = new Vector3(0, 0.1f, 0);
     private XRGrabInteractable grabInteractable;
 
+    private LiquidControl myLiquid;
+    public LiquidControl targetLiquid;
+    private float originalAmount;
     void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectExited.AddListener(OnGrab);
+        myLiquid = GetComponent<LiquidControl>();
+        if (targetLiquid != null)
+        {
+            originalAmount = targetLiquid.GetCurrentTotalVolumn();
+        }
     }
 
     public void OnGrab(SelectExitEventArgs args)
     {
-        StartCoroutine(DelayedAction());
+        if (targetLiquid != null)
+        {
+            if (targetLiquid.GetCurrentTotalVolumn() > originalAmount)
+            {
+                targetLiquid.SetWaterLine(1f);
+                StartCoroutine(DelayedAction());
+            }
+        }
     }
 
     private IEnumerator DelayedAction()
@@ -31,7 +47,7 @@ public class Flow : MonoBehaviour
         GlucoseScaleCube1.SendMessage("UpdateScaleFactor", new GlucoseScaleCube.ScaleFactorParameters(scale1, false));
         GlucoseScaleCube2.SendMessage("UpdateScaleFactor", new GlucoseScaleCube.ScaleFactorParameters(scale2, false));
 
-        yield return new WaitForSeconds(7.5f); 
+        yield return new WaitForSeconds(3f); 
       
         DoSomething();
     }

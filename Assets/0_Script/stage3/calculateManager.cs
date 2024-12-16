@@ -188,18 +188,26 @@ public class calculateManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
             detectBall.FindParts(); // 更新关卡
-            detectBall.CheckRequiredElementQuantities();
+            //detectBall.CheckRequiredElementQuantities();
             elementDisplay.UpdateDisplay(); // 更新显示
+            detectBall.SpawnFakeBall();
         }
     }
 
-        public void ResetAllCounts()
+    public void ResetAllCounts()
     {
+        print("ResetAllCounts");
         cCount = 0;
         nCount = 0;
         oCount = 0;
         hCount = 0;
         feCount = 0;
-        initialTotalPrice = 300f;
+        UpdateCText();
+        UpdateNText();
+        UpdateOText();
+        UpdateHText();
+        UpdateFeText();
+        totalPrice = initialTotalPrice;
+        UpdateTotalPrice(0f);
     }
 }

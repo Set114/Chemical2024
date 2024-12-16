@@ -10,7 +10,9 @@ public class Weighing : MonoBehaviour
     bool isEnd = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Equals("Vial_fake"))
+        if (isEnd)
+        return;
+            if (other.gameObject.name.Equals("Vial_fake"))
         {
             Text_UI.SetActive(true);
             if (!other.transform.Find("Liquid (1)").gameObject.activeSelf)
@@ -32,10 +34,11 @@ public class Weighing : MonoBehaviour
     }
     private IEnumerator WaitForAudioToEnd(GameObject gameObject)
     {
-        gameObject.GetComponentInChildren<PourSolution>().audioSource2.Play();
+        PourSolution pourSolution = gameObject.GetComponentInChildren<PourSolution>();
+        float waitSeconds = pourSolution.Play(pourSolution.audioSource2);
         gameObject.GetComponentInChildren<PourSolution>().text.text = gameObject.GetComponentInChildren<PourSolution>().Text[1];
-        yield return new WaitForSeconds(gameObject.GetComponentInChildren<PourSolution>().audioSource2.clip.length);
-        gameObject.GetComponentInChildren<PourSolution>().audioSource3.Play();
+        yield return new WaitForSeconds(waitSeconds);
+        pourSolution.Play(pourSolution.audioSource3);
         gameObject.GetComponentInChildren<PourSolution>().text.text = gameObject.GetComponentInChildren<PourSolution>().Text[2];
     }
 

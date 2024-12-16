@@ -55,15 +55,14 @@ public class RealBall : MonoBehaviour
 
         }
     }
-
-    void OnTriggerExit(Collider other)
+    /* void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("TrashBin"))
         {
             // 進入收集盆
             transform.position = Vector3.Lerp(transform.position, new Vector3(0, 0, 0), Time.deltaTime * 5); // 假設收集盆在原點
         }
-    }
+    }*/
 
     void UpdateNumbers(int whiteboardChange)
     {

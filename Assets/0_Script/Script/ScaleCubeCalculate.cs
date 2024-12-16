@@ -79,18 +79,22 @@ public class ScaleCubeCalculate : MonoBehaviour
 
     private float MapScaleToDisplayValue(float scaleValue)
     {
+        print(scaleValue);
         if (Mathf.Approximately(scaleValue, 0.1f))
         {
+            //return 0.825f;
             return 0.25f;
         }
 
-        if (Mathf.Approximately(scaleValue, 0.03f))
+        if (Mathf.Approximately(scaleValue, 0.01f))
         {
+            //return 0.8226f;
             return 0.26f;
         }
 
         if (Mathf.Approximately(scaleValue, -0.05f))
         {
+            //return 0.515f;
             return 0.15f;
         }
 
@@ -99,7 +103,7 @@ public class ScaleCubeCalculate : MonoBehaviour
             return 60f; 
         }
 
-        if (Mathf.Approximately(scaleValue, 0.11f) || Mathf.Approximately(scaleValue,-0.01f) || Mathf.Approximately(scaleValue, 0f) || Mathf.Approximately(scaleValue, -0.15f) || Mathf.Approximately(scaleValue, -0.09f))
+        if (Mathf.Approximately(scaleValue, 0.11f) || Mathf.Approximately(scaleValue,-0.2f) || Mathf.Approximately(scaleValue, -0.04f) || Mathf.Approximately(scaleValue, -0.15f) || Mathf.Approximately(scaleValue, -0.09f))
         {
             return 58f;
         }
@@ -109,12 +113,13 @@ public class ScaleCubeCalculate : MonoBehaviour
             return 440f;
         }
 
-        if (Mathf.Approximately(scaleValue, 0.09f))
+        //if (Mathf.Approximately(scaleValue, 0.09f))
+        if (Mathf.Approximately(scaleValue, 0.047f))
         {
             return 139f;
         }
 
-        if (Mathf.Approximately(scaleValue, -0.02f))
+        if (Mathf.Approximately(scaleValue, 0f))
         {
             return 41f;
         }

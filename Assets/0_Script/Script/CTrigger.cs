@@ -21,7 +21,8 @@ public class CTrigger : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
 
         grabInteractable.selectExited.AddListener(OnPutDown);
-        warning.SetActive(false);
+        if (warning)
+            warning.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -73,11 +74,13 @@ public class CTrigger : MonoBehaviour
             transform.position = originalPosition.position;
             transform.rotation = originalPosition.rotation;
             isLocked = false;
-            warning.SetActive(true); // 如果不在原點或目標點，則警告
+            if (warning)
+                warning.SetActive(true); // 如果不在原點或目標點，則警告
         }
         else
         {
-            warning.SetActive(false);
+            if (warning)
+                warning.SetActive(false);
         }
     }
 }

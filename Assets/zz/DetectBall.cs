@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Xml.Linq;
 
 public class DetectBall : MonoBehaviour
 {
     public int c = 0, n = 0, o = 0, h = 0, fe = 0, allcount = 0;
-    public int displayC = 0, displayN = 0, displayO = 0, displayH = 0, displayFe = 0;
-
+    //public int displayC = 0, displayN = 0, displayO = 0, displayH = 0, displayFe = 0;
+    public GameObject fakeC, fakeN, fakeO, fakeH, fakeFe;
     public TMP_Text cText;
     public TMP_Text nText;
     public TMP_Text oText;
@@ -47,6 +48,12 @@ public class DetectBall : MonoBehaviour
         elementDisplay = FindObjectOfType<ElementDisplay>();
         canvasController = FindObjectOfType<CanvasController_Unit3>();
         animationController = FindObjectOfType<AnimationController_Unit3>();
+
+        fakeC.SetActive(false);
+        fakeN.SetActive(false);
+        fakeO.SetActive(false);
+        fakeH.SetActive(false);
+        fakeFe.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,12 +62,11 @@ public class DetectBall : MonoBehaviour
         {
             RealBall realBall = other.GetComponent<RealBall>();
             Debug.Log(realBall);
-            
+
             if (realBall != null && !realBall.isInsideTrigger)
             {
                 realBall.isInsideTrigger = true;
-
-                if (CurrentLevel == "part0")
+                /*if (CurrentLevel == "part0")
                 {
                     // 仅更新本地计数和显示计数
                     if (other.CompareTag("C"))
@@ -123,41 +129,41 @@ public class DetectBall : MonoBehaviour
                         allcount++;
                         feText.text = displayFe.ToString();
                     }
+                }*/
+
+                realBall.transform.SetParent(canvasController.Ball.transform);
+                // 在其他关卡中减少 ElementalBallCounter 的数量
+                if (other.CompareTag("C"))
+                {
+                    c++;
+                    allcount++;
+                }
+                else if (other.CompareTag("N"))
+                {
+                    n++;
+                    allcount++;
+                }
+                else if (other.CompareTag("O"))
+                {
+                    o++;
+                    allcount++;
+                }
+                else if (other.CompareTag("H"))
+                {
+                    h++;
+                    allcount++;
+                }
+                else if (other.CompareTag("Fe"))
+                {
+                    fe++;
+                    allcount++;
                 }
                 else
                 {
-                    // 在其他关卡中减少 ElementalBallCounter 的数量
-                    if (other.CompareTag("C"))
-                    {
-                        c++;
-                        allcount++;
-                    }
-                    else if (other.CompareTag("N"))
-                    {
-                        n++;
-                        allcount++;
-                    }
-                    else if (other.CompareTag("O"))
-                    {
-                        o++;
-                        allcount++;
-                    }
-                    else if (other.CompareTag("H"))
-                    {
-                        h++;
-                        allcount++;
-                    }
-                    else if (other.CompareTag("Fe"))
-                    {
-                        fe++;
-                        allcount++;
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Unknown element tag: " + other.tag);
-                    }
+                    Debug.LogWarning("Unknown element tag: " + other.tag);
                 }
-                CheckQuantities();
+
+                //CheckQuantities();
             }
             else
             {
@@ -165,18 +171,27 @@ public class DetectBall : MonoBehaviour
             }
         }
     }
+
+    public void SpawnFakeBall()
+    {
+        fakeC.SetActive(elementalBallCounter.GetBallCount("c") >= 1);
+        fakeN.SetActive(elementalBallCounter.GetBallCount("n") >= 1);
+        fakeO.SetActive(elementalBallCounter.GetBallCount("o") >= 1);
+        fakeH.SetActive(elementalBallCounter.GetBallCount("h") >= 1);
+        fakeFe.SetActive(elementalBallCounter.GetBallCount("fe") >= 1);
+    }
     private void CheckQuantities()
     {
         //Debug.Log("allcount:" + allcount);
         //Debug.Log("GetRequiredBallCountForCurrentLevel:" + GetRequiredBallCountForCurrentLevel());
         // 如果数量足够，执行对应的逻辑
-        if (allcount == GetRequiredBallCountForCurrentLevel())
+        //if (allcount == GetRequiredBallCountForCurrentLevel())
         {
             //Debug.Log("CheckQuantities CurrentLevel:" + CurrentLevel);
             switch (CurrentLevel)
             {
                 case "part0":
-                    if (n == 4 && o == 2)
+                    if (n == 1 && o == 2)
                     {
                         animationController.ActivateObjectsForLevel(CurrentLevel);
                         Debug.Log("教學關卡正確");
@@ -189,7 +204,7 @@ public class DetectBall : MonoBehaviour
                     }
                     break;
                 case "part1":
-                    if (c == 1 && o == 2)
+                    if (c == 2 && o == 1)
                     {
                         animationController.ActivateObjectsForLevel(CurrentLevel);
                         Debug.Log("第一關正確");
@@ -206,7 +221,7 @@ public class DetectBall : MonoBehaviour
                     }
                     break;
                 case "part2":
-                    if (n == 2 && h == 2)
+                    if (n == 1 && h == 3)
                     {
                         animationController.ActivateObjectsForLevel(CurrentLevel);
                         Debug.Log("第二關正確");
@@ -220,7 +235,7 @@ public class DetectBall : MonoBehaviour
                     }
                     break;
                 case "part3":
-                    if (h == 1 && o == 2)
+                    if (h == 2 && o == 1)
                     {
                         animationController.ActivateObjectsForLevel(CurrentLevel);
                         Debug.Log("第三關正確");
@@ -275,11 +290,17 @@ public class DetectBall : MonoBehaviour
             }
     }
 
+    public void OnConfirmButtonClicked()
+    {
+        //CheckQuantities();
+        CheckRequiredElementQuantities();
+    }
+
     private int GetRequiredBallCountForCurrentLevel()
     {
         switch (CurrentLevel)
         {
-            case "part0": return 6;
+            case "part0": return 3;
             case "part1": return 3;
             case "part2": return 4;
             case "part3": return 3;
@@ -299,22 +320,22 @@ public class DetectBall : MonoBehaviour
         switch (CurrentLevel)
         {
             case "part0":
-                requiredN = 4; requiredO = 2;
+                requiredN = 1; requiredO = 2;
                 break;
             case "part1":
                 requiredC = 1; requiredO = 2;
                 break;
             case "part2":
-                requiredN = 2; requiredH = 2;
+                requiredN = 1; requiredH = 3;
                 break;
             case "part3":
-                requiredO = 2; requiredH = 1;
+                requiredO = 1; requiredH = 2;
                 break;
             case "part4":
-                requiredC = 3; requiredO = 2; requiredH = 8;
+                requiredC = 3; requiredO = 1; requiredH = 8;
                 break;
             case "part5":
-                requiredC = 1; requiredO = 3; requiredFe = 2;
+                requiredC = 1; requiredO = 2; requiredFe = 2;
                 break;
             default:
                 Debug.LogWarning("Unknown level: " + CurrentLevel);
@@ -323,20 +344,21 @@ public class DetectBall : MonoBehaviour
         Debug.Log("=========");
         Debug.Log("its checking");
         Debug.Log("=========");
-        Debug.Log("c: " + elementalBallCounter.GetBallCount("c"));
-        Debug.Log("n: " + elementalBallCounter.GetBallCount("n"));
-        Debug.Log("o: " + elementalBallCounter.GetBallCount("o"));
-        Debug.Log("h: " + elementalBallCounter.GetBallCount("h"));
-        Debug.Log("fe: " + elementalBallCounter.GetBallCount("fe"));
+        Debug.Log("c: " + c);
+        Debug.Log("n: " + n);
+        Debug.Log("o: " + o);
+        Debug.Log("h: " + h);
+        Debug.Log("fe: " + fe);
 
         // 检查当前所拥有的元素数量
-        if (elementalBallCounter.GetBallCount("c") < requiredC ||
-            elementalBallCounter.GetBallCount("n") < requiredN ||
-            elementalBallCounter.GetBallCount("o") < requiredO ||
-            elementalBallCounter.GetBallCount("h") < requiredH ||
-            elementalBallCounter.GetBallCount("fe") < requiredFe)
+        if (c < requiredC ||
+            n < requiredN ||
+            o < requiredO ||
+            h < requiredH ||
+            fe < requiredFe)
         {
             Debug.Log($"數量不足 {CurrentLevel}!");
+            //  原子不足流程
             canvasController.NotEnoughQuantity();
             //這是放錯誤音效判斷
             if (CurrentLevel == "part0")
@@ -374,6 +396,7 @@ public class DetectBall : MonoBehaviour
         else
         {
             Debug.Log("檢查目前所擁有的元素數量");
+            CheckQuantities();
         }
     }
 
@@ -385,14 +408,14 @@ public class DetectBall : MonoBehaviour
         {
             if (obj.name.StartsWith("part"))
             {
-                if (obj.name == "part0")
+                /*if (obj.name == "part0")
                 {
                     displayC = elementalBallCounter.GetBallCount("c");
                     displayN = elementalBallCounter.GetBallCount("n");
                     displayO = elementalBallCounter.GetBallCount("o");
                     displayH = elementalBallCounter.GetBallCount("h");
                     displayFe = elementalBallCounter.GetBallCount("fe");
-                }
+                }*/
                 CurrentLevel = obj.name; // 這裡會觸發事件
                 return obj.name;
             }

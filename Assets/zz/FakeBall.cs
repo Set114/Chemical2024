@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit;
+using Unity.VisualScripting;
 
 public class FakeBall : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class FakeBall : MonoBehaviour
     public GameObject whiteboard;
 
     private Vector3 originalPosition;
+    private Quaternion originalRotation;
     private Rigidbody rb;
+    private XRGrabInteractable grabInteractable;
 
     public DetectBall detectBall;
     private ElementalBallCounter elementalBallCounter;
@@ -18,7 +21,10 @@ public class FakeBall : MonoBehaviour
     void Awake()
     {
         originalPosition = transform.position;
+        originalRotation = transform.rotation;
         rb = GetComponent<Rigidbody>();
+        grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable.selectExited.AddListener(OnGrab);
 
         elementalBallCounter = FindObjectOfType<ElementalBallCounter>();
         elementDisplay = FindObjectOfType<ElementDisplay>();
@@ -32,6 +38,12 @@ public class FakeBall : MonoBehaviour
         {
             Debug.LogWarning("DetectBall component not found!");
         }
+    }
+
+    public void OnGrab(SelectExitEventArgs args)
+    {
+        // 重置剛體約束
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     private void OnEnable()
@@ -51,21 +63,25 @@ public class FakeBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        string currentTag = gameObject.tag;
-
-        //Debug.Log($"OnTriggerEnter - Current Level: {currentLevel}, Tag: {currentTag}");
-
-        if (currentLevel == "part0")
+        if(other.gameObject.name== "Atomicdetection")
         {
-            HandlePart0Trigger(currentTag);
-        }
-        else
-        {
-            HandleOtherPartsTrigger(currentTag);
-        }
+            string currentTag = gameObject.tag;
 
-        // 重置剛體約束
-        rb.constraints = RigidbodyConstraints.None;
+            //Debug.Log($"OnTriggerEnter - Current Level: {currentLevel}, Tag: {currentTag}");
+
+            /*
+            if (currentLevel == "part0")
+            {
+                //HandlePart0Trigger(currentTag);
+            }*/
+            HandleOtherPartsTrigger(currentTag);  
+
+            // 重置剛體約束
+            //rb.constraints = RigidbodyConstraints.None;
+        }else if(other.gameObject.tag == "TrashBin")
+        {
+            ResetPosition();
+        }
     }
 
     private void HandlePart0Trigger(string currentTag)
@@ -74,19 +90,19 @@ public class FakeBall : MonoBehaviour
         switch (currentTag)
         {
             case "C":
-                hasAvailableElement = detectBall.displayC > 0;
+                hasAvailableElement = elementalBallCounter.GetBallCount("c") > 1;
                 break;
             case "N":
-                hasAvailableElement = detectBall.displayN > 0;
+                hasAvailableElement = elementalBallCounter.GetBallCount("n") > 1;
                 break;
             case "O":
-                hasAvailableElement = detectBall.displayO > 0;
+                hasAvailableElement = elementalBallCounter.GetBallCount("o") > 1;
                 break;
             case "H":
-                hasAvailableElement = detectBall.displayH > 0;
+                hasAvailableElement = elementalBallCounter.GetBallCount("h") > 1;
                 break;
             case "Fe":
-                hasAvailableElement = detectBall.displayFe > 0;
+                hasAvailableElement = elementalBallCounter.GetBallCount("fe") > 1;
                 break;
             default:
                 Debug.LogWarning($"Unknown element type: {currentTag}");
@@ -105,21 +121,22 @@ public class FakeBall : MonoBehaviour
 
     private void HandleOtherPartsTrigger(string currentTag)
     {
-        if (elementalBallCounter.GetBallCount(currentTag) >= 1)
+        /*if (elementalBallCounter.GetBallCount(currentTag) > 1)
         {
             SpawnRealBall();
-            elementalBallCounter.RemoveBalls(currentTag, 1);
-            elementDisplay.UpdateDisplay();
         }
         else
         {
             DisableGrabInteraction();
-        }
+        }*/
+        SpawnRealBall();
+        elementalBallCounter.RemoveBalls(currentTag, 1);
+        elementDisplay.UpdateDisplay();
     }
 
     private void SpawnRealBall()
     {
-        Instantiate(realBallPrefab, transform.position, Quaternion.identity);
+        Instantiate(realBallPrefab, transform.position, Quaternion.identity, transform.parent);
         ResetPosition();
         UpdateNumbers(1);
     }
@@ -127,6 +144,7 @@ public class FakeBall : MonoBehaviour
     private void ResetPosition()
     {
         transform.position = originalPosition;
+        transform.rotation = originalRotation;
         rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 

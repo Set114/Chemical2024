@@ -20,11 +20,14 @@ public class GlucoseScaleCube : MonoBehaviour
     
     
 
-    private bool isMove = false;
+    [SerializeField]private bool isMove = false;
     public bool a1 = false;
     public bool isParticleTriggered = false;
     
     public bool tempflag = true;
+
+    public bool isToBeReturn = false;       //讓數值緩慢下降
+    public Vector3 returnScale = new Vector3(0, 0.1f, 0);
 
     void OnEnable()
     {
@@ -45,6 +48,13 @@ public class GlucoseScaleCube : MonoBehaviour
                 UpdateScaleFactor(new ScaleFactorParameters(scale1,true));
                 isMove = true;
                 Debug.Log("Update is true");
+            }
+            //  葡萄糖溶解速率就要馬上變為60mg/s了(因為表面積會影響反應速率)，之後再緩慢下降到58mg/s
+            if (isToBeReturn && transform.localScale.y == scale1.y)
+            {
+                UpdateScaleFactor(new ScaleFactorParameters(returnScale, true));
+                isToBeReturn = false;
+                Debug.Log("try retrue");
             }
         }
     }

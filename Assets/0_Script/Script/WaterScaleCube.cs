@@ -31,7 +31,7 @@ public class WaterScaleCube : MonoBehaviour
         if (!flag1)
         {
             previousCoverPosition = cover.transform.position;
-            //UpdateScaleFactor(scale1);
+            UpdateScaleFactor(scale1);
             H2ONo.SetActive(false);  
             flag1 = true;
         }          

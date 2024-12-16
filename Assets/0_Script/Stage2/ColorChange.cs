@@ -77,7 +77,8 @@ public class ColorChange : MonoBehaviour
     // 触发事件，启动颜色过渡
     private void OnTriggerEnter(Collider other)
     {
-        if (!isTransitioning && other.gameObject.name.Equals("GAS"))
+        //  修改了指定物件名稱
+        if (!isTransitioning && other.gameObject.name.Equals("fire"))
         {
             StartNextTransition(startColor, orangeColor, 1);
         }
