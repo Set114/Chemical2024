@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System; 
+using System;
 
 
 public class IceBlockCollision : MonoBehaviour
@@ -23,17 +23,21 @@ public class IceBlockCollision : MonoBehaviour
     [Header("LoadingSign")]
     [SerializeField] GameObject loading_sign;
 
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public TestDataManager testDataManager;
     public IceBlockCollisionStage1UI iceBlockCollisionStage1UI;
     int count = 0;
 
+    private LevelObjManager levelObjManager;
+
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+
         q1question_btn.onClick.AddListener(Q1question);
         q2question_btn.onClick.AddListener(Q2question);
         Close_btn.onClick.AddListener(Close_controler);
-    }       
+    }   
 
     void OnTriggerEnter(Collider other)
     {
@@ -107,7 +111,8 @@ public class IceBlockCollision : MonoBehaviour
         }
         else if (count == 2)
         {
-            levelEndSequence.EndLevel(false,false, 1f, 2f, 1f, "1", () => {iceBlockCollisionStage1UI.TestUIShow();});
+            //levelEndSequence.EndLevel(false,false, 1f, 2f, 1f, "1", () => {iceBlockCollisionStage1UI.TestUIShow();});
+            levelObjManager.LevelClear("1", "");
         }
         count++;
         yield return null;

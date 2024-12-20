@@ -32,14 +32,14 @@ public class CanvasController_Unit3 : MonoBehaviour
 
     private int chapterMode = 0;
     // 假設關卡一開始是教學模式，0 = 教學 ，1 = 測驗
-    private GameManager gameManager; // 讀取玩家資料
+    private UserDataManager userDataManager; // 讀取玩家資料
     private calculateManager calculate;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
+        userDataManager = UserDataManager.Instance;
         calculate = GetComponent<calculateManager>();
-        chapterMode = gameManager.GetChapterMode();
+        chapterMode = userDataManager.GetChapterMode();
         if (chapterMode == 0)
         {
             currentPartIndex = 0;

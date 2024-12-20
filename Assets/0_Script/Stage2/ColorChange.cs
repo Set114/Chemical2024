@@ -19,9 +19,13 @@ public class ColorChange : MonoBehaviour
     private bool isTransitioning = false; // 是否正在进行过渡
     private int transitionStage = 0; // 当前过渡阶段：0 - 未启动，1 - 银色到橙色，2 - 橙色到黑色
 
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
+
+    private LevelObjManager levelObjManager;
+
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         if (targetMaterial != null)
         {
             targetMaterial.color = startColor; // 初始化为起始颜色
@@ -102,7 +106,8 @@ public class ColorChange : MonoBehaviour
         }
         if (finalText == "30G")
         {
-            levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
+            //levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
+            levelObjManager.LevelClear("1", "");
         }
     }
 }

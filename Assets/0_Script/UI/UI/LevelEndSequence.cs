@@ -35,11 +35,11 @@ public class LevelEndSequence : MonoBehaviour
     public LearnDataManager learnDataManager; // 紀錄
     public TestDataManager testDataManager; // 紀錄
     public PlaySpeechAudio playSpeechAudio; // 語音撥放
-    private GameManager gameManager;
+    private UserDataManager userDataManager;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
+        userDataManager = UserDataManager.Instance;
         loading_sign.SetActive(false);
     }
 
@@ -85,7 +85,7 @@ public class LevelEndSequence : MonoBehaviour
     {
         yield return new WaitForSeconds(levelChangeDelay);
         elfStatus.HideELF(); // 隱藏 ELF
-        chapterMode = gameManager.GetChapterMode();
+        chapterMode = userDataManager.GetChapterMode();
         loading_sign.SetActive(true);
         if (switchT != null)
         {
@@ -106,7 +106,7 @@ public class LevelEndSequence : MonoBehaviour
     // 延遲顯示下一個 UI
     IEnumerator ShowNextUIAfterDelay(float delay, System.Action callback)
     {
-        chapterMode = gameManager.GetChapterMode();
+        chapterMode = userDataManager.GetChapterMode();
         yield return new WaitForSeconds(delay); // 等待指定時間
         switchUI.CompletedState(levelCount); // 紀錄關卡已完成
         checkImage.SwitchImage(levelCount); // 切換圖像

@@ -37,13 +37,17 @@ public class BlendShapeControl : MonoBehaviour
     [SerializeField] GameObject loading_sign;
     int count=0;
     //public Lvl1TestGM lvl1TestGM;
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public TestDataManager testDataManager;
     private bool flag = true ;
 
     [SerializeField] GameObject item;
+
+    private LevelObjManager levelObjManager;
+
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         if (blendCoroutines != null)
         {
             foreach (Coroutine coroutine in blendCoroutines)
@@ -147,10 +151,11 @@ public class BlendShapeControl : MonoBehaviour
 
     private IEnumerator WaitForEndLevelAndShowUI()
     {
-        yield return null; 
-        levelEndSequence.EndLevel(true, false, 1f, 2f, 1f, "1", () => {
+        yield return null;
+        /*levelEndSequence.EndLevel(true, false, 1f, 2f, 1f, "1", () => {
             TestShowUI.gameObject.SetActive(true);
-        });
+        });*/
+        levelObjManager.LevelClear("1", "");
         count++;
     }
 

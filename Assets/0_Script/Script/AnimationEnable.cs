@@ -15,12 +15,16 @@ public class AnimationEnable : MonoBehaviour
 
 
     private bool a1 = false;
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public FeAniAnimationController feAniAnimationController1;
     public FeAniAnimationController feAniAnimationController2;
 
+    private LevelObjManager levelObjManager;
+
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+
         // Button.onClick.AddListener(() => OnButtonClicked(h2o, canva1));
         Button.onClick.AddListener(Level1);
     }
@@ -49,7 +53,8 @@ public class AnimationEnable : MonoBehaviour
     
     private void End()
     {
-        levelEndSequence.EndLevel(false,true, 1f, 9f, 1f, "1", () => { });
+        //levelEndSequence.EndLevel(false,true, 1f, 9f, 1f, "1", () => { });
+        levelObjManager.LevelClear("1", "");
         // StartCoroutine(HideScreenActive(5f));
     }
 

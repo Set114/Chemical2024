@@ -17,11 +17,13 @@ public class ShowBubbleChangeColor : MonoBehaviour
 
     private Material mat;
     
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public FeAniAnimationController feAniAnimationController;
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         Renderer rend = GetComponent<Renderer>();
         mat = rend.material; // 獲取材質
     }
@@ -57,7 +59,7 @@ public class ShowBubbleChangeColor : MonoBehaviour
         // 確保時間結束後顏色正好是 endColor
         mat.SetColor("_Albedo", endColor);
 
-        levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+        //levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+        levelObjManager.LevelClear("1", "");
     }
-
 }

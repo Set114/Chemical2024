@@ -20,11 +20,11 @@ public class LearnDataManager : MonoBehaviour
     private string folderName;
     private string sheetId;
     private string fileName;
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
+        userDataManager = UserDataManager.Instance;
         GetData();
     }
 
@@ -36,10 +36,10 @@ public class LearnDataManager : MonoBehaviour
         // studentId = "a1110831001";
         // getUId = 1;   
         
-        schoolId = gameManager.GetSchID();  
-        classId = gameManager.GetClass();  
-        getUId = gameManager.GetUid();   
-        studentId = gameManager.GetPlayerID();
+        schoolId = userDataManager.GetSchID();  
+        classId = userDataManager.GetClass();  
+        getUId = userDataManager.GetUid();   
+        studentId = userDataManager.GetPlayerID();
         
         // Debug.Log("schoolId = " + schoolId);
         // Debug.Log("classId = " + classId);
@@ -72,6 +72,20 @@ public class LearnDataManager : MonoBehaviour
     {
         completionTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
         //Debug.Log("Completion Times: " + completionTime);
+    }
+
+    public void EndLevel(string levelAnswer)
+    {
+        CompleteLevel();
+        if (levelAnswer == "0")
+        {
+            answer = "0";
+        }
+        else if (levelAnswer == "1")
+        {
+            answer = "1";
+        }
+        StartCoroutine(LearnUploadData()); // 等待上传完成
     }
 
     public void EndLevelWithCallback(string levelAnswer, Action callback)

@@ -19,11 +19,14 @@ public class GasCan : MonoBehaviour
     private Vector3 initialScaleCap;
     private Vector3 initialScaleCap1;
 
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public FeAniAnimationController feAniAnimationController;
+
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         renderer1 = cap.GetComponent<Renderer>();
         renderer2 = cap1.GetComponent<Renderer>();
 
@@ -87,7 +90,8 @@ public class GasCan : MonoBehaviour
 
                 shouldPlayAnimation = false;
 
-                levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+                //levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+                levelObjManager.LevelClear("1", "");
             }
         }
     }

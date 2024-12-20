@@ -40,10 +40,11 @@ public class Collision02 : MonoBehaviour
     public TestDataManager testDataManager;
 
     private int currentQuestionIndex = 1; // 當前題目索引（從1開始）
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
-
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         q1question_btn.onClick.AddListener(OnQ1MarkClicked);
         Close_btn.onClick.AddListener(Close_controler);
         loading_sign.SetActive(true);
@@ -143,12 +144,14 @@ public class Collision02 : MonoBehaviour
     void EndAllQuestions()
     {
         Debug.Log("所有題目完成，進入結算流程");
+        /*
         levelEndSequence.EndLevel(false, false, 1f, 3f, 1f, "1", () =>
         {
             Canvas_Test.SetActive(true);
             Canvas_Test_UI.SetActive(true);
             Canvas_Test_UI_END.SetActive(true);
-        });
+        });*/
+        levelObjManager.LevelClear("1", "");
     }
 
 }

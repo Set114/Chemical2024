@@ -1,124 +1,175 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton instance
-    private static GameManager instance;
+    [Tooltip("假設關卡一開始是教學模式，0 = 教學 ，1 = 測驗")]
+    private int gameMode = 0;
+    [Tooltip("目前單元，需手動輸入")]
+    [SerializeField] private int currStage = 0;
+    [Tooltip("目前關卡")]
+    [SerializeField] private int currLevel = 0;
+    [Tooltip("輸入測驗的第一個UI在第幾個levelUIs")]
+    [SerializeField] private int testIndex;
 
-    // 用於在場景間保存的資料
-    public string currentPlayerID;
-    public string currentPlayerName;
-    public string currentSchID;
-    // public string currentMail;
-    // public string currentYear;
-    public string currentClass;
-    public int currentUid;
-    public int chapterMode;
+    [Tooltip("管理題目介面")]
+    [SerializeField] private QuestionManager questionManager;
+    [Tooltip("管理關卡物件")]
+    [SerializeField] private LevelObjManager levelObjManager;
+    [Tooltip("管理提示板、角色")]
+    [SerializeField] private HintManager hintManager;
+    [Tooltip("管理分子視窗顯示")]
+    [SerializeField] private MoleculaDisplay moleculaDisplay;
+    [Tooltip("管理播放音效")]
+    [SerializeField] private AudioManager audioManager;
 
-    // 單例實例的取得方式
-    public static GameManager Instance
+    [Tooltip("讀取玩家資料")]
+    private UserDataManager userDataManager;
+    [Tooltip("紀錄學生的教學資料")]
+    [SerializeField] private LearnDataManager learnDataManager;
+    [Tooltip("紀錄學生的測驗資料")]
+    [SerializeField] private TestDataManager testDataManager;
+
+    [Tooltip("緩衝時間")]
+    [SerializeField] private float defaultDelay = 3f;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        get
+        userDataManager = UserDataManager.Instance;
+        gameMode = userDataManager.GetChapterMode();
+
+        questionManager.gameObject.SetActive(false);
+        levelObjManager.gameObject.SetActive(false);
+        hintManager.gameObject.SetActive(false);
+
+        //  根據模式切換介面
+        if (gameMode == 0)
         {
-            if (instance == null)
-            {
-                // 嘗試查找現有的 GameManager 實例
-                instance = FindObjectOfType<GameManager>();
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject("GameManager");
-                    instance = obj.AddComponent<GameManager>();
-                    DontDestroyOnLoad(obj); // 在場景切換時不銷毀
-                    // Debug.Log("GameManager 初始化");
-                }
-            }
-            return instance;
+            questionManager.SwitchUI(0);
         }
-    }
-
-    void Awake()
-    {
-        if (instance == null)
+        else if (gameMode == 1)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // 在場景切換時不銷毀
-            // Debug.Log("GameManager 初始化");
+            questionManager.SwitchUI(testIndex);
         }
-        else if (instance != this)
+        questionManager.gameObject.SetActive(true);
+    }
+
+    //  關卡開始
+    public void LevelStart()
+    {
+        if (currLevel < testIndex)
         {
-            // Debug.LogWarning("檢測到重複的 GameManager 實例並銷毀");
-            Destroy(gameObject); // 避免重複的 GameManager 實例
+            // 紀錄學生關卡的學習歷程資料
+            learnDataManager.GetsId(currLevel);
+            learnDataManager.StartLevel();
         }
+
+        questionManager.gameObject.SetActive(false);
+        levelObjManager.gameObject.SetActive(true);
+        levelObjManager.SwitchObject(currLevel);
+
+        hintManager.gameObject.SetActive(true);
+        hintManager.SwitchStep(0);
+        moleculaDisplay.SwitchDisplay(hintManager.GetCurrStep());
     }
 
-    // 更新玩家資料
-    public void UpdatePlayerData(string playerName)
+    //  切換到測驗關卡
+    public void SwitchToTestLevel()
     {
-        currentPlayerName = playerName;
-        // Debug.Log($"Player name updated to: {currentPlayerName}");
+        userDataManager.UpdateChapterMode(1);
+        gameMode = userDataManager.GetChapterMode();
+        SwitchLevel(testIndex);
     }
 
-    // 更新下一個場景索引
-    public void UpdateChapterMode(int levelIndex)
+    public void SwitchLevel(int level)
     {
-        chapterMode = levelIndex;
-        // Debug.Log($"Chapter mode updated to: {chapterMode}");
+        currLevel = level;
+        questionManager.gameObject.SetActive(true);
+        //  如果教學模式結束
+        if (gameMode == 0 && currLevel >= testIndex)
+        {
+            questionManager.SwitchLevelClearUI(true);
+            return;
+        }
+
+        if (currLevel < questionManager.GetQuestionsLength())
+        {
+            //切換下一關
+            questionManager.SwitchUI(currLevel);
+
+            levelObjManager.gameObject.SetActive(false);
+            hintManager.gameObject.SetActive(false);
+            //switchItem.UpdateLevelName(levelCount);
+        }
+        else
+        {
+            questionManager.SwitchLevelClearUI(false);
+        }
+
+    }
+    //  關卡結束
+    public void LevelClear(string answer)
+    {
+        currLevel++;
+        //結束
+        if (gameMode == 0)
+        {
+            learnDataManager.EndLevel(answer);
+        }
+        else if (gameMode == 1)
+        {
+            testDataManager.EndLevel();
+        }
+        SwitchLevel(currLevel);
     }
 
-    // 獲取當前玩家名稱
-    public string GetCurrentPlayerName()
+    public float NextStep()
     {
-        return currentPlayerName;
+        hintManager.gameObject.SetActive(true);
+        //  切換步驟的同時呼叫分子視窗顯示
+        float delay = hintManager.SwitchStep(hintManager.GetCurrStep() + 1)
+            + moleculaDisplay.SwitchDisplay(hintManager.GetCurrStep()) ;
+        return delay;
     }
 
-    public void UpdateUid(int levelIndex)
+    //  取得指定音效長度
+    public float GetClipLength(string name)
     {
-        currentUid = levelIndex;
-        // Debug.Log($"UID updated to: {currentUid}");
+        return audioManager.GetClipLength(name);
     }
 
-    public string GetPlayerID()
+    //  播放指定音效
+    public void PlaySound(string name,float delay)
     {
-        return currentPlayerID;
+        print("Play: " + name);
+        StartCoroutine(CallAudioManagerPlaySound(name, delay));
     }
 
-    // public string GetMail()
-    // {
-    //     return currentMail;
-    // }
-
-    // public string GetYear()
-    // {
-    //     return currentYear;
-    // }
-
-    public string GetClass()
+    IEnumerator CallAudioManagerPlaySound(string name, float delay)
     {
-        return currentClass;
+        yield return new WaitForSeconds(delay);
+        audioManager.Play(name);
     }
 
-    public string GetSchID()
+    //  取得目前關卡
+    public int GetCurrLevel()
     {
-        return currentSchID;
+        return currLevel;
     }
-
-    public int GetChapterMode()
+    public float GetDefaultDelay()
     {
-        return chapterMode;
+        return defaultDelay;
     }
-
-    public int GetUid()
+    public void BackToMainMenu()
     {
-        return currentUid;
-    }
-
-    // 設置玩家資料
-    public void SetPlayerData(string schoolID,string classData, string studentID, string studentName)
-    {
-        currentPlayerID = studentID; 
-        currentPlayerName = studentName; 
-        currentSchID = schoolID;
-        currentClass = classData;
-        // Debug.Log("Set player data in GameManager.");
+        MenuUIManager.shouldOpenMenu = true;
+        SceneManager.LoadScene("MainMenu");
     }
 }

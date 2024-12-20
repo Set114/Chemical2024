@@ -56,9 +56,11 @@ public class IBCS_UI : MonoBehaviour
     private float currentTime;         // 當前倒數時間
     private bool hasStartedCountdown = false; // 確保倒數只啟動一次
 
+    private LevelObjManager levelObjManager;
+
     void Start()
     {
-
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         q1question_btn.onClick.AddListener(Q1question);
         Close_btn.onClick.AddListener(Close_controler);
         Renderer renderer = next_level202.GetComponent<Renderer>(); //為了隱藏當前關卡並繼續執行
@@ -151,6 +153,7 @@ public class IBCS_UI : MonoBehaviour
         yield return null;
 
         Debug.Log("下一個場景");
+        /*
         levelEndSequence.EndLevel(false, false, 1f, 3f, 1f, "1", () =>
         {
             Canvas_Test.SetActive(true);//開Canvas_Test
@@ -158,6 +161,8 @@ public class IBCS_UI : MonoBehaviour
             next_level203.SetActive(true);  //開 下一關
             next_level202.SetActive(false);  //關閉 目前關卡
         });
+        */
+        levelObjManager.LevelClear("1", "");
     }
 
     public void TestDataStart(int countindex)

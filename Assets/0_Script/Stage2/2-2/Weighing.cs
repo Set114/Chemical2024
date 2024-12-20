@@ -6,8 +6,16 @@ using UnityEngine;
 public class Weighing : MonoBehaviour
 {
     public GameObject Text_UI;
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     bool isEnd = false;
+
+    private LevelObjManager levelObjManager;
+
+    void Start()
+    {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (isEnd)
@@ -25,7 +33,8 @@ public class Weighing : MonoBehaviour
                 //other.GetComponentInChildren<PourSolution>().text.text = other.GetComponentInChildren<PourSolution>().Text[4];
                 if (!isEnd) 
                 {
-                    levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
+                    //levelEndSequence.EndLevel(false, true, 1f, 6f, 1f, "1", () => { });
+                    levelObjManager.LevelClear("1", "");
                     isEnd = true;
                 }
                 

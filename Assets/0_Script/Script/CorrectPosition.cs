@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class CorrectPosition : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class CorrectPosition : MonoBehaviour
     public bool allPlaced = true;
     public bool flag = false;
 
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public ControllerHaptics controllerHaptics;
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         bnt_t.onClick.AddListener(OnButtonClick_t);
     }
 
@@ -101,11 +104,13 @@ public class CorrectPosition : MonoBehaviour
     {   
         if (flag == true)
         {
-            levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "0", () => { });
+            //levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "0", () => { });
+            levelObjManager.LevelClear("0", "");
         }
         else if (flag == false)
         {
-            levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "1", () => { });
+            //levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "1", () => { });
+            levelObjManager.LevelClear("1", "");
         }
         
     }

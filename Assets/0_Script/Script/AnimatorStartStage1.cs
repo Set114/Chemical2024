@@ -11,11 +11,14 @@ public class AnimatorStartStage1 : MonoBehaviour
     public GameObject item2; // 物體
     
 
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public FeAniAnimationController feAniAnimationController;
+
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         // 延遲2秒後觸發動畫播放
         Invoke("PlayIgniteAnimation", 2.0f);
     }
@@ -39,8 +42,9 @@ public class AnimatorStartStage1 : MonoBehaviour
     IEnumerator End()
     {
         yield return new WaitForSeconds(5f);
-        
-        levelEndSequence.EndLevel(false,true, 1f, 11f, 1f, "1", () => { });
+
+        //levelEndSequence.EndLevel(false,true, 1f, 11f, 1f, "1", () => { });
+        levelObjManager.LevelClear("1", "");
     }
     
 }

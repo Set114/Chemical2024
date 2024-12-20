@@ -29,14 +29,14 @@ public class SwitchUI : MonoBehaviour
     private LevelManager levelManager; // 查看與紀錄關卡是否已做過
     private SwitchItem switchItem; // 切換關卡物品
     public LearnDataManager learnDataManager; // 紀錄學生的 教學 資料
-    private GameManager gameManager; // 讀取玩家資料
+    private UserDataManager userDataManager; // 讀取玩家資料
 
     void Start()
     {
         levelManager = new LevelManager(levelUIs.Length);
 
-        gameManager = GameManager.Instance;
-        chapterMode = gameManager.GetChapterMode();
+        userDataManager = UserDataManager.Instance;
+        chapterMode = userDataManager.GetChapterMode();
         
         switchItem = GetComponent<SwitchItem>();
 
@@ -112,7 +112,7 @@ public class SwitchUI : MonoBehaviour
                 else
                 {
                     TestUI.SetActive(true);
-                    gameManager.UpdateChapterMode(1);
+                    userDataManager.UpdateChapterMode(1);
                 }
                 switchItem.UpdateLevelName(levelCount);
                 //換關

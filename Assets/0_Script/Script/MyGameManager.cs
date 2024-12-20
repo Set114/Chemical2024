@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class MyGameManager : MonoBehaviour
 {
@@ -17,10 +18,17 @@ public class MyGameManager : MonoBehaviour
     public Timer Timer;
     public CheckAnswer checkAnswer;
     public ControllerHaptics hapticsController;
-    public LevelEndSequence levelEndSequence;
+    //public LevelEndSequence levelEndSequence;
     public TestDataManager testDataManager;
 
     private bool a1 = false;
+
+    private LevelObjManager levelObjManager;
+
+    void Start()
+    {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+    }
     public void AddCardInCardComparison(Card card)
     {
         testDataManager.StartLevel();
@@ -120,9 +128,8 @@ public class MyGameManager : MonoBehaviour
 
         // 確保兩者執行完成後再執行 EndLevel
         yield return null;
-    
-        levelEndSequence.EndLevel(true,false, 1f, 4f, 1f, "1", () => { });
+
+        //levelEndSequence.EndLevel(true,false, 1f, 4f, 1f, "1", () => { });
+        levelObjManager.LevelClear("1", "");
     }
-
-
 }

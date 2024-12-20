@@ -40,7 +40,7 @@ public class MenuUIManager : MonoBehaviour
     [SerializeField] GameObject TestButton;
 
     public AudioManager audioManager;
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
 
     public static bool shouldOpenMenu = false;
     private int chapterData;
@@ -56,7 +56,7 @@ public class MenuUIManager : MonoBehaviour
     void Start()
     {
         ReadDatas readDatasInstance = ReadDatas.Instance;
-        gameManager = GameManager.Instance; // 確保gameManager被正確分配
+        userDataManager = UserDataManager.Instance; // 確保gameManager被正確分配
         audioManager = AudioManager.instance; // 確保audioManager被正確分配
 
         InitializeUI();
@@ -131,13 +131,13 @@ public class MenuUIManager : MonoBehaviour
             TestButton.SetActive(true);
         }
         */
-        if (gameManager == null)
+        if (userDataManager == null)
         {
             Debug.Log("GameManager is null. Please ensure it is properly initialized.");
             return;
         }
-        
-        gameManager.UpdateUid(chapterIndex);
+
+        userDataManager.UpdateUid(chapterIndex);
         PlayUIeffect();
         chapterData = chapterIndex;
         SelectionModeUI.SetActive(true);
@@ -148,8 +148,8 @@ public class MenuUIManager : MonoBehaviour
     {
         // 設置章節模式和場景名稱
         chapterModeData = 0;
-        
-        gameManager.UpdateChapterMode(chapterModeData);
+
+        userDataManager.UpdateChapterMode(chapterModeData);
         SharedChapterModeData = chapterModeData;
         string sceneName = $"Stage{chapterData}";
         // 在進入場景之前執行清理工作
@@ -162,8 +162,8 @@ public class MenuUIManager : MonoBehaviour
     {
         // 設置章節模式和場景名稱
         chapterModeData = 1;
-        
-        gameManager.UpdateChapterMode(chapterModeData);
+
+        userDataManager.UpdateChapterMode(chapterModeData);
         SharedChapterModeData = chapterModeData;
         string sceneName = $"Stage{chapterData}";
         // 在進入場景之前執行清理工作

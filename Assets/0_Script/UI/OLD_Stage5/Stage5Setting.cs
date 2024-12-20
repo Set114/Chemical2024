@@ -48,19 +48,19 @@ public class Stage5Setting : MonoBehaviour
     public int chapterModeData = 0;
     public Stage5_UIManager stage5_UIManager;
     public AudioManager audioManager;
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
     void Start()
     {
-        gameManager = GameManager.Instance;
+        userDataManager = UserDataManager.Instance;
         // �T�O gameManager ��Ҥw��l��
-        if (gameManager != null)
+        if (userDataManager != null)
         {
-            studentData = gameManager.GetCurrentPlayerName();
+            studentData = userDataManager.GetCurrentPlayerName();
 
             if (!string.IsNullOrEmpty(studentData))
             {
                 studentname_txt.text = studentData;
-                chapterModeData = gameManager.GetChapterMode();
+                chapterModeData = userDataManager.GetChapterMode();
             }
             else
             {

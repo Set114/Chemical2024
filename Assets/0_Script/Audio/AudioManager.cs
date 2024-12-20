@@ -86,7 +86,7 @@ public class AudioManager : MonoBehaviour
         seSource.Play(); // 播放音效
     }
 
-    public float PlayAndReturnClipLength(string name)
+    public float GetClipLength(string name)
     {
         Sound s = Array.Find(Sounds, sound => sound.name == name); //在 Sounds 陣列中查找具有指定名稱的音效
         if (s == null)
@@ -94,12 +94,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound not found: " + name); // 若找不到指定名稱的音效，輸出警告
             return 0;
         }
-        seSource.Stop();
-        seSource.clip = s.clip;
-        seSource.volume = s.volume;
-        seSource.pitch = s.pitch;
-        seSource.loop = s.loop;
-        seSource.Play(); // 播放音效
         return s.clip.length;
     }
 

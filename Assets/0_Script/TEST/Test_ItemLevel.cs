@@ -13,9 +13,11 @@ public class Test_ItemLevel : MonoBehaviour
     public string AnswerInt;
 
     public LevelEndSequence levelEndSequence;
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         EndBool = false;
         AnswerInt = "1";
         LearnEnd_btn.onClick.AddListener(End);
@@ -25,6 +27,7 @@ public class Test_ItemLevel : MonoBehaviour
     void End()
     {
         // levelEndSequence.EndLevel(EndBool, false, 2f, 0f, 5f, 0f, AnswerInt);
-        levelEndSequence.EndLevel(EndBool,false, 1f, 4f, 1f, AnswerInt, () => { });
+        //levelEndSequence.EndLevel(EndBool,false, 1f, 4f, 1f, AnswerInt, () => { });
+        levelObjManager.LevelClear(AnswerInt, "");
     }
 }

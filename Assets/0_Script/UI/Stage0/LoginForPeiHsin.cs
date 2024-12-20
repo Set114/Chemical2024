@@ -60,7 +60,6 @@ public class LoginForPeiHsin : MonoBehaviour
 
 
     public MenuUIManager menuUIManager;
-    public GameManager gameManager;
 
     void Start()
     {
@@ -395,7 +394,7 @@ public class LoginForPeiHsin : MonoBehaviour
     void UploadDataToGameManager()
     {
         // 在這裡調用 GameManager 的 SetPlayerData 方法來上傳資料
-        GameManager.Instance.SetPlayerData(SchoolDataID, ClassID, selectedStudentID, selectedStudentName);
+        UserDataManager.Instance.SetPlayerData(SchoolDataID, ClassID, selectedStudentID, selectedStudentName);
     }
     #endregion
 }

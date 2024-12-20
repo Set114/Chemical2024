@@ -841,7 +841,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_UI: {fileID: 1583356626}
-  levelEndSequence: {fileID: 1638835886}
 --- !u!65 &21138697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9489,6 +9488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squares 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b66a45a2f5d5cfb4d8d9681bc97ffe8e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22400002, guid: b66a45a2f5d5cfb4d8d9681bc97ffe8e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17773,7 +17776,6 @@ MonoBehaviour:
   cap1: {fileID: 0}
   targetScaleMultiplier: 1.5
   scaleSpeed: 0.3
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!114 &555918722
 MonoBehaviour:
@@ -19089,7 +19091,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &584426148
 BoxCollider:
@@ -24556,7 +24557,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &796612817
 BoxCollider:
@@ -26967,7 +26967,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &901466478
 BoxCollider:
@@ -30259,7 +30258,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1010635279
 BoxCollider:
@@ -30409,6 +30407,104 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014389559}
   m_Mesh: {fileID: 4300000, guid: 0a3f3c5d2b5c90844b524d43f07ddb77, type: 3}
+--- !u!1 &1015816482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015816483}
+  - component: {fileID: 1015816486}
+  - component: {fileID: 1015816485}
+  - component: {fileID: 1015816484}
+  m_Layer: 5
+  m_Name: LoadingImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1015816483
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015816482}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5283758, y: 0.8402083, z: 0.8147454}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1099153459}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1015816484
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015816482}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 059810c72097041e59fc4b0ee2b864c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1015816485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015816482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 46c0e3873efa5409b8c93dea943a4c82, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1015816486
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015816482}
+  m_CullTransparentMesh: 1
 --- !u!1 &1033096124
 GameObject:
   m_ObjectHideFlags: 0
@@ -32198,6 +32294,7 @@ RectTransform:
   m_Children:
   - {fileID: 765321023}
   - {fileID: 1949618585}
+  - {fileID: 1015816483}
   m_Father: {fileID: 699522013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34164,7 +34261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e269b4935fb65354a952d12dac451d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  userDataManager: {fileID: 0}
 --- !u!114 &1150556285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34177,7 +34274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d929409c1039cf84ab7d4e8b6843cff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  userDataManager: {fileID: 0}
 --- !u!114 &1150556286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34618,7 +34715,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1167026111
 BoxCollider:
@@ -40072,7 +40168,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1202483056
 BoxCollider:
@@ -42140,7 +42235,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1287757758
 BoxCollider:
@@ -42559,7 +42653,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1307473971
 BoxCollider:
@@ -47471,7 +47564,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1475569401
 BoxCollider:
@@ -57264,9 +57356,8 @@ MonoBehaviour:
   bgmSlider: {fileID: 666506447}
   UIeffectSlider: {fileID: 606937462}
   chapterModeData: 0
-  switchUI: {fileID: 1638835883}
   audioManager: {fileID: 490415501}
-  gameManager: {fileID: 0}
+  userDataManager: {fileID: 0}
 --- !u!114 &1638835889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59024,7 +59115,6 @@ MonoBehaviour:
   duration: 10
   targetTag: Iron
   flag: 0
-  levelEndSequence: {fileID: 0}
   feAniAnimationController: {fileID: 0}
 --- !u!65 &1697911208
 BoxCollider:
@@ -62648,7 +62738,6 @@ MonoBehaviour:
   cap1: {fileID: 0}
   targetScaleMultiplier: 1.5
   scaleSpeed: 0.3
-  levelEndSequence: {fileID: 1638835886}
   feAniAnimationController: {fileID: 1850982417}
 --- !u!54 &1753075475
 Rigidbody:
@@ -65004,7 +65093,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_UI: {fileID: 1111496552}
-  levelEndSequence: {fileID: 1638835886}
 --- !u!65 &1837965207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68194,7 +68282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1949618585
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74498,7 +74586,6 @@ MonoBehaviour:
   uiText: {fileID: 157579736}
   initialText: 20G
   finalText: 30G
-  levelEndSequence: {fileID: 1638835886}
 --- !u!65 &5521283702311388751
 BoxCollider:
   m_ObjectHideFlags: 0

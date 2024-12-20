@@ -41,8 +41,8 @@ public class FireInteraction : MonoBehaviour
             return;
         }
         //  修改打開火焰的判斷
-        if ((targetshowLevelText.text == "1-2" || targetshowLevelText.text == "2-1")
-            && !IsApproximatelyEqual(transform.position, originalPosition.position))
+        //if ((targetshowLevelText.text == "1-2" || targetshowLevelText.text == "2-1")&&
+        if (!IsApproximatelyEqual(transform.position, originalPosition.position))
         {
             //ani.SetBool("firewow", true);
             StartCoroutine(PlayFireEffectWithDelay());

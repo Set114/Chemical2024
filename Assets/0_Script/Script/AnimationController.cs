@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class AnimationController : MonoBehaviour
 {
@@ -21,10 +22,15 @@ public class AnimationController : MonoBehaviour
     public GlucoseScaleCube glucoseScaleCube1;
     public GlucoseScaleCube glucoseScaleCube2;
     
-    public LevelEndSequence levelEndSequence;
+   // public LevelEndSequence levelEndSequence;
     
     public Vector3 scale2 = new Vector3(0, 0.1f, 0);
+    private LevelObjManager levelObjManager;
 
+    void Start()
+    {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+    }
     void OnEnable()
     {
         animator = GetComponent<Animator>();
@@ -67,11 +73,13 @@ public class AnimationController : MonoBehaviour
         }
         if (levelIndex.text == "5-5")
         {
-            levelEndSequence.EndLevel(true,true, 1f, 7f, 1f, "1", () => { });
+            //levelEndSequence.EndLevel(true,true, 1f, 7f, 1f, "1", () => { });
+            levelObjManager.LevelClear("1", "");
         }
         else
         {
-            levelEndSequence.EndLevel(false,true, 1f, 7f, 1f, "1", () => { });
+            //levelEndSequence.EndLevel(false,true, 1f, 7f, 1f, "1", () => { });
+            levelObjManager.LevelClear("1", "");
         }
         
         yield return new WaitForSeconds(1f);

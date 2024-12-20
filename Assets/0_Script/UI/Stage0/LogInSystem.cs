@@ -26,7 +26,6 @@ public class LogInSystem : MonoBehaviour
     private string studentIDData = "";
 
     public MenuUIManager menuUIManager;
-    public GameManager gameManager;
 
     // 預設的學生ID選項
     private Dictionary<string, List<string>> classToStudents = new Dictionary<string, List<string>>()
@@ -245,6 +244,6 @@ public class LogInSystem : MonoBehaviour
         
         string schoolId = "173510";
         string classId = "173510_0001";
-        GameManager.Instance.SetPlayerData(schoolId, classId, studentIDData, studentNameData);
+        UserDataManager.Instance.SetPlayerData(schoolId, classId, studentIDData, studentNameData);
     }
 }

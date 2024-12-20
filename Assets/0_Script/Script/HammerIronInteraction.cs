@@ -21,10 +21,11 @@ public class HammerIronInteraction : MonoBehaviour
 
     public FeAniAnimationController feAniAnimationController;
     public LevelEndSequence levelEndSequence;
-
+    private LevelObjManager levelObjManager;
 
     void Start()
     {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
         // 隐藏所有的铁块对象
         foreach (GameObject ironObject in ironObjects)
         {
@@ -89,7 +90,8 @@ public class HammerIronInteraction : MonoBehaviour
 
             if (currentIronIndex == 3)
             {
-                levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+                //levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
+                levelObjManager.LevelClear("1", "");
             }
         }
 

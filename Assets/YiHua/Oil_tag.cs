@@ -20,7 +20,12 @@ public class Oil_tag : MonoBehaviour
 
     // 引用 SwitchItem
     public SwitchItem switchItem;
+    private LevelObjManager levelObjManager;
 
+    void Start()
+    {
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+    }
     void OnTriggerEnter(Collider other)
     {
         // 如果碰到標籤為 rag_water 的物體
@@ -56,13 +61,15 @@ public class Oil_tag : MonoBehaviour
         if (levelEndSequence != null)
         {
            // Debug.Log("場景切換");
+           /*
             levelEndSequence.EndLevel(false, false, 1f, 1f, 1f, "1", () =>
             {
                 next_levelItem.SetActive(true);//Item
                 next_level201.SetActive(false);  //2-1
                 next_levelTV.SetActive(true); //TV
                 next_level202.SetActive(true);  //2-2
-            });
+            });*/
+            levelObjManager.LevelClear("1", "");
         }
     }
 

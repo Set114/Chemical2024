@@ -46,23 +46,25 @@ public class SettingUIManager : MonoBehaviour
     private string studentData;
     private string studentDataID;
     public int chapterModeData = 0;
-    public SwitchUI switchUI;
+    //public SwitchUI switchUI;
+    private GameManager gm;
     public AudioManager audioManager;
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
     void Start()
     {
-        gameManager = GameManager.Instance;
+        gm = FindObjectOfType<GameManager>();
+        userDataManager = UserDataManager.Instance;
         // 確保 gameManager 實例已初始化
-        if (gameManager != null)
+        if (userDataManager != null)
         {
-            studentData = gameManager.GetCurrentPlayerName();
-            studentDataID = gameManager.GetPlayerID();
+            studentData = userDataManager.GetCurrentPlayerName();
+            studentDataID = userDataManager.GetPlayerID();
 
             if (!string.IsNullOrEmpty(studentData))
             {
                 studentname_txt.text = studentData;
                 studentid_txt.text = studentDataID;
-                chapterModeData = gameManager.GetChapterMode();
+                chapterModeData = userDataManager.GetChapterMode();
             }
             else
             {
@@ -130,7 +132,7 @@ public class SettingUIManager : MonoBehaviour
 
     public void ChapterMode()
     {
-        int uidlevel = gameManager.GetUid();
+        int uidlevel = userDataManager.GetUid();
         if (uidlevel != 3)
         {
             Image modeButton_img = chapterMode_btn.GetComponent<Image>();
@@ -140,10 +142,10 @@ public class SettingUIManager : MonoBehaviour
                 audioManager.Stop();
                 modeButton_img.sprite = testMode_img;
                 chapterModeData = 1;
-                gameManager.UpdateChapterMode(chapterModeData);
+                userDataManager.UpdateChapterMode(chapterModeData);
                 Learnimg.SetActive(false);
                 Testing.SetActive(true);
-                switchUI.ShowTestLevel();
+                gm.SwitchToTestLevel();
 
             }
             else if (modeButton_img.sprite == testMode_img)
@@ -151,7 +153,7 @@ public class SettingUIManager : MonoBehaviour
                 audioManager.Stop();
                 modeButton_img.sprite = learnMode_img;
                 chapterModeData = 0;
-                gameManager.UpdateChapterMode(chapterModeData);
+                userDataManager.UpdateChapterMode(chapterModeData);
                 Learnimg.SetActive(true);
                 Testing.SetActive(false);
                 RefreshScene();
@@ -197,10 +199,10 @@ public class SettingUIManager : MonoBehaviour
 
     public void RefreshScene()
     {
-        int checkUid = gameManager.GetUid();
+        int checkUid = userDataManager.GetUid();
         if (checkUid == 3)
         {
-            gameManager.UpdateChapterMode(0);
+            userDataManager.UpdateChapterMode(0);
         }
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
@@ -215,7 +217,7 @@ public class SettingUIManager : MonoBehaviour
             audioManager.Stop();
             modeButton_img.sprite = testMode_img;
             chapterModeData = 1;
-            gameManager.UpdateChapterMode(chapterModeData);
+            userDataManager.UpdateChapterMode(chapterModeData);
 
         }
         else if (modeButton_img.sprite == testMode_img)
@@ -223,7 +225,7 @@ public class SettingUIManager : MonoBehaviour
             audioManager.Stop();
             modeButton_img.sprite = learnMode_img;
             chapterModeData = 0;
-            gameManager.UpdateChapterMode(chapterModeData);
+            userDataManager.UpdateChapterMode(chapterModeData);
         }
     }
 }

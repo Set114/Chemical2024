@@ -33,13 +33,13 @@ public class Stage5_UIManager : MonoBehaviour
     public SwitchLevelObjects_5 switchLevelObjects_5;
 
 
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
     //public SwitchLevelObjects switchLevelObjects;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        chapterMode = gameManager.GetChapterMode();
+        userDataManager = UserDataManager.Instance;
+        chapterMode = userDataManager.GetChapterMode();
 
         if (UI_Close != null)
         {

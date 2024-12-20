@@ -22,11 +22,11 @@ public class TestDataManager : MonoBehaviour
     private string sheetId;
     private string fileName;
 
-    public GameManager gameManager;
+    public UserDataManager userDataManager;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
+        userDataManager = UserDataManager.Instance;
         GetData();
     }
 
@@ -38,10 +38,10 @@ public class TestDataManager : MonoBehaviour
         // getUId = 1;   
         
         //資料查詢暫定
-        schoolId = gameManager.GetSchID();  
-        classId = gameManager.GetClass();  
-        getUId = gameManager.GetUid();   
-        studentId = gameManager.GetPlayerID();
+        schoolId = userDataManager.GetSchID();  
+        classId = userDataManager.GetClass();  
+        getUId = userDataManager.GetUid();   
+        studentId = userDataManager.GetPlayerID();
         
         folderName = schoolId;
         fileName = classId + "_Test";
@@ -87,6 +87,7 @@ public class TestDataManager : MonoBehaviour
 
     public void EndLevel()
     {
+        CompleteLevel();
         StartCoroutine(TestUploadData());
     }
 
