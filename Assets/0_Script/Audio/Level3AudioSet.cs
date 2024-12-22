@@ -17,9 +17,9 @@ public class Level3AudioSet : MonoBehaviour
     {
         ELF.SetActive(true);
         yield return new WaitForSeconds(1f); 
-        FindObjectOfType<AudioManager>().Play("ELF_3-1-1");
+        FindObjectOfType<AudioManager>().PlayVoice("ELF_3-1-1");
         yield return new WaitForSeconds(13f); 
-        FindObjectOfType<AudioManager>().Play("ELF_3-1-2");
+        FindObjectOfType<AudioManager>().PlayVoice("ELF_3-1-2");
         yield return new WaitForSeconds(13f); 
 
         ELF.SetActive(false);
@@ -34,9 +34,9 @@ public class Level3AudioSet : MonoBehaviour
     {
         ELF.SetActive(true);
         yield return new WaitForSeconds(1f); 
-        FindObjectOfType<AudioManager>().Play("ELF_error_3-1-1");
+        FindObjectOfType<AudioManager>().PlayVoice("ELF_error_3-1-1");
         yield return new WaitForSeconds(13f); 
-        FindObjectOfType<AudioManager>().Play("ELF_error_3-1-2");
+        FindObjectOfType<AudioManager>().PlayVoice("ELF_error_3-1-2");
         yield return new WaitForSeconds(13f); 
 
         ELF.SetActive(false);

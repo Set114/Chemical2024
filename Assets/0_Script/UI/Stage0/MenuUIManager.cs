@@ -212,6 +212,6 @@ public class MenuUIManager : MonoBehaviour
 
     public void PlayUIeffect()
     {
-        audioManager.Play("UIeffect");
+        audioManager.PlayVoice("UIeffect");
     }  
 }

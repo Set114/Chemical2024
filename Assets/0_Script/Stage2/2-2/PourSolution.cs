@@ -43,14 +43,14 @@ public class PourSolution : MonoBehaviour
     public float Play(string audioSource)
     {
         float waitSeconds = audioManager.GetClipLength(audioSource);
-        audioManager.Play(audioSource);
+        audioManager.PlayVoice(audioSource);
         return waitSeconds;
     }
     private IEnumerator WaitForAudioToEnd()
     {
         //audioSource1.Play(); // 播放音频
         float waitSeconds = audioManager.GetClipLength(audioSource1);
-        audioManager.Play(audioSource1);
+        audioManager.PlayVoice(audioSource1);
         text.text = Text[0];
 
         // 等待音频播放完成

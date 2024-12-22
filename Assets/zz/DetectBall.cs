@@ -217,7 +217,7 @@ public class DetectBall : MonoBehaviour
                         animationController.resetValue();
                         animationController.CloneRemover();
                         canvasController.Wrongsituation();
-                        audioManager.Play("part1-withoutTheTrueAtom");
+                        audioManager.PlayVoice("part1-withoutTheTrueAtom");
                     }
                     break;
                 case "part2":
@@ -231,7 +231,7 @@ public class DetectBall : MonoBehaviour
                         animationController.resetValue();
                         animationController.CloneRemover();
                         canvasController.Wrongsituation();
-                        audioManager.Play("part2-withoutTheTrueAtom");
+                        audioManager.PlayVoice("part2-withoutTheTrueAtom");
                     }
                     break;
                 case "part3":
@@ -245,7 +245,7 @@ public class DetectBall : MonoBehaviour
                         animationController.resetValue();
                         animationController.CloneRemover();
                         canvasController.Wrongsituation();
-                        audioManager.Play("part3-withoutTheTrueAtom");
+                        audioManager.PlayVoice("part3-withoutTheTrueAtom");
                     }
                     break;
                 case "part4":
@@ -259,7 +259,7 @@ public class DetectBall : MonoBehaviour
                         animationController.resetValue();
                         animationController.CloneRemover();
                         canvasController.Wrongsituation();
-                        audioManager.Play("part4-withoutTheTrueAtom");
+                        audioManager.PlayVoice("part4-withoutTheTrueAtom");
                     }
                     break;
                 case "part5":
@@ -273,7 +273,7 @@ public class DetectBall : MonoBehaviour
                         animationController.resetValue();
                         animationController.CloneRemover();
                         canvasController.Wrongsituation();
-                        audioManager.Play("part5-withoutTheTrueAtom");
+                        audioManager.PlayVoice("part5-withoutTheTrueAtom");
                     }
                     break;
                 default:
@@ -364,32 +364,32 @@ public class DetectBall : MonoBehaviour
             if (CurrentLevel == "part0")
             {
                 audioManager.Stop();
-                audioManager.Play("part0-Wrong");
+                audioManager.PlayVoice("part0-Wrong");
             }
             else if(CurrentLevel == "part1")
             {
                 audioManager.Stop();
-                audioManager.Play("part1-Wrong");
+                audioManager.PlayVoice("part1-Wrong");
             }
             else if(CurrentLevel == "part2")
             {
                 audioManager.Stop();
-                audioManager.Play("part2-Wrong");
+                audioManager.PlayVoice("part2-Wrong");
             }
             else if(CurrentLevel == "part3")
             {
                 audioManager.Stop();
-                audioManager.Play("part3-Wrong");
+                audioManager.PlayVoice("part3-Wrong");
             }
             else if(CurrentLevel == "part4")
             {
                 audioManager.Stop();
-                audioManager.Play("part4-Wrong");
+                audioManager.PlayVoice("part4-Wrong");
             }
             else if(CurrentLevel == "part5")
             {
                 audioManager.Stop();
-                audioManager.Play("part5-Wrong");
+                audioManager.PlayVoice("part5-Wrong");
             }
             //return; 
         }

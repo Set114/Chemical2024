@@ -42,7 +42,7 @@ public class PlaySpeechAudio_M : MonoBehaviour
             foreach (string name in unielfnames)
             {
                 // 播放語音
-                audioManager.Play(name);
+                audioManager.PlayVoice(name);
 
                 // 等待直到前一個語音播放完畢
                 yield return new WaitUntil(() => !audioSource.isPlaying);

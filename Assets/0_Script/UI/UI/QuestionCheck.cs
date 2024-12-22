@@ -84,7 +84,7 @@ public class QuestionCheck : MonoBehaviour
     IEnumerator PlaySuccessAndContinue()
     {
         // 播放音效
-        audioManager.Play("Success");
+        audioManager.PlayVoice("Success");
 
         // 等待3秒
         yield return new WaitForSeconds(2f);

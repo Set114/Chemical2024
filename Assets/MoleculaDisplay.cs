@@ -13,14 +13,14 @@ public class Molecula
 //  管理分子視窗顯示
 public class MoleculaDisplay : MonoBehaviour
 {
-    [Tooltip("顯示螢幕")]
-    [SerializeField] private GameObject screen;
-    [Tooltip("分子")]
-    [SerializeField] private Molecula[] moleculas;
+    [Tooltip("顯示螢幕")] [SerializeField] GameObject screen;
+    [Tooltip("分子")] [SerializeField] Molecula[] moleculas;
+    public Animator moleculasAnimator;
 
     private GameObject targerMolecula;
     private GameManager gm;
-    private void Awake()
+
+    void awake()
     {
         gm = FindObjectOfType<GameManager>();
         screen.SetActive(false);
@@ -34,27 +34,15 @@ public class MoleculaDisplay : MonoBehaviour
     }
 
     //  切換顯示分子
-    public float SwitchDisplay(int step)
+    public void ShowMoleculas(int index)
     {
-        string moleculaName = gm.GetCurrLevel() + 1 + "-" + (step + 1);
-        print("MoleculaDisplay: " + moleculaName);
-        float delay = 0f;
-        screen.SetActive(false);
-        foreach (Molecula molecula in moleculas)
-        {
-            if (molecula.moleculaObj != null)
-            {
-                if (molecula.name == moleculaName)
-                {
-                    screen.SetActive(true);
-                    targerMolecula = molecula.moleculaObj;
-                    delay = molecula.animTime;
-                }
-                molecula.moleculaObj.SetActive(false);
-            }
-        }
-        if (targerMolecula != null)
-            targerMolecula.SetActive(true);
-        return delay;
+        screen.SetActive(true);
+        moleculas[index].moleculaObj.SetActive(true);
+        moleculasAnimator = moleculas[index].moleculaObj.GetComponentInChildren<Animator>();
+    }
+
+    public void PlayMoleculasAnimation()
+    {
+        moleculasAnimator.SetTrigger("isClick");
     }
 }

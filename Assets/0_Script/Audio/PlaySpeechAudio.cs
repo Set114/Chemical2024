@@ -23,7 +23,7 @@ public class PlaySpeechAudio : MonoBehaviour
         {
             // 如果是 UI 語音，播放物件自己的名稱
             yield return new WaitForSeconds(0.3f); // 等待 0.3 秒
-            FindObjectOfType<AudioManager>().Play(this.gameObject.name);
+            FindObjectOfType<AudioManager>().PlayVoice(this.gameObject.name);
             //Debug.Log("PLAY" + this.gameObject.name);
         }
         else
@@ -33,19 +33,19 @@ public class PlaySpeechAudio : MonoBehaviour
             string speechName = "ELF_1-" + currentLevel;
             if (speechName == "ELF_1-6")
             {
-                FindObjectOfType<AudioManager>().Play(speechName);
+                FindObjectOfType<AudioManager>().PlayVoice(speechName);
             }
             else
             {          
                 if(unielf)
                 {
                     yield return new WaitForSeconds(0.3f); // 等待 0.3 秒
-                    FindObjectOfType<AudioManager>().Play(unielfname);
+                    FindObjectOfType<AudioManager>().PlayVoice(unielfname);
                     //Debug.Log("PLAY" + this.gameObject.name);
                 }else
                 {
                 yield return new WaitForSeconds(1f); // 等待 0.3 秒
-                FindObjectOfType<AudioManager>().Play(speechName);
+                FindObjectOfType<AudioManager>().PlayVoice(speechName);
                 // yield return new WaitForSeconds(1.2f); 
                 // yield return new WaitForSeconds(ELF_1_1_Duration); // 等待第一段語音結束
                 // FindObjectOfType<AudioManager>().Play("ELF_MEBase"); 
