@@ -6,6 +6,7 @@ public class SoundController : MonoBehaviour
 {
     [SerializeField] AudioSource myAudio;
     bool isStart = false;
+    GameObject sender;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +24,22 @@ public class SoundController : MonoBehaviour
         else
         {
             if (!myAudio.isPlaying)
+            {
+                if (sender)
+                    sender.SendMessage("FinishAudio");
                 Destroy(this.gameObject);
+            }
         }
     }
 
-    public void SetClip(AudioClip Clip)
+    void SetClip(AudioClip Clip)
     {
         myAudio.clip = Clip;
+    }
+
+    void SetClip(SoundMessage ClipData)
+    {
+        sender = ClipData.sender;
+        myAudio.clip = ClipData.clip;
     }
 }

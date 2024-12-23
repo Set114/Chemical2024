@@ -26,7 +26,7 @@ public class HintManager : MonoBehaviour
 
     AudioManager audioManager;          //音樂管理
     GameObject Sender;
-    private void OnEnable()
+    private void Awake()
     {
         audioManager = FindObjectOfType<AudioManager>();
 

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("目前關卡")]
     public int currLevel = 0;   //這個直接開放給其他物件使用，要正式一點就設定只能讀取
     [Tooltip("輸入測驗的第一個UI在第幾個levelUIs")]
-    [SerializeField] private int testIndex;
+    [SerializeField] private int examIndex;
 
     [Tooltip("管理關卡物件")]
     [SerializeField] private LevelObjManager levelObjManager;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     //  關卡開始------------可能要搬到上面
     public void LevelStart()
     {
-        if (currLevel < testIndex)
+        if (currLevel < examIndex)
         {
             // 紀錄學生關卡的學習歷程資料
             learnDataManager.GetsId(currLevel);
@@ -62,11 +62,11 @@ public class GameManager : MonoBehaviour
     }
 
     //  切換到測驗關卡
-    public void SwitchToTestLevel()
+    public void SwitchToExamLevel()
     {
         userDataManager.UpdateChapterMode(1);
         gameMode = userDataManager.GetChapterMode();
-        currLevel = testIndex;
+        currLevel = examIndex;
     }
 
     //  關卡結束 儲存資料以及切換關卡編號

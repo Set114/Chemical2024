@@ -20,6 +20,20 @@ public class Sound
     public AudioSource source;
 }
 
+public class SoundMessage
+{
+    public int index;           //曲目編號
+    public AudioClip clip;           //曲目編號
+    public GameObject sender;   //傳送者
+
+    public SoundMessage(int Index, AudioClip Clip, GameObject Sender)
+    {
+        index = Index;
+        clip = Clip;
+        sender = Sender;
+    }
+}
+
 public class AudioManager : MonoBehaviour
 {
     // 跟Sound類搭配使用，用於播放音效的程式碼
@@ -113,6 +127,15 @@ public class AudioManager : MonoBehaviour
         tempObj.SendMessage("SetClip", SoundList[index].clip);
     }
 
+    //用來撥放音效的
+    public void PlaySound( SoundMessage ClipData)
+    {
+        GameObject tempObj = Instantiate(soundSource);
+        tempObj.GetComponent<AudioSource>().volume = soundsSlider.value * SoundList[ClipData.index].volume;
+        tempObj.SetActive(true);
+        tempObj.SendMessage("SetClip", new SoundMessage(ClipData.index, SoundList[ClipData.index].clip, ClipData.sender));
+    }
+
     public float GetClipLength(string name)
     {
         Sound s = Array.Find(Sounds, sound => sound.name == name); //在 Sounds 陣列中查找具有指定名稱的音效
@@ -127,15 +150,7 @@ public class AudioManager : MonoBehaviour
     // 停止所有音效的播放，排除背景音樂
     public void Stop()
     {
-        /*foreach (Sound s in Sounds)
-        {
-            if (s.source != null && s.source.isPlaying && s.name != "BackgroundMusic")
-            {
-                s.source.Stop();
-            }
-        }*/
         voiceSource.Stop();
-        PlayVoice("Click"); // 播放點擊音效
     }
     // 打開遊戲音效
     public void VolumeOn()

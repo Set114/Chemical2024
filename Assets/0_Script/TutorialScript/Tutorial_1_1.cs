@@ -91,6 +91,6 @@ public class Tutorial_1_1 : MonoBehaviour
 
     void closeHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear("1", "");
+        levelObjManager.LevelClear(0);
     }
 }
