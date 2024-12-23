@@ -59,9 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Samples/OpenXR Plugin/1.6.0/Meshing Subsystem Feature/FallingSphere.cs" />
-    <Compile Include="Assets/0_Script/PlatformManager.cs" />
+    <Compile Include="Assets/0_Script/Core/PlatformManager.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Exam_1_1.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/TargetProjectionMatrix.cs" />
     <Compile Include="Assets/0_Script/Script/MyGameManager.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_6.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Mapper/GameViewEncoder.cs" />
     <Compile Include="Assets/0_Script/UI/OLD_Stage5/SwitchLevelObjects_5.cs" />
     <Compile Include="Assets/0_Script/Script/ChangeMaterial0Collision.cs" />
@@ -82,11 +84,12 @@
     <Compile Include="Assets/0_Script/stage3/backp1.cs" />
     <Compile Include="Assets/0_Script/ELF/ElzManager.cs" />
     <Compile Include="Assets/0_Script/Script/PickupAndEffect.cs" />
+    <Compile Include="Assets/0_Script/Audio/SoundController.cs" />
     <Compile Include="Assets/0_Script/Script/ObjectTargetAttachment.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_3/TubeHiObj.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_3/Stage4_3.cs" />
     <Compile Include="Assets/0_Script/Script/FireInteraction.cs" />
-    <Compile Include="Assets/0_Script/UserDataManager.cs" />
+    <Compile Include="Assets/0_Script/Core/UserDataManager.cs" />
     <Compile Include="Assets/Samples/OpenXR Plugin/1.6.0/Intercept Feature/InterceptMessageHandler.cs" />
     <Compile Include="Assets/zz/AnimationController_Unit3.cs" />
     <Compile Include="Assets/Pc Player/Script/InteractionController.cs" />
@@ -97,7 +100,7 @@
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/SocketIO/FM_Event/Ack.cs" />
     <Compile Include="Assets/0_Script/Script/CollisionDetection1.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_1/O2.cs" />
-    <Compile Include="Assets/0_Script/HintManager.cs" />
+    <Compile Include="Assets/0_Script/Core/HintManager.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Scripts/CFX_AutoRotate.cs" />
     <Compile Include="Assets/Shine/Script/six/Stage6-3/ControlObj.cs" />
     <Compile Include="Assets/0_Script/Audio/PlaySpeechAudio.cs" />
@@ -133,9 +136,11 @@
     <Compile Include="Assets/0_Script/Script/ShowOnCollision.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Mapper/TextureEncoder.cs" />
     <Compile Include="Assets/0_Script/Script/SphereDetection.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_2.cs" />
     <Compile Include="Assets/0_Script/Audio/AudioManager.cs" />
     <Compile Include="Assets/0_Script/Script/ButtonInteraction6.cs" />
     <Compile Include="Assets/0_Script/UI/UI/LevelManager.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_3.cs" />
     <Compile Include="Assets/0_Script/Script/WaterandGlass.cs" />
     <Compile Include="Assets/Shine/PowerUp/Scripts/PowerUpManager.cs" />
     <Compile Include="Assets/0_Script/Script/DisplayText.cs" />
@@ -157,6 +162,7 @@
     <Compile Include="Assets/0_Script/stage3/calculateManager.cs" />
     <Compile Include="Assets/0_Script/UI/Stage0/ReadDatas.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/FillCameraBackground.cs" />
+    <Compile Include="Assets/0_Script/Core/MouseController.cs" />
     <Compile Include="Assets/0_Script/Script/ButtonInteraction3.cs" />
     <Compile Include="Assets/0_Script/Script/LockjPosition.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Scripts/Character/Parts.cs" />
@@ -184,6 +190,8 @@
     <Compile Include="Assets/Shine/Script/Stage4_4/TouchSticks.cs" />
     <Compile Include="Assets/0_Script/Stage2/2-2/balloon.cs" />
     <Compile Include="Assets/zz/FakeBall.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_5.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_1.cs" />
     <Compile Include="Assets/0_Script/UI/Stage0/LoginForPeiHsin.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Scripts/Control/DemoControl.cs" />
     <Compile Include="Assets/0_Script/Script/CubeSphereInteraction6.cs" />
@@ -201,11 +209,12 @@
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/EnergySaving/EnergySavingManager.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Scripts/CFX_InspectorHelp.cs" />
     <Compile Include="Assets/0_Script/Script/change.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Exam_1_2.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Demo/Assets/CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets/Shine/PowerUp/Scripts/TakeablePowerUp.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_2/Stage4_2.cs" />
     <Compile Include="Assets/0_Script/Script/AnimationController.cs" />
-    <Compile Include="Assets/0_Script/LevelObjManager.cs" />
+    <Compile Include="Assets/0_Script/Core/LevelObjManager.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Scripts/UI/AnimationUI.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Mapper/AudioDecoder.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_4/Statge4_4.cs" />
@@ -258,7 +267,6 @@
     <Compile Include="Assets/0_Script/Audio/VolumeController.cs" />
     <Compile Include="Assets/3_Model/Props/Security Systems/Free Version/Scripts/ObjectRotator.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Mapper/MicEncoder.cs" />
-    <Compile Include="Assets/0_Script/Audio/Sound.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Demo/Assets/CFX_Demo_RandomDirectionTranslate.cs" />
     <Compile Include="Assets/0_Script/Script/ScopeLimit.cs" />
     <Compile Include="Assets/0_Script/Audio/ButtonArrayStopAudio.cs" />
@@ -312,6 +320,7 @@
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/SocketIO/FM_IO/SocketIOComponent.cs" />
     <Compile Include="Assets/0_Script/TEST/PCTestUI.cs" />
     <Compile Include="Assets/0_Script/UI/UI/SettingUIManager.cs" />
+    <Compile Include="Assets/0_Script/TutorialScript/Tutorial_1_4.cs" />
     <Compile Include="Assets/FMETP_STREAM/Common/Scripts/Events/UnityEventClass.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Demo/Assets/CFX_Demo_New.cs" />
     <Compile Include="Assets/0_Script/Script/CubeSphereInteraction5.cs" />
@@ -329,7 +338,7 @@
     <Compile Include="Assets/0_Script/Script/ParticleCollider.cs" />
     <Compile Include="Assets/0_Script/Script/ScaleOverTime.cs" />
     <Compile Include="Assets/0_Script/Script/CubeSphereInteraction4.cs" />
-    <Compile Include="Assets/0_Script/QuestionManager.cs" />
+    <Compile Include="Assets/0_Script/Core/QuestionManager.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/Interactive/PointerEvents.cs" />
     <Compile Include="Assets/0_Script/Script/IronDetection.cs" />
     <Compile Include="Assets/0_Script/Stage2/2-2/PourSolution.cs" />

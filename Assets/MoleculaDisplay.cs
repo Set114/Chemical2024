@@ -44,5 +44,6 @@ public class MoleculaDisplay : MonoBehaviour
     public void PlayMoleculasAnimation()
     {
         moleculasAnimator.SetTrigger("isClick");
+        moleculasAnimator.speed = 1f;
     }
 }
