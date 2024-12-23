@@ -145,7 +145,7 @@ public class SettingUIManager : MonoBehaviour
                 userDataManager.UpdateChapterMode(chapterModeData);
                 Learnimg.SetActive(false);
                 Testing.SetActive(true);
-                gm.SwitchToTestLevel();
+                gm.SwitchToExamLevel();
 
             }
             else if (modeButton_img.sprite == testMode_img)
