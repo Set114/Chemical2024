@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     //  關卡結束 儲存資料以及切換關卡編號
     public void LevelClear(string answer)
     {
+        // answer用意待確認
         currLevel++;
         //結束
         if (gameMode == 0)
@@ -82,11 +83,6 @@ public class GameManager : MonoBehaviour
         {
             testDataManager.EndLevel();
         }
-    }
-    //-------感覺用不到
-    public float NextStep()
-    {
-        return 1;
     }
 
     //  取得指定音效長度

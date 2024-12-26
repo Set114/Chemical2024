@@ -7,7 +7,7 @@ public class CTrigger : MonoBehaviour
     public Transform correctPoint; // 正确地點的 Transform
     public Transform originalPosition; // 原地點的 Transform
     public GameObject warning;
-    public CorrectPosition correctPositionScript;
+    [SerializeField] private GameObject tutorialObject;
     public MonoBehaviour otherScript; // 要停用的另一個腳本
     public bool botPlaced = false;
     public bool isLocked = false;
@@ -44,7 +44,7 @@ public class CTrigger : MonoBehaviour
             }
             if (targetPointFound)
             {
-                correctPositionScript?.CheckAllObjectsPlaced();
+                tutorialObject.SendMessage("CheckAllObjectsPlaced");
             }
         }
     }

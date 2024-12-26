@@ -104,14 +104,12 @@ public class AudioManager : MonoBehaviour
     //用來撥放語音的
     public void PlayVoice(string chapterName)
     {
-
         Sound s = Array.Find(Sounds, sound => sound.name == chapterName); //在 Sounds 陣列中查找具有指定名稱的音效
         if (s == null)
         {
             Debug.LogWarning("找不到該語音： " + chapterName); // 若找不到指定名稱的音效，輸出警告
             return;
         }
-
         voiceSource.Stop();
         voiceSource.clip = s.clip;
         voiceSource.volume = soundsSlider.value * s.volume;

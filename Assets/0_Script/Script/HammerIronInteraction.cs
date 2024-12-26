@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class HammerIronInteraction : MonoBehaviour
 {
@@ -36,7 +33,7 @@ public class HammerIronInteraction : MonoBehaviour
         }
     }
 
-    void backToInitial()
+    void BackToInitial()
     {
 
     }

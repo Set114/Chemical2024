@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Tutorial_1_1 : MonoBehaviour
 {
@@ -14,10 +13,10 @@ public class Tutorial_1_1 : MonoBehaviour
     float timer = 0.0f; //計時器
     bool isEnd = false;
 
-    LevelObjManager levelObjManager;
-    HintManager hintManager;            //管理提示板
-    MoleculaDisplay moleculaManager;    //管理分子螢幕
-    AudioManager audioManager;          //音樂管理
+    private LevelObjManager levelObjManager;
+    private HintManager hintManager;            //管理提示板
+    private MoleculaDisplay moleculaManager;    //管理分子螢幕
+    private AudioManager audioManager;          //音樂管理
 
     void OnEnable()
     {
@@ -47,7 +46,7 @@ public class Tutorial_1_1 : MonoBehaviour
         //打了第一下之後數10秒用
         if (currentIronIndex > 0 && Time.time > timer )
         {
-            endTheTutorial();
+            EndTheTutorial();
         }
     }
 
@@ -76,20 +75,20 @@ public class Tutorial_1_1 : MonoBehaviour
             //敲三下之後，強制完成(文件寫5下)
             if (currentIronIndex == 3)
             {
-                endTheTutorial();
+                EndTheTutorial();
             }
         }
     }
     
-    void endTheTutorial()   //完成教學
+    void EndTheTutorial()   //完成教學
     {
         hintManager.SwitchStep("T1_1_2");
         hintManager.showNextButton(this.gameObject);
         isEnd = true;
-        hammer.SendMessage("backToInitial");
+        hammer.SendMessage("BackToInitial");
     }
 
-    void closeHint()    //關閉提示視窗
+    void CloseHint()    //關閉提示視窗
     {
         levelObjManager.LevelClear(0);
     }

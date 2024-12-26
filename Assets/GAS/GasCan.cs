@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GasCan : MonoBehaviour
 {
@@ -22,11 +19,10 @@ public class GasCan : MonoBehaviour
     //public LevelEndSequence levelEndSequence;
     public FeAniAnimationController feAniAnimationController;
 
-    private LevelObjManager levelObjManager;
+    [SerializeField] GameObject tutorialObject;
 
     void Start()
     {
-        levelObjManager = FindObjectOfType<LevelObjManager>();
         renderer1 = cap.GetComponent<Renderer>();
         renderer2 = cap1.GetComponent<Renderer>();
 
@@ -64,13 +60,10 @@ public class GasCan : MonoBehaviour
             if (cap.transform.localScale == targetScaleCap && cap1.transform.localScale == targetScaleCap1)
             {
                 shouldScale = false; // 停止缩放
-            }
-
-            
+            }   
         }
     }
     
-
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Trigger entered with: " + other.gameObject.name);
@@ -91,7 +84,7 @@ public class GasCan : MonoBehaviour
                 shouldPlayAnimation = false;
 
                 //levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
-                levelObjManager.LevelClear("1", "");
+                tutorialObject.SendMessage("Heating");
             }
         }
     }

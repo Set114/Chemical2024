@@ -105,12 +105,12 @@ public class CorrectPosition : MonoBehaviour
         if (flag == true)
         {
             //levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "0", () => { });
-            levelObjManager.LevelClear("0", "");
+            levelObjManager.SendMessage("EndTheTutorial");
         }
         else if (flag == false)
         {
             //levelEndSequence.EndLevel(false,false, 1f, 0f, 1f, "1", () => { });
-            levelObjManager.LevelClear("1", "");
+            levelObjManager.SendMessage("EndTheTutorial");
         }
         
     }

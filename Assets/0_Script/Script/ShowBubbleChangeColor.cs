@@ -12,18 +12,15 @@ public class ShowBubbleChangeColor : MonoBehaviour
     public Color startColor = Color.white;
     public Color endColor = Color.gray;
     public float duration = 2f;
-    public string targetTag = "Object";
+    public string targetName = "Object";
     public bool flag = false;
 
     private Material mat;
     
-    //public LevelEndSequence levelEndSequence;
-    public FeAniAnimationController feAniAnimationController;
-    private LevelObjManager levelObjManager;
+    [SerializeField] private GameObject tutorialObject;
 
     void Start()
     {
-        levelObjManager = FindObjectOfType<LevelObjManager>();
         Renderer rend = GetComponent<Renderer>();
         mat = rend.material; // 獲取材質
     }
@@ -33,14 +30,13 @@ public class ShowBubbleChangeColor : MonoBehaviour
     {
         if (flag == false)
         {
-            if (other.CompareTag(targetTag))
+            if (other.gameObject.name==targetName)
             {
                 // 激活 bubble GameObject 和 改變顏色
                 bubble.SetActive(true);
                 StartCoroutine(ChangeColorOverTime());
-                feAniAnimationController.ResumeAnimation();
+                tutorialObject.SendMessage("ChangeColor");
             }
-
         }
         flag = true;
     }
@@ -60,6 +56,7 @@ public class ShowBubbleChangeColor : MonoBehaviour
         mat.SetColor("_Albedo", endColor);
 
         //levelEndSequence.EndLevel(false,true, 1f, 6f, 1f, "1", () => { });
-        levelObjManager.LevelClear("1", "");
+
+        tutorialObject.SendMessage("EndTheTutorial");
     }
 }

@@ -15,7 +15,6 @@ public struct textMapping
 public class HintManager : MonoBehaviour
 {
     [Tooltip("提示板")] [SerializeField] GameObject hintPanel;
-    [Tooltip("提示訊息")] [SerializeField] [TextArea(3, 5)] string[] tips;
     [Tooltip("提示訊息")] [SerializeField] textMapping[] tipsContent;
     [SerializeField] Text hintText;
     [Tooltip("縮小按鈕")] [SerializeField] GameObject minimizeButton;
@@ -82,6 +81,12 @@ public class HintManager : MonoBehaviour
     public void NextButtonClick()
     {
         nextButton.SetActive(false);
-        Sender.SendMessage("closeHint");
+        Sender.SendMessage("CloseHint");
+    }
+
+    //  播放警告語音
+    public void PlayWarningHint(string hintName)
+    {
+        audioManager.PlayVoice(hintName);
     }
 }

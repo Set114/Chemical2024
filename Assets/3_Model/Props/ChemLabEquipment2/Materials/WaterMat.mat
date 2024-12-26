@@ -8,16 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterMat
-  m_Shader: {fileID: 4800000, guid: 15378b0674ebcbc4abb0dc19071ee583, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  m_InvalidKeywords:
   - _SPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -115,7 +116,7 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Albedo: {r: 0, g: 0.020738602, b: 0.7830189, a: 1}
-    - _Color: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 0}
+    - _Color: {r: 0.6, g: 0.8666666, b: 1, a: 0.39607844}
     - _Color0: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0.105882354}
     - _Colour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
