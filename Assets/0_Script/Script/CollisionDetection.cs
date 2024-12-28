@@ -9,7 +9,7 @@ public class CollisionDetection : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //如果碰撞
-        if (other.CompareTag(targetTag))
+        if (other.gameObject.name == targetTag)
         {
             tutorialObject.SendMessage("PaperTouched");
         }

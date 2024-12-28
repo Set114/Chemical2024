@@ -14,6 +14,8 @@ public class MouseController : MonoBehaviour
     GameObject parentEmpty;             //用來調整相對位置用的
     float planeDistance = 0.65f;        //平面距離
 
+    bool isToolSwitchOn;                //道具是否使用中
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +50,28 @@ public class MouseController : MonoBehaviour
                     {
                         case "hammer":
                             Collider[] objCollider = selectedObject.GetComponents<Collider>();
-                            objCollider[0].enabled = false;
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+                            objCollider[1].enabled = false;
+                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 90.0f, -90.0f);
+                            break;
+                        case "GAS":
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.067f);
+                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 55.0f);
+                            isToolSwitchOn = false; //初始化噴燈起始狀態
+                            break;
+                        case "Iron":                            
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, -0.0178f);
+                            selectedObject.transform.localEulerAngles = new Vector3(30.0f, 330.0f, 41.0f);
+                            break;
+                        case "TestTube":
+
+                            break;
+                        case "alcohol lamp":
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "Paper":
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                     }
                 }
@@ -67,17 +89,57 @@ public class MouseController : MonoBehaviour
         // 放開滑鼠，結束拖曳
         if (Input.GetMouseButtonUp(0) && selectedObject)
         {
-            selectedObject.transform.parent = selectedObjectParent;
-            selectedObject.transform.position = initialPosition;       //恢復初始位置
-            selectedObject.transform.rotation = initialRotation;       //恢復初始角度
             switch (selectedObject.name)
             {
                 case "hammer":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
                     Collider[] objCollider = selectedObject.GetComponents<Collider>();
                     objCollider[0].enabled = true;
                     break;
+                case "GAS":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
+                    isToolSwitchOn = false;
+                    selectedObject.SendMessage("Fire", isToolSwitchOn);
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
+                case "Iron":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
+                case "TestTube":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    break;
+                case "alcohol lamp":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
+                case "Paper":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
             }
             selectedObject = null;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (selectedObject)
+            {
+                switch (selectedObject.name)
+                {
+                    case "hammer":  //attach hammer動畫
+
+                        break;
+                    case "GAS":
+                        isToolSwitchOn = !isToolSwitchOn;
+                        selectedObject.SendMessage("Fire", isToolSwitchOn);
+                        break;
+                }
+            }
         }
     }
 
