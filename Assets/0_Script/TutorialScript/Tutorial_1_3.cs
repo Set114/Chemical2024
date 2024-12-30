@@ -12,6 +12,7 @@ public class Tutorial_1_3 : MonoBehaviour
     [SerializeField] private float maxDistance = 0.75f;
     private float distance;
     private bool near = false;
+    private bool firstTimeWarning = true;              // 第一次抓取危險物品的通知
     private bool isEnd = false;
 
     private LevelObjManager levelObjManager;
@@ -52,7 +53,11 @@ public class Tutorial_1_3 : MonoBehaviour
     // 靠近鹽酸
     private void NearToHCI()
     {
-        hintManager.PlayWarningHint("W_HCI");
+        if (firstTimeWarning)
+        {
+            hintManager.PlayWarningHint("W_HCI");
+            firstTimeWarning = false;
+        }
     }
 
     public void ChangeColor()
@@ -69,6 +74,6 @@ public class Tutorial_1_3 : MonoBehaviour
     }
     void CloseHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear(2);
+        levelObjManager.LevelClear(0);
     }
 }

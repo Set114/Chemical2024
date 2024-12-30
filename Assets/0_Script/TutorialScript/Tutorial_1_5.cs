@@ -17,6 +17,7 @@ public class Tutorial_1_5 : MonoBehaviour
     private bool heating = false;
     private bool heatingDone = false;
     private bool reactionDone = false;
+    private bool firstTimeWarning = true;              // 第一次抓取危險物品的通知
 
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
@@ -63,10 +64,14 @@ public class Tutorial_1_5 : MonoBehaviour
 
     public void OnAlcoholLampTouched()
     {
-        hintManager.PlayWarningHint("W_AlcoholLamp");
-        cap.SetBool("cover", true);
-        fire.SetActive(true);
-        heating = true;
+        if (firstTimeWarning)
+        {
+            hintManager.PlayWarningHint("W_AlcoholLamp");
+            cap.SetBool("cover", true);
+            fire.SetActive(true);
+            heating = true;
+            firstTimeWarning = false;
+        }
     }
 
     public void OnTestTubeTouched()
@@ -82,6 +87,6 @@ public class Tutorial_1_5 : MonoBehaviour
 
     void CloseHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear(4);
+        levelObjManager.LevelClear(0);
     }
 }

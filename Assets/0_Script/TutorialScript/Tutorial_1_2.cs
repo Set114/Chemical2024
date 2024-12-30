@@ -24,6 +24,7 @@ public class Tutorial_1_2 : MonoBehaviour
 
     private bool heating = false;                       //  加熱中
     private bool isBurn = false;                        //  燃燒完畢
+    private bool firstTimeWarning = true;              // 第一次抓取危險物品的通知
     private bool isEnd = false;
 
     private Color heatingColor;
@@ -65,6 +66,7 @@ public class Tutorial_1_2 : MonoBehaviour
         if (isEnd)
             return;
 
+        //  紀錄最高溫度
         if (ironTemp > currMaxIronTemp)
         {
             currMaxIronTemp = ironTemp;
@@ -118,7 +120,6 @@ public class Tutorial_1_2 : MonoBehaviour
                     timer += Time.deltaTime;
                     if (timer >= 3f)
                     {
-                        isEnd = true;
                         EndTheTutorial();
                     }
                 }
@@ -140,7 +141,11 @@ public class Tutorial_1_2 : MonoBehaviour
 
     public void OnBlowtorchGrabbed()
     {
-        hintManager.PlayWarningHint("W_Blowtorch");
+        if (firstTimeWarning)
+        {
+            hintManager.PlayWarningHint("W_Blowtorch");
+            firstTimeWarning = false;
+        }
     }
 
     private void EndTheTutorial()   //完成教學
@@ -153,6 +158,6 @@ public class Tutorial_1_2 : MonoBehaviour
 
     void CloseHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear(1);
+        levelObjManager.LevelClear(0);
     }
 }

@@ -8,7 +8,6 @@ public class Blowtorch : MonoBehaviour
     [SerializeField] private Collider fireCollider;
     [SerializeField] private GameObject tutorialObject;
 
-    private bool isBurning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +17,7 @@ public class Blowtorch : MonoBehaviour
 
     public void Fire(bool open)
     {
-        isBurning = open;
-        if (isBurning)
+        if (open)
         {
             fireParticleSystem.Play();
             tutorialObject.SendMessage("OnBlowtorchGrabbed"); 
@@ -28,13 +26,13 @@ public class Blowtorch : MonoBehaviour
         {
             fireParticleSystem.Stop();
         }
-        fireCollider.enabled = isBurning;
+        fireCollider.enabled = open;
     }
 
     private void OnTriggerStay(Collider other)
     {
         // 碰到铁块时触发
-        if (isBurning && other.gameObject.name == "IronType1")
+        if (other.gameObject.name == "IronType1")
             tutorialObject.SendMessage("StartHeating",true);
     }
     private void OnTriggerExit(Collider other)
