@@ -4,14 +4,21 @@ using System.Collections;
 public class CollisionDetection : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialObject;
-    public string targetTag = "Object";
-    // public GameObject canva;
+    [SerializeField] private string targetName = "Object";
+    [SerializeField] private bool sendObj = false;
     void OnTriggerEnter(Collider other)
     {
         //如果碰撞
-        if (other.gameObject.name == targetTag)
+        if (other.gameObject.name == targetName)
         {
-            tutorialObject.SendMessage("PaperTouched");
+            if (sendObj)
+            {
+                tutorialObject.SendMessage("Reaction", gameObject);
+            }
+            else
+            {
+                tutorialObject.SendMessage("Reaction");
+            }
         }
     }
 }

@@ -72,7 +72,7 @@ public class HintManager : MonoBehaviour
         return currStep;
     }
 
-    public void showNextButton(GameObject sender)
+    public void ShowNextButton(GameObject sender)
     {
         Sender = sender;
         nextButton.SetActive(true);

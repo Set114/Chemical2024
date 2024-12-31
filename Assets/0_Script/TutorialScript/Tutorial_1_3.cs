@@ -12,6 +12,12 @@ public class Tutorial_1_3 : MonoBehaviour
     [SerializeField] private float maxDistance = 0.75f;
     private float distance;
     private bool near = false;
+
+    [Tooltip("反應時間")]
+    [SerializeField] private float reactionTime = 10f;
+    private float timer = 0.0f;
+    private bool reaction = false;
+
     private bool firstTimeWarning = true;              // 第一次抓取危險物品的通知
     private bool isEnd = false;
 
@@ -48,6 +54,17 @@ public class Tutorial_1_3 : MonoBehaviour
         {
             near = false;
         }
+
+        if (reaction)
+        {
+            timer += Time.deltaTime;
+
+            if (timer > reactionTime)
+            {
+                isEnd = true;
+                EndTheTutorial();
+            }
+        }
     }
 
     // 靠近鹽酸
@@ -59,17 +76,21 @@ public class Tutorial_1_3 : MonoBehaviour
             firstTimeWarning = false;
         }
     }
-
-    public void ChangeColor()
+    //  開始反應
+    public void Reaction()
     {
-        //粒子視窗動畫
-        moleculaManager.PlayMoleculasAnimation();
+        if (!reaction)
+        {
+            //粒子視窗動畫
+            moleculaManager.PlayMoleculasAnimation();
+            reaction = true;
+        }
     }
 
     public void EndTheTutorial()   
     {
         hintManager.SwitchStep("T1_3_2");
-        hintManager.showNextButton(this.gameObject);
+        hintManager.ShowNextButton(this.gameObject);
         isEnd = true;
     }
     void CloseHint()    //關閉提示視窗

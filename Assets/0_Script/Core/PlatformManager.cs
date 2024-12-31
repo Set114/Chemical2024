@@ -9,13 +9,13 @@ public class PlatformManager : MonoBehaviour
     bool isPC = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
-        // ¦b½s¿è¾¹Àô¹Ò¶}±Òª«¥ó
+        // ï¿½bï¿½sï¿½è¾¹ï¿½ï¿½ï¿½Ò¶}ï¿½Òªï¿½ï¿½ï¿½
         isPC = true;
 #else
-        // ¦b¨ä¥L¥­¥x«O«ùÃö³¬
+        // ï¿½bï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         isPC = false;
 #endif
         pcController.SetActive(isPC);

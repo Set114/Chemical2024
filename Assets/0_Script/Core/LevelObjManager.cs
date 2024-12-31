@@ -13,7 +13,7 @@ public class LevelObjManager : MonoBehaviour
 
     //---system
     private GameManager gm;
-    private QuestionManager questionManager; //管理題目介面
+    private QuestionManager questionManager;    //管理題目介面
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private ZoomDisplay zoomDisplay;            //管理近看視窗
 

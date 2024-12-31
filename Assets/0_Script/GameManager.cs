@@ -104,15 +104,20 @@ public class GameManager : MonoBehaviour
         audioManager.PlayVoice(name);
     }
 
-    //  取得目前關卡-------都開放了，這個其實就多餘了
-    public int GetCurrLevel()
+    //  處理測驗資料儲存
+    public void TestDataStart(int countindex)
     {
-        return currLevel;
+        testDataManager.StartLevel();
+        testDataManager.GetsId(countindex);
     }
-    public float GetDefaultDelay()  //是在delay什麼...=..=||||
+    //  處理測驗資料儲存
+    public void TestDataEnd(Action callback)
     {
-        return defaultDelay;
+        testDataManager.CompleteLevel();
+        testDataManager.EndLevelWithCallback(callback);
+        // testDataManager.EndLevel();
     }
+
     public void BackToMainMenu()
     {
         MenuUIManager.shouldOpenMenu = true;

@@ -82,7 +82,7 @@ public class Tutorial_1_5 : MonoBehaviour
     public void EndTheTutorial()
     {
         hintManager.SwitchStep("T1_5_2");
-        hintManager.showNextButton(this.gameObject);
+        hintManager.ShowNextButton(this.gameObject);
     }
 
     void CloseHint()    //關閉提示視窗

@@ -151,7 +151,7 @@ public class Tutorial_1_2 : MonoBehaviour
     private void EndTheTutorial()   //完成教學
     {
         hintManager.SwitchStep("T1_2_2");
-        hintManager.showNextButton(this.gameObject);
+        hintManager.ShowNextButton(this.gameObject);
         isEnd = true;
         gasCan.SendMessage("BackToInitial");
     }
