@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         userDataManager.UpdateChapterMode(1);
         gameMode = userDataManager.GetChapterMode();
         currLevel = examIndex;
+        levelObjManager.SetLevel();
     }
 
     //  關卡結束 儲存資料以及切換關卡編號

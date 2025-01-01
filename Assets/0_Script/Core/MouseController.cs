@@ -43,7 +43,7 @@ public class MouseController : MonoBehaviour
                     initialRotation = selectedObject.transform.rotation;
                     //設置empty
                     parentEmpty.transform.position = initialPosition;
-                    parentEmpty.transform.rotation = initialRotation;
+                    //parentEmpty.transform.rotation = initialRotation;
                     selectedObjectParent = selectedObject.transform.parent;
                     selectedObject.transform.parent = parentEmpty.transform;
                     switch (selectedObject.name)
@@ -61,8 +61,8 @@ public class MouseController : MonoBehaviour
                             break;
                         case "Iron":                            
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
-                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, -0.0178f);
-                            selectedObject.transform.localEulerAngles = new Vector3(30.0f, 330.0f, 41.0f);
+                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, 0.032f);
+                            selectedObject.transform.localEulerAngles = new Vector3(-15.0f, 270.0f, 75.0f);
                             break;
                         case "TestTube":
 
@@ -73,17 +73,16 @@ public class MouseController : MonoBehaviour
                         case "Paper":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
+                        case "DryIce":
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "Glass":
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localEulerAngles = new Vector3(-90.0f, 0.0f, 0.0f);
+                            break;
                     }
                 }
             }
-        }
-
-        // 拖曳操作
-        if (selectedObject != null && Input.GetMouseButton(0)) // 左鍵按住
-        {
-            Vector3 mouseWorldPosition = GetMousePositionOnFixedPlane();
-            // 將物件移動到滑鼠位置
-            parentEmpty.transform.position = mouseWorldPosition;
         }
 
         // 放開滑鼠，結束拖曳
@@ -121,9 +120,21 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
+                case "DryIce":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
             }
             selectedObject = null;
         }
+
+        // 拖曳操作
+        if (selectedObject != null && Input.GetMouseButton(0)) // 左鍵按住
+        {
+            Vector3 mouseWorldPosition = GetMousePositionOnFixedPlane();
+            // 將物件移動到滑鼠位置
+            parentEmpty.transform.position = mouseWorldPosition;
+        }        
 
         if (Input.GetMouseButtonDown(1))
         {
