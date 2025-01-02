@@ -6,6 +6,7 @@ public class CollisionDetection : MonoBehaviour
     [SerializeField] private GameObject tutorialObject;
     [SerializeField] private string targetName = "Object";
     [SerializeField] private bool sendObj = false;
+
     void OnTriggerEnter(Collider other)
     {
         //如果碰撞

@@ -67,7 +67,7 @@ public class MouseController : MonoBehaviour
                         case "TestTube":
 
                             break;
-                        case "alcohol lamp":
+                        case "AlcoholLamp":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         case "Paper":
@@ -112,7 +112,7 @@ public class MouseController : MonoBehaviour
                 case "TestTube":
                     selectedObject.transform.parent = selectedObjectParent;
                     break;
-                case "alcohol lamp":
+                case "AlcoholLamp":
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;

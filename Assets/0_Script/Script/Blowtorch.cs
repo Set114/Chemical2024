@@ -25,6 +25,7 @@ public class Blowtorch : MonoBehaviour
         else
         {
             fireParticleSystem.Stop();
+            tutorialObject.SendMessage("StartHeating", false);
         }
         fireCollider.enabled = open;
     }
@@ -40,6 +41,7 @@ public class Blowtorch : MonoBehaviour
         if (other.gameObject.name == "IronType1")
             tutorialObject.SendMessage("StartHeating", false);
     }
+
     void BackToInitial()
     {
 

@@ -1,16 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Tutorial_1_4 : MonoBehaviour
 {
-    [SerializeField] private CTrigger[] targetObjs;
+    [Tooltip("酒精燈")]
+    [SerializeField] private Transform alcoholLamp;
+    [Tooltip("試管")]
+    [SerializeField] private Transform testTube;
+    [Tooltip("酒精燈目標位置")]
+    [SerializeField] private Transform alcoholLampPoint;
+    [Tooltip("試管目標位置")]
+    [SerializeField] private Transform testTubePoint;
+    private Vector3 alcoholLampStartPos;
+    private Vector3 testTubeStartPos;
+
+    [SerializeField] private float minDistance = 0.05f;
+    private bool alcoholLampPlaced = false;
+    private bool testTubePlaced = false;
+
     [SerializeField] private GameObject submitAnswerUI;
     [SerializeField] private GameObject wrongUI;
     [SerializeField] private GameObject image;
-    [SerializeField] private int correctCount;
-    private bool allPlaced = true;
-
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
 
@@ -25,29 +38,20 @@ public class Tutorial_1_4 : MonoBehaviour
         submitAnswerUI.SetActive(false);
         wrongUI.SetActive(false);
         image.SetActive(true);
+
+        alcoholLampStartPos = alcoholLamp.position;
+        testTubeStartPos = testTube.position;
     }
 
     // 确认所有物体是否都放置在正确位置上
     public void CheckAllObjectsPlaced()
     {
-        int lockedCount = 0; // 記錄 isLocked 為 true 的物件數量
-        allPlaced = true;
-
-        foreach (CTrigger obj in targetObjs)
+        alcoholLampPlaced = Vector3.Distance(alcoholLamp.position, alcoholLampPoint.position) <= minDistance;
+        testTubePlaced = Vector3.Distance(testTube.position, testTubePoint.position) <= minDistance;
+        if (testTubePlaced && alcoholLampPlaced)
         {
-            if (Vector3.Distance(obj.correctPoint.position, obj.transform.position) > 0.1f)
-            {
-                allPlaced = false;
-            }
-            if (obj.isLocked)
-            {
-                lockedCount++;
-            }
-        }
-
-        // 檢查 isLocked 為 true 的物件數量是否等於 2
-        if (lockedCount == correctCount)
-        {
+            alcoholLamp.position = alcoholLampPoint.position;
+            testTube.position = testTubePoint.position;
             submitAnswerUI.SetActive(true);
         }
         else
@@ -61,19 +65,8 @@ public class Tutorial_1_4 : MonoBehaviour
     {
         CheckAllObjectsPlaced(); // 每次按钮点击时检查所有物体的状态
 
-        if (allPlaced)
+        if (testTubePlaced && alcoholLampPlaced)
         {
-            foreach (CTrigger script in targetObjs)
-            {
-                if (script.otherScript != null)
-                {
-                    script.otherScript.enabled = false;
-                }
-                else
-                {
-                    //Debug.LogWarning("otherScript is null in " + script.name + " script.");
-                }
-            }
             submitAnswerUI.SetActive(false);
             image.SetActive(false);
 
@@ -88,10 +81,28 @@ public class Tutorial_1_4 : MonoBehaviour
         }
     }
 
+    public void Reaction(GameObject sender)
+    {
+        if (sender.name == "Point_AlcoholLamp")
+        {
+            alcoholLampPlaced = true;
+            alcoholLamp.position = alcoholLampPoint.position;
+
+        }
+        else if (sender.name == "Point_TestTube")
+        {
+            testTubePlaced = true;
+            testTube.position = testTubePoint.position;
+        }
+
+        CheckAllObjectsPlaced();
+    }
+
     public void EndTheTutorial()
     {
-        hintManager.SwitchStep("T1_4_2");
-        hintManager.ShowNextButton(this.gameObject);
+        //hintManager.SwitchStep("T1_4_2");
+        //hintManager.ShowNextButton(this.gameObject);
+        levelObjManager.LevelClear(0);
 
     }
     void CloseHint()    //關閉提示視窗

@@ -73,7 +73,7 @@ public class Exam_1_2 : MonoBehaviour
         //蠟燭動畫控制
         if (timer < totalBurnTime)
         {
-            progressRatio = 1.0f - timer / totalBurnTime;
+            progressRatio = timer / totalBurnTime;
             candleMeshRenderer.SetBlendShapeWeight(0, progressRatio * 100.0f);
             candleMeshRenderer.SetBlendShapeWeight(1, progressRatio * 100.0f);
             ropeObject.position = Vector3.Lerp(ropeStartPosition.position, ropeFinalPosition.position, progressRatio);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1686047174536678444}
   - component: {fileID: 2362649748411794313}
   - component: {fileID: 517111469566900035}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: baking soda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 638773556150675245}
   - component: {fileID: 8696752934831491894}
   - component: {fileID: 5582575162171435036}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 1567750567588265196}
   - component: {fileID: 1688638072448864086}
   - component: {fileID: 2403812163749690760}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 5582575161344655255}
   - component: {fileID: 5582575161344655252}
   - component: {fileID: 5582575161344655253}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: "\u5E95"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,8 +290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5582575161344655210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11829397, y: -0.10430008, z: -0.375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.07, y: -0.103, z: -0.324}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5582575161843851548}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 5582575161354666779}
   - component: {fileID: 5582575161354666757}
   - component: {fileID: 5582575161354666778}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: "\u5EE3\u7528\u593E"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5582575161445419757}
   - component: {fileID: 1196915102439769937}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: T1_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,6 +625,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paper: {fileID: 5582575161363455511}
+  q1questionMark: {fileID: 0}
+  q2questionMark: {fileID: 0}
+  q1question_btn: {fileID: 0}
+  q2question_btn: {fileID: 0}
   reactionTime: 8
 --- !u!1 &5582575161843851549
 GameObject:
@@ -637,7 +641,7 @@ GameObject:
   - component: {fileID: 5582575161843851548}
   - component: {fileID: 5582575161843851550}
   - component: {fileID: 5582575161843851551}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: "\u652F\u67B6"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +724,7 @@ GameObject:
   - component: {fileID: 5582575161893126528}
   - component: {fileID: 5582575161893126540}
   - component: {fileID: 5582575161893126541}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: B (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +807,7 @@ GameObject:
   - component: {fileID: 5582575161953426174}
   - component: {fileID: 5582575161953426168}
   - component: {fileID: 5582575161953426169}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: "\u5E95\u5EA7"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +890,7 @@ GameObject:
   - component: {fileID: 5582575163100913619}
   - component: {fileID: 5582575163100913629}
   - component: {fileID: 5582575163100913618}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: A (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -967,7 +971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8982293276230931963}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: A-Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1004,7 +1008,7 @@ GameObject:
   - component: {fileID: 6925030108872715998}
   - component: {fileID: 5582575163125870819}
   - component: {fileID: 5582575163125870816}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TestTube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialObject: {fileID: 5582575161445419746}
-  targetTag: Paper
+  targetName: Paper
+  sendObj: 0
 --- !u!1 &6977472473575136524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1124,7 @@ GameObject:
   - component: {fileID: 5582575162070652178}
   - component: {fileID: 5582575162070652189}
   - component: {fileID: 5582575161363455511}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Paper
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -1134,8 +1139,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977472473575136524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.155, y: -0.11, z: -0.382}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0.239, y: -0.11, z: -0.338}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1567750567588265196}
@@ -1172,7 +1177,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24987853, y: 0.0013400316, z: 0.059673667}
+  m_Size: {x: 0.24987853, y: 0.005, z: 0.059673667}
   m_Center: {x: 0.00010806322, y: 0.00038963556, z: -0.00008702278}
 --- !u!65 &5582575162070652178
 BoxCollider:
@@ -1185,7 +1190,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.013602927, y: 0.0038400888, z: 0.05967367}
+  m_Size: {x: 0.013602927, y: 0.0075, z: 0.05967367}
   m_Center: {x: -0.118137784, y: 0.00039708614, z: 0}
 --- !u!114 &5582575162070652189
 MonoBehaviour:
@@ -1371,7 +1376,7 @@ GameObject:
   - component: {fileID: 3998557970290989605}
   - component: {fileID: 1216243310434861412}
   - component: {fileID: 6932252939088314302}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

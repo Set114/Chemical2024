@@ -51,7 +51,11 @@ public class Exam_1_1 : MonoBehaviour
         smoke_water.SetActive(false);
         dryIceScale = dryIce.transform.localScale.x;
         dryIceMinScale = dryIceScale * smallerRatio;
-        
+        foreach (GameObject questionMark in questionMarks)
+        {
+            questionMark.SetActive(false);
+        }
+
     }
 
     private void Update()
@@ -86,7 +90,7 @@ public class Exam_1_1 : MonoBehaviour
             if (timer > paperReactionTime)
             {
                 paperReactionDone = true;
-                QuestionShow(2);
+                ShowExam(2);
             }
         }
     }
@@ -121,9 +125,13 @@ public class Exam_1_1 : MonoBehaviour
         questionMarks[index].SetActive(true);
     }
 
-    public void QuestionShow(int index)
+    public void ShowExam(int index)
     {
         questionManager.ShowExam(index, gameObject);
+        foreach(GameObject questionMark in questionMarks)
+        {
+            questionMark.SetActive(false);
+        }
     }
 
     public void EndTheTutorial()
