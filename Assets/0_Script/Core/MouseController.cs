@@ -51,7 +51,7 @@ public class MouseController : MonoBehaviour
                         case "hammer":
                             Collider[] objCollider = selectedObject.GetComponents<Collider>();
                             objCollider[1].enabled = false;
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 90.0f, -90.0f);
+                            selectedObject.transform.localEulerAngles = new Vector3(90.0f, -90.0f, 0.0f);
                             break;
                         case "GAS":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -61,7 +61,7 @@ public class MouseController : MonoBehaviour
                             break;
                         case "Iron":                            
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
-                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, 0.032f);
+                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, 0.075f);
                             selectedObject.transform.localEulerAngles = new Vector3(-15.0f, 270.0f, 75.0f);
                             break;
                         case "TestTube":
@@ -72,13 +72,16 @@ public class MouseController : MonoBehaviour
                             break;
                         case "Paper":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0241f);
                             break;
                         case "DryIce":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0442f);
                             break;
                         case "Glass":
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
-                            selectedObject.transform.localEulerAngles = new Vector3(-90.0f, 0.0f, 0.0f);
+                            selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.053f); 
+                            selectedObject.transform.localEulerAngles = new Vector3( 0.0f, 0.0f, 0.0f);
                             break;
                     }
                 }
