@@ -31,7 +31,7 @@ public class Exam_1_1 : MonoBehaviour
     private bool glassWet = false;
     private bool paperReaction = false;
     private bool paperReactionDone = false;
-    private int examCount = 0;
+    private int examCount = 0;                  //作題進度
 
     private LevelObjManager levelObjManager;
     private QuestionManager questionManager;    //管理題目介面
@@ -112,7 +112,7 @@ public class Exam_1_1 : MonoBehaviour
             {
                 glassWet = true;
             }
-            else if (sender.name == "Paper" && glassWet && !paperReaction)
+            else if (sender.name == "Paper" && glassWet && !paperReaction&& examCount == 2)
             {
                 paper.SetBool("move", true);
                 paperReaction = true;

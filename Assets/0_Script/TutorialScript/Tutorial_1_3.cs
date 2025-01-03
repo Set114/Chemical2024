@@ -6,6 +6,7 @@ public class Tutorial_1_3 : MonoBehaviour
 {
     [SerializeField] private Transform cupRim;         //杯口
     [SerializeField] private Transform iron;
+    [SerializeField] private GameObject bubble;
 
     [Tooltip("靠近杯口發出警示的距離")]
     [SerializeField] private float minDistance = 0.5f;
@@ -36,6 +37,7 @@ public class Tutorial_1_3 : MonoBehaviour
         hintManager.SwitchStep("T1_3_1");
 
         moleculaManager.ShowMoleculas(2);
+        bubble.SetActive(false);
     }
 
     private void Update()
@@ -83,6 +85,7 @@ public class Tutorial_1_3 : MonoBehaviour
         {
             //粒子視窗動畫
             moleculaManager.PlayMoleculasAnimation();
+            bubble.SetActive(true);
             reaction = true;
         }
     }

@@ -186,7 +186,7 @@ public class QuestionManager : MonoBehaviour
     //  按下測試按鈕
     public void OnExamBtnClicked()
     {
-        finishExamCanvas.SetActive(false);
+        finishLearnCanvas.SetActive(false);
         gm.SwitchToExamLevel();
     }
     //  按下結束按鈕
