@@ -8,6 +8,8 @@ public class Exam_1_1 : MonoBehaviour
     [SerializeField] private GameObject dryIce;
     [Tooltip("乾冰特效")]
     [SerializeField] private GameObject smoke_dryIce;
+    [Tooltip("冒泡特效")]
+    [SerializeField] private GameObject bubble_dryIce;
     [Tooltip("水面特效")]
     [SerializeField] private GameObject smoke_water;
     [Tooltip("試紙")]
@@ -21,22 +23,19 @@ public class Exam_1_1 : MonoBehaviour
     private float dryIceScale;
 
     [Tooltip("乾冰反應時間")]
-    [SerializeField] private float dryIceReactionTime = 6f;
+    [SerializeField] private float dryIceReactionTime = 5.0f;
     [Tooltip("試紙反應時間")]
     [SerializeField] private float paperReactionTime = 6f;
 
     private float timer = 0.0f;
-    private bool dryIceReaction = false;
-    private bool dryIceReactionDone = false;
     private bool glassWet = false;
-    private bool paperReaction = false;
-    private bool paperReactionDone = false;
     private int examCount = 0;                  //作題進度
 
     private LevelObjManager levelObjManager;
     private QuestionManager questionManager;    //管理題目介面
     private HintManager hintManager;            //管理提示板
 
+    int Status = 0;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -56,78 +55,91 @@ public class Exam_1_1 : MonoBehaviour
             questionMark.SetActive(false);
         }
 
+        Status = 0;
+        examCount = 0;
     }
 
     private void Update()
     {
-        if (paperReactionDone)
-            return;
-
-
-        if (dryIceReaction && !dryIceReactionDone)
+        switch (Status)
         {
-            timer += Time.deltaTime;
+            case 0: //等待乾冰放入
 
-            if(dryIceScale > dryIceMinScale)
-            {
-                dryIceScale -= Time.deltaTime*(dryIceReactionTime * smallerRatio);
-                dryIce.transform.localScale = new Vector3(dryIceScale, dryIceScale, dryIceScale);
-            }
+                break;
+            case 1: //乾冰已放入
+                timer += Time.deltaTime;
+                if (timer > dryIceReactionTime)
+                {
+                    timer = 0.0f;
+                    questionMarks[0].SetActive(true);
+                    Status++;
+                }
+                break;
+            case 2: //乾冰在水中反應完畢，Q1出現
 
-            if (timer > dryIceReactionTime)
-            {
-                //  乾冰在水中反應完畢
-                dryIceReactionDone = true;
-                timer = 0f;
-                QuestionMarkShow(0);
-            }
-        }
+                break;
+            case 3: //回答Q1完畢，等待Q2出現
+                timer += Time.deltaTime;
+                if (timer > 2.0f)
+                {
+                    questionMarks[1].SetActive(true);
+                    Status++;
+                }                 
+                break;
+            case 4: //乾冰在水中反應完畢，Q2出現
 
-        if (paperReaction && dryIceReactionDone)
-        {
-            timer += Time.deltaTime;
+                break;
+            case 5: //回答Q2完畢，等待玻璃棒以及觸碰試紙
 
-            if (timer > paperReactionTime)
-            {
-                paperReactionDone = true;
-                ShowExam(2);
-            }
+                break;
+            case 6: //試紙開始變化
+                timer += Time.deltaTime;
+                if (timer > paperReactionTime)
+                {
+                    ShowExam(2);
+                    Status++;
+                }                    
+                break;
+            case 7: //結束狀態
+
+                break;
         }
     }
 
     //  開始反應
     public void Reaction(GameObject sender)
     {
-        if(sender.name == "DryIce")
+        switch (Status)
         {
-            if (!dryIceReaction)
-            {
-                dryIceReaction = true;
-                smoke_water.SetActive(true);
-            }
+            case 0:
+                if (sender.name == "DryIce")
+                {
+                    smoke_water.SetActive(true);
+                    smoke_dryIce.SetActive(false);
+                    bubble_dryIce.SetActive(true);
+                    dryIce.AddComponent<MotionTimeScale>();
+                    hintManager.OnCloseBtnClicked();
+                    Status++;
+                }
+                break;
+            case 5:
+                if (sender.name == "Glass")
+                {
+                    glassWet = true;
+                }
+                if (sender.name == "Paper" && glassWet )
+                {
+                    paper.SetBool("move", true);
+                    timer = 0.0f;
+                    Status = 6;
+                }
+                break;
         }
-        else if(dryIceReactionDone)
-        {
-            if (sender.name == "Glass")
-            {
-                glassWet = true;
-            }
-            else if (sender.name == "Paper" && glassWet && !paperReaction&& examCount == 2)
-            {
-                paper.SetBool("move", true);
-                paperReaction = true;
-            }
-        }
-    }
-
-    public void QuestionMarkShow(int index)
-    {
-        questionMarks[index].SetActive(true);
     }
 
     public void ShowExam(int index)
     {
-        questionManager.ShowExam(index, gameObject);
+        questionManager.ShowExam(index, this.gameObject);
         foreach(GameObject questionMark in questionMarks)
         {
             questionMark.SetActive(false);
@@ -139,7 +151,8 @@ public class Exam_1_1 : MonoBehaviour
         hintManager.ShowNextButton(this.gameObject);
     }
 
-    //  關閉提示視窗
+    //  關閉提示視窗   感覺沒用到
+    /*
     void CloseHint()
     {
         if (paperReactionDone)
@@ -151,18 +164,19 @@ public class Exam_1_1 : MonoBehaviour
 
         }
     }
+    */
+
     //  回答完畢
     void FinishExam()
     {
         examCount++;
         switch (examCount)
         {
-            case 0:
-                break;
             case 1:
-                QuestionMarkShow(1);
+                Status = 3;
                 break;
             case 2:
+                Status = 5;
                 hintManager.SwitchStep("E1_1_2");
                 break;
             case 3:

@@ -7,7 +7,7 @@ public class MouseController : MonoBehaviour
     GameManager gm;
 
     Camera mainCamera;                  //主攝影機
-    GameObject selectedObject;          //被選中的物件
+    public GameObject selectedObject;          //被選中的物件
     Transform selectedObjectParent;     //紀錄被選中的物件原本的Parent
     Vector3 initialPosition;            //物体的初始位置
     Quaternion initialRotation;         //物体的初始世界旋转
@@ -49,36 +49,45 @@ public class MouseController : MonoBehaviour
                     switch (selectedObject.name)
                     {
                         case "hammer":
+                            planeDistance = 0.722f;
                             Collider[] objCollider = selectedObject.GetComponents<Collider>();
                             objCollider[1].enabled = false;
-                            selectedObject.transform.localEulerAngles = new Vector3(90.0f, -90.0f, 0.0f);
+                            selectedObject.transform.localPosition = new Vector3(0.0013f, 0.0f, 0.0f);
+                            selectedObject.transform.localEulerAngles = new Vector3(75.0f, -90.0f, 0.0f);
                             break;
                         case "GAS":
+                            planeDistance = 0.717f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
-                            selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.067f);
+                            selectedObject.transform.localPosition = new Vector3(0.091f, -0.064f, 0.0f);
                             selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 55.0f);
                             isToolSwitchOn = false; //初始化噴燈起始狀態
                             break;
-                        case "Iron":                            
+                        case "Iron":
+                            planeDistance = 0.725f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
-                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, 0.075f);
+                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.054f, 0.0f);
                             selectedObject.transform.localEulerAngles = new Vector3(-15.0f, 270.0f, 75.0f);
                             break;
                         case "TestTube":
-
+                            planeDistance = 0.68f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         case "AlcoholLamp":
+                            planeDistance = 0.68f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         case "Paper":
+                            planeDistance = 0.65f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0241f);
                             break;
                         case "DryIce":
+                            planeDistance = 0.65f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0442f);
                             break;
                         case "Glass":
+                            planeDistance = 0.65f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.053f); 
                             selectedObject.transform.localEulerAngles = new Vector3( 0.0f, 0.0f, 0.0f);
@@ -94,11 +103,13 @@ public class MouseController : MonoBehaviour
             switch (selectedObject.name)
             {
                 case "hammer":
+                    if (selectedObject.GetComponent<MotionHammer>())
+                        Destroy(selectedObject.GetComponent<MotionHammer>());
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.transform.position = initialPosition;       //恢復初始位置
                     selectedObject.transform.rotation = initialRotation;       //恢復初始角度
                     Collider[] objCollider = selectedObject.GetComponents<Collider>();
-                    objCollider[0].enabled = true;
+                    objCollider[1].enabled = true;
                     break;
                 case "GAS":
                     selectedObject.transform.parent = selectedObjectParent;
@@ -114,6 +125,7 @@ public class MouseController : MonoBehaviour
                     break;
                 case "TestTube":
                     selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
                 case "AlcoholLamp":
                     selectedObject.transform.parent = selectedObjectParent;
@@ -150,7 +162,8 @@ public class MouseController : MonoBehaviour
                 switch (selectedObject.name)
                 {
                     case "hammer":  //attach hammer動畫
-
+                        if (!selectedObject.GetComponent<MotionHammer>())
+                            selectedObject.AddComponent<MotionHammer>();
                         break;
                     case "GAS":
                         isToolSwitchOn = !isToolSwitchOn;

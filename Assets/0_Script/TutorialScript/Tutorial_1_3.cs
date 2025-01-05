@@ -90,6 +90,10 @@ public class Tutorial_1_3 : MonoBehaviour
         }
     }
 
+    public void ReactionStay()
+    {
+    }
+    
     public void EndTheTutorial()   
     {
         hintManager.SwitchStep("T1_3_2");

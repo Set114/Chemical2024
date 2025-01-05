@@ -14,8 +14,6 @@ public class Tutorial_1_4 : MonoBehaviour
     [SerializeField] private Transform alcoholLampPoint;
     [Tooltip("試管目標位置")]
     [SerializeField] private Transform testTubePoint;
-    private Vector3 alcoholLampStartPos;
-    private Vector3 testTubeStartPos;
 
     [SerializeField] private float minDistance = 0.05f;
     private bool alcoholLampPlaced = false;
@@ -26,6 +24,11 @@ public class Tutorial_1_4 : MonoBehaviour
     [SerializeField] private GameObject image;
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
+
+    bool isPC;
+    public MouseController pcController;
+
+    int Status = 0;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -39,11 +42,39 @@ public class Tutorial_1_4 : MonoBehaviour
         wrongUI.SetActive(false);
         image.SetActive(true);
 
-        alcoholLampStartPos = alcoholLamp.position;
-        testTubeStartPos = testTube.position;
+        //判斷平台
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        isPC = true;
+#else
+        isPC = false;
+#endif
+
+
+        //初始化，一個是改tag，一個開關碰撞
+        alcoholLamp.tag = "Pickable";
+        alcoholLampPoint.gameObject.SetActive(true);
+        testTube.tag = "Untagged";
+        testTubePoint.gameObject.SetActive(false);  
+
+        Status = 0;
     }
 
-    // 确认所有物体是否都放置在正确位置上
+    private void Update()
+    {
+        switch (Status)
+        {
+            case 0: //等待使用者將物件放上正確位置
+                break;
+            case 1: 
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    // 确认所有物体是否都放置在正确位置上 ----取消這做法
     public void CheckAllObjectsPlaced()
     {
         alcoholLampPlaced = Vector3.Distance(alcoholLamp.position, alcoholLampPoint.position) <= minDistance;
@@ -60,7 +91,7 @@ public class Tutorial_1_4 : MonoBehaviour
         }
     }
 
-    // 點擊確認按鈕
+    // 點擊確認按鈕 ----取消這做法
     public void OnSubmitButtonClicked()
     {
         CheckAllObjectsPlaced(); // 每次按钮点击时检查所有物体的状态
@@ -81,29 +112,38 @@ public class Tutorial_1_4 : MonoBehaviour
         }
     }
 
-    public void Reaction(GameObject sender)
+    //當碰撞產生時觸發
+    public void ReactionStay(GameObject sender)
     {
-        if (sender.name == "Point_AlcoholLamp")
+        if(isPC)
         {
-            alcoholLampPlaced = true;
-            alcoholLamp.position = alcoholLampPoint.position;
-
+            if (!pcController.selectedObject)
+            {
+                switch (sender.name)
+                {
+                    case "Point_AlcoholLamp":
+                        alcoholLamp.position = alcoholLampPoint.position;
+                        alcoholLamp.tag = "Untagged";
+                        alcoholLampPoint.gameObject.SetActive(false);
+                        testTube.tag = "Pickable";
+                        testTubePoint.gameObject.SetActive(true);
+                        hintManager.SwitchStep("T1_4_2");
+                        break;
+                    case "Point_TestTube":
+                        testTube.tag = "Untagged";
+                        testTubePoint.gameObject.SetActive(false);
+                        testTube.position = testTubePoint.position;
+                        EndTheTutorial();
+                        break;
+                }
+            }
         }
-        else if (sender.name == "Point_TestTube")
-        {
-            testTubePlaced = true;
-            testTube.position = testTubePoint.position;
-        }
-
-        CheckAllObjectsPlaced();
     }
 
     public void EndTheTutorial()
     {
-        //hintManager.SwitchStep("T1_4_2");
-        //hintManager.ShowNextButton(this.gameObject);
-        levelObjManager.LevelClear(0);
-
+        hintManager.SwitchStep("T1_4_3");
+        hintManager.ShowNextButton(this.gameObject);
     }
     void CloseHint()    //關閉提示視窗
     {

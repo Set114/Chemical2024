@@ -14,15 +14,17 @@ public class Tutorial_1_5 : MonoBehaviour
     [Tooltip("反應時間")]
     [SerializeField] private float reactionTime = 6f;
     private float timer = 0.0f;
-    private bool heating = false;
     private bool heatingDone = false;
-    private bool reactionDone = false;
-    private bool firstTimeWarning = true;              // 第一次抓取危險物品的通知
+    private bool warningAlcoholLamp = true;           // 第一次抓取危險物品的通知
+    private bool warningTestTube = true;              // 第一次抓取危險物品的通知
 
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private ZoomDisplay zoomDisplay;            //管理近看視窗
+    private AudioManager audioManager;          //音樂管理
+
+    int Status = 0;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -31,6 +33,7 @@ public class Tutorial_1_5 : MonoBehaviour
         hintManager = FindObjectOfType<HintManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
         zoomDisplay = FindObjectOfType<ZoomDisplay>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("T1_5_1");
@@ -39,49 +42,69 @@ public class Tutorial_1_5 : MonoBehaviour
         zoomDisplay.ShowZoomObj(0);
         fire.SetActive(false);
         bubble.SetActive(false);
+
+        Status = 0;        
+        warningAlcoholLamp = true;
+        warningTestTube = true;
     }
 
     private void Update()
     {
-        if (heating && !reactionDone)
+        switch (Status)
         {
-            timer += Time.deltaTime;
+            case 0: //等待點選酒精燈
 
-            if (timer > heatingTime + reactionTime)
-            {
-                reactionDone = true;
-                EndTheTutorial();
-            }
-            else if (timer > heatingTime && !heatingDone)
-            {
-                heatingDone = true;
-                bubble.SetActive(true);
-                moleculaManager.PlayMoleculasAnimation();
-                zoomDisplay.PlayAnimation();
-            }
-        }
+                break;
+            case 1: //等待試管加熱
+                timer += Time.deltaTime;
+                if (timer > heatingTime )
+                {
+                    bubble.SetActive(true);
+                    moleculaManager.PlayMoleculasAnimation();
+                    zoomDisplay.PlayAnimation();
+                    hintManager.SwitchStep("T1_5_2");
+                    Status++;
+                }                
+                break;
+            case 2: //當試管加熱完畢時，等待觀察時間過後
+                timer += Time.deltaTime;
+                if (timer > heatingTime + reactionTime)
+                {
+                    EndTheTutorial();
+                    Status++;
+                }
+                break;
+            case 3: //等待到下一關
+
+                break;
+        }        
     }
 
     public void OnAlcoholLampTouched()
     {
-        if (firstTimeWarning)
+        if (warningAlcoholLamp)
         {
-            hintManager.PlayWarningHint("W_AlcoholLamp");
+            audioManager.PlayVoice("W_AlcoholLamp");
+            warningAlcoholLamp = false;
             cap.SetBool("cover", true);
             fire.SetActive(true);
-            heating = true;
-            firstTimeWarning = false;
+            timer = 0.0f;
+            Status = 1;
         }
     }
 
     public void OnTestTubeTouched()
     {
-        hintManager.PlayWarningHint("W_Hot");
+        if (Status > 0 && warningTestTube)
+        {
+            audioManager.PlayVoice("W_Hot");
+            warningTestTube = false;
+        }
     }
 
     public void EndTheTutorial()
     {
-        hintManager.SwitchStep("T1_5_2");
+        hintManager.SwitchStep("T1_5_3");
         hintManager.ShowNextButton(this.gameObject);
     }
 

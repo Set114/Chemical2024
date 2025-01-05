@@ -179,8 +179,8 @@ public class QuestionManager : MonoBehaviour
     public void OnStartBtnClicked()
     {
         mainCanvas.SetActive(false);
-        audioManager.PlaySound(0);  
-        
+        audioManager.Stop();
+        audioManager.PlaySound(0);
         levelManager.LevelStart();
     }
     //  按下測試按鈕

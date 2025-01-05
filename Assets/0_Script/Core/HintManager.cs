@@ -48,7 +48,6 @@ public class HintManager : MonoBehaviour
 
         hintText.text = t.content;
         audioManager.PlayVoice(chapterName);
-        hintPanel.SetActive(true);
     }
 
     /* 感覺完全沒用到的功能

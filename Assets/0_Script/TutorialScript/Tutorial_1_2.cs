@@ -118,7 +118,7 @@ public class Tutorial_1_2 : MonoBehaviour
                 if (isBurn && !isEnd)
                 {
                     timer += Time.deltaTime;
-                    if (timer >= 3f)
+                    if (timer >= 1.5f)
                     {
                         EndTheTutorial();
                     }
