@@ -80,6 +80,7 @@ public class HintManager : MonoBehaviour
     public void NextButtonClick()
     {
         nextButton.SetActive(false);
+        hintPanel.SetActive(false);
         Sender.SendMessage("CloseHint");
     }
 

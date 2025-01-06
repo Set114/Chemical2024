@@ -131,6 +131,7 @@ public class Exam_1_1 : MonoBehaviour
                 {
                     paper.SetBool("move", true);
                     timer = 0.0f;
+                    hintManager.OnCloseBtnClicked();
                     Status = 6;
                 }
                 break;
