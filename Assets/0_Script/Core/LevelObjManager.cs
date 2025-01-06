@@ -7,6 +7,7 @@ public class LevelObjManager : MonoBehaviour
 {
     [Tooltip("關卡物品")]
     [SerializeField] GameObject[] levelObjects; // 關卡物品
+    private GameObject currentScene;
 
     [Tooltip("LoadingSign")]
     [SerializeField] GameObject loading_sign;
@@ -24,29 +25,27 @@ public class LevelObjManager : MonoBehaviour
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
         zoomDisplay = FindObjectOfType<ZoomDisplay>();
         loading_sign.SetActive(false);
-
-        foreach (GameObject obj in levelObjects)
-        {
-            if (obj != null)
-            {
-                obj.SetActive(false);
-            }
-        }
     }
 
     public void SetLevel()    //給GameManager 使用的
     {
+        if (currentScene)
+            Destroy(currentScene);
+        moleculaManager.CloseDisplay();
+        zoomDisplay.CloseDisplay();
         //應該要依照currentLevel 去切換對應的
         questionManager.ShowQuestion(gm.currLevel);
     }
-
 
     public void LevelStart()
     {
         if (gm.currLevel < levelObjects.Length)
         {
             if (levelObjects[gm.currLevel] != null)
-                levelObjects[gm.currLevel].SetActive(true);
+            {
+                currentScene = Instantiate(levelObjects[gm.currLevel], this.transform);
+                currentScene.SetActive(true);
+            }
         }
     }
 
@@ -54,7 +53,9 @@ public class LevelObjManager : MonoBehaviour
     public void LevelClear(int NextStageType)
     {
         //  播放最後的提示語音
-        levelObjects[gm.currLevel].SetActive(false);
+        //levelObjects[gm.currLevel].SetActive(false);
+        if (currentScene)
+            Destroy(currentScene);
         moleculaManager.CloseDisplay();
         zoomDisplay.CloseDisplay();
 
@@ -93,7 +94,7 @@ public class LevelObjManager : MonoBehaviour
     IEnumerator ShowFinishDialog()
     {
         yield return new WaitForSeconds(1.0f);
-        loading_sign.SetActive(false);            
+        loading_sign.SetActive(false);
         //??????  gm.LevelClear(answer); 
         this.SetLevel();
     }

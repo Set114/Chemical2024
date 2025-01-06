@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
         else if (gameMode == 1)
         {
-            //questionManager.SwitchUI(testIndex);
+            SwitchToExamLevel();
         }        
     }
 
@@ -67,6 +67,13 @@ public class GameManager : MonoBehaviour
         userDataManager.UpdateChapterMode(1);
         gameMode = userDataManager.GetChapterMode();
         currLevel = examIndex;
+        levelObjManager.SetLevel();
+    }
+
+    //  切換到指定關卡
+    public void SwitchLevel(int level)
+    {
+        currLevel = level;
         levelObjManager.SetLevel();
     }
 
