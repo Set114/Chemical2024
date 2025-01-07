@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Tutorial_2_1 : MonoBehaviour
 {
     [Header("木屑")]
@@ -13,6 +13,8 @@ public class Tutorial_2_1 : MonoBehaviour
     private Color color_woodPowder;
     [Tooltip("木屑燃燒效果")]
     [SerializeField] private ParticleSystem fire_woodPowder;
+    [Tooltip("磅秤文字")]
+    [SerializeField] Text weightText_woodPowder;
 
     [Tooltip("目前木屑重量")]
     [SerializeField] private float weight_woodPowder = 20f;
@@ -40,6 +42,8 @@ public class Tutorial_2_1 : MonoBehaviour
     private Color[] steelWoolColors;
     [Tooltip("鋼絲絨燃燒效果")]
     [SerializeField] private ParticleSystem fire_steelWool;
+    [Tooltip("磅秤文字")]
+    [SerializeField] Text weightText_steelWool;
 
     [Tooltip("目前鋼絲絨重量")]
     [SerializeField] private float weight_steelWool = 20f;
@@ -103,6 +107,8 @@ public class Tutorial_2_1 : MonoBehaviour
 
     void Update()
     {
+        weightText_woodPowder.text = weight_woodPowder.ToString("0") + "g";
+        weightText_steelWool.text = weight_steelWool.ToString("0") + "g";
         switch (status_woodPowder)
         {
             case 0:     //  待加熱
@@ -194,7 +200,6 @@ public class Tutorial_2_1 : MonoBehaviour
                 }
                 break;
         }
-
     }
 
     public void ReactionStay(GameObject obj)
