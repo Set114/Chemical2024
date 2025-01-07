@@ -33,12 +33,18 @@ public class Blowtorch : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // 碰到铁块时触发
-        if (other.gameObject.name == "IronType1" || other.gameObject.name == "SteelWool")
-            tutorialObject.SendMessage("StartHeating",true);
+        if (other.gameObject.name == "IronType1")
+        {
+            tutorialObject.SendMessage("StartHeating", true);
+        }
+        else if (other.gameObject.name == "WoodPowders" || other.gameObject.name == "SteelWool")
+        {
+            tutorialObject.SendMessage("ReactionStay", other.gameObject);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "IronType1" || other.gameObject.name == "SteelWool")
+        if (other.gameObject.name == "IronType1")
             tutorialObject.SendMessage("StartHeating", false);
     }
 

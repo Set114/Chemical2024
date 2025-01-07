@@ -82,10 +82,4 @@ public class HintManager : MonoBehaviour
         nextButton.SetActive(false);
         Sender.SendMessage("CloseHint");
     }
-
-    //  播放警告語音
-    public void PlayWarningHint(string hintName)
-    {
-        audioManager.PlayVoice(hintName);
-    }
 }

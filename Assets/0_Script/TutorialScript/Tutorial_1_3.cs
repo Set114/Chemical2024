@@ -23,6 +23,7 @@ public class Tutorial_1_3 : MonoBehaviour
     private bool isEnd = false;
 
     private LevelObjManager levelObjManager;
+    private AudioManager audioManager;          //音樂管理
     private HintManager hintManager;            //管理提示板
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
 
@@ -30,6 +31,7 @@ public class Tutorial_1_3 : MonoBehaviour
     void OnEnable()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
 
@@ -74,7 +76,7 @@ public class Tutorial_1_3 : MonoBehaviour
     {
         if (firstTimeWarning)
         {
-            hintManager.PlayWarningHint("W_HCI");
+            audioManager.PlayVoice("W_HCI");
             firstTimeWarning = false;
         }
     }
