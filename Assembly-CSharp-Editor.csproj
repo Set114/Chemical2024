@@ -60,22 +60,22 @@
   <ItemGroup>
     <Compile Include="Assets/JMO Assets/Cartoon FX Easy Editor/Editor/CFXEasyEditor.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Editor/PartsEditor.cs" />
-    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/AudioEncoder_Editor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/Editor/FMWebSocketBuildPostProcessor.cs" />
-    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMPCStreamEncoder_Editor.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Editor/CFX_InspectorHelpEditor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/GameViewDecoder_Editor.cs" />
+    <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Editor/CFX_SpawnSystemEditor.cs" />
+    <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Editor/CharacterBaseEditor.cs" />
+    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMETPBuildPostProcessor.cs" />
+    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMPCStreamDecoder_Editor.cs" />
+    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/AudioEncoder_Editor.cs" />
+    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMPCStreamEncoder_Editor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/GameViewEncoder_Editor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/AudioDecoder_Editor.cs" />
-    <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Editor/CFX_SpawnSystemEditor.cs" />
     <Compile Include="Assets/Samples/OpenXR Plugin/1.6.0/Intercept Feature/Editor/InterceptCreateSessionFeatureEditor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMNetwork/Scripts/Editor/FMNetworkManager_Editor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/MicEncoder_Editor.cs" />
-    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMETPBuildPostProcessor.cs" />
-    <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Editor/CharacterBaseEditor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/Editor/FMSocketIOManager_Editor.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/TextureEncoder_Editor.cs" />
-    <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Editor/FMPCStreamDecoder_Editor.cs" />
     <Compile Include="Assets/3_Model/Props/SoftKitty/LiquidContainer/Editor/LiquidControlEditor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1015,6 +1015,10 @@
       <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1035,6 +1039,10 @@
       <HintPath>Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -1053,6 +1061,10 @@
     </Reference>
     <Reference Include="Unity.XR.CoreUtils.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.XR.CoreUtils.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Cinemachine">
@@ -1111,6 +1123,10 @@
       <HintPath>Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
@@ -1147,6 +1163,10 @@
       <HintPath>Library/ScriptAssemblies/Unity.XR.OpenXR.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1181,6 +1201,10 @@
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.ConformanceAutomation">
       <HintPath>Library/ScriptAssemblies/Unity.XR.OpenXR.Features.ConformanceAutomation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.OpenXR.Features.RuntimeDebugger.Editor">

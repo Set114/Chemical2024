@@ -22,7 +22,21 @@ public class CollisionDetection : MonoBehaviour
             }
         }
     }
-
+    void OnTriggerExit(Collider other)
+    {
+        //如果碰撞
+        if (other.gameObject.name == targetName)
+        {
+            if (sendObj)
+            {
+                tutorialObject.SendMessage("ReactionExit", gameObject, SendMessageOptions.DontRequireReceiver);
+            }
+            else
+            {
+                tutorialObject.SendMessage("ReactionExit", SendMessageOptions.DontRequireReceiver);
+            }
+        }
+    }
     void OnTriggerStay(Collider other)
     {
         //如果碰撞

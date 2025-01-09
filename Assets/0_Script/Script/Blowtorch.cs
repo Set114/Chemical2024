@@ -20,12 +20,12 @@ public class Blowtorch : MonoBehaviour
         if (open)
         {
             fireParticleSystem.Play();
-            tutorialObject.SendMessage("OnBlowtorchGrabbed"); 
+            tutorialObject.SendMessage("OnBlowtorchGrabbed", SendMessageOptions.DontRequireReceiver); 
         }
         else
         {
             fireParticleSystem.Stop();
-            tutorialObject.SendMessage("StartHeating", false);
+            tutorialObject.SendMessage("StartHeating", false, SendMessageOptions.DontRequireReceiver);
         }
         fireCollider.enabled = open;
     }
@@ -35,17 +35,17 @@ public class Blowtorch : MonoBehaviour
         // 碰到铁块时触发
         if (other.gameObject.name == "IronType1")
         {
-            tutorialObject.SendMessage("StartHeating", true);
+            tutorialObject.SendMessage("StartHeating", true, SendMessageOptions.DontRequireReceiver);
         }
         else if (other.gameObject.name == "WoodPowders" || other.gameObject.name == "SteelWool")
         {
-            tutorialObject.SendMessage("ReactionStay", other.gameObject);
+            tutorialObject.SendMessage("ReactionStay", other.gameObject, SendMessageOptions.DontRequireReceiver);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "IronType1")
-            tutorialObject.SendMessage("StartHeating", false);
+            tutorialObject.SendMessage("StartHeating", false, SendMessageOptions.DontRequireReceiver);
     }
 
     void BackToInitial()

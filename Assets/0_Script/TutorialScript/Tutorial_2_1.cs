@@ -62,7 +62,6 @@ public class Tutorial_2_1 : MonoBehaviour
     private float timer_steelWool = 0.0f;                //  計時器
     private int status_steelWool = 0;                    //  鋼絲絨狀態
 
-
     private bool firstTimeWarning = true;               //  第一次抓取危險物品的通知
 
     private LevelObjManager levelObjManager;
