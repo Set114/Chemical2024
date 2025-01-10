@@ -29,6 +29,7 @@ public class CollisionDetection : MonoBehaviour
         {
             if (sendObj)
             {
+                print(other.gameObject.name);
                 tutorialObject.SendMessage("ReactionExit", gameObject, SendMessageOptions.DontRequireReceiver);
             }
             else

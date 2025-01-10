@@ -12,7 +12,7 @@ public class LiquidController : MonoBehaviour
     [Tooltip("液體MeshRenderer")]
     [SerializeField] private MeshRenderer myLiquid;
     [Tooltip("液體顏色")]
-    [SerializeField] private Color fluidColor;
+    public Color liquidColor;
 
     [Tooltip("最大容量")]
     [SerializeField] private float maxCapacity = 100f;
@@ -54,13 +54,6 @@ public class LiquidController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (myLiquid)
-            myLiquid.material.SetColor("_Color", fluidColor);
-        if (stream)
-        {
-            ParticleSystem.MainModule main = stream.main;
-            main.startColor = fluidColor;
-        }
         ratio = currCapacity / maxCapacity;
         isFull = ratio >= 0.99f;
     }
@@ -148,7 +141,15 @@ public class LiquidController : MonoBehaviour
         }
         ratio = currCapacity / maxCapacity;
         if (myLiquid)
-            myLiquid.material.SetFloat("_Fill", ratio);   
+        {
+            myLiquid.material.SetFloat("_Fill", ratio);
+            myLiquid.material.SetColor("_Color", liquidColor);
+        }
+        if (stream)
+        {
+            ParticleSystem.MainModule main = stream.main;
+            main.startColor = liquidColor;
+        }
     }
 
 
