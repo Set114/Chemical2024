@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2-
+  m_text: 1-
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e0d39b2069bfe24ca009ff418096158, type: 2}
   m_sharedMaterial: {fileID: -7147170475624585155, guid: 9e0d39b2069bfe24ca009ff418096158, type: 2}
@@ -2594,9 +2594,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638835883}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: ListChangeLevel
+      - m_Target: {fileID: 684610237}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SwitchLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2606,22 +2606,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131535137}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1699488690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2050668747}
+        m_TargetAssemblyTypeName: SettingUIManager, Assembly-CSharp
+        m_MethodName: LessonList_Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2799,7 +2787,7 @@ MonoBehaviour:
   targetSize: 13
   initialSize: 2.5
   duration: 1
-  targetshowLevelText: {fileID: 950201977}
+  targetshowLevelText: {fileID: 0}
   camPosition: {x: -31, y: 15.852, z: -1.4432}
   animatorsList:
   - name: 1
@@ -3931,7 +3919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490415501}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: VolumeOn
         m_Mode: 1
@@ -9944,8 +9932,8 @@ MonoBehaviour:
   voiceSource: {fileID: 0}
   soundSource: {fileID: 0}
   bgmClip: {fileID: 8300000, guid: 469e2841ce6de4844b670f9d7ac85616, type: 3}
-  soundsSlider: {fileID: 606937462}
-  bgmSlider: {fileID: 666506447}
+  soundsSlider: {fileID: 0}
+  bgmSlider: {fileID: 0}
 --- !u!114 &490415502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9958,7 +9946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9abad409ecc5247a1c06fafc195189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSlider: {fileID: 666506447}
+  bgmSlider: {fileID: 0}
 --- !u!1 &499653213 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 474968904440573265, guid: fb60b1fb90d4e1348a999f1f0d6d073b, type: 3}
@@ -12372,7 +12360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currStage: 1
-  currLevel: 1
+  currLevel: 0
   examIndex: 6
   levelObjManager: {fileID: 1404153067}
   audioManager: {fileID: 3385617890250005706}
@@ -15057,7 +15045,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490415501}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: BGMVolumeOff
         m_Mode: 1
@@ -15547,7 +15535,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490415501}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: BGMVolumeOn
         m_Mode: 1
@@ -16734,7 +16722,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490415501}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: VolumeOff
         m_Mode: 1
@@ -16895,7 +16883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2-1
+  m_text: 1-1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e0d39b2069bfe24ca009ff418096158, type: 2}
   m_sharedMaterial: {fileID: -7147170475624585155, guid: 9e0d39b2069bfe24ca009ff418096158, type: 2}
@@ -25087,9 +25075,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638835883}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: ListChangeLevel
+      - m_Target: {fileID: 684610237}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SwitchLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25099,22 +25087,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131535137}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1699488690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2050668747}
+        m_TargetAssemblyTypeName: SettingUIManager, Assembly-CSharp
+        m_MethodName: LessonList_Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25655,9 +25631,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638835883}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: ListChangeLevel
+      - m_Target: {fileID: 684610237}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SwitchLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25667,22 +25643,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131535137}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1699488690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2050668747}
+        m_TargetAssemblyTypeName: SettingUIManager, Assembly-CSharp
+        m_MethodName: LessonList_Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -34141,34 +34105,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638835883}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: ListChangeLevel
+      - m_Target: {fileID: 684610237}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SwitchLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131535137}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1699488690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2050668747}
+        m_TargetAssemblyTypeName: SettingUIManager, Assembly-CSharp
+        m_MethodName: LessonList_Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -35570,7 +35522,7 @@ MonoBehaviour:
     levelObjects:
     - {fileID: 0}
   test_btn: {fileID: 0}
-  showLevelText: {fileID: 950201977}
+  showLevelText: {fileID: 0}
   item: {fileID: 0}
 --- !u!114 &1638835883
 MonoBehaviour:
@@ -35737,29 +35689,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1c024d4f6540742a469f75231cdf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting_btn: {fileID: 1210715957}
-  settingBack_btn: {fileID: 917343838}
-  lessonList_btn: {fileID: 718793486}
+  setting_btn: {fileID: 0}
+  settingBack_btn: {fileID: 0}
+  lessonList_btn: {fileID: 0}
   lessonBack_btn: {fileID: 1868635902}
-  logout_btn: {fileID: 218675718}
-  levlMenu_btn: {fileID: 1118795098}
-  refresh_btn: {fileID: 865946017}
-  chapterMode_btn: {fileID: 1467155966}
-  bgmMax_btn: {fileID: 888157046}
-  bgmMin_btn: {fileID: 866966505}
-  UIeffectMax_btn: {fileID: 223142476}
-  UIeffectMin_btn: {fileID: 934298257}
+  logout_btn: {fileID: 0}
+  levlMenu_btn: {fileID: 0}
+  refresh_btn: {fileID: 0}
+  chapterMode_btn: {fileID: 0}
+  bgmMax_btn: {fileID: 0}
+  bgmMin_btn: {fileID: 0}
+  UIeffectMax_btn: {fileID: 0}
+  UIeffectMin_btn: {fileID: 0}
   learnMode_img: {fileID: -3520311570620876210, guid: 1078ad580a6a48a47be064e4c7e53bf8, type: 3}
   testMode_img: {fileID: -7361647592921953100, guid: 1078ad580a6a48a47be064e4c7e53bf8, type: 3}
-  studentname_txt: {fileID: 1140552806}
-  studentid_txt: {fileID: 825432449}
-  Account: {fileID: 1131535137}
+  studentname_txt: {fileID: 0}
+  studentid_txt: {fileID: 0}
+  Account: {fileID: 0}
   Lesson_List: {fileID: 1699488690}
-  Setting: {fileID: 1035556177}
+  Setting: {fileID: 0}
   Learnimg: {fileID: 1370628883}
   Testing: {fileID: 1559309105}
-  bgmSlider: {fileID: 666506447}
-  UIeffectSlider: {fileID: 606937462}
+  bgmSlider: {fileID: 0}
+  UIeffectSlider: {fileID: 0}
   chapterModeData: 0
   audioManager: {fileID: 490415501}
   userDataManager: {fileID: 0}
@@ -36833,7 +36785,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699488690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.6520162, y: 0.5233678, z: 0.73484004}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36844,7 +36796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.8, y: 2.8000126}
+  m_AnchoredPosition: {x: -1.4, y: -9.6}
   m_SizeDelta: {x: 120.21, y: 136.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1704164811
@@ -44170,6 +44122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050668745}
+  - component: {fileID: 2050668747}
   - component: {fileID: 2050668744}
   - component: {fileID: 2050668743}
   - component: {fileID: 2050668742}
@@ -44250,7 +44203,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050668740}
-  m_LocalRotation: {x: -0, y: -0.19036104, z: -0, w: 0.9817141}
+  m_LocalRotation: {x: -0, y: -0.19036105, z: -0, w: 0.9817142}
   m_LocalPosition: {x: 0, y: 0, z: 1.349}
   m_LocalScale: {x: 0.0056637637, y: 0.0046190764, z: 0.0029904437}
   m_ConstrainProportionsScale: 1
@@ -44263,7 +44216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -21.948, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.332, y: 0.923}
+  m_AnchoredPosition: {x: -0.332, y: 0.987}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050668746
@@ -44285,6 +44238,44 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &2050668747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050668740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1c024d4f6540742a469f75231cdf51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setting_btn: {fileID: 1210715957}
+  settingBack_btn: {fileID: 917343838}
+  lessonList_btn: {fileID: 718793486}
+  lessonBack_btn: {fileID: 1868635902}
+  logout_btn: {fileID: 218675718}
+  levlMenu_btn: {fileID: 1118795098}
+  refresh_btn: {fileID: 865946017}
+  chapterMode_btn: {fileID: 1467155966}
+  bgmMax_btn: {fileID: 888157046}
+  bgmMin_btn: {fileID: 866966505}
+  UIeffectMax_btn: {fileID: 223142476}
+  UIeffectMin_btn: {fileID: 934298257}
+  learnMode_img: {fileID: -3520311570620876210, guid: 1078ad580a6a48a47be064e4c7e53bf8, type: 3}
+  testMode_img: {fileID: -7361647592921953100, guid: 1078ad580a6a48a47be064e4c7e53bf8, type: 3}
+  studentname_txt: {fileID: 1140552806}
+  studentid_txt: {fileID: 825432449}
+  Account: {fileID: 1131535137}
+  Lesson_List: {fileID: 1699488690}
+  Setting: {fileID: 1035556177}
+  Learnimg: {fileID: 1370628883}
+  Testing: {fileID: 1559309105}
+  bgmSlider: {fileID: 666506447}
+  UIeffectSlider: {fileID: 606937462}
+  chapterModeData: 0
+  audioManager: {fileID: 3385617890250005706}
+  userDataManager: {fileID: 1819460062}
 --- !u!1 &2053681245
 GameObject:
   m_ObjectHideFlags: 0
@@ -44888,9 +44879,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638835883}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: ListChangeLevel
+      - m_Target: {fileID: 684610237}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SwitchLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -44900,22 +44891,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1131535137}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1699488690}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2050668747}
+        m_TargetAssemblyTypeName: SettingUIManager, Assembly-CSharp
+        m_MethodName: LessonList_Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

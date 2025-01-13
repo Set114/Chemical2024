@@ -4,7 +4,7 @@ using System.Collections;
 public class CollisionDetection : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialObject;
-    [SerializeField] private string targetName = "Object";
+    public string targetName = "Object";
     [SerializeField] private bool sendObj = false;
 
     void OnTriggerEnter(Collider other)
@@ -29,7 +29,6 @@ public class CollisionDetection : MonoBehaviour
         {
             if (sendObj)
             {
-                print(other.gameObject.name);
                 tutorialObject.SendMessage("ReactionExit", gameObject, SendMessageOptions.DontRequireReceiver);
             }
             else

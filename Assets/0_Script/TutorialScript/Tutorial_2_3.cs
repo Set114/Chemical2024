@@ -9,13 +9,10 @@ public class Tutorial_2_3 : MonoBehaviour
     [Header("寶特瓶")]
     [Tooltip("寶特瓶")]
     [SerializeField] private GameObject bottle;
-    [Tooltip("氣球")]
-    [SerializeField] private GameObject balloon;
     [Tooltip("瓶蓋位置")]
     [SerializeField] private Transform bottleCapPoint;
     [Tooltip("瓶內試管位置")]
     [SerializeField] private Transform testTubePoint;
-
     [Tooltip("寶特瓶液體")]
     [SerializeField] private LiquidController bottleLiquid;
     [Tooltip("寶特瓶液體反應後顏色")]
@@ -23,18 +20,33 @@ public class Tutorial_2_3 : MonoBehaviour
     private Color bottleLiquidColor;
     [Tooltip("變色速度")]
     [SerializeField] private float reactionTime = 3f;
-
     [Tooltip("設定搖晃判斷的角度閾值")]
     [SerializeField] private float shakeThreshold = 90f;
     private float bottleAngle = 0f;
     [Tooltip("變色速度")]
     [SerializeField] private float colorChangeSpeed = 3f;
 
-    [Header("後續要隱藏的物件")]
+    [Header("氣球")]
+    [Tooltip("未充氣氣球")]
+    [SerializeField] private GameObject balloon;
+    [Tooltip("未充氣氣球")]
+    [SerializeField] private GameObject balloon_flat;
+    [Tooltip("充氣用氣球")]
+    [SerializeField] private GameObject balloon_inflated;
+    [Tooltip("瓶口橡皮筋")]
+    [SerializeField] private GameObject rubberBand_Cap;
+    [Tooltip("充氣速度")]
+    [SerializeField] private float inflationSpeed = 1f;
+    [Tooltip("最大尺寸")]
+    [SerializeField] private float balloonMaxSize = 1f;
+
+    [Header("要隱藏的物件")]
     [Tooltip("前半部需要顯示的物件")]
     [SerializeField] private GameObject object_Step1;
     [Tooltip("後半部需要顯示的物件")]
-    [SerializeField] private GameObject object_Step2;
+    [SerializeField] private GameObject object_Step2;   
+    [Tooltip("鑷子")]
+    [SerializeField] private GameObject tweezers;
 
     [Header("質量設定")]
     [Tooltip("磅秤文字")]
@@ -43,8 +55,8 @@ public class Tutorial_2_3 : MonoBehaviour
     [SerializeField] private float scaleVale = 0f;
     [Tooltip("寶特瓶重量")]
     [SerializeField] private float weight_Bottle = 30f;
-    [Tooltip("瓶蓋重量")]
-    [SerializeField] private float weight_BottleCap = 10f;
+    [Tooltip("氣球重量")]
+    [SerializeField] private float weight_Balloon = 10f;
     [Tooltip("試管重量")]
     [SerializeField] private float weight_TestTube = 40f;
 
@@ -139,6 +151,9 @@ public class Tutorial_2_3 : MonoBehaviour
             case 6: //待反應結束
 
                 //氣球膨脹
+                float size = balloon_inflated.transform.localScale.x;
+                size = Mathf.Clamp(size += Time.deltaTime * inflationSpeed, size, balloonMaxSize);
+                balloon_inflated.transform.localScale = new Vector3(size, size, size);
 
                 // 使用 Lerp 混合顏色
                 bottleLiquidColor = Color.Lerp(bottleLiquidColor, bottleLiquidColor_final, colorChangeSpeed);
@@ -157,63 +172,10 @@ public class Tutorial_2_3 : MonoBehaviour
                 break;
             case 8: //待拿掉氣球
                 break;
-            case 9: //待寶特瓶放上電子秤
+            case 9: //待氣球放上電子秤
                 break;
             case 10: //結論
                 break;
-        }
-    }
-
-    public void Reaction(GameObject sender)
-    {
-        if (sender.name== "KitchenScale")
-        {
-            switch (Status)
-            {
-                case 4: //寶特瓶放上電子秤
-                    
-                    stepPage.SetActive(false);
-                    massPage.SetActive(true);
-                    scaleVale = weight_Bottle + weight_BottleCap + weight_TestTube;
-                    massTexts[0].text = scaleVale.ToString("0") + "g";
-                    hintManager.SwitchStep("T2_3_3");
-                    Status++;
-                    break;
-                case 7: //搖晃後放上電子秤
-                    //取得第二個數值
-                    scaleVale = weight_Bottle + weight_BottleCap + weight_TestTube;
-                    massTexts[1].text = scaleVale.ToString("0") + "g";
-                    //讓蓋子可以被打開
-                    balloon.GetComponent<XRGrabInteractable>().enabled = true;
-                    balloon.tag = "Pickable";
-                    hintManager.SwitchStep("T2_3_5");
-                    Status++;
-                    break;
-                case 9: //打開瓶蓋後放上電子秤
-                    //取得第三個數值
-                    scaleVale = weight_Bottle + weight_TestTube;
-                    massTexts[2].text = scaleVale.ToString("0") + "g";
-                    EndTheTutorial();
-                    Status++;
-                    break;
-            }
-        }
-        weightText.text = scaleVale.ToString("0") + "g";
-    }
-
-    public void ReactionExit(GameObject sender)
-    {
-        if (sender.name == "KitchenScale")
-        {
-            scaleVale = 0f;
-            weightText.text = scaleVale.ToString("0") + "g";
-        }
-        if (sender.name == "Balloon" && Status == 8)
-        {
-            //打開瓶蓋
-            balloon.transform.SetParent(transform);
-            balloon.GetComponent<Rigidbody>().isKinematic = false;
-            Status++;
         }
     }
 
@@ -241,19 +203,23 @@ public class Tutorial_2_3 : MonoBehaviour
                     //場上只剩下後半部物件
                     object_Step1.SetActive(false);
                     object_Step2.SetActive(true);
+                    tweezers.transform.SetParent(object_Step1.transform);
                     Status++;
                 }
                 break;
             case 2: //套上氣球
-                print(sender.name);
                 if (sender.name == "Balloon")
                 {
-                    sender.GetComponent<XRGrabInteractable>().enabled = false;
-                    sender.GetComponent<Rigidbody>().isKinematic = true;
-                    sender.transform.position = bottleCapPoint.position;
-                    sender.transform.rotation = bottleCapPoint.rotation;
-                    sender.transform.SetParent(bottleCapPoint);
-                    sender.tag = "Untagged";
+                    bottle.GetComponent<Rigidbody>().isKinematic = true;
+
+                    balloon.GetComponent<XRGrabInteractable>().enabled = false;
+                    balloon.tag = "Untagged";
+                    balloon.GetComponent<Rigidbody>().isKinematic = true;
+                    balloon.transform.position = bottleCapPoint.position;
+                    balloon.transform.rotation = bottleCapPoint.rotation;
+                    balloon.transform.SetParent(bottleCapPoint);
+                    balloon_flat.SetActive(false);
+                    balloon_inflated.SetActive(true);
                     Status++;
                 }
                 break;
@@ -261,16 +227,66 @@ public class Tutorial_2_3 : MonoBehaviour
                 if (sender.name == "RubberBand")
                 {
                     sender.gameObject.SetActive(false);
-
+                    rubberBand_Cap.SetActive(true);
+                    bottle.GetComponent<Rigidbody>().isKinematic = false;
                     //畫面跳轉至測量質量頁面
                     stepPage.SetActive(false);
                     massPage.SetActive(true);
-
                     hintManager.SwitchStep("T2_3_2");
                     Status++;
                 }
                 break;
+            case 4: //寶特瓶放上電子秤
+                if (sender.name == "KitchenScale")
+                {
+                    stepPage.SetActive(false);
+                    massPage.SetActive(true);
+                    scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
+                    massTexts[0].text = scaleVale.ToString("0") + "g";
+                    hintManager.SwitchStep("T2_3_3");
+                    Status++;
+                }
+                break;
+            case 7: //搖晃後放上電子秤
+                if (sender.name == "KitchenScale")
+                {
+                    //取得第二個數值
+                    scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
+                    massTexts[1].text = scaleVale.ToString("0") + "g";
+
+                    //讓寶特瓶不可被拿起
+                    bottle.GetComponent<XRGrabInteractable>().enabled = false;
+                    bottle.tag = "Untagged";
+                    bottle.GetComponent<Rigidbody>().isKinematic = true;
+
+                    //讓氣球可以被拿起
+                    balloon.GetComponent<XRGrabInteractable>().enabled = true;
+                    balloon.tag = "Pickable";
+                    hintManager.SwitchStep("T2_3_5");
+
+                    //磅秤改為偵測氣球
+                    sender.GetComponent<CollisionDetection>().targetName = "Balloon";
+
+                    Status++;
+                }
+                break;
+            case 9: //氣球放上電子秤
+                if (sender.name == "KitchenScale")
+                {
+                    //取得第三個數值
+                    scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
+                    massTexts[2].text = scaleVale.ToString("0") + "g";
+
+                    //讓氣球不可被拿起
+                    balloon.GetComponent<XRGrabInteractable>().enabled = false;
+                    balloon.tag = "Untagged";
+
+                    EndTheTutorial();
+                    Status++;
+                }
+                break;
         }
+        weightText.text = scaleVale.ToString("0") + "g";
     }
     //  液體裝滿時通知
     public void LiquidFull(GameObject obj)
@@ -307,6 +323,23 @@ public class Tutorial_2_3 : MonoBehaviour
             firstTimeWarning = false;
         }
     }
+    //抓取氣球時觸發
+    public void OnBalloonGrabbed()
+    {
+        if (Status == 8)
+        {
+            //拿掉氣球
+            balloon.transform.SetParent(transform);
+            balloon.GetComponent<Rigidbody>().isKinematic = false;
+
+            balloon_flat.SetActive(true);
+            balloon_inflated.SetActive(false);
+            rubberBand_Cap.SetActive(false);
+            scaleVale = weight_Bottle + weight_TestTube;
+            weightText.text = scaleVale.ToString("0") + "g";
+            Status++;
+        }
+    }
     private void EndTheTutorial()   //完成教學
     {
         hintManager.SwitchStep("T2_3_6");
@@ -315,6 +348,6 @@ public class Tutorial_2_3 : MonoBehaviour
 
     void CloseHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear(0);
+        levelObjManager.LevelClear(1);
     }
 }

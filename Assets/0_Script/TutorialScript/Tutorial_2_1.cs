@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Tutorial_2_1 : MonoBehaviour
 {
     [Header("木屑")]
     [Tooltip("用於縮放的parent")]
     [SerializeField] Transform woodPowder;
     [SerializeField] MeshRenderer meshRenderer_woodPowder;
-    [Tooltip("木屑燒完的顏色")]
-    [SerializeField] private Color burntColor_woodPowder;
     private Color color_woodPowder;
     [Tooltip("木屑燃燒效果")]
     [SerializeField] private ParticleSystem fire_woodPowder;
@@ -86,7 +85,6 @@ public class Tutorial_2_1 : MonoBehaviour
         scalingSpeed_woodPowder = (scale_woodPowder - finalScale_woodPowder) / burningTime_woodPowder;
         color_woodPowder = meshRenderer_woodPowder.material.color;
 
-
         fire_steelWool.Stop();
         // 計算改變重量速度
         weightChangeSpeed_steelWool = (finalWeight_steelWool - weight_steelWool) / burningTime_steelWool;
@@ -122,15 +120,14 @@ public class Tutorial_2_1 : MonoBehaviour
                 timer_woodPowder -= Time.deltaTime;
 
                 scale_woodPowder -= scalingSpeed_woodPowder * Time.deltaTime;
-                scale_woodPowder = Mathf.Max(scale_woodPowder, finalScale_woodPowder);
+                scale_woodPowder = Mathf.Clamp(scale_woodPowder, finalScale_woodPowder, scale_woodPowder);
                 woodPowder.localScale = new Vector3(scale_woodPowder, scale_woodPowder, scale_woodPowder);
 
                 //重量減輕
                 weight_woodPowder -= weightChangeSpeed_woodPowder * Time.deltaTime;
-                weight_woodPowder = Mathf.Max(weight_woodPowder, finalWeight_woodPowder);
-
-                // 使用 Lerp 混合顏色
-                color_woodPowder = Color.Lerp(color_woodPowder, burntColor_woodPowder, colorChangeSpeed_woodPowder);
+                weight_woodPowder = Mathf.Clamp(weight_woodPowder, finalWeight_woodPowder, weight_woodPowder);
+                //處理變色
+                color_woodPowder.a = timer_woodPowder / burningTime_woodPowder;
                 // 更新物件的顏色
                 meshRenderer_woodPowder.material.color = color_woodPowder;
 
@@ -175,8 +172,7 @@ public class Tutorial_2_1 : MonoBehaviour
 
                 //重量減輕
                 weight_steelWool += weightChangeSpeed_steelWool * Time.deltaTime;
-                weight_steelWool = Mathf.Max(weight_steelWool, finalWeight_steelWool);
-
+                weight_steelWool = Mathf.Clamp(weight_steelWool, weight_steelWool, finalWeight_steelWool);
                 //處理變色
                 steelWoolColors[1].a = timer_steelWool / burningTime_steelWool;
 
