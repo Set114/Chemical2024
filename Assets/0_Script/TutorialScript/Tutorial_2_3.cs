@@ -191,7 +191,7 @@ public class Tutorial_2_3 : MonoBehaviour
         switch (Status)
         {
             case 1: //試管放進寶特瓶
-                if(sender.name== "TestTube")
+                if(sender.name== "TestTube_2-3")
                 {
                     sender.tag = "Untagged";
                     sender.transform.position = testTubePoint.position;
@@ -208,7 +208,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 }
                 break;
             case 2: //套上氣球
-                if (sender.name == "Balloon")
+                if (sender.name == "Balloon_2-3")
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -224,7 +224,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 }
                 break;
             case 3: //套上橡皮筋
-                if (sender.name == "RubberBand")
+                if (sender.name == "RubberBand_2-3")
                 {
                     sender.gameObject.SetActive(false);
                     rubberBand_Cap.SetActive(true);
@@ -265,7 +265,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     hintManager.SwitchStep("T2_3_5");
 
                     //磅秤改為偵測氣球
-                    sender.GetComponent<CollisionDetection>().targetName = "Balloon";
+                    sender.GetComponent<CollisionDetection>().targetName = "Balloon_2-3";
 
                     Status++;
                 }
@@ -293,13 +293,13 @@ public class Tutorial_2_3 : MonoBehaviour
     {
         switch (obj.name)
         {
-            case "WaterBottle":
+            case "WaterBottle_2-3":
                 if (Status == 0)
                 {
                     fullLiquid++;
                 }
                 break;
-            case "TestTube":
+            case "TestTube_2-3":
                 if (Status == 0)
                 {
                     fullLiquid++;

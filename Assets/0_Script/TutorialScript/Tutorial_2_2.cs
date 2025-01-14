@@ -162,7 +162,7 @@ public class Tutorial_2_2 : MonoBehaviour
 
     public void ReactionExit(GameObject sender)
     {
-        if (sender.name == "Cap" && Status == 7)
+        if (sender.name == "Cap_2-2" && Status == 7)
         {
             //打開瓶蓋
             bottleCap.transform.SetParent(transform);
@@ -185,7 +185,7 @@ public class Tutorial_2_2 : MonoBehaviour
         switch (Status)
         {
             case 1: //試管放進寶特瓶
-                if(sender.name== "TestTube")
+                if(sender.name== "TestTube_2-2")
                 {
                     sender.tag = "Untagged";
                     sender.transform.position = testTubePoint.position;
@@ -199,7 +199,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 }
                 break;
             case 2: //鎖上寶特瓶蓋
-                if (sender.name == "Cap")
+                if (sender.name == "Cap_2-2")
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -253,7 +253,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     hintManager.SwitchStep("T2_2_5");
 
                     //磅秤改為偵測瓶蓋
-                    sender.GetComponent<CollisionDetection>().targetName = "Cap";
+                    sender.GetComponent<CollisionDetection>().targetName = "Cap_2-2";
 
                     Status++;
                 }
@@ -281,13 +281,13 @@ public class Tutorial_2_2 : MonoBehaviour
     {
         switch (obj.name)
         {
-            case "WaterBottle":
+            case "WaterBottle_2-2":
                 if (Status == 0)
                 {
                     fullLiquid++;
                 }
                 break;
-            case "TestTube":
+            case "TestTube_2-2":
                 if (Status == 0)
                 {
                     fullLiquid++;
