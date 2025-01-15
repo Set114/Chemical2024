@@ -61,12 +61,6 @@ public class Tutorial_2_3 : MonoBehaviour
     [SerializeField] private float weight_TestTube = 40f;
 
     [Header("UI")]
-    [Tooltip("步驟頁面")]
-    [SerializeField] private GameObject stepPage;
-    [Tooltip("步驟打勾圖示")]
-    [SerializeField] private GameObject[] checkImages;
-    [Tooltip("測量質量頁面")]
-    [SerializeField] private GameObject massPage;
     [Tooltip("步驟打勾圖示")]
     [SerializeField] private Text[] massTexts;
     [Tooltip("粒子畫面")]
@@ -100,15 +94,9 @@ public class Tutorial_2_3 : MonoBehaviour
         hintManager = FindObjectOfType<HintManager>();
 
         hintManager.gameObject.SetActive(true);
-        stepPage.SetActive(true);
-        massPage.SetActive(false);
         particlePage.SetActive(false);
         object_Step1.SetActive(true);
         object_Step2.SetActive(false);
-        foreach (GameObject checkImage in checkImages)
-        {
-            checkImage.SetActive(false);
-        }
 
         hintManager.SwitchStep("T2_3_1");
     }
@@ -164,7 +152,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 if (timer <= 0f)
                 {
                     particlePage.SetActive(true);
-                    hintManager.SwitchStep("T2_3_4");
+                    hintManager.SwitchStep("T2_3_6");
                     Status++;
                 }
                 break;
@@ -198,8 +186,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     sender.transform.rotation = testTubePoint.rotation;
                     sender.transform.SetParent(testTubePoint);
                     sender.GetComponent<Rigidbody>().isKinematic = true;
-                    checkImages[1].SetActive(true);
-                    checkImages[2].SetActive(true);
+                    hintManager.SwitchStep("T2_3_3");
                     //場上只剩下後半部物件
                     object_Step1.SetActive(false);
                     object_Step2.SetActive(true);
@@ -230,20 +217,16 @@ public class Tutorial_2_3 : MonoBehaviour
                     rubberBand_Cap.SetActive(true);
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
                     //畫面跳轉至測量質量頁面
-                    stepPage.SetActive(false);
-                    massPage.SetActive(true);
-                    hintManager.SwitchStep("T2_3_2");
+                    hintManager.SwitchStep("T2_3_4");
                     Status++;
                 }
                 break;
             case 4: //寶特瓶放上電子秤
                 if (sender.name == "KitchenScale")
                 {
-                    stepPage.SetActive(false);
-                    massPage.SetActive(true);
                     scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
                     massTexts[0].text = scaleVale.ToString("0") + "g";
-                    hintManager.SwitchStep("T2_3_3");
+                    hintManager.SwitchStep("T2_3_5");
                     Status++;
                 }
                 break;
@@ -262,7 +245,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     //讓氣球可以被拿起
                     balloon.GetComponent<XRGrabInteractable>().enabled = true;
                     balloon.tag = "Pickable";
-                    hintManager.SwitchStep("T2_3_5");
+                    hintManager.SwitchStep("T2_3_7");
 
                     //磅秤改為偵測氣球
                     sender.GetComponent<CollisionDetection>().targetName = "Balloon_2-3";
@@ -308,7 +291,7 @@ public class Tutorial_2_3 : MonoBehaviour
         }
         if (fullLiquid == 2 && Status == 0)
         {
-            checkImages[0].SetActive(true);
+            hintManager.SwitchStep("T2_3_2");
             Status++;
         }
 
@@ -342,7 +325,7 @@ public class Tutorial_2_3 : MonoBehaviour
     }
     private void EndTheTutorial()   //完成教學
     {
-        hintManager.SwitchStep("T2_3_6");
+        hintManager.SwitchStep("T2_3_8");
         hintManager.ShowNextButton(this.gameObject);
     }
 

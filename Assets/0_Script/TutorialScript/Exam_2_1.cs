@@ -45,7 +45,6 @@ public class Exam_2_1 : MonoBehaviour
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("E2_1_1");
-
         ragMesh = rag.GetComponent<MeshRenderer>();
         bakingSodaPowderInWater.transform.localScale = new Vector3(0f, 0f, 0f);
     }

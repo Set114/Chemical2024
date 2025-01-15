@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 //  負責管理題目介面
@@ -56,6 +57,9 @@ public class QuestionManager : MonoBehaviour
     [Tooltip("錯誤標記")] [SerializeField] GameObject MarkWrong;
     [Tooltip("內容文字")] [SerializeField] QuestionDailog[] questionContent;
     [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_Q_Question, UI_Q_Answer, UI_Q_Button01, UI_Q_Button02;
+    [Tooltip("頭像圖片")][SerializeField] Sprite[] userIcons;
+    [Tooltip("答案提出者頭像")][SerializeField] GameObject userIcon0, userIcon1;
+    [Tooltip("答案提出者頭像圖片")][SerializeField] Image userIconImage0, userIconImage1;
     [Header("結束UI")]
     [Tooltip("教學結束介面")] [SerializeField] GameObject finishLearnCanvas;
     [Tooltip("測驗結束介面")] [SerializeField] GameObject finishExamCanvas;
@@ -112,6 +116,34 @@ public class QuestionManager : MonoBehaviour
         UI_Q_Button01.text = questionContent[currentIndex].answer0Text;
         UI_Q_Button02.text = questionContent[currentIndex].answer1Text;
         UI_Q_Answer.text = questionContent[currentIndex].answer;
+
+        //設定答案提出者頭像
+        userIcon0.SetActive(false);
+        userIcon1.SetActive(false);
+        if (questionContent[currentIndex].user0Name != "")
+        {
+            foreach (Sprite userIcon in userIcons)
+            {
+                if (userIcon.name == questionContent[currentIndex].user0Name)
+                {
+                    userIconImage0.sprite = userIcon;
+                    userIcon0.SetActive(true);
+                }
+            }
+        }
+
+        if (questionContent[currentIndex].user1Name != "")
+        {
+            foreach (Sprite userIcon in userIcons)
+            {
+                if (userIcon.name == questionContent[currentIndex].user1Name)
+                {
+                    userIconImage1.sprite = userIcon;
+                    userIcon1.SetActive(true);
+                }
+            }
+        }
+
         audioManager.PlayVoice(questionContent[currentIndex].voiceQuestionName);
         Image_Warning.SetActive(UI_Q_Button02.text != "");
 
