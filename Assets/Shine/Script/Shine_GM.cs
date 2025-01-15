@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Shine_GM : MonoBehaviour
 {
     public GameObject TestMode, TeachMode;
     public GameObject TestModeButton, TeachModeButton;
     public GameObject ELF;
+    public GameObject[] LevelScene, LevelSceneUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +41,21 @@ public class Shine_GM : MonoBehaviour
     {
         MenuUIManager.shouldOpenMenu = true;
         Application.LoadLevel("MainMenu");
+    }
+    public void BackLoginMenu()
+    {
+        Application.LoadLevel("MainMenu");
+    }
+    public void ReScene() {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void SelectLevel(int ID) {
+        for (int i = 0; i < LevelScene.Length; i++) {
+            LevelScene[i].SetActive(false);
+            LevelSceneUI[i].SetActive(false);
+        }
+        LevelScene[ID].SetActive(true);
+        LevelSceneUI[ID].SetActive(true);
     }
 }
