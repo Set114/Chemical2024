@@ -48,6 +48,7 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = parentEmpty.transform;
                     switch (selectedObject.name)
                     {
+                        //------------Stage 1--------------
                         case "hammer":
                             planeDistance = 0.722f;
                             Collider[] objCollider = selectedObject.GetComponents<Collider>();
@@ -92,6 +93,14 @@ public class MouseController : MonoBehaviour
                             selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.053f); 
                             selectedObject.transform.localEulerAngles = new Vector3( 0.0f, 0.0f, 0.0f);
                             break;
+                        //------------Stage 2--------------
+                        case "GAS_2_1":
+                            planeDistance = 0.77f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.091f, -0.064f, 0.0f);
+                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 55.0f);
+                            isToolSwitchOn = false; //初始化噴燈起始狀態
+                            break;
                     }
                 }
             }
@@ -102,6 +111,7 @@ public class MouseController : MonoBehaviour
         {
             switch (selectedObject.name)
             {
+                //------------Stage 1--------------
                 case "hammer":
                     if (selectedObject.GetComponent<MotionHammer>())
                         Destroy(selectedObject.GetComponent<MotionHammer>());
@@ -143,6 +153,15 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
+                //------------Stage 2--------------
+                case "GAS_2_1":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
+                    isToolSwitchOn = false;
+                    selectedObject.SendMessage("Fire", isToolSwitchOn);
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
             }
             selectedObject = null;
         }
@@ -155,17 +174,24 @@ public class MouseController : MonoBehaviour
             parentEmpty.transform.position = mouseWorldPosition;
         }        
 
+        //使用物件
         if (Input.GetMouseButtonDown(1))
         {
             if (selectedObject)
             {
                 switch (selectedObject.name)
                 {
+                    //------------Stage 1--------------
                     case "hammer":  //attach hammer動畫
                         if (!selectedObject.GetComponent<MotionHammer>())
                             selectedObject.AddComponent<MotionHammer>();
                         break;
                     case "GAS":
+                        isToolSwitchOn = !isToolSwitchOn;
+                        selectedObject.SendMessage("Fire", isToolSwitchOn);
+                        break;
+                    //------------Stage 2--------------
+                    case "GAS_2_1":
                         isToolSwitchOn = !isToolSwitchOn;
                         selectedObject.SendMessage("Fire", isToolSwitchOn);
                         break;

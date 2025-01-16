@@ -4,18 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-[System.Serializable]
-public struct textMapping
-{
-    public string chapter;
-    [TextArea(3, 5)] public string content;
-}
-
 //  管理提示板、角色
 public class HintManager : MonoBehaviour
 {
     [Tooltip("提示板")] [SerializeField] GameObject hintPanel;
-    [Tooltip("提示訊息")] [SerializeField] textMapping[] tipsContent;
+    [Tooltip("提示訊息")] [SerializeField] TipsData tipsContent;
     [SerializeField] Text hintText;
     [Tooltip("縮小按鈕")] [SerializeField] GameObject minimizeButton;
     [Tooltip("結束按鈕")] [SerializeField] GameObject nextButton;
@@ -39,7 +32,7 @@ public class HintManager : MonoBehaviour
     {
         hintPanel.SetActive(true);
 
-        textMapping t = Array.Find(tipsContent, tip => tip.chapter == chapterName);
+        TextMapping t = Array.Find(tipsContent.tipsContent, tip => tip.chapter == chapterName);
         if (t.chapter == null)
         {
             Debug.LogWarning("沒找到這提示編號： " + chapterName);
