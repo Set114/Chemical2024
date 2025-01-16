@@ -35,21 +35,29 @@ public class LiquidController : MonoBehaviour
     private float pourOutSpeed;                                 // 目前倒出速度
 
     [Tooltip("篩選注入液體")]
-    [SerializeField] private string injectFilter = "";
+    public string injectFilter = "";
     [Tooltip("無限液體")]
     [SerializeField] private bool isUnlimited = false;
     private bool isFull = false;
+    private bool isReach = false;
     [Space]
+
+    [Tooltip("達成指定比例")]
+    public float targerRatio = 0f;
+
     [Tooltip("注入時觸發")]
     [SerializeField] private UnityEvent _whenInject;
     [Tooltip("倒出時觸發")]
     [SerializeField] private UnityEvent _whenPourOut;
     [Tooltip("注滿時觸發")]
     [SerializeField] private UnityEvent _whenFull;
+    [Tooltip("達成指定比例時觸發")]
+    [SerializeField] private UnityEvent _whenReachTargerRatio;
 
     public UnityEvent WhenInject => _whenInject;
     public UnityEvent WhenPourOut => _whenPourOut;
     public UnityEvent WhenFull => _whenFull;
+    public UnityEvent WhenReachTargerRatio => _whenReachTargerRatio;
 
     // Start is called before the first frame update
     void Start()
@@ -156,6 +164,16 @@ public class LiquidController : MonoBehaviour
     //注入液體
     public void InjectLiquid(string pourInto, float speed)
     {
+        if (targerRatio > 0f && !isReach)
+        {
+            if (ratio >= targerRatio)
+            {
+                _whenReachTargerRatio.Invoke();
+                isReach = true;
+            }
+        }
+
+
         if (isFull)
             return;
         //判斷是否指定注入液體

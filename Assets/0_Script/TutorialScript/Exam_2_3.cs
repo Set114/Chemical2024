@@ -1,10 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Exam_2_3 : MonoBehaviour
 {
+    [Header("實驗道具")]
+    [Tooltip("試管")]
+    [SerializeField] private GameObject testTube;
+    [Tooltip("試管架位置")]
+    [SerializeField] private Transform testTubePoint;
+    [Tooltip("盤子內的碳粉")]
+    [SerializeField] private GameObject tonerPowder;
+    [Tooltip("盤子內的氧化銅粉")]
+    [SerializeField] private GameObject copperOxidePowder;
+    [Tooltip("碳粉效果")]
+    [SerializeField] private GameObject particleSystem_toner;
+    [Tooltip("氧化銅粉效果")]
+    [SerializeField] private GameObject particleSystem_copperOxide;
+    [Tooltip("酒精燈蓋子")]
+    [SerializeField] private Animator cap;
+    [Tooltip("酒精燈火焰")]
+    [SerializeField] private GameObject fire;
 
+
+    [Header("質量設定")]
+    [Tooltip("磅秤文字")]
+    [SerializeField] Text weightText;
+    [Tooltip("磅秤目前數值")]
+    [SerializeField] private float scaleVale = 0f;
+    [Tooltip("碳粉重量")]
+    [SerializeField] private float weight_toner = 50f;
+    [Tooltip("氧化銅粉重量")]
+    [SerializeField] private float weight_copperOxide = 50f;
+    [Tooltip("反應後的重量")]
+    [SerializeField] private float weight_finsh = 80f;
+
+    [Header("UI")]
+    [Tooltip("質量文字")]
+    [SerializeField] private Text[] massTexts;
+
+    [Tooltip("反應時間")]
+    [SerializeField] private float reactionTime = 5f;
+    private float timer = 0f;
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -21,27 +59,139 @@ public class Exam_2_3 : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
 
         hintManager.gameObject.SetActive(true);
-        hintManager.SwitchStep("E2_2_1");
+        hintManager.SwitchStep("E2_3_1");
+        weightText.text = "0g";
     }
 
     private void Update()
     {
         switch (Status)
         {
-            case 0:
+            case 0://待粉末裝滿
+                break;
+            case 1://待點燃酒精燈
+                break;
+            case 2://待試管加熱完成
+                break;
+            case 3://待試管放置於架上
+                break;
+            case 4://回答第一題
+                break;
+            case 5://回答第二題
+                break;
+            case 6://回答第三題
                 break;
         }
     }
-
 
     void CloseHint()    //關閉提示視窗
     {
 
     }
 
+    public void ReactionStay(GameObject sender)
+    {
+        {
+            switch (Status)
+            {
+                case 2://試管加熱
+                    if (sender.name == "TestTube_Mixed_2-6")
+                    {
+                        timer += Time.deltaTime;
+                        if (timer >= reactionTime)
+                        {
+                            testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
+                            hintManager.SwitchStep("E2_3_5");
+                            timer = 0f;
+                            Status++;
+                        }
+                    }
+                    break;
+                case 3://加熱完的試管放置於架上
+                    if (sender.name == "TestTube_Mixed_2-6_Clamp")
+                    {
+                        testTube.tag = "Untagged";
+                        testTube.transform.SetParent(testTubePoint);
+                        testTube.transform.localPosition = new Vector3(0f, 0f, 0f);
+                        testTube.transform.localRotation = Quaternion.identity;
+                        hintManager.SwitchStep("E2_3_5");
+
+                        //記錄反應後重量
+                        scaleVale = weight_finsh;
+                        weightText.text = scaleVale.ToString("0") + "g";
+                        massTexts[1].text = scaleVale.ToString("0") + "g";
+                        Status++;
+
+                    }
+                    break;
+            }
+        }
+    }
+
+    //  液體裝滿時通知
+    public void LiquidFull(GameObject obj)
+    {
+        switch (obj.name)
+        {
+            case "TestTube_Empty_2-6":
+                if (Status == 0)
+                {
+                    //將試管倒入篩選改為氧化銅粉
+                    testTube.GetComponent<LiquidController>().injectFilter = "CopperOxide_2-6";
+                    testTube.name = "TestTube_Toner_2-6";
+                    tonerPowder.SetActive(false);
+                    particleSystem_toner.SetActive(false);
+                    scaleVale = weight_toner;
+                    weightText.text = scaleVale.ToString("0") + "g";
+                }
+                break;
+            case "TestTube_Toner_2-6":
+                if (Status == 0)
+                {
+                    testTube.GetComponent<CollisionDetection>().targetName = "Alcohol Lamp Flame";
+                    testTube.name = "TestTube_Mixed_2-6";
+                    testTube.tag = "TweezersClamp";
+                    copperOxidePowder.SetActive(false);
+                    particleSystem_copperOxide.SetActive(false);
+                    scaleVale = weight_toner + weight_copperOxide;
+                    weightText.text = scaleVale.ToString("0") + "g";
+                    //記錄反應前重量
+                    massTexts[0].text = scaleVale.ToString("0") + "g";
+                    hintManager.SwitchStep("E2_3_2");
+                    Status++;
+                }
+                break;
+        }
+    }
+
+    public void OnAlcoholLampTouched()
+    {
+        if (Status == 1)
+        {
+            audioManager.PlayVoice("W_AlcoholLamp");
+            cap.SetBool("cover", true);
+            fire.SetActive(true);
+
+            hintManager.SwitchStep("E2_3_4");
+            Status++;
+        }
+    }
+
     //答題完畢
     public void FinishExam()
     {
-        levelObjManager.LevelClear(0);
+        switch (Status)
+        {
+            case 4://回答第一題
+                questionManager.ShowExam(2, gameObject);
+                break;
+            case 5://回答第二題
+                questionManager.ShowExam(3, gameObject);
+                break;
+            case 6://回答第三題
+                questionManager.ShowExam(4, gameObject);
+                break;
+        }
+        levelObjManager.LevelClear(2);
     }
 }
