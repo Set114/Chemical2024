@@ -7,46 +7,9 @@ using TMPro;
 //  負責管理題目介面
 public class QuestionManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct UIDailog  //對話框架構
-    {
-        public string title;    //標題文字
-        [TextArea(3, 5)]
-        public string question; //內容文字
-        [TextArea(3, 5)]
-        public string warning;  //警告訊息
-        public string voiceName;  //對應語音
-
-        public UIDailog(string Title, string Question, string Warning, string VoiceName)
-        {
-            title = Title;
-            question = Question;
-            warning = Warning;
-            voiceName = VoiceName;
-        }
-    }
-
-    [System.Serializable]
-    public struct QuestionDailog  //問答對話框架構
-    {
-        [TextArea(3, 5)]
-        public string question;    //題目文字
-        public string voiceQuestionName;  //對應語音
-        [TextArea(3, 5)]
-        public string answer;    //答案文字
-        public string voiceAnswerName;  //對應語音
-        [TextArea(3, 5)]
-        public string answer0Text;  //答案1的內容文字
-        public string user0Name;    //答案1的提出者
-        [TextArea(3, 5)]
-        public string answer1Text;  //答案2的內容文字
-        public string user1Name;    //答案2的提出者
-        public int answerNumber;    //正確答案        
-    }
-
     [Header("章節起始UI")]
-    [Tooltip("章節起始介面")] [SerializeField] GameObject mainCanvas;    
-    [Tooltip("內容文字")] [SerializeField] UIDailog[] dialogContent;     
+    [Tooltip("章節起始介面")] [SerializeField] GameObject mainCanvas;
+    [Tooltip("內容文字")] [SerializeField] DialogData dialogContent;
     [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_M_Title, UI_M_Question, UI_M_Warning;
     [Tooltip("警告訊息圖片")] [SerializeField] GameObject Image_Warning;
     [Header("提問UI")]
@@ -55,7 +18,7 @@ public class QuestionManager : MonoBehaviour
     [Tooltip("答案介面")] [SerializeField] GameObject AnswerCanvas;
     [Tooltip("正確標記")] [SerializeField] GameObject MarkCorrect;
     [Tooltip("錯誤標記")] [SerializeField] GameObject MarkWrong;
-    [Tooltip("內容文字")] [SerializeField] QuestionDailog[] questionContent;
+    [Tooltip("內容文字")] [SerializeField] QuestionData questionContent;
     [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_Q_Question, UI_Q_Answer, UI_Q_Button01, UI_Q_Button02;
     [Tooltip("頭像圖片")][SerializeField] Sprite[] userIcons;
     [Tooltip("答案提出者頭像")][SerializeField] GameObject userIcon0, userIcon1;
@@ -94,10 +57,10 @@ public class QuestionManager : MonoBehaviour
         mainCanvas.SetActive(true);
         Image_Warning.SetActive(false);
 
-        UI_M_Title.text = dialogContent[currentIndex].title;
-        UI_M_Question.text = dialogContent[currentIndex].question;
-        UI_M_Warning.text = dialogContent[currentIndex].warning;
-        audioManager.PlayVoice(dialogContent[currentIndex].voiceName);
+        UI_M_Title.text = dialogContent.dialogContent[currentIndex].title;
+        UI_M_Question.text = dialogContent.dialogContent[currentIndex].question;
+        UI_M_Warning.text = dialogContent.dialogContent[currentIndex].warning;
+        audioManager.PlayVoice(dialogContent.dialogContent[currentIndex].voiceName);
         Image_Warning.SetActive(UI_M_Warning.text != "");        
     }
 
@@ -112,19 +75,19 @@ public class QuestionManager : MonoBehaviour
         AnswerCanvas.SetActive(false);
         MarkCorrect.SetActive(false);
         MarkWrong.SetActive(false);
-        UI_Q_Question.text = questionContent[currentIndex].question;
-        UI_Q_Button01.text = questionContent[currentIndex].answer0Text;
-        UI_Q_Button02.text = questionContent[currentIndex].answer1Text;
-        UI_Q_Answer.text = questionContent[currentIndex].answer;
+        UI_Q_Question.text = questionContent.questionContent[currentIndex].question;
+        UI_Q_Button01.text = questionContent.questionContent[currentIndex].answer0Text;
+        UI_Q_Button02.text = questionContent.questionContent[currentIndex].answer1Text;
+        UI_Q_Answer.text = questionContent.questionContent[currentIndex].answer;
 
         //設定答案提出者頭像
         userIcon0.SetActive(false);
         userIcon1.SetActive(false);
-        if (questionContent[currentIndex].user0Name != "")
+        if (questionContent.questionContent[currentIndex].user0Name != "")
         {
             foreach (Sprite userIcon in userIcons)
             {
-                if (userIcon.name == questionContent[currentIndex].user0Name)
+                if (userIcon.name == questionContent.questionContent[currentIndex].user0Name)
                 {
                     userIconImage0.sprite = userIcon;
                     userIcon0.SetActive(true);
@@ -132,11 +95,11 @@ public class QuestionManager : MonoBehaviour
             }
         }
 
-        if (questionContent[currentIndex].user1Name != "")
+        if (questionContent.questionContent[currentIndex].user1Name != "")
         {
             foreach (Sprite userIcon in userIcons)
             {
-                if (userIcon.name == questionContent[currentIndex].user1Name)
+                if (userIcon.name == questionContent.questionContent[currentIndex].user1Name)
                 {
                     userIconImage1.sprite = userIcon;
                     userIcon1.SetActive(true);
@@ -144,7 +107,7 @@ public class QuestionManager : MonoBehaviour
             }
         }
 
-        audioManager.PlayVoice(questionContent[currentIndex].voiceQuestionName);
+        audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceQuestionName);
         Image_Warning.SetActive(UI_Q_Button02.text != "");
 
         isAnswer = false;
@@ -156,7 +119,7 @@ public class QuestionManager : MonoBehaviour
         {
             isAnswer = true;
             //答對先撥音效
-            if (questionContent[currentIndex].answerNumber == answerNumber)
+            if (questionContent.questionContent[currentIndex].answerNumber == answerNumber)
             {
                 audioManager.Stop();
                 audioManager.PlaySound(new SoundMessage(2, null, this.gameObject));
@@ -166,7 +129,7 @@ public class QuestionManager : MonoBehaviour
                 ExamCanvas.SetActive(false);
                 AnswerCanvas.SetActive(true);
                 MarkWrong.SetActive(true);
-                audioManager.PlayVoice(questionContent[currentIndex].voiceAnswerName);
+                audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceAnswerName);
             }
         }
     }
@@ -177,7 +140,7 @@ public class QuestionManager : MonoBehaviour
         ExamCanvas.SetActive(false);
         AnswerCanvas.SetActive(true);
         MarkCorrect.SetActive(true);
-        audioManager.PlayVoice(questionContent[currentIndex].voiceAnswerName);
+        audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceAnswerName);
     }
 
     //結束該問題
