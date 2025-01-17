@@ -8,6 +8,12 @@ public class Exam_2_3 : MonoBehaviour
     [Header("實驗道具")]
     [Tooltip("試管")]
     [SerializeField] private GameObject testTube;
+    [Tooltip("試管內粉末")]
+    [SerializeField] private LiquidController testTubePowder;
+    [Tooltip("試管內粉末顏色")]
+    private Color testTubePowderColor;
+    [Tooltip("試管內粉末反應後顏色")]
+    [SerializeField] private Color testTubePowderColor_final;
     [Tooltip("試管架位置")]
     [SerializeField] private Transform testTubePoint;
     [Tooltip("盤子內的碳粉")]
@@ -42,6 +48,8 @@ public class Exam_2_3 : MonoBehaviour
 
     [Tooltip("反應時間")]
     [SerializeField] private float reactionTime = 5f;
+    [Tooltip("答題延遲")]
+    [SerializeField] private float answerDelay = 3f;
     private float timer = 0f;
     private int Status = 0;
 
@@ -61,6 +69,7 @@ public class Exam_2_3 : MonoBehaviour
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
+        testTubePowderColor = testTubePowder.liquidColor;
     }
 
     private void Update()
@@ -75,11 +84,51 @@ public class Exam_2_3 : MonoBehaviour
                 break;
             case 3://待試管放置於架上
                 break;
-            case 4://回答第一題
+            case 4://試管放置於架上
+                timer += Time.deltaTime;
+                if (timer >= answerDelay)
+                {
+                    levelObjManager.loading_sign.SetActive(false);
+                    questionManager.ShowExam(2, gameObject);
+                    timer = 0f;
+                    Status++;
+                }
                 break;
-            case 5://回答第二題
+            case 5://回答第一題
                 break;
-            case 6://回答第三題
+            case 6://答完第一題
+                timer += Time.deltaTime;
+                if (timer >= answerDelay)
+                {
+                    levelObjManager.loading_sign.SetActive(false);
+                    questionManager.ShowExam(3, gameObject);
+                    timer = 0f;
+                    Status++;
+                }
+                break;
+            case 7://回答第二題
+                break;
+            case 8://答完第二題
+                timer += Time.deltaTime;
+                if (timer >= answerDelay)
+                {
+                    levelObjManager.loading_sign.SetActive(false);
+                    questionManager.ShowExam(4, gameObject);
+                    timer = 0f;
+                    Status++;
+                }
+                break;
+            case 9://回答第三題
+                break;
+            case 10://答完第三題
+                timer += Time.deltaTime;
+                if (timer >= answerDelay)
+                {
+                    levelObjManager.loading_sign.SetActive(false);
+                    levelObjManager.LevelClear(2);
+                    timer = 0f;
+                    Status++;
+                }
                 break;
         }
     }
@@ -95,9 +144,17 @@ public class Exam_2_3 : MonoBehaviour
             switch (Status)
             {
                 case 2://試管加熱
-                    if (sender.name == "TestTube_Mixed_2-6")
+                    if (sender.name == "TestTube_Mixed_2-6_Clamp")
                     {
                         timer += Time.deltaTime;
+                        //計算比例 0% > 100%
+                        float processPercent = timer / reactionTime;
+
+                        // 使用 Lerp 混合顏色
+                        testTubePowderColor = Color.Lerp(testTubePowderColor, testTubePowderColor_final, processPercent);
+                        // 更新物件的顏色
+                        testTubePowder.liquidColor = testTubePowderColor;
+
                         if (timer >= reactionTime)
                         {
                             testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
@@ -108,20 +165,19 @@ public class Exam_2_3 : MonoBehaviour
                     }
                     break;
                 case 3://加熱完的試管放置於架上
-                    if (sender.name == "TestTube_Mixed_2-6_Clamp")
+                    if (sender.name == "TestTube_Mixed_2-6")
                     {
                         testTube.tag = "Untagged";
                         testTube.transform.SetParent(testTubePoint);
                         testTube.transform.localPosition = new Vector3(0f, 0f, 0f);
                         testTube.transform.localRotation = Quaternion.identity;
-                        hintManager.SwitchStep("E2_3_5");
 
                         //記錄反應後重量
                         scaleVale = weight_finsh;
                         weightText.text = scaleVale.ToString("0") + "g";
                         massTexts[1].text = scaleVale.ToString("0") + "g";
+                        levelObjManager.loading_sign.SetActive(true);
                         Status++;
-
                     }
                     break;
             }
@@ -180,18 +236,7 @@ public class Exam_2_3 : MonoBehaviour
     //答題完畢
     public void FinishExam()
     {
-        switch (Status)
-        {
-            case 4://回答第一題
-                questionManager.ShowExam(2, gameObject);
-                break;
-            case 5://回答第二題
-                questionManager.ShowExam(3, gameObject);
-                break;
-            case 6://回答第三題
-                questionManager.ShowExam(4, gameObject);
-                break;
-        }
-        levelObjManager.LevelClear(2);
+        levelObjManager.loading_sign.SetActive(true);
+        Status++;
     }
 }

@@ -4,50 +4,52 @@ using UnityEngine;
 
 
 [System.Serializable]
-public struct TextMapping  //´£¥Ü®Ø¬[ºc
+public struct TextMapping  //ï¿½ï¿½ï¿½Ü®Ø¬[ï¿½c
 {
     public string chapter;
     [TextArea(3, 5)] public string content;
 }
 
 [System.Serializable]
-public struct DialogMapping  //¹ï¸Ü®Ø¬[ºc
+public struct DialogMapping  //ï¿½ï¿½Ü®Ø¬[ï¿½c
 {
-    public string title;    //¼ĞÃD¤å¦r
+    public string title;    //ï¿½ï¿½ï¿½Dï¿½ï¿½r
     [TextArea(3, 5)]
-    public string question; //¤º®e¤å¦r
+    public string question; //ï¿½ï¿½ï¿½eï¿½ï¿½r
     [TextArea(3, 5)]
-    public string warning;  //Äµ§i°T®§
-    public string voiceName;  //¹ïÀ³»y­µ
+    public string warning;  //Äµï¿½iï¿½Tï¿½ï¿½
+    public string voiceName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
 }
 
 [System.Serializable]
-public struct QuestionMapping  //°İµª¹ï¸Ü®Ø¬[ºc
+public struct QuestionMapping  //ï¿½İµï¿½ï¿½ï¿½Ü®Ø¬[ï¿½c
 {
     [TextArea(3, 5)]
-    public string question;    //ÃD¥Ø¤å¦r
-    public string voiceQuestionName;  //¹ïÀ³»y­µ
+    public string question;    //ï¿½Dï¿½Ø¤ï¿½r
+    public string voiceQuestionName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
     [TextArea(3, 5)]
-    public string answer;    //µª®×¤å¦r
-    public string voiceAnswerName;  //¹ïÀ³»y­µ
+    public string answer;    //ï¿½ï¿½ï¿½×¤ï¿½r
+    public string voiceAnswerName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
     [TextArea(3, 5)]
-    public string answer0Text;  //µª®×1ªº¤º®e¤å¦r
-    public string user0Name;    //µª®×1ªº´£¥XªÌ
+    public string answer0Text;  //ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½r
+    public Sprite answer0Image; //ç­”æ¡ˆ1åœ–ç‰‡
+    public Sprite user0Icon;    //ç­”æ¡ˆæå‡ºè€…1é ­åƒ
     [TextArea(3, 5)]
-    public string answer1Text;  //µª®×2ªº¤º®e¤å¦r
-    public string user1Name;    //µª®×2ªº´£¥XªÌ
-    public int answerNumber;    //¥¿½Tµª®×        
+    public string answer1Text;  //ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½r
+    public Sprite answer1Image; //ç­”æ¡ˆ2åœ–ç‰‡
+    public Sprite user1Icon;    //ç­”æ¡ˆæå‡ºè€…2é ­åƒ
+    public int answerNumber;    //ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½        
 }
 
 [System.Serializable]
-public struct UIDailog  //¹ï¸Ü®Ø¬[ºc
+public struct UIDailog  //ï¿½ï¿½Ü®Ø¬[ï¿½c
 {
-    public string title;    //¼ĞÃD¤å¦r
+    public string title;    //ï¿½ï¿½ï¿½Dï¿½ï¿½r
     [TextArea(3, 5)]
-    public string question; //¤º®e¤å¦r
+    public string question; //ï¿½ï¿½ï¿½eï¿½ï¿½r
     [TextArea(3, 5)]
-    public string warning;  //Äµ§i°T®§
-    public string voiceName;  //¹ïÀ³»y­µ
+    public string warning;  //Äµï¿½iï¿½Tï¿½ï¿½
+    public string voiceName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
 
     public UIDailog(string Title, string Question, string Warning, string VoiceName)
     {
@@ -59,19 +61,19 @@ public struct UIDailog  //¹ï¸Ü®Ø¬[ºc
 }
 
 [System.Serializable]
-public struct QuestionDailog  //°İµª¹ï¸Ü®Ø¬[ºc
+public struct QuestionDailog  //ï¿½İµï¿½ï¿½ï¿½Ü®Ø¬[ï¿½c
 {
     [TextArea(3, 5)]
-    public string question;    //ÃD¥Ø¤å¦r
-    public string voiceQuestionName;  //¹ïÀ³»y­µ
+    public string question;    //ï¿½Dï¿½Ø¤ï¿½r
+    public string voiceQuestionName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
     [TextArea(3, 5)]
-    public string answer;    //µª®×¤å¦r
-    public string voiceAnswerName;  //¹ïÀ³»y­µ
+    public string answer;    //ï¿½ï¿½ï¿½×¤ï¿½r
+    public string voiceAnswerName;  //ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
     [TextArea(3, 5)]
-    public string answer0Text;  //µª®×1ªº¤º®e¤å¦r
-    public string user0Name;    //µª®×1ªº´£¥XªÌ
+    public string answer0Text;  //ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½r
+    public string user0Name;    //ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½
     [TextArea(3, 5)]
-    public string answer1Text;  //µª®×2ªº¤º®e¤å¦r
-    public string user1Name;    //µª®×2ªº´£¥XªÌ
-    public int answerNumber;    //¥¿½Tµª®×        
+    public string answer1Text;  //ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½r
+    public string user1Name;    //ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½
+    public int answerNumber;    //ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½        
 }

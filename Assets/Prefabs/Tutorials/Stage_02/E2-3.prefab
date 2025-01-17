@@ -333,6 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testTube: {fileID: 6838465980632390165}
+  testTubePowder: {fileID: 6838465980632390162}
+  testTubePowderColor_final: {r: 0.603, g: 0.21448395, b: 0.07679717, a: 1}
   testTubePoint: {fileID: 6838465979315273446}
   tonerPowder: {fileID: 6838465980946547664}
   copperOxidePowder: {fileID: 6838465979052786834}
@@ -349,6 +351,7 @@ MonoBehaviour:
   - {fileID: 6838465979273992221}
   - {fileID: 6838465980533795833}
   reactionTime: 3
+  answerDelay: 3
 --- !u!1 &257893075091876951
 GameObject:
   m_ObjectHideFlags: 0
@@ -25899,8 +25902,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12, y: 0.1, z: 0.01}
-  m_Center: {x: 0.01, y: -0.06, z: 0}
+  m_Size: {x: 0.13, y: 0.05, z: 0.01}
+  m_Center: {x: 0.012, y: -0.07, z: 0}
 --- !u!1 &6838465979357183482
 GameObject:
   m_ObjectHideFlags: 0
@@ -26342,7 +26345,7 @@ MonoBehaviour:
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
   pourOutAngle: 0
-  maxPourOutSpeed: 20
+  maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
   targerRatio: 0
@@ -36579,7 +36582,7 @@ MonoBehaviour:
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
   pourOutAngle: 0
-  maxPourOutSpeed: 20
+  maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
   targerRatio: 0

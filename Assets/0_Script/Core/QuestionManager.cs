@@ -20,7 +20,7 @@ public class QuestionManager : MonoBehaviour
     [Tooltip("錯誤標記")] [SerializeField] GameObject MarkWrong;
     [Tooltip("內容文字")] [SerializeField] QuestionData questionContent;
     [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_Q_Question, UI_Q_Answer, UI_Q_Button01, UI_Q_Button02;
-    [Tooltip("頭像圖片")][SerializeField] Sprite[] userIcons;
+    [Tooltip("答案圖片")][SerializeField] Image UI_Q_ButtonImage01, UI_Q_ButtonImage02;
     [Tooltip("答案提出者頭像")][SerializeField] GameObject userIcon0, userIcon1;
     [Tooltip("答案提出者頭像圖片")][SerializeField] Image userIconImage0, userIconImage1;
     [Header("結束UI")]
@@ -80,31 +80,35 @@ public class QuestionManager : MonoBehaviour
         UI_Q_Button02.text = questionContent.questionContent[currentIndex].answer1Text;
         UI_Q_Answer.text = questionContent.questionContent[currentIndex].answer;
 
+        //設定答案圖片
+        UI_Q_ButtonImage01.gameObject.SetActive(false);
+        UI_Q_ButtonImage02.gameObject.SetActive(false);
+        Sprite image01 = questionContent.questionContent[currentIndex].answer0Image;
+        if (image01)
+        {
+            UI_Q_ButtonImage01.sprite = image01;
+            UI_Q_ButtonImage01.gameObject.SetActive(true);
+        }
+        Sprite image02 = questionContent.questionContent[currentIndex].answer1Image;
+        if (image02)
+        {
+            UI_Q_ButtonImage02.sprite = image02;
+            UI_Q_ButtonImage02.gameObject.SetActive(true);
+        }
         //設定答案提出者頭像
         userIcon0.SetActive(false);
         userIcon1.SetActive(false);
-        if (questionContent.questionContent[currentIndex].user0Name != "")
+        Sprite icon0 = questionContent.questionContent[currentIndex].user0Icon;
+        if (icon0)
         {
-            foreach (Sprite userIcon in userIcons)
-            {
-                if (userIcon.name == questionContent.questionContent[currentIndex].user0Name)
-                {
-                    userIconImage0.sprite = userIcon;
-                    userIcon0.SetActive(true);
-                }
-            }
+            userIconImage0.sprite = icon0;
+            userIcon0.SetActive(true);
         }
-
-        if (questionContent.questionContent[currentIndex].user1Name != "")
+        Sprite icon1 = questionContent.questionContent[currentIndex].user1Icon;
+        if (icon1)
         {
-            foreach (Sprite userIcon in userIcons)
-            {
-                if (userIcon.name == questionContent.questionContent[currentIndex].user1Name)
-                {
-                    userIconImage1.sprite = userIcon;
-                    userIcon1.SetActive(true);
-                }
-            }
+            userIconImage1.sprite = icon1;
+            userIcon1.SetActive(true);
         }
 
         audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceQuestionName);

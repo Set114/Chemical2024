@@ -10,7 +10,7 @@ public class LevelObjManager : MonoBehaviour
     private GameObject currentScene;
 
     [Tooltip("LoadingSign")]
-    [SerializeField] GameObject loading_sign;
+    public GameObject loading_sign;
 
     //---system
     private GameManager gm;
@@ -67,9 +67,11 @@ public class LevelObjManager : MonoBehaviour
                 StartCoroutine(ShowFinishDialog());
                 break;
             case 1: //教學結束
+                loading_sign.SetActive(false);
                 questionManager.ShowFinishLearnUI();
                 break;
             case 2: //測驗結束
+                loading_sign.SetActive(false);
                 questionManager.ShowFinishExamUI();
                 break;
         }

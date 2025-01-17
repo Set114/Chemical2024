@@ -59,7 +59,6 @@ public class Exam_2_1 : MonoBehaviour
                     ragMesh.material = wetRagMaterial;
                     rag.name = "Rag_Wet_2-4";
                     rag.GetComponent<CollisionDetection>().targetName = "OilStain";
-                    hintManager.SwitchStep("E2_1_2");
                 }
                 break;
         }
@@ -121,6 +120,7 @@ public class Exam_2_1 : MonoBehaviour
     //答題完畢
     public void FinishExam()
     {
+        hintManager.SwitchStep("E2_1_2");
         Status++;
     }
 }
