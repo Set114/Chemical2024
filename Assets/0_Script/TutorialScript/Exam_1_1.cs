@@ -27,6 +27,8 @@ public class Exam_1_1 : MonoBehaviour
     [Tooltip("試紙反應時間")]
     [SerializeField] private float paperReactionTime = 6f;
 
+    [Tooltip("答題延遲")]
+    [SerializeField] private float answerDelay = 3f;
     private float timer = 0.0f;
     private bool glassWet = false;
     private int examCount = 0;                  //作題進度
@@ -140,7 +142,7 @@ public class Exam_1_1 : MonoBehaviour
 
     public void ShowExam(int index)
     {
-        questionManager.ShowExam(index, this.gameObject);
+        questionManager.ShowExamWithDelay(index, answerDelay, gameObject);
         foreach(GameObject questionMark in questionMarks)
         {
             questionMark.SetActive(false);

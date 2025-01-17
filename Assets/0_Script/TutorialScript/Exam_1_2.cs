@@ -14,20 +14,18 @@ public class Exam_1_2 : MonoBehaviour
 
     float timer;                    //計時器
     float progressRatio = 0.0f;     //進度比例
-
+    [Tooltip("答題延遲")]
+    [SerializeField] private float answerDelay = 3f;
     int Status = 0;
 
     LevelObjManager levelObjManager;
-    HintManager hintManager;            //管理提示板
-    MoleculaDisplay moleculaManager;    //管理分子螢幕
+
     QuestionManager questionManager; //管理題目介面
     AudioManager audioManager;          //音樂管理
     // Start is called before the first frame update
     void OnEnable()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
-        hintManager = FindObjectOfType<HintManager>();
-        moleculaManager = FindObjectOfType<MoleculaDisplay>();
         questionManager = FindObjectOfType<QuestionManager>();
         audioManager = FindObjectOfType<AudioManager>();
 
@@ -89,11 +87,11 @@ public class Exam_1_2 : MonoBehaviour
         switch (Status)
         {
             case 1:
-                questionManager.ShowExam(3, this.gameObject);
+                questionManager.ShowExamWithDelay(3, answerDelay, gameObject);
                 QuestionMark_04.SetActive(false);
                 break;
             case 3:
-                questionManager.ShowExam(4, this.gameObject);
+                questionManager.ShowExamWithDelay(4, answerDelay, gameObject);
                 QuestionMark_05.SetActive(false);
                 break;
         }

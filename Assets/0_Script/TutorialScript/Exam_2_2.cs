@@ -22,7 +22,8 @@ public class Exam_2_2 : MonoBehaviour
     [SerializeField] private float bakingSodaPourSpeed = 1f;
     [Tooltip("小蘇打溶解速度")]
     [SerializeField] private float bakingSodaDissolveSpeed = 1f;
-
+    [Tooltip("答題延遲")]
+    [SerializeField] private float answerDelay = 3f;
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -60,7 +61,7 @@ public class Exam_2_2 : MonoBehaviour
                 if (size <= 0)
                 {
                     //跳出題目
-                    questionManager.ShowExam(1, gameObject);
+                    questionManager.ShowExamWithDelay(1, answerDelay, gameObject);
                     Status++;
                 }
                 break;

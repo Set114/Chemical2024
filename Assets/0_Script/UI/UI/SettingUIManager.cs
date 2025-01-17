@@ -29,6 +29,7 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Sprite testMode_img;
     
     [Header("Text")]
+    [SerializeField] Text stage_txt;
     [SerializeField] Text studentname_txt;
     [SerializeField] Text studentid_txt;
 

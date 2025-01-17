@@ -116,6 +116,22 @@ public class QuestionManager : MonoBehaviour
 
         isAnswer = false;
     }
+
+    //延遲顯示題目
+    public void ShowExamWithDelay(int index,float delay, GameObject Sender)
+    {
+        levelManager.loading_sign.SetActive(true);
+        StartCoroutine(DelayedFunction(index, delay, Sender));
+    }
+
+    IEnumerator DelayedFunction(int index, float delay, GameObject Sender)
+    {
+        // 等待指定的秒數
+        yield return new WaitForSeconds(delay);
+        ShowExam(index, Sender);
+        levelManager.loading_sign.SetActive(false);
+    }
+
     //當使用者點選回答按鈕時
     public void AnswerSelect(int answerNumber)
     {

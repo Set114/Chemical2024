@@ -84,51 +84,11 @@ public class Exam_2_3 : MonoBehaviour
                 break;
             case 3://待試管放置於架上
                 break;
-            case 4://試管放置於架上
-                timer += Time.deltaTime;
-                if (timer >= answerDelay)
-                {
-                    levelObjManager.loading_sign.SetActive(false);
-                    questionManager.ShowExam(2, gameObject);
-                    timer = 0f;
-                    Status++;
-                }
+            case 4://回答第一題
                 break;
-            case 5://回答第一題
+            case 5://回答第二題
                 break;
-            case 6://答完第一題
-                timer += Time.deltaTime;
-                if (timer >= answerDelay)
-                {
-                    levelObjManager.loading_sign.SetActive(false);
-                    questionManager.ShowExam(3, gameObject);
-                    timer = 0f;
-                    Status++;
-                }
-                break;
-            case 7://回答第二題
-                break;
-            case 8://答完第二題
-                timer += Time.deltaTime;
-                if (timer >= answerDelay)
-                {
-                    levelObjManager.loading_sign.SetActive(false);
-                    questionManager.ShowExam(4, gameObject);
-                    timer = 0f;
-                    Status++;
-                }
-                break;
-            case 9://回答第三題
-                break;
-            case 10://答完第三題
-                timer += Time.deltaTime;
-                if (timer >= answerDelay)
-                {
-                    levelObjManager.loading_sign.SetActive(false);
-                    levelObjManager.LevelClear(2);
-                    timer = 0f;
-                    Status++;
-                }
+            case 6://回答第三題
                 break;
         }
     }
@@ -176,7 +136,8 @@ public class Exam_2_3 : MonoBehaviour
                         scaleVale = weight_finsh;
                         weightText.text = scaleVale.ToString("0") + "g";
                         massTexts[1].text = scaleVale.ToString("0") + "g";
-                        levelObjManager.loading_sign.SetActive(true);
+                        questionManager.ShowExamWithDelay(2, answerDelay, gameObject);
+
                         Status++;
                     }
                     break;
@@ -236,7 +197,19 @@ public class Exam_2_3 : MonoBehaviour
     //答題完畢
     public void FinishExam()
     {
-        levelObjManager.loading_sign.SetActive(true);
-        Status++;
+        switch (Status)
+        {
+            case 4://回答第一題
+                questionManager.ShowExamWithDelay(3, answerDelay, gameObject);
+                Status++;
+                break;
+            case 5://回答第二題
+                questionManager.ShowExamWithDelay(4, answerDelay, gameObject);
+                Status++;
+                break;
+            case 6://回答第三題
+                levelObjManager.LevelClear(2);
+                break;
+        }
     }
 }
