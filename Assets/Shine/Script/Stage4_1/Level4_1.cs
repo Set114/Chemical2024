@@ -34,6 +34,7 @@ public class Level4_1 : MonoBehaviour
     public GameObject[] Infos;
     [Header("4-1教學結束")]
     public GameObject Finish4_1;
+    public GameObject ObjTips;
     // Start is called before the first frame update
     void Awake()
     {
@@ -82,7 +83,6 @@ public class Level4_1 : MonoBehaviour
                         else {
                             if (TotalO2.Count < CObject.Length && !ClickHeaterObj) {
                                 Infos[3].SetActive(true);
-
                             }
                             else {
                                 
@@ -90,14 +90,15 @@ public class Level4_1 : MonoBehaviour
                                     {
                                         //出現語音解說3
                                         Infos[2].SetActive(true);
-                                    }
-                                    if (!ClickHeaterObj&& TotalO2.Count >= CObject.Length)
+
+                                }
+                                if (!ClickHeaterObj&& TotalO2.Count >= CObject.Length)
                                     {
                                         //出現語音解說1
                                         Infos[0].SetActive(true);
 
-                                    }
                                 }
+                            }
                         }
                         
                     }
@@ -157,6 +158,7 @@ public class Level4_1 : MonoBehaviour
         Infos[1].SetActive(false);
         Infos[2].SetActive(false);
         Infos[3].SetActive(false);
+        ObjTips.SetActive(true);
 
 
         for (int i = 0; i < TotalO2.Count; i++)
