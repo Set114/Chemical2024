@@ -141,7 +141,7 @@ public class Tutorial_2_1 : MonoBehaviour
 
                 //重量減輕
                 //currentWeight_woodPowder -= weightChangeSpeed_woodPowder * Time.deltaTime;
-                currentWeight_woodPowder = (initialWeight_woodPowder - finalWeight_woodPowder) * processPercent + finalWeight_woodPowder;
+                currentWeight_woodPowder = (initialWeight_woodPowder - finalWeight_woodPowder) * (1.0f - processPercent) + finalWeight_woodPowder;
                 //處理變色
                 color_woodPowder.a = timer_woodPowder / burningTime_woodPowder;
                 // 更新物件的顏色
@@ -189,7 +189,7 @@ public class Tutorial_2_1 : MonoBehaviour
                 //計算比例 0% > 100%
                 float processPercent = 1.0f - timer_steelWool / burningTime_steelWool;
                 //重量減輕
-                currentWeight_steelWool = (initialWeight_steelWool - finalWeight_steelWool) * processPercent + finalWeight_steelWool;
+                currentWeight_steelWool = (initialWeight_steelWool - finalWeight_steelWool) * (1.0f - processPercent) + finalWeight_steelWool;
                 //處理變色
                 steelWoolColors[1].a = timer_steelWool / burningTime_steelWool;
 
