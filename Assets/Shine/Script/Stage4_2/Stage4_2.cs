@@ -68,6 +68,8 @@ public class Stage4_2 : MonoBehaviour
         FindObjectOfType<AlcoholLamp>().Copper_L.SetTrigger("Reset");
         FindObjectOfType<AlcoholLamp>().Copper_R.SetTrigger("Reset");
         FindObjectOfType<AlcoholLamp>().Copper.SetTrigger("Reset");
+        FindObjectOfType<AlcoholLamp>().MagnesiumTime = 0;
+        FindObjectOfType<AlcoholLamp>().ZincTime = 0;
 
     }
 }
