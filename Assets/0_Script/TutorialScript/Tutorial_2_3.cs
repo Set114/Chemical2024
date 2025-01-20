@@ -69,7 +69,6 @@ public class Tutorial_2_3 : MonoBehaviour
     private float timer = 0;
     private bool firstTimeWarning = true;       // 第一次抓取危險物品的通知
     private bool bottleRotationWarning = false; //警告寶特瓶不可傾倒
-    private int fullLiquid = 0;                 //已裝滿的容器
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -108,15 +107,17 @@ public class Tutorial_2_3 : MonoBehaviour
         bottleAngle = Vector3.Angle(bottle.transform.up, Vector3.up);
         switch (Status)
         {
-            case 0: //等待兩邊的液體倒入
+            case 0: //等待寶特瓶液體倒滿
                 break;
-            case 1: //兩邊的液體已倒入，待試管放進寶特瓶內
+            case 1: //等待試管液體倒滿
                 break;
-            case 2: //待氣球套上寶特瓶
+            case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
                 break;
-            case 3: //待套上橡皮筋
+            case 3: //待氣球套上寶特瓶
                 break;
-            case 4: //待寶特瓶放上電子秤
+            case 4: //待套上橡皮筋
+                break;
+            case 5: //待寶特瓶放上電子秤
                 if (!bottleRotationWarning)
                 {
                     if (bottleAngle >= shakeThreshold * 0.5f)
@@ -127,7 +128,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     }
                 }
                 break;
-            case 5: //待寶特瓶搖晃
+            case 6: //待寶特瓶搖晃
                 // 判斷是否達到搖晃的閾值
                 if (bottleAngle >= shakeThreshold)
                 {
@@ -136,7 +137,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 6: //待反應結束
+            case 7: //待反應結束
 
                 //氣球膨脹
                 float size = balloon_inflated.transform.localScale.x;
@@ -156,13 +157,13 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 7: //待寶特瓶放上電子秤
+            case 8: //待寶特瓶放上電子秤
                 break;
-            case 8: //待拿掉氣球
+            case 9: //待拿掉氣球
                 break;
-            case 9: //待氣球放上電子秤
+            case 10: //待氣球放上電子秤
                 break;
-            case 10: //結論
+            case 11: //結論
                 break;
         }
     }
@@ -171,14 +172,14 @@ public class Tutorial_2_3 : MonoBehaviour
     {
         if (isPC)
         {
-            if (pcController.selectedObject)
+            if (pcController.selectedObject && Status != 2)
             {
                 return;
             }
         }
         switch (Status)
         {
-            case 1: //試管放進寶特瓶
+            case 2: //試管放進寶特瓶
                 if(sender.name== "TestTube_2-3")
                 {
                     sender.tag = "Untagged";
@@ -194,7 +195,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 2: //套上氣球
+            case 3: //套上氣球
                 if (sender.name == "Balloon_2-3")
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
@@ -210,7 +211,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 3: //套上橡皮筋
+            case 4: //套上橡皮筋
                 if (sender.name == "RubberBand_2-3")
                 {
                     sender.gameObject.SetActive(false);
@@ -221,7 +222,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 4: //寶特瓶放上電子秤
+            case 5: //寶特瓶放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
@@ -230,7 +231,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 7: //搖晃後放上電子秤
+            case 8: //搖晃後放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     //取得第二個數值
@@ -253,7 +254,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 9: //氣球放上電子秤
+            case 10: //氣球放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     //取得第三個數值
@@ -279,48 +280,103 @@ public class Tutorial_2_3 : MonoBehaviour
             case "WaterBottle_2-3":
                 if (Status == 0)
                 {
-                    fullLiquid++;
+                    Status++;
                 }
                 break;
             case "TestTube_2-3":
-                if (Status == 0)
+                if (Status == 1)
                 {
-                    fullLiquid++;
+                    hintManager.SwitchStep("T2_3_2");
+                    Status++;
                 }
                 break;
         }
-        if (fullLiquid == 2 && Status == 0)
-        {
-            hintManager.SwitchStep("T2_3_2");
-            Status++;
-        }
-
     }
 
-    //抓取鹽酸時觸發
-    public void OnHCIGrabbed()
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
     {
-        if (firstTimeWarning)
+        if (obj.name == "HCI_2-3" && firstTimeWarning)
         {
             audioManager.PlayVoice("W_HCI");
             firstTimeWarning = false;
         }
-    }
-    //抓取氣球時觸發
-    public void OnBalloonGrabbed()
-    {
-        if (Status == 8)
+        //該步驟如果去觸碰其他物件，給予警告語音。
+        switch (Status)
         {
-            //拿掉氣球
-            balloon.transform.SetParent(transform);
-            balloon.GetComponent<Rigidbody>().isKinematic = false;
+            case 0: //等待寶特瓶液體倒滿
+                if (obj.name != "WaterBottle_2-3" || obj.name != "SodiumCarbonate_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 1: //等待試管液體倒滿
+                if (obj.name != "TestTube_2-3" || obj.name != "HCI_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
+                if (obj.name != "WaterBottle_2-3" || obj.name != "Tweezers_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 3: //待氣球套上寶特瓶
+                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 4: //待套上橡皮筋
+                if (obj.name != "WaterBottle_2-3" || obj.name != "RubberBand_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 5: //待寶特瓶放上電子秤
+                if (obj.name != "WaterBottle_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 6: //待寶特瓶搖晃
+                if (obj.name != "WaterBottle_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 8: //待寶特瓶放上電子秤
+                if (obj.name != "WaterBottle_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 9: //待拿掉氣球
+                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                else if (obj.name == "Balloon_2-3")
+                {
+                    //拿掉氣球
+                    balloon.transform.SetParent(transform);
+                    balloon.GetComponent<Rigidbody>().isKinematic = false;
 
-            balloon_flat.SetActive(true);
-            balloon_inflated.SetActive(false);
-            rubberBand_Cap.SetActive(false);
-            scaleVale = weight_Bottle + weight_TestTube;
-            weightText.text = scaleVale.ToString("0") + "g";
-            Status++;
+                    balloon_flat.SetActive(true);
+                    balloon_inflated.SetActive(false);
+                    rubberBand_Cap.SetActive(false);
+                    scaleVale = weight_Bottle + weight_TestTube;
+                    weightText.text = scaleVale.ToString("0") + "g";
+                    Status++;
+                }
+                break;
+            case 10: //待氣球放上電子秤
+                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
         }
     }
     private void EndTheTutorial()   //完成教學

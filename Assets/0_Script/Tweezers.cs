@@ -14,22 +14,46 @@ public class Tweezers : MonoBehaviour
     private string clampingObjName;     //夾取中的物件原名稱
     private Transform clampingObjParent;//夾取中的物件的元父物件
 
+    private bool isPC;
+
     private void Start()
     {
         models[0].SetActive(true);
         models[1].SetActive(false);
+
+        //判斷平台
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        isPC = true;
+#else
+        isPC = false;
+#endif
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (isPC)
         {
-            Clamp(true);
+            if (Input.GetMouseButtonDown(1))
+            {
+                Clamp(true);
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                Clamp(false);
+            }
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else
         {
-            Clamp(false);
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Clamp(true);
+            }
+            else if (Input.GetButtonUp("Fire1"))
+            {
+                Clamp(false);
+            }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)

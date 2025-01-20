@@ -60,7 +60,6 @@ public class Tutorial_2_2 : MonoBehaviour
 
     private float timer = 0;
     private bool bottleRotationWarning = false; //警告寶特瓶不可傾倒
-    private int fullLiquid = 0;                 //已裝滿的容器
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -89,7 +88,7 @@ public class Tutorial_2_2 : MonoBehaviour
 
         hintManager.SwitchStep("T2_2_1");
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -97,13 +96,15 @@ public class Tutorial_2_2 : MonoBehaviour
         bottleAngle = Vector3.Angle(bottle.transform.up, Vector3.up);
         switch (Status)
         {
-            case 0: //等待兩邊的液體倒入
+            case 0: //等待寶特瓶液體倒滿
                 break;
-            case 1: //兩邊的液體已倒入，待試管放進寶特瓶內
+            case 1: //等待試管液體倒滿
                 break;
-            case 2: //待鎖上寶特瓶蓋後， 畫面跳轉至測量質量頁面。
+            case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
                 break;
-            case 3: //待寶特瓶放上電子秤
+            case 3: //待鎖上寶特瓶蓋後， 畫面跳轉至測量質量頁面。
+                break;
+            case 4: //待寶特瓶放上電子秤
                 if (!bottleRotationWarning)
                 {
                     if (bottleAngle >= shakeThreshold * 0.5f)
@@ -114,7 +115,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     }
                 }
                 break;
-            case 4: //待寶特瓶搖晃
+            case 5: //待寶特瓶搖晃
                 // 判斷是否達到搖晃的閾值
                 if (bottleAngle >= shakeThreshold)
                 {
@@ -123,7 +124,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 5: //待反應結束
+            case 6: //待反應結束
 
                 // 使用 Lerp 混合顏色
                 bottleLiquidColor = Color.Lerp(bottleLiquidColor, bottleLiquidColor_final, colorChangeSpeed);
@@ -137,20 +138,20 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 6: //待寶特瓶放上電子秤
+            case 7: //待寶特瓶放上電子秤
                 break;
-            case 7: //待打開瓶蓋
+            case 8: //待打開瓶蓋
                 break;
-            case 8: //待瓶蓋放上電子秤
+            case 9: //待瓶蓋放上電子秤
                 break;
-            case 9: //結論
+            case 10: //結論
                 break;
         }
     }
 
     public void ReactionExit(GameObject sender)
     {
-        if (sender.name == "Cap_2-2" && Status == 7)
+        if (sender.name == "Cap_2-2" && Status == 8)
         {
             //打開瓶蓋
             bottleCap.transform.SetParent(transform);
@@ -165,14 +166,14 @@ public class Tutorial_2_2 : MonoBehaviour
     {
         if (isPC)
         {
-            if (pcController.selectedObject)
+            if (pcController.selectedObject && Status != 2)
             {
                 return;
             }
         }
         switch (Status)
         {
-            case 1: //試管放進寶特瓶
+            case 2: //試管放進寶特瓶
                 if(sender.name== "TestTube_2-2")
                 {
                     sender.tag = "Untagged";
@@ -184,7 +185,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 2: //鎖上寶特瓶蓋
+            case 3: //鎖上寶特瓶蓋
                 if (sender.name == "Cap_2-2")
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
@@ -208,7 +209,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 3: //寶特瓶放上電子秤
+            case 4: //寶特瓶放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     scaleVale = weight_Bottle + weight_BottleCap + weight_TestTube;
@@ -217,7 +218,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 6: //搖晃後放上電子秤
+            case 7: //搖晃後放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     //取得第二個數值
@@ -240,7 +241,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 8: //瓶蓋放上電子秤
+            case 9: //瓶蓋放上電子秤
                 if (sender.name == "KitchenScale")
                 {
                     //取得第三個數值
@@ -266,22 +267,79 @@ public class Tutorial_2_2 : MonoBehaviour
             case "WaterBottle_2-2":
                 if (Status == 0)
                 {
-                    fullLiquid++;
+                    Status++;
                 }
                 break;
             case "TestTube_2-2":
-                if (Status == 0)
+                if (Status == 1)
                 {
-                    fullLiquid++;
+                    hintManager.SwitchStep("T2_2_2");
+                    Status++;
                 }
                 break;
         }
-        if (fullLiquid == 2 && Status == 0)
+    }
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
+    {
+        //該步驟如果去觸碰其他物件，給予警告語音。
+        switch (Status)
         {
-            hintManager.SwitchStep("T2_2_2");
-            Status++;
+            case 0: //等待寶特瓶液體倒滿
+                if (obj.name != "WaterBottle_2-2" || obj.name != "SodiumCarbonate_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 1: //等待試管液體倒滿
+                if (obj.name != "TestTube_2-2" || obj.name != "CalciumChloride_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
+                if (obj.name != "WaterBottle_2-2" || obj.name != "Tweezers_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 3: //待鎖上寶特瓶蓋後， 畫面跳轉至測量質量頁面。
+                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 4: //待寶特瓶放上電子秤
+                if (obj.name != "WaterBottle_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 5: //待寶特瓶搖晃
+                if (obj.name != "WaterBottle_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 7: //待寶特瓶放上電子秤
+                if (obj.name != "WaterBottle_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 8: //待打開瓶蓋
+                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
+            case 9: //待瓶蓋放上電子秤
+                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                {
+                    audioManager.PlayVoice("W_WrongObject");
+                }
+                break;
         }
-
     }
 
     private void EndTheTutorial()   //完成教學

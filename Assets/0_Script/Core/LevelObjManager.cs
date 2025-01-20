@@ -56,6 +56,14 @@ public class LevelObjManager : MonoBehaviour
         //levelObjects[gm.currLevel].SetActive(false);
         if (currentScene)
             Destroy(currentScene);
+
+        //刪除被抓取中或沒回到currentScene底下的關卡物件
+        GameObject[] pickables = GameObject.FindGameObjectsWithTag("Pickable");
+        foreach(GameObject pickable in pickables)
+        {
+            Destroy(pickable);
+        }
+
         moleculaManager.CloseDisplay();
         zoomDisplay.CloseDisplay();
 
