@@ -6,24 +6,27 @@ public class Tutorial_5_1 : MonoBehaviour
 {
     [Header("長條圖")]
     [Tooltip("長條1")]
-    [SerializeField] private Transform bar1;
+    [SerializeField] private Transform barA;
     [Tooltip("長條2")]
-    [SerializeField] private Transform bar2;
-    [Tooltip("比例")]
-    [SerializeField] private float ratio1, ratio2;
+    [SerializeField] private Transform barB;
     private float scaleX;
-    [SerializeField] private Text text1;
-    [Tooltip("長條2")]
-    [SerializeField] private Text text2;
+    [Tooltip("蒸發速率數值文字")]
+    [SerializeField] private Text textA;
+    [Tooltip("凝結速率數值文字")]
+    [SerializeField] private Text textB;
+
+    [Header("數值")]
+    [Tooltip("蒸發速率")]
+    [SerializeField] private float valueA;
+    [Tooltip("凝結速率")]
+    [SerializeField] private float valueB;
+
 
     [Space]
     [Tooltip("互動按鈕")]
     [SerializeField] private GameObject questionMark;
-    private float timer = 0;
-    private int Status = 0;
 
     private LevelObjManager levelObjManager;
-    private AudioManager audioManager;          //音樂管理
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private HintManager hintManager;            //管理提示板
 
@@ -32,26 +35,26 @@ public class Tutorial_5_1 : MonoBehaviour
     void Start()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
-        audioManager = FindObjectOfType<AudioManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
         hintManager = FindObjectOfType<HintManager>();
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("T5_1_1");
-        scaleX = bar1.localScale.x;
+        moleculaManager.ShowMoleculas(0);
+        questionMark.SetActive(true);
+        scaleX = barA.localScale.x;
     }
 
     private void Update()
     {
-        bar1.localScale = new Vector3(scaleX, ratio1, scaleX);
-        bar2.localScale = new Vector3(scaleX, ratio2, scaleX);
-        text1.text = ratio1.ToString("0.00") + "mg/s";
-        text2.text = ratio2.ToString("0.00") + "mg/s";
+        barA.localScale = new Vector3(scaleX, valueA, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB, scaleX);
+        textA.text = valueA.ToString("0.00") + "mg/s";
+        textB.text = valueB.ToString("0.00") + "mg/s";
     }
 
     public void ShowMoleculas()
     {
-        moleculaManager.ShowMoleculas(0);
         moleculaManager.PlayMoleculasAnimation();
         hintManager.SwitchStep("T5_1_2");
         hintManager.ShowNextButton(gameObject);

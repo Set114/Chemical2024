@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462856501199882758}
   m_Layer: 5
-  m_Name: "\u6C34\u84B8\u767C\u901F\u7387"
+  m_Name: EvaporationRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,7 +526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462856501377738152}
   m_Layer: 5
-  m_Name: "\u6C34\u84B8\u6C23\u51DD\u7D50\u901F\u7387"
+  m_Name: CoagulationRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,12 +601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cc035c11f44c359b7978b36455e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar1: {fileID: 3448075312310302532}
-  bar2: {fileID: 3448075311644058687}
-  ratio1: 0.25
-  ratio2: 0.25
-  text1: {fileID: 7250775421992259998}
-  text2: {fileID: 8117801705840992450}
+  barA: {fileID: 3448075312310302532}
+  barB: {fileID: 3448075311644058687}
+  textA: {fileID: 7250775421992259998}
+  textB: {fileID: 8117801705840992450}
+  valueA: 0.25
+  valueB: 0.25
   questionMark: {fileID: 3849028360288651032}
 --- !u!1 &1462856501973569956
 GameObject:
@@ -1236,7 +1236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3448075311644058687}
   m_Layer: 0
-  m_Name: Bar02
+  m_Name: BarB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1299,7 +1299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3448075312310302532}
   m_Layer: 0
-  m_Name: Bar01
+  m_Name: BarA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
