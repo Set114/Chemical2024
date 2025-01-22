@@ -103,10 +103,8 @@ public class MouseController : MonoBehaviour
                             break;
                         case "CalciumChloride_2-2":
                         case "SodiumCarbonate_2-2":
-                        case "Cap_2-2":
                         case "SodiumCarbonate_2-3":
                         case "HCI_2-3":
-                        case "Balloon_2-3":
                             planeDistance = 0.762f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
@@ -116,6 +114,14 @@ public class MouseController : MonoBehaviour
                             planeDistance = 0.671f;
                             Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
                             objColliderTweezers[2].enabled = false;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "Cap_2-2":     //瓶蓋
+                        case "Balloon_2-3": //氣球
+                        case "RubberBand_2-3":  //橡皮筋
+                            planeDistance = 0.762f;
+                            Collider objColliderCap2_2 = selectedObject.GetComponent<Collider>();
+                            objColliderCap2_2.isTrigger = true;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         case "BakingSoda_2-4":
@@ -128,6 +134,12 @@ public class MouseController : MonoBehaviour
                         case "CopperOxide_2-6":   //碟子
                             planeDistance = 0.753f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "WaterBottle_2-2":
+                        case "WaterBottle_2-3":
+                            planeDistance = 0.762f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.transform.localPosition = new Vector3(0.0f, -0.104f, 0.0f);
                             break;
                         case "Glass_2-4":
                             planeDistance = 0.681f;
@@ -193,11 +205,9 @@ public class MouseController : MonoBehaviour
                     objColliderTweezers[2].enabled = true;
                     break;
                 case "CalciumChloride_2-2":
-                case "SodiumCarbonate_2-2":                
-                case "Cap_2-2":                
+                case "SodiumCarbonate_2-2":                             
                 case "SodiumCarbonate_2-3":
                 case "HCI_2-3":
-                case "Balloon_2-3":
                 case "BakingSoda_2-4":
                 case "BakingSoda_2-5":
                 case "Rag_2-4": //抹布
@@ -208,6 +218,19 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.position = initialPosition;       //恢復初始位置
                     selectedObject.transform.rotation = initialRotation;       //恢復初始角度
                     isToolSwitchOn = false;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
+                case "Cap_2-2":
+                case "Balloon_2-3": //氣球
+                case "RubberBand_2-3":  //橡皮筋
+                    Collider objColliderCap2_2 = selectedObject.GetComponent<Collider>();
+                    objColliderCap2_2.isTrigger = false;
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    break;
+                case "WaterBottle_2-2": //恢復物理，但不回原位
+                case "WaterBottle_2-3":
+                    selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
             }
@@ -243,30 +266,57 @@ public class MouseController : MonoBehaviour
                         isToolSwitchOn = !isToolSwitchOn;
                         selectedObject.SendMessage("Fire", isToolSwitchOn);
                         break;
+                }
+            }
+        }
+        //使用物件
+        if (Input.GetMouseButton(1))
+        {
+            if (selectedObject)
+            {
+                switch (selectedObject.name)
+                {
                     case "CalciumChloride_2-2":
                     case "SodiumCarbonate_2-2":
                     case "SodiumCarbonate_2-3":
-                    case "HCI_2-3":                    
-                        isToolSwitchOn = !isToolSwitchOn;
-                        if (isToolSwitchOn)
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 56.0f);
-                        else
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                        break;
-                    case "Tweezers_2-2":    //鑷子
-                    case "Tweezers_2-3":
-                    case "Tweezers_2-6":
-
+                    case "HCI_2-3":
+                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 56.0f);
                         break;
                     case "BakingSoda_2-4":  //小碟子
                     case "BakingSoda_2-5":
                     case "Toner_2-6":   //碟子
                     case "CopperOxide_2-6":   //碟子
-                        isToolSwitchOn = !isToolSwitchOn;
-                        if (isToolSwitchOn)
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 85.0f);
-                        else
-                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 85.0f);
+                        break;
+                    case "WaterBottle_2-2":
+                    case "WaterBottle_2-3":
+                        selectedObject.transform.localPosition = new Vector3(0.0146f, 0.1f, 0.0f);
+                        selectedObject.transform.localEulerAngles = new Vector3(-4.351f, 2.832f, 172.45f);
+                        break;
+                }
+            }
+        }
+        //使用物件
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (selectedObject)
+            {
+                switch (selectedObject.name)
+                {
+                    case "CalciumChloride_2-2":
+                    case "SodiumCarbonate_2-2":
+                    case "SodiumCarbonate_2-3":
+                    case "HCI_2-3":
+                    case "BakingSoda_2-4":  //小碟子
+                    case "BakingSoda_2-5":
+                    case "Toner_2-6":   //碟子
+                    case "CopperOxide_2-6":   //碟子
+                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                        break;
+                    case "WaterBottle_2-2":
+                    case "WaterBottle_2-3":
+                        selectedObject.transform.localPosition = new Vector3(0.0f, -0.104f, 0.0f);
+                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                         break;
                 }
             }
