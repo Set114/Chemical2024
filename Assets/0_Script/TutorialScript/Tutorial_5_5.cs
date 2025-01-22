@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
-public class Tutorial_5_4 : MonoBehaviour
+public class Tutorial_5_5 : MonoBehaviour
 {
     [Header("長條圖")]
     [Tooltip("長條1")]
@@ -38,25 +38,18 @@ public class Tutorial_5_4 : MonoBehaviour
     [Tooltip("每階段的濃度")]
     [SerializeField] private float[] concentrations;
     [Tooltip("反應時間")]
-    [SerializeField] private float reactionTime = 10f;
+    [SerializeField] private float[] reactionTime;
 
-    [Space]
-    [Tooltip("酒精燈蓋子")]
-    [SerializeField] private Animator cap;
-    [Tooltip("酒精燈火焰")]
-    [SerializeField] private GameObject fire;
     private float timer = 0;
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
-    private AudioManager audioManager;          //音樂管理
     private HintManager hintManager;            //管理提示板
 
     // Start is called before the first frame update
     void Start()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
-        audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
 
         hintManager.gameObject.SetActive(true);
@@ -70,31 +63,24 @@ public class Tutorial_5_4 : MonoBehaviour
 
     private void Update()
     {
-        float t = Mathf.Clamp01(timer / reactionTime);
         switch (Status)
         {
-            case 0: //等待酒精燈點燃
+            case 0: //等待水倒入
                 break;
-            case 1: //加熱中
-                // 計算經過的時間
+            case 1: //濃度緩慢逐漸上升
+                    // 計算經過的時間
                 timer += Time.deltaTime;
+                float t = Mathf.Clamp01(timer / reactionTime[1]);
                 // 使用 Lerp 計算新的數值
-                valueA = Mathf.Lerp(valuesA[0], valuesA[1], t);
-                valueB = Mathf.Lerp(valuesB[0], valuesB[1], t);
-                temperature = Mathf.Lerp(temperatures[0], temperatures[1], t);
-                concentration = Mathf.Lerp(concentrations[0], concentrations[1], t);
-                if (timer >= reactionTime)
+                concentration = Mathf.Lerp(concentrations[1], concentrations[2], t);
+                if (timer >= reactionTime[1])
                 {
-                    valueA = valuesA[1];
-                    valueB = valuesB[1];
-                    temperature = temperatures[1];
-                    concentration = concentrations[1];
-                    hintManager.SwitchStep("T5_4_2");
+                    concentration = concentrations[2];
+                    hintManager.SwitchStep("T5_5_2");
                     hintManager.ShowNextButton(gameObject);
+                    timer = 0f;
                     Status++;
                 }
-                break;
-            case 2: //加熱完
                 break;
         }
 
@@ -106,19 +92,28 @@ public class Tutorial_5_4 : MonoBehaviour
         concentrationText.text = concentration.ToString("0");
     }
 
-    public void OnAlcoholLampTouched()
+    public void WaterPourIn()
     {
         if (Status == 0)
         {
-            audioManager.PlayVoice("W_AlcoholLamp");
-            cap.SetBool("cover", true);
-            fire.SetActive(true);
-            Status++;
+            // 計算經過的時間
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / reactionTime[0]);
+            // 使用 Lerp 計算新的數值
+            valueB = Mathf.Lerp(valuesB[0], valuesB[1], t);
+            concentration = Mathf.Lerp(concentrations[0], concentrations[1], t);
+            if (timer >= reactionTime[0])
+            {
+                valueB = valuesB[1];
+                concentration = concentrations[1];
+                timer = 0f;
+                Status++;
+            }
         }
     }
 
     void CloseHint()    //關閉提示視窗
     {
-        levelObjManager.LevelClear(0);
+        levelObjManager.LevelClear(1);
     }
 }

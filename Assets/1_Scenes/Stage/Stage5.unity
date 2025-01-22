@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_EnableUIInteraction: 1
   m_BlockUIOnInteractableSelection: 1
   m_AllowAnchorControl: 1
-  m_UseForceGrab: 0
+  m_UseForceGrab: 1
   m_RotateSpeed: 180
   m_TranslateSpeed: 1
   m_AnchorRotateReferenceFrame: {fileID: 0}
@@ -5225,7 +5225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currStage: 1
-  currLevel: 2
+  currLevel: 5
   examIndex: 5
   levelObjManager: {fileID: 1404153067}
   audioManager: {fileID: 3385617890250005706}
@@ -14047,7 +14047,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000053406, y: -13.38}
+  m_AnchoredPosition: {x: 0.000053406, y: -5.2}
   m_SizeDelta: {x: 79.11, y: 44.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &823693508279363116
@@ -31132,6 +31132,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: T5_5_2
     clip: {fileID: 8300000, guid: 7d1dd26b3f8244f4298f0a4d70a742ff, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: QE5_1
+    clip: {fileID: 8300000, guid: 4e567a0607b4bcd43ace8c060fb6fedb, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: E5_1_1
+    clip: {fileID: 8300000, guid: a6e013e73a1205b4bb1d80a990ca3a72, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: E5_1_2
+    clip: {fileID: 8300000, guid: 95375fb4a6789c146b70b8e67ab82bb1, type: 3}
     volume: 1
     source: {fileID: 0}
   BGMList: []

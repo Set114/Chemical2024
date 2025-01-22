@@ -389,7 +389,6 @@ MonoBehaviour:
   glucosePowder: {fileID: 1509885528506565361}
   particleSystem_glucose: {fileID: 1509885527147009311}
   glucosePowderInWater: {fileID: 6244292433272393509}
-  questionMark: {fileID: 8702293734041048888}
 --- !u!1 &1509885526963731837
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,7 +6146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.05, y: 0.44099998}
+  m_AnchoredPosition: {x: -0.05, y: 0.561}
   m_SizeDelta: {x: 867.6443, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4105661958471296981
@@ -6408,7 +6407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6244292431672658138}
   m_LocalRotation: {x: -0, y: 0.020138144, z: -0, w: -0.9997972}
-  m_LocalPosition: {x: -0.058, y: 0.1152, z: -0.516}
+  m_LocalPosition: {x: -0.058, y: 0.1713, z: -0.516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6433,16 +6432,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   port: {fileID: 0}
-  myLiquid: {fileID: 0}
-  liquidColor: {r: 1, g: 1, b: 1, a: 1}
-  maxCapacity: 100
-  currCapacity: 0
+  myLiquid: {fileID: 6244292432122714722}
+  liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
+  maxCapacity: 500
+  currCapacity: 400
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
   pourOutAngle: 0
   maxPourOutSpeed: 100
-  injectFilter: Glucose_5-3
+  injectFilter: 
   isUnlimited: 0
   targerRatio: 0
   _whenInject:
@@ -6577,7 +6576,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7edfb9e8c392a3f48b6333c47a50da70, type: 2}
+  - {fileID: 2100000, guid: 4d69fe16b8d074c34b3d61f7ee901ff6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12906,15 +12905,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6926160379203978297, guid: a7e7b10cfbf4e8e4ab851946ae104572, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 6926160379203978297, guid: a7e7b10cfbf4e8e4ab851946ae104572, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 6926160379203978297, guid: a7e7b10cfbf4e8e4ab851946ae104572, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 6926160379203978297, guid: a7e7b10cfbf4e8e4ab851946ae104572, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13176,10 +13175,5 @@ PrefabInstance:
 --- !u!224 &5567552457643796875 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2792946048301563768, guid: 1ccd96ca34fe2436d9d0918703998fc3, type: 3}
-  m_PrefabInstance: {fileID: 7746581498201790195}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8702293734041048888 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1388692939943805387, guid: 1ccd96ca34fe2436d9d0918703998fc3, type: 3}
   m_PrefabInstance: {fileID: 7746581498201790195}
   m_PrefabAsset: {fileID: 0}

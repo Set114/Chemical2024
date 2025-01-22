@@ -6,7 +6,7 @@ public class Card : MonoBehaviour
 {
     public GameObject[] detectItems; // 更改為陣列以處理多個 detectitem
     public CardPattern cardPattern;
-    public MyGameManager gameManager;
+    public Exam_5_1 gameManager;
 
     private Rigidbody rb;
     private XRGrabInteractable grabInteractable; // 新增 XRGrabInteractable 來處理 VR 交互
@@ -17,7 +17,6 @@ public class Card : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<MyGameManager>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>(); // 獲取 Rigidbody
 
@@ -27,9 +26,7 @@ public class Card : MonoBehaviour
 
         // 監聽選擇退出事件
         grabInteractable.selectExited.AddListener(OnSelectExited);
-    }
-
-  
+    }  
 
     void OnDestroy()
     {
@@ -64,19 +61,17 @@ public class Card : MonoBehaviour
 
     private void MoveCardToDetectItemPosition(GameObject detectItem)
     {
-        
-            // 將卡牌位置設置為 detectitem 的位置加上一點高度
-            transform.position = new Vector3(detectItem.transform.position.x, detectItem.transform.position.y + 0.01f, detectItem.transform.position.z);
-            transform.rotation = detectItem.transform.rotation;
+        // 將卡牌位置設置為 detectitem 的位置加上一點高度
+        transform.position = new Vector3(detectItem.transform.position.x, detectItem.transform.position.y + 0.01f, detectItem.transform.position.z);
+        transform.rotation = detectItem.transform.rotation;
 
-            // 凍結 Rigidbody 的所有運動
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-   
+        // 凍結 Rigidbody 的所有運動
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     private void HandleCollision()
     {
-        if (gameManager.ReadyToCompareCards)
+        if (gameManager.cardComparison.Count == 2)
         {
             return; // 如果準備比對卡牌，則退出方法
         }
