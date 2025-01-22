@@ -93,6 +93,8 @@ public class Tutorial_5_3 : MonoBehaviour
 
                 if (timer >= reactionTime)
                 {
+                    valueA = valuesA[2];
+                    valueB = valuesB[2];
                     hintManager.SwitchStep("T5_3_2");
                     hintManager.ShowNextButton(gameObject);
                     Status++;
@@ -103,8 +105,8 @@ public class Tutorial_5_3 : MonoBehaviour
                 break;
         }
 
-        barA.localScale = new Vector3(scaleX, valueA * 0.01f, scaleX);
-        barB.localScale = new Vector3(scaleX, valueB * 0.01f, scaleX);
+        barA.localScale = new Vector3(scaleX, valueA * 0.002f, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB * 0.002f, scaleX);
         textA.text = valueA.ToString("0.00") + "mg/s";
         textB.text = valueB.ToString("0.00") + "mg/s";
         temperatureText.text = temperature.ToString("0");
@@ -126,6 +128,9 @@ public class Tutorial_5_3 : MonoBehaviour
             glucosePowderInWater.transform.localScale = new Vector3(size, size, size);
             if (size >= 1f)
             {
+                valueA = valuesA[1];
+                valueB = valuesB[1];
+                concentration = concentrations[1];
                 glucosePowder.SetActive(false);
                 glucosePowderInWater.SetActive(true);
                 particleSystem_glucose.SetActive(false);
