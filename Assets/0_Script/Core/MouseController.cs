@@ -51,8 +51,8 @@ public class MouseController : MonoBehaviour
                         //------------Stage 1--------------
                         case "hammer":
                             planeDistance = 0.722f;
-                            Collider[] objCollider = selectedObject.GetComponents<Collider>();
-                            objCollider[1].enabled = false;
+                            Collider[] objColliderhammer = selectedObject.GetComponents<Collider>();
+                            objColliderhammer[1].enabled = false;
                             selectedObject.transform.localPosition = new Vector3(0.0013f, 0.0f, 0.0f);
                             selectedObject.transform.localEulerAngles = new Vector3(75.0f, -90.0f, 0.0f);
                             break;
@@ -103,13 +103,21 @@ public class MouseController : MonoBehaviour
                             break;
                         case "CalciumChloride_2-2":
                         case "SodiumCarbonate_2-2":
+                        case "Cap_2-2":
                         case "SodiumCarbonate_2-3":
                         case "HCI_2-3":
+                        case "Balloon_2-3":
                             planeDistance = 0.762f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         case "Tweezers_2-2":
                         case "Tweezers_2-3":
+                        case "Tweezers_2-6":
+                            planeDistance = 0.671f;
+                            Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                            objColliderTweezers[2].enabled = false;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
                         case "BakingSoda_2-4":
                         case "BakingSoda_2-5":
                         case "Rag_2-4": //抹布
@@ -144,8 +152,8 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.transform.position = initialPosition;       //恢復初始位置
                     selectedObject.transform.rotation = initialRotation;       //恢復初始角度
-                    Collider[] objCollider = selectedObject.GetComponents<Collider>();
-                    objCollider[1].enabled = true;
+                    Collider[] objColliderHammer = selectedObject.GetComponents<Collider>();
+                    objColliderHammer[1].enabled = true;
                     break;
                 case "GAS":
                     selectedObject.transform.parent = selectedObjectParent;
@@ -173,12 +181,23 @@ public class MouseController : MonoBehaviour
                     selectedObject.SendMessage("Fire", isToolSwitchOn);
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
+                case "Tweezers_2-2":
+                case "Tweezers_2-3":
+                case "Tweezers_2-6":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
+                    isToolSwitchOn = false;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                    objColliderTweezers[2].enabled = true;
+                    break;
                 case "CalciumChloride_2-2":
-                case "SodiumCarbonate_2-2":
-                case "Tweezers_2-2":                
+                case "SodiumCarbonate_2-2":                
+                case "Cap_2-2":                
                 case "SodiumCarbonate_2-3":
                 case "HCI_2-3":
-                case "Tweezers_2-3":
+                case "Balloon_2-3":
                 case "BakingSoda_2-4":
                 case "BakingSoda_2-5":
                 case "Rag_2-4": //抹布
@@ -236,6 +255,7 @@ public class MouseController : MonoBehaviour
                         break;
                     case "Tweezers_2-2":    //鑷子
                     case "Tweezers_2-3":
+                    case "Tweezers_2-6":
 
                         break;
                     case "BakingSoda_2-4":  //小碟子
