@@ -154,18 +154,6 @@ public class Tutorial_2_2 : MonoBehaviour
     {
         switch (Status)
         {
-            case 2: //試管放進寶特瓶
-                if(sender.name== "TestTube_2-2")
-                {
-                    sender.tag = "Untagged";
-                    sender.transform.position = testTubePoint.position;
-                    sender.transform.rotation = testTubePoint.rotation;
-                    sender.transform.SetParent(testTubePoint);
-                    sender.GetComponent<Rigidbody>().isKinematic = true;
-                    hintManager.SwitchStep("T2_2_3");
-                    Status++;
-                }
-                break;
             case 3: //鎖上寶特瓶蓋
                 if (sender.name == "Cap_2-2")
                 {
@@ -241,6 +229,19 @@ public class Tutorial_2_2 : MonoBehaviour
                 break;
         }
         weightText.text = scaleVale.ToString("0") + "g";
+    }
+    public void ReactionStay(GameObject sender)
+    {
+        if (Status == 2 && sender.name == "TestTube_2-2")
+        {
+            sender.tag = "Untagged";
+            sender.transform.position = testTubePoint.position;
+            sender.transform.rotation = testTubePoint.rotation;
+            sender.transform.SetParent(testTubePoint);
+            sender.GetComponent<Rigidbody>().isKinematic = true;
+            hintManager.SwitchStep("T2_2_3");
+            Status++;
+        }
     }
     public void ReactionExit(GameObject sender)
     {

@@ -172,22 +172,6 @@ public class Tutorial_2_3 : MonoBehaviour
     {
         switch (Status)
         {
-            case 2: //試管放進寶特瓶
-                if(sender.name== "TestTube_2-3")
-                {
-                    sender.tag = "Untagged";
-                    sender.transform.position = testTubePoint.position;
-                    sender.transform.rotation = testTubePoint.rotation;
-                    sender.transform.SetParent(testTubePoint);
-                    sender.GetComponent<Rigidbody>().isKinematic = true;
-                    hintManager.SwitchStep("T2_3_3");
-                    //場上只剩下後半部物件
-                    object_Step1.SetActive(false);
-                    object_Step2.SetActive(true);
-                    tweezers.transform.SetParent(object_Step1.transform);
-                    Status++;
-                }
-                break;
             case 3: //套上氣球
                 if (sender.name == "Balloon_2-3")
                 {
@@ -266,6 +250,24 @@ public class Tutorial_2_3 : MonoBehaviour
                 break;
         }
         weightText.text = scaleVale.ToString("0") + "g";
+    }
+
+    public void ReactionStay(GameObject sender)
+    {
+        if (Status == 2 && sender.name == "TestTube_2-2")
+        {
+            sender.tag = "Untagged";
+            sender.transform.position = testTubePoint.position;
+            sender.transform.rotation = testTubePoint.rotation;
+            sender.transform.SetParent(testTubePoint);
+            sender.GetComponent<Rigidbody>().isKinematic = true;
+            hintManager.SwitchStep("T2_3_3");
+            //場上只剩下後半部物件
+            object_Step1.SetActive(false);
+            object_Step2.SetActive(true);
+            tweezers.transform.SetParent(object_Step1.transform);
+            Status++;
+        }
     }
     //  液體裝滿時通知
     public void LiquidFull(GameObject obj)
