@@ -13,6 +13,7 @@ public class Shine_GM : MonoBehaviour
     public GameObject[] LevelScene, LevelSceneUI;
     public GameObject Lesson_ListTeach, Lesson_ListTest;
 
+    public GameObject[] Infos;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,5 +68,10 @@ public class Shine_GM : MonoBehaviour
         }
         LevelScene[ID].SetActive(true);
         LevelSceneUI[ID].SetActive(true);
+    }
+    public void CloseInfos() {
+        for (int i = 0; i < Infos.Length; i++) {
+            Infos[i].SetActive(false);
+        }
     }
 }

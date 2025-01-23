@@ -19,8 +19,11 @@ public class MoveTowards2 : MonoBehaviour
     bool isChangeScale;
     public float ChangeScaleValue;
     public bool isH2;
+
+    public Vector3 StartPosRectTransform;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         StartPos = StartTarget.position;
     }
@@ -52,7 +55,7 @@ public class MoveTowards2 : MonoBehaviour
     }
     public void Reset()
     {
-        StartTarget.position = StartPos;
+        StartTarget.GetComponent<RectTransform>().anchoredPosition = StartPosRectTransform;
         if (isH2)
         {
             gameObject.SetActive(true);

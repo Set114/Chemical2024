@@ -15,16 +15,24 @@ public class Statge4_4 : MonoBehaviour
     public Image[] AtomImages;
 
     public GameObject Finish;
-
+    [Header("­»")]
+    public Transform Fragrant;
+    public Vector3 FragrantPos;
+    public Vector3 FragrantAngle;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        FragrantPos = Fragrant.position;
+        FragrantAngle = Fragrant.eulerAngles;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            ReButton();
+        }
     }
     public void ReButton() {
         for (int j = 0; j < AtomStateObjs.Length; j++) {
@@ -36,7 +44,8 @@ public class Statge4_4 : MonoBehaviour
 
             AtomImages[j].sprite = DefaultSprite;
         }
-
+        Fragrant.position = FragrantPos;
+        Fragrant.eulerAngles = FragrantAngle;
         for (int i = 0; i < AtomObjs.Length; i++)
         {
             AtomObjs[i].Reset();

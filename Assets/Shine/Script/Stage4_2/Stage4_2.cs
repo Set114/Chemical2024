@@ -59,7 +59,14 @@ public class Stage4_2 : MonoBehaviour
             Spoons[i].transform.GetChild(1).gameObject.SetActive(false);
             Spoons[i].transform.GetChild(2).GetChild(0).GetChild(1).gameObject.SetActive(false);
             LeftHandSpoons[i].SetActive(false);
+            LeftHandSpoons[i].transform.GetChild(0).gameObject.SetActive(true);
+            LeftHandSpoons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            LeftHandSpoons[i].transform.GetChild(1).gameObject.SetActive(false);
+
             RightHandSpoons[i].SetActive(false);
+            RightHandSpoons[i].transform.GetChild(0).gameObject.SetActive(true);
+            RightHandSpoons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            RightHandSpoons[i].transform.GetChild(1).gameObject.SetActive(false);
             State[i] = false;
 
         }

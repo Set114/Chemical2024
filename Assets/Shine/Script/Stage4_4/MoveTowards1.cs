@@ -12,10 +12,12 @@ public class MoveTowards1 : MonoBehaviour
     public bool isTouchMiss;
     public bool isToEndPoint;
     Vector3 StartPos;
+    public Vector3 StartPosRectTransform;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+       // StartPosRectTransform = StartTarget.GetComponent<RectTransform>().anchoredPosition;
         StartPos = StartTarget.position;
     }
 
@@ -42,10 +44,11 @@ public class MoveTowards1 : MonoBehaviour
             transform.position = Vector3.Lerp(EndTarget.position, StartPos, Mathf.PingPong(t, 1f));
 
         }
+        
     }
     public void Reset()
     {
-        StartTarget.position = StartPos;
+        StartTarget.GetComponent<RectTransform>().anchoredPosition = StartPosRectTransform;
         gameObject.SetActive(true);
         isToEndPoint = false;
     }

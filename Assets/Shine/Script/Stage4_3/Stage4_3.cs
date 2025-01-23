@@ -10,7 +10,7 @@ public class Stage4_3 : MonoBehaviour
     public Toggle[] ObjToggles;
     public GameObject TubeClloder;
 
-    public GameObject ParticleEffects, BalloonNoAir, Balloon;
+    public GameObject ParticleEffects, BalloonNoAir, Balloon, ContainerMouth;
     public GameObject[] Tips;
 
     public Vector3[] SaveDeskObjsPos;
@@ -18,7 +18,7 @@ public class Stage4_3 : MonoBehaviour
 
     public GameObject Finish;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         for(int i=0;i< DeskObjs.Length; i++)
         {
@@ -40,7 +40,7 @@ public class Stage4_3 : MonoBehaviour
         BalloonNoAir.SetActive(false);
         Balloon.SetActive(false);
         ParticleEffects.SetActive(false);
-
+        ContainerMouth.SetActive(true);
     }
     // Update is called once per frame
     void Update()

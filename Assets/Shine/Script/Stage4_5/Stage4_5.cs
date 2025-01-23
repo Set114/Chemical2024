@@ -14,7 +14,7 @@ public class Stage4_5 : MonoBehaviour
 
     public Vector3[] TableMarblesPos;
     public GameObject Finished,ReButtonUI;
-    private void Start()
+    private void Awake()
     {
         TableMarblesPos[0] = TableMarbles[0].transform.position;
         TableMarblesPos[1] = TableMarbles[1].transform.position;

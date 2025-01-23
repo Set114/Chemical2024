@@ -160,24 +160,8 @@ public class Level4_1 : MonoBehaviour
         Infos[3].SetActive(false);
         ObjTips.SetActive(true);
 
-
-        for (int i = 0; i < TotalO2.Count; i++)
-        {
-            Destroy(TotalO2[i]);
-            Destroy(TotalO2UI[i]);
-
-        }
-        TotalO2.Clear();
-        TotalO2UI.Clear();
-        for (int k = 0; k < TotalCO2.Count; k++)
-        {
-            Destroy(TotalCO2[k]);
-            if(TotalCO2UI.Count>0)
-            Destroy(TotalCO2UI[k]);
-
-        }
-        TotalCO2.Clear();
-        TotalCO2UI.Clear();
+        // ²M°£O©MCO2
+        ClearO2CO2();
 
         for (int l = 0; l < CObject.Length; l++)
         {
@@ -218,5 +202,24 @@ public class Level4_1 : MonoBehaviour
         {
             CObject[l].SetActive(false);
         }
+    }
+    public void ClearO2CO2() {
+        for (int i = 0; i < TotalO2.Count; i++)
+        {
+            Destroy(TotalO2[i]);
+            Destroy(TotalO2UI[i]);
+
+        }
+        TotalO2.Clear();
+        TotalO2UI.Clear();
+        for (int k = 0; k < TotalCO2.Count; k++)
+        {
+            Destroy(TotalCO2[k]);
+            if (TotalCO2UI.Count > 0)
+                Destroy(TotalCO2UI[k]);
+
+        }
+        TotalCO2.Clear();
+        TotalCO2UI.Clear();
     }
 }
