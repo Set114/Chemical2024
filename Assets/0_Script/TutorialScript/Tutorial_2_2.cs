@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -149,28 +150,8 @@ public class Tutorial_2_2 : MonoBehaviour
         }
     }
 
-    public void ReactionExit(GameObject sender)
+    public void Reaction(GameObject sender)
     {
-        if (sender.name == "Cap_2-2" && Status == 8)
-        {
-            //打開瓶蓋
-            bottleCap.transform.SetParent(transform);
-            bottleCap.GetComponent<Rigidbody>().isKinematic = false;
-            scaleVale = weight_Bottle + weight_TestTube;
-            Status++;
-        }
-        weightText.text = scaleVale.ToString("0") + "g";
-    }
-
-    public void ReactionStay(GameObject sender)
-    {
-        if (isPC)
-        {
-            if (pcController.selectedObject && Status != 2)
-            {
-                return;
-            }
-        }
         switch (Status)
         {
             case 2: //試管放進寶特瓶
@@ -196,6 +177,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     bottleCap.transform.position = bottleCapPoint.position;
                     bottleCap.transform.rotation = bottleCapPoint.rotation;
                     bottleCap.transform.SetParent(bottleCapPoint);
+                    pcController.SendMessage("Reset");
 
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -251,11 +233,24 @@ public class Tutorial_2_2 : MonoBehaviour
                     //讓瓶蓋不可被拿起
                     bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
                     bottleCap.tag = "Untagged";
+                    pcController.SendMessage("Reset");
 
                     EndTheTutorial();
                     Status++;
                 }
                 break;
+        }
+        weightText.text = scaleVale.ToString("0") + "g";
+    }
+    public void ReactionExit(GameObject sender)
+    {
+        if (sender.name == "Cap_2-2" && Status == 8)
+        {
+            //打開瓶蓋
+            bottleCap.transform.SetParent(transform);
+            bottleCap.GetComponent<Rigidbody>().isKinematic = false;
+            scaleVale = weight_Bottle + weight_TestTube;
+            Status++;
         }
         weightText.text = scaleVale.ToString("0") + "g";
     }

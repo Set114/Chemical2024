@@ -168,15 +168,8 @@ public class Tutorial_2_3 : MonoBehaviour
         }
     }
 
-    public void ReactionStay(GameObject sender)
+    public void Reaction(GameObject sender)
     {
-        if (isPC)
-        {
-            if (pcController.selectedObject && Status != 2)
-            {
-                return;
-            }
-        }
         switch (Status)
         {
             case 2: //試管放進寶特瓶
@@ -206,6 +199,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     balloon.transform.position = bottleCapPoint.position;
                     balloon.transform.rotation = bottleCapPoint.rotation;
                     balloon.transform.SetParent(bottleCapPoint);
+                    pcController.SendMessage("Reset");
                     balloon_flat.SetActive(false);
                     balloon_inflated.SetActive(true);
                     Status++;
@@ -215,6 +209,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 if (sender.name == "RubberBand_2-3")
                 {
                     sender.gameObject.SetActive(false);
+                    pcController.SendMessage("Reset");
                     rubberBand_Cap.SetActive(true);
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
                     //畫面跳轉至測量質量頁面
@@ -264,7 +259,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     //讓氣球不可被拿起
                     balloon.GetComponent<XRGrabInteractable>().enabled = false;
                     balloon.tag = "Untagged";
-
+                    pcController.SendMessage("Reset");
                     EndTheTutorial();
                     Status++;
                 }
