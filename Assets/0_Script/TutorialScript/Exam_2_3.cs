@@ -55,7 +55,7 @@ public class Exam_2_3 : MonoBehaviour
 
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
-    private QuestionManager questionManager; //管理題目介面
+    private QuestionManager questionManager;    //管理題目介面
     private AudioManager audioManager;          //音樂管理
 
     // Start is called before the first frame update

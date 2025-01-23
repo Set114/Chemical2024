@@ -58,7 +58,7 @@ public class ButtonInteraction6 : MonoBehaviour
         else
         {
             //level3AudioSet.leve1Error();
-            controllerHaptics.TriggerHapticFeedback(true);
+            controllerHaptics.TriggerHapticFeedback();
             HideNO2Object();
             ShowHintPlane();
            

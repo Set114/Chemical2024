@@ -98,7 +98,7 @@ public class QuestionCheck : MonoBehaviour
     }
     void OnWrongButtonClicked(int index)
     {
-        controllerHaptics.TriggerHapticFeedback(true);
+        controllerHaptics.TriggerHapticFeedback();
         // 設定當前題目索引
         currentQuestionIndex = index;
 

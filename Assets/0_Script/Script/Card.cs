@@ -34,7 +34,7 @@ public class Card : MonoBehaviour
         grabInteractable.selectExited.RemoveListener(OnSelectExited);
     }
 
-    private void OnSelectExited(SelectExitEventArgs args)
+    public void OnSelectExited(SelectExitEventArgs args)
     {
         bool cardPlaced = false;
 

@@ -24,6 +24,7 @@ public class Exam_5_1 : MonoBehaviour
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
+    private QuestionManager questionManager;    //管理題目介面
     private AudioManager audioManager;
     private TestDataManager testDataManager;
     private ControllerHaptics hapticsController;
@@ -32,9 +33,11 @@ public class Exam_5_1 : MonoBehaviour
     void Start()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
+        questionManager = FindObjectOfType<QuestionManager>();
         audioManager = FindObjectOfType<AudioManager>();
         testDataManager = FindObjectOfType<TestDataManager>();
         hapticsController = FindObjectOfType<ControllerHaptics>();
+
         audioManager.PlayVoice("E5_1_1");
         startMenu.SetActive(true);
         endMenu.SetActive(false);
@@ -105,7 +108,7 @@ public class Exam_5_1 : MonoBehaviour
 
     IEnumerator MissMatchCards()
     {
-        hapticsController.TriggerHapticFeedback(true);
+        questionManager.TriggerHapticFeedback();
         foreach (var card in cardComparison)
         {
             card.ChangeDetectItemsColor(Color.red);

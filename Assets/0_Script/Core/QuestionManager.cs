@@ -29,17 +29,26 @@ public class QuestionManager : MonoBehaviour
 
     int currentIndex;   //紀錄目前的編號
     bool isAnswer = false;  //紀錄是否已經答題，防呆用
-    GameObject sender;  //用來記錄誰呼叫他的
 
+    private GameObject sender;  //用來記錄誰呼叫他的
     //--System
-    GameManager gm;
-    LevelObjManager levelManager;
-    AudioManager audioManager;  //音樂管理
+    private GameManager gm;
+    private LevelObjManager levelManager;
+    private AudioManager audioManager;                      //音樂管理
+    private ControllerHaptics controllerHaptics;            //處理手把震動
+    private bool isPC;
     private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
         levelManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
+        //判斷平台
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        isPC = true;
+#else
+        isPC = false;
+        controllerHaptics = FindObjectOfType<ControllerHaptics>();
+#endif
     }
 
     private void OnEnable()
@@ -163,10 +172,19 @@ public class QuestionManager : MonoBehaviour
                 AnswerCanvas.SetActive(true);
                 MarkWrong.SetActive(true);
                 audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceAnswerName);
+                if (!isPC)
+                    TriggerHapticFeedback();
             }
         }
     }
-
+    //回答錯誤時VR手把的震動回饋
+    public void TriggerHapticFeedback()
+    {
+        if (controllerHaptics)
+        {
+            controllerHaptics.TriggerHapticFeedback();
+        }
+    }
     //答對後等待語音
     void FinishAudio()
     {

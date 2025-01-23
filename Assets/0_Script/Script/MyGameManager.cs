@@ -90,7 +90,7 @@ public class MyGameManager : MonoBehaviour
 
     IEnumerator MissMatchCards()
     {
-        hapticsController.TriggerHapticFeedback(true);
+        hapticsController.TriggerHapticFeedback();
         foreach (var card in cardComparison)
         {
             card.ChangeDetectItemsColor(Color.red);

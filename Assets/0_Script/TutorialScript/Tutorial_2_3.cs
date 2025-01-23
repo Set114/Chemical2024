@@ -254,7 +254,7 @@ public class Tutorial_2_3 : MonoBehaviour
 
     public void ReactionStay(GameObject sender)
     {
-        if (Status == 2 && sender.name == "TestTube_2-2")
+        if (Status == 2 && sender.name == "TestTube_2-3")
         {
             sender.tag = "Untagged";
             sender.transform.position = testTubePoint.position;

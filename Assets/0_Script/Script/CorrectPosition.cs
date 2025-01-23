@@ -91,7 +91,7 @@ public class CorrectPosition : MonoBehaviour
         }
         else
         {
-            controllerHaptics.TriggerHapticFeedback(true);
+            controllerHaptics.TriggerHapticFeedback();
             submitAnswerUI.SetActive(false);
             wrong.SetActive(true);
             a1.SetActive(true);

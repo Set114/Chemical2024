@@ -9,13 +9,10 @@ public class ControllerHaptics : MonoBehaviour
     public float amplitude = 0.5f; // 震動強度
     public float duration = 0.5f; // 震動持續時間
 
-    public void TriggerHapticFeedback(bool isShock)
+    public void TriggerHapticFeedback()
     {
-        if (isShock)
-        {
-            StartCoroutine(TriggerHaptic(leftController));
-            StartCoroutine(TriggerHaptic(rightController));
-        }
+        StartCoroutine(TriggerHaptic(leftController));
+        StartCoroutine(TriggerHaptic(rightController));
     }
 
     private IEnumerator TriggerHaptic(XRBaseController controller)

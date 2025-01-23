@@ -49,7 +49,7 @@ public class ButtonInteraction2 : MonoBehaviour
         }
         else
         {
-            controllerHaptics.TriggerHapticFeedback(true);
+            controllerHaptics.TriggerHapticFeedback();
             HideNO2Object();
             ShowHintPlane();
            
