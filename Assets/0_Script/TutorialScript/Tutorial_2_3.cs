@@ -177,13 +177,14 @@ public class Tutorial_2_3 : MonoBehaviour
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
 
+                    pcController.SendMessage("Reset");
                     balloon.GetComponent<XRGrabInteractable>().enabled = false;
                     balloon.tag = "Untagged";
                     balloon.GetComponent<Rigidbody>().isKinematic = true;
                     balloon.transform.position = bottleCapPoint.position;
                     balloon.transform.rotation = bottleCapPoint.rotation;
                     balloon.transform.SetParent(bottleCapPoint);
-                    pcController.SendMessage("Reset");
+                    
                     balloon_flat.SetActive(false);
                     balloon_inflated.SetActive(true);
                     Status++;

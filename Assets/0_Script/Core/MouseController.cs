@@ -46,6 +46,7 @@ public class MouseController : MonoBehaviour
                     //parentEmpty.transform.rotation = initialRotation;
                     selectedObjectParent = selectedObject.transform.parent;
                     selectedObject.transform.parent = parentEmpty.transform;
+                    GameObject.FindWithTag("LevelObject").SendMessage("Grab", selectedObject, SendMessageOptions.DontRequireReceiver);
                     switch (selectedObject.name)
                     {
                         //------------Stage 1--------------
@@ -334,5 +335,71 @@ public class MouseController : MonoBehaviour
         Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
 
         return worldPosition;
+    }
+
+    private void Reset()
+    {
+        switch (selectedObject.name)
+        {
+            //------------Stage 1--------------
+            case "hammer":
+                if (selectedObject.GetComponent<MotionHammer>())
+                    Destroy(selectedObject.GetComponent<MotionHammer>());
+                Collider[] objColliderHammer = selectedObject.GetComponents<Collider>();
+                objColliderHammer[1].enabled = true;
+                break;
+            case "GAS":
+                isToolSwitchOn = false;
+                selectedObject.SendMessage("Fire", isToolSwitchOn);
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            case "Iron":
+            case "TestTube":
+            case "AlcoholLamp":
+            case "Paper":
+            case "DryIce":
+            case "Glass":
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            //------------Stage 2--------------
+            case "GAS_2_1":
+                isToolSwitchOn = false;
+                selectedObject.SendMessage("Fire", isToolSwitchOn);
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            case "Tweezers_2-2":
+            case "Tweezers_2-3":
+            case "Tweezers_2-6":
+                isToolSwitchOn = false;
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                objColliderTweezers[2].enabled = true;
+                break;
+            case "CalciumChloride_2-2":
+            case "SodiumCarbonate_2-2":
+            case "SodiumCarbonate_2-3":
+            case "HCI_2-3":
+            case "BakingSoda_2-4":
+            case "BakingSoda_2-5":
+            case "Rag_2-4": //抹布
+            case "Toner_2-6":   //碟子
+            case "CopperOxide_2-6":   //碟子
+            case "Glass_2-4":
+                isToolSwitchOn = false;
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            case "Cap_2-2":
+            case "Balloon_2-3": //氣球
+            case "RubberBand_2-3":  //橡皮筋
+                Collider objColliderCap2_2 = selectedObject.GetComponent<Collider>();
+                objColliderCap2_2.isTrigger = false;
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+            case "WaterBottle_2-2": //恢復物理，但不回原位
+            case "WaterBottle_2-3":
+                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                break;
+        }
+        selectedObject = null;
     }
 }

@@ -159,13 +159,13 @@ public class Tutorial_2_2 : MonoBehaviour
                 {
                     bottle.GetComponent<Rigidbody>().isKinematic = true;
 
+                    pcController.SendMessage("Reset",SendMessageOptions.DontRequireReceiver);
                     bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
                     bottleCap.tag = "Untagged";
                     bottleCap.GetComponent<Rigidbody>().isKinematic = true;
                     bottleCap.transform.position = bottleCapPoint.position;
                     bottleCap.transform.rotation = bottleCapPoint.rotation;
-                    bottleCap.transform.SetParent(bottleCapPoint);
-                    pcController.SendMessage("Reset");
+                    bottleCap.transform.SetParent(bottleCapPoint);                    
 
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -219,9 +219,9 @@ public class Tutorial_2_2 : MonoBehaviour
                     massTexts[2].text = scaleVale.ToString("0") + "g";
 
                     //讓瓶蓋不可被拿起
-                    bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
-                    bottleCap.tag = "Untagged";
                     pcController.SendMessage("Reset");
+                    bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
+                    bottleCap.tag = "Untagged";                    
 
                     EndTheTutorial();
                     Status++;
