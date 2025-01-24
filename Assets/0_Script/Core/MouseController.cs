@@ -339,6 +339,8 @@ public class MouseController : MonoBehaviour
 
     private void Reset()
     {
+        if (selectedObject == null)
+            return;
         switch (selectedObject.name)
         {
             //------------Stage 1--------------

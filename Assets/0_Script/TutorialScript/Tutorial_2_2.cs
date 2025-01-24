@@ -282,25 +282,25 @@ public class Tutorial_2_2 : MonoBehaviour
         switch (Status)
         {
             case 0: //等待寶特瓶液體倒滿
-                if (obj.name != "WaterBottle_2-2" || obj.name != "SodiumCarbonate_2-2")
+                if (obj.name != "WaterBottle_2-2" && obj.name != "SodiumCarbonate_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 1: //等待試管液體倒滿
-                if (obj.name != "TestTube_2-2" || obj.name != "CalciumChloride_2-2")
+                if (obj.name != "TestTube_2-2" && obj.name != "CalciumChloride_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
-                if (obj.name != "WaterBottle_2-2" || obj.name != "Tweezers_2-2")
+                if (obj.name != "WaterBottle_2-2" && obj.name != "Tweezers_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 3: //待鎖上寶特瓶蓋後， 畫面跳轉至測量質量頁面。
-                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
@@ -324,13 +324,13 @@ public class Tutorial_2_2 : MonoBehaviour
                 }
                 break;
             case 8: //待打開瓶蓋
-                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 9: //待瓶蓋放上電子秤
-                if (obj.name != "WaterBottle_2-2" || obj.name != "Cap_2-2")
+                if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }

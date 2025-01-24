@@ -303,31 +303,31 @@ public class Tutorial_2_3 : MonoBehaviour
         switch (Status)
         {
             case 0: //等待寶特瓶液體倒滿
-                if (obj.name != "WaterBottle_2-3" || obj.name != "SodiumCarbonate_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "SodiumCarbonate_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 1: //等待試管液體倒滿
-                if (obj.name != "TestTube_2-3" || obj.name != "HCI_2-3")
+                if (obj.name != "TestTube_2-3" && obj.name != "HCI_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
-                if (obj.name != "WaterBottle_2-3" || obj.name != "Tweezers_2-2")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "Tweezers_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 3: //待氣球套上寶特瓶
-                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
                 break;
             case 4: //待套上橡皮筋
-                if (obj.name != "WaterBottle_2-3" || obj.name != "RubberBand_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "RubberBand_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
@@ -351,7 +351,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 }
                 break;
             case 9: //待拿掉氣球
-                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
@@ -370,7 +370,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 }
                 break;
             case 10: //待氣球放上電子秤
-                if (obj.name != "WaterBottle_2-3" || obj.name != "Balloon_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
                 }
