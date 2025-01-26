@@ -33,6 +33,8 @@ public class Exam_2_3 : MonoBehaviour
     [Header("質量設定")]
     [Tooltip("磅秤文字")]
     [SerializeField] Text weightText;
+    [Tooltip("磅秤文字介面")]
+    [SerializeField] Text weightTextDisplay;
     [Tooltip("磅秤目前數值")]
     [SerializeField] private float scaleVale = 0f;
     [Tooltip("碳粉重量")]
@@ -69,6 +71,7 @@ public class Exam_2_3 : MonoBehaviour
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
+        weightTextDisplay.text = "0g";
         testTubePowderColor = testTubePowder.liquidColor;
     }
 
@@ -135,6 +138,7 @@ public class Exam_2_3 : MonoBehaviour
                         //記錄反應後重量
                         scaleVale = weight_finsh;
                         weightText.text = scaleVale.ToString("0") + "g";
+                        weightTextDisplay.text = scaleVale.ToString("0") + "g";
                         massTexts[1].text = scaleVale.ToString("0") + "g";
                         questionManager.ShowExamWithDelay(2, answerDelay, gameObject);
 
@@ -160,6 +164,7 @@ public class Exam_2_3 : MonoBehaviour
                     particleSystem_toner.SetActive(false);
                     scaleVale = weight_toner;
                     weightText.text = scaleVale.ToString("0") + "g";
+                    weightTextDisplay.text = scaleVale.ToString("0") + "g";
                 }
                 break;
             case "TestTube_Toner_2-6":
@@ -172,6 +177,7 @@ public class Exam_2_3 : MonoBehaviour
                     particleSystem_copperOxide.SetActive(false);
                     scaleVale = weight_toner + weight_copperOxide;
                     weightText.text = scaleVale.ToString("0") + "g";
+                    weightTextDisplay.text = scaleVale.ToString("0") + "g";
                     //記錄反應前重量
                     massTexts[0].text = scaleVale.ToString("0") + "g";
                     hintManager.SwitchStep("E2_3_2");

@@ -5255,7 +5255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3534741442076678580
 Transform:
   m_ObjectHideFlags: 0
@@ -15668,7 +15668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &929187296186650179
 Transform:
   m_ObjectHideFlags: 0
@@ -21064,10 +21064,10 @@ MonoBehaviour:
   weightText_woodPowder: {fileID: 3262615032884861957}
   weightText_woodPowderDisplay: {fileID: 5920409205446166842}
   initialWeight_woodPowder: 20
-  finalWeight_woodPowder: 17
+  finalWeight_woodPowder: 18.6
   heatingTime_woodPowder: 2
   burningTime_woodPowder: 5
-  coolingTime_woodPowder: 5
+  coolingTime_woodPowder: 1
   finalRelativeScale: 0.5
   colorChangeSpeed_woodPowder: 0.001
   steelWools:
@@ -21078,10 +21078,10 @@ MonoBehaviour:
   weightText_steelWool: {fileID: 4408883442824049393}
   weightText_steelWoolDisplay: {fileID: 3595594075137433759}
   initialWeight_steelWool: 20
-  finalWeight_steelWool: 22
+  finalWeight_steelWool: 22.4
   heatingTime_steelWool: 3
   burningTime_steelWool: 5
-  coolingTime_steelWool: 5
+  coolingTime_steelWool: 1
   colorChangeSpeed_steelWool: 0
 --- !u!1 &4774141035822877013
 GameObject:
@@ -42184,7 +42184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7213131683867348821}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00037}
+  m_LocalPosition: {x: 0, y: -0, z: 0.000132}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -42278,7 +42278,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -42331,7 +42331,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.73
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -42447,7 +42447,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.56
+      scalar: 0.005
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -42823,7 +42823,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 2
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -42910,7 +42910,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.0001
+      value: 0.17
       mode: 0
       spread: 0
       speed:
@@ -43029,7 +43029,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -46923,7 +46923,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14fab0de6c54324468738e7b38a88207, type: 2}
+  - {fileID: 2100000, guid: 598ce1e649c6fa34fb4c92015ebfd8b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -46944,14 +46944,14 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0
-  m_LengthScale: 2
+  m_VelocityScale: 0.1
+  m_LengthScale: 1
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0

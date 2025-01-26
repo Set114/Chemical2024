@@ -18,5 +18,13 @@ public class LabelCanvas : MonoBehaviour
             // 保持 Canvas 朝向攝影機
             transform.rotation = Camera.main.transform.rotation;
         }
+        if(!targetObject)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else if (!targetObject.gameObject.activeSelf)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

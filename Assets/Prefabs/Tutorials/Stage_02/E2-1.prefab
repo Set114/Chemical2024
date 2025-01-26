@@ -654,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2233553971119541842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.396, y: -0.005, z: -0.358}
+  m_LocalPosition: {x: 0.396, y: -0.005, z: -0.458}
   m_LocalScale: {x: 0.6, y: 0.01, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -722,8 +722,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &2233553971138145034
 GameObject:
   m_ObjectHideFlags: 0
@@ -6415,6 +6415,8 @@ MonoBehaviour:
   bakingSodaPowder: {fileID: 3459035640843192993}
   particleSystem_SodaPowder: {fileID: 2233553971728608135}
   bakingSodaPowderInWater: {fileID: 2233553970601628995}
+  bakingSoda: {fileID: 2233553971867589134}
+  glass: {fileID: 6116119675330166334}
   rag: {fileID: 5106684098442772716}
   wetRagMaterial: {fileID: 2100000, guid: c7f710f9042764fa7ac5b946d10eaf94, type: 2}
   dirtyRagMaterial: {fileID: 2100000, guid: ce5f12804a85b4875a1c2337a22faa81, type: 2}

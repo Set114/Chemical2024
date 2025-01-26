@@ -34,7 +34,7 @@ public class LiquidController : MonoBehaviour
     [SerializeField] private float maxPourOutSpeed = 10000f;
     private float pourOutSpeed;                                 // 目前倒出速度
 
-    [Tooltip("篩選注入液體")]
+    [Tooltip("篩選注入液體，以分號分隔")]
     public string injectFilter = "";
     [Tooltip("無限液體")]
     [SerializeField] private bool isUnlimited = false;

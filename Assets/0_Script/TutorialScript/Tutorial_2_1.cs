@@ -21,7 +21,6 @@ public class Tutorial_2_1 : MonoBehaviour
     [Tooltip("燃燒後木屑重量")]
     [SerializeField] private float finalWeight_woodPowder = 10f;
     float currentWeight_woodPowder;
-    //private float weightChangeSpeed_woodPowder;          //  木屑改變重量速度(沒用到的數值，功能與燃燒時間重複)
     [Tooltip("木屑需要持續加熱的時間")]
     [SerializeField] private float heatingTime_woodPowder = 3f;
     [Tooltip("木屑持續燃燒時間")]
@@ -32,7 +31,6 @@ public class Tutorial_2_1 : MonoBehaviour
     [SerializeField] private float finalRelativeScale = 0.5f;
     private Vector3 initialScale_woodPowder;              //  初始木屑尺寸
     private Vector3 finalScale_woodPowder;                //  最後的木屑尺寸
-    //private float scalingSpeed_woodPowder;              //  木屑縮小速度(沒用到的數值，功能與燃燒時間重複)
     [Tooltip("木屑變色速度")]
     [SerializeField] private float colorChangeSpeed_woodPowder;
 
@@ -53,7 +51,6 @@ public class Tutorial_2_1 : MonoBehaviour
     [Tooltip("燃燒後鋼絲絨重量")]
     [SerializeField] private float finalWeight_steelWool = 30f;
     float currentWeight_steelWool;
-    //private float weightChangeSpeed_steelWool = 1f;     //  鋼絲絨改變重量速度
     [Tooltip("鋼絲絨需要持續加熱的時間")]
     [SerializeField] private float heatingTime_steelWool = 5f;
     [Tooltip("鋼絲絨持續燃燒時間")]
@@ -65,6 +62,8 @@ public class Tutorial_2_1 : MonoBehaviour
 
     private float timer_steelWool = 0.0f;                //  計時器
     private int status_steelWool = 0;                    //  鋼絲絨狀態
+
+    int StageStatus = 0;
 
     private bool firstTimeWarning = true;               //  第一次抓取危險物品的通知
 
@@ -85,20 +84,14 @@ public class Tutorial_2_1 : MonoBehaviour
         fire_woodPowder.Stop();
         
         currentWeight_woodPowder = initialWeight_woodPowder;
-        // 計算改變重量速度 這個沒用到...
-        //weightChangeSpeed_woodPowder = (initialweight_woodPowder - finalWeight_woodPowder) / burningTime_woodPowder;
         // 初始化比例
         initialScale_woodPowder = Vector3.one * woodPowder.localScale.x;
         finalScale_woodPowder = new Vector3( initialScale_woodPowder.x * (finalRelativeScale + ( 1.0f - finalRelativeScale ) * 0.8f), initialScale_woodPowder.y * finalRelativeScale, initialScale_woodPowder.z * (finalRelativeScale + (1.0f - finalRelativeScale) * 0.8f));
-        //scalingSpeed_woodPowder 完全沒使用到...
-        //scalingSpeed_woodPowder = (initialScale_woodPowder - finalScale_woodPowder) / burningTime_woodPowder;
         color_woodPowder = meshRenderer_woodPowder.material.color;
 
         fire_steelWool.Stop();
 
         currentWeight_steelWool = initialWeight_steelWool;
-        // 計算改變重量速度 這個沒用到...
-        //weightChangeSpeed_steelWool = (finalWeight_steelWool - weight_steelWool) / burningTime_steelWool;
         steelWoolColors = new Color[steelWools.Length];
         for (int i = 0; i < steelWools.Length; i++)
         {
@@ -134,13 +127,11 @@ public class Tutorial_2_1 : MonoBehaviour
 
                 //計算比例 0% > 100%
                 float processPercent = 1.0f - timer_woodPowder/burningTime_woodPowder;
-                //scale_woodPowder -= scalingSpeed_woodPowder * Time.deltaTime;
                 Vector3 currentScale;
                 currentScale = Vector3.Lerp(initialScale_woodPowder, finalScale_woodPowder, processPercent);
                 woodPowder.localScale = currentScale;
 
                 //重量減輕
-                //currentWeight_woodPowder -= weightChangeSpeed_woodPowder * Time.deltaTime;
                 currentWeight_woodPowder = (initialWeight_woodPowder - finalWeight_woodPowder) * (1.0f - processPercent) + finalWeight_woodPowder;
                 //處理變色
                 color_woodPowder.a = timer_woodPowder / burningTime_woodPowder;
@@ -158,8 +149,6 @@ public class Tutorial_2_1 : MonoBehaviour
                 timer_woodPowder -= Time.deltaTime;
                 if (timer_woodPowder <= 0f)
                 {
-                    if (status_steelWool == 3)
-                        EndTheTutorial();
                     status_woodPowder++;
                 }
                 break;
@@ -168,13 +157,12 @@ public class Tutorial_2_1 : MonoBehaviour
         switch (status_steelWool)
         {
             case 0:     //  待加熱
-
                 //處理變色
                 steelWoolColors[1].a = timer_steelWool / heatingTime_steelWool;
                 if (timer_steelWool >= heatingTime_steelWool)
                 {
                     timer_steelWool = burningTime_steelWool;
-                    //fire_steelWool.Play();    //鋼絲絨燃燒沒有煙
+                    fire_steelWool.Play();
                     steelWoolColors[1].a = 1f;
                     steelWoolColors[2].a = 1f;
                     steelWools[2].material.color = steelWoolColors[2];
@@ -206,9 +194,27 @@ public class Tutorial_2_1 : MonoBehaviour
                 timer_steelWool -= Time.deltaTime;
                 if (timer_steelWool <= 0f)
                 {
-                    if (status_woodPowder == 3)
-                        EndTheTutorial();
                     status_steelWool++;
+                }
+                break;
+        }
+
+        switch(StageStatus)
+        {
+            case 0:     //等待都燒完
+                if(status_steelWool ==3 && status_woodPowder ==3)
+                {
+                    hintManager.SwitchStep("T2_1_2");   //先切換訊息
+                    timer_steelWool = 3.0f; //待機個2秒，等待語音結束
+                    StageStatus++;
+                }
+                break;
+            case 1: //關卡待機
+                timer_steelWool -= Time.deltaTime;
+                if (timer_steelWool <= 0f)
+                {
+                    EndTheTutorial();
+                    StageStatus++;
                 }
                 break;
         }
@@ -249,7 +255,6 @@ public class Tutorial_2_1 : MonoBehaviour
 
     private void EndTheTutorial()   //完成教學
     {
-        hintManager.SwitchStep("T2_1_2");
         hintManager.ShowNextButton(this.gameObject);
     }
 

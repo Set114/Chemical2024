@@ -29,7 +29,7 @@ public class MouseController : MonoBehaviour
     void Update()
     {
         // 檢測滑鼠點擊
-        if (Input.GetMouseButtonDown(0)) // 左鍵按下
+        if (Input.GetMouseButtonDown(0) && !selectedObject ) // 左鍵按下
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -46,7 +46,7 @@ public class MouseController : MonoBehaviour
                     //parentEmpty.transform.rotation = initialRotation;
                     selectedObjectParent = selectedObject.transform.parent;
                     selectedObject.transform.parent = parentEmpty.transform;
-                    GameObject.FindWithTag("LevelObject").SendMessage("Grab", selectedObject, SendMessageOptions.DontRequireReceiver);
+                    
                     switch (selectedObject.name)
                     {
                         //------------Stage 1--------------
@@ -128,6 +128,7 @@ public class MouseController : MonoBehaviour
                         case "BakingSoda_2-4":
                         case "BakingSoda_2-5":
                         case "Rag_2-4": //抹布
+                        case "Rag_Wet_2-4": //抹布
                             planeDistance = 0.681f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
@@ -149,12 +150,126 @@ public class MouseController : MonoBehaviour
                             selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                             break;
                     }
+                    GameObject.FindWithTag("LevelObject").SendMessage("Grab", selectedObject, SendMessageOptions.DontRequireReceiver);
                 }
             }
         }
 
         // 放開滑鼠，結束拖曳
-        if (Input.GetMouseButtonUp(0) && selectedObject)
+        if (Input.GetMouseButtonUp(0) )
+        {
+            this.Reset();
+        }
+
+        // 拖曳操作
+        if (selectedObject != null && Input.GetMouseButton(0)) // 左鍵按住
+        {
+            Vector3 mouseWorldPosition = GetMousePositionOnFixedPlane();
+            // 將物件移動到滑鼠位置
+            parentEmpty.transform.position = mouseWorldPosition;
+        }        
+
+        //使用物件
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (selectedObject)
+            {
+                switch (selectedObject.name)
+                {
+                    //------------Stage 1--------------
+                    case "hammer":  //attach hammer動畫
+                        if (!selectedObject.GetComponent<MotionHammer>())
+                            selectedObject.AddComponent<MotionHammer>();
+                        break;
+                    case "GAS":
+                        isToolSwitchOn = !isToolSwitchOn;
+                        selectedObject.SendMessage("Fire", isToolSwitchOn);
+                        break;
+                    //------------Stage 2--------------
+                    case "GAS_2_1":
+                        isToolSwitchOn = !isToolSwitchOn;
+                        selectedObject.SendMessage("Fire", isToolSwitchOn);
+                        break;
+                }
+            }
+        }
+        //使用物件
+        if (Input.GetMouseButton(1))
+        {
+            if (selectedObject)
+            {
+                Quaternion targetRotation;
+                switch (selectedObject.name)
+                {
+                    case "CalciumChloride_2-2":
+                    case "SodiumCarbonate_2-2":
+                    case "SodiumCarbonate_2-3":
+                    case "HCI_2-3":
+                        targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 56.0f));
+                        selectedObject.transform.localRotation = Quaternion.Slerp(  selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
+                        break;
+                    case "BakingSoda_2-4":  //小碟子
+                    case "BakingSoda_2-5":
+                    case "Toner_2-6":   //碟子
+                    case "CopperOxide_2-6":   //碟子
+                        targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 85.0f));
+                        selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
+                        break;
+                    case "WaterBottle_2-2":
+                    case "WaterBottle_2-3":
+                        selectedObject.transform.localPosition = new Vector3(0.0146f, 0.1f, 0.0f);
+                        targetRotation = Quaternion.Euler(new Vector3( 0.0f, 0.0f, 105.0f));
+                        selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
+                        break;
+                }
+            }
+        }
+        //使用物件
+        else//if(Input.GetMouseButtonUp(1))
+        {
+            if (selectedObject)
+            {
+                Quaternion targetRotation;
+                switch (selectedObject.name)
+                {
+                    case "CalciumChloride_2-2":
+                    case "SodiumCarbonate_2-2":
+                    case "SodiumCarbonate_2-3":
+                    case "HCI_2-3":
+                    case "BakingSoda_2-4":  //小碟子
+                    case "BakingSoda_2-5":
+                    case "Toner_2-6":   //碟子
+                    case "CopperOxide_2-6":   //碟子
+                        targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+                        selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
+                        break;
+                    case "WaterBottle_2-2":
+                    case "WaterBottle_2-3":
+                        selectedObject.transform.localPosition = new Vector3(0.0f, -0.104f, 0.0f);
+                        targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+                        selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
+                        break;
+                }
+            }
+        }
+    }
+
+    //取得滑鼠前方固定距離的位置
+    Vector3 GetMousePositionOnFixedPlane()
+    {
+        // 獲取滑鼠的螢幕座標
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        // 設置滑鼠的 Z 軸距離（相對於攝影機）
+        mouseScreenPosition.z = planeDistance;
+        // 使用攝影機將螢幕座標轉換為世界座標
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
+
+        return worldPosition;
+    }
+
+    private void Reset()
+    {
+        if (selectedObject)
         {
             switch (selectedObject.name)
             {
@@ -206,12 +321,13 @@ public class MouseController : MonoBehaviour
                     objColliderTweezers[2].enabled = true;
                     break;
                 case "CalciumChloride_2-2":
-                case "SodiumCarbonate_2-2":                             
+                case "SodiumCarbonate_2-2":
                 case "SodiumCarbonate_2-3":
                 case "HCI_2-3":
                 case "BakingSoda_2-4":
                 case "BakingSoda_2-5":
                 case "Rag_2-4": //抹布
+                case "Rag_Wet_2-4": //濕抹布
                 case "Toner_2-6":   //碟子
                 case "CopperOxide_2-6":   //碟子
                 case "Glass_2-4":
@@ -233,175 +349,10 @@ public class MouseController : MonoBehaviour
                 case "WaterBottle_2-3":
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                     break;
             }
             selectedObject = null;
         }
-
-        // 拖曳操作
-        if (selectedObject != null && Input.GetMouseButton(0)) // 左鍵按住
-        {
-            Vector3 mouseWorldPosition = GetMousePositionOnFixedPlane();
-            // 將物件移動到滑鼠位置
-            parentEmpty.transform.position = mouseWorldPosition;
-        }        
-
-        //使用物件
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (selectedObject)
-            {
-                switch (selectedObject.name)
-                {
-                    //------------Stage 1--------------
-                    case "hammer":  //attach hammer動畫
-                        if (!selectedObject.GetComponent<MotionHammer>())
-                            selectedObject.AddComponent<MotionHammer>();
-                        break;
-                    case "GAS":
-                        isToolSwitchOn = !isToolSwitchOn;
-                        selectedObject.SendMessage("Fire", isToolSwitchOn);
-                        break;
-                    //------------Stage 2--------------
-                    case "GAS_2_1":
-                        isToolSwitchOn = !isToolSwitchOn;
-                        selectedObject.SendMessage("Fire", isToolSwitchOn);
-                        break;
-                }
-            }
-        }
-        //使用物件
-        if (Input.GetMouseButton(1))
-        {
-            if (selectedObject)
-            {
-                switch (selectedObject.name)
-                {
-                    case "CalciumChloride_2-2":
-                    case "SodiumCarbonate_2-2":
-                    case "SodiumCarbonate_2-3":
-                    case "HCI_2-3":
-                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 56.0f);
-                        break;
-                    case "BakingSoda_2-4":  //小碟子
-                    case "BakingSoda_2-5":
-                    case "Toner_2-6":   //碟子
-                    case "CopperOxide_2-6":   //碟子
-                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 85.0f);
-                        break;
-                    case "WaterBottle_2-2":
-                    case "WaterBottle_2-3":
-                        selectedObject.transform.localPosition = new Vector3(0.0146f, 0.1f, 0.0f);
-                        selectedObject.transform.localEulerAngles = new Vector3(-4.351f, 2.832f, 172.45f);
-                        break;
-                }
-            }
-        }
-        //使用物件
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (selectedObject)
-            {
-                switch (selectedObject.name)
-                {
-                    case "CalciumChloride_2-2":
-                    case "SodiumCarbonate_2-2":
-                    case "SodiumCarbonate_2-3":
-                    case "HCI_2-3":
-                    case "BakingSoda_2-4":  //小碟子
-                    case "BakingSoda_2-5":
-                    case "Toner_2-6":   //碟子
-                    case "CopperOxide_2-6":   //碟子
-                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                        break;
-                    case "WaterBottle_2-2":
-                    case "WaterBottle_2-3":
-                        selectedObject.transform.localPosition = new Vector3(0.0f, -0.104f, 0.0f);
-                        selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                        break;
-                }
-            }
-        }
-    }
-
-    //取得滑鼠前方固定距離的位置
-    Vector3 GetMousePositionOnFixedPlane()
-    {
-        // 獲取滑鼠的螢幕座標
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        // 設置滑鼠的 Z 軸距離（相對於攝影機）
-        mouseScreenPosition.z = planeDistance;
-        // 使用攝影機將螢幕座標轉換為世界座標
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
-
-        return worldPosition;
-    }
-
-    private void Reset()
-    {
-        if (selectedObject == null)
-            return;
-        switch (selectedObject.name)
-        {
-            //------------Stage 1--------------
-            case "hammer":
-                if (selectedObject.GetComponent<MotionHammer>())
-                    Destroy(selectedObject.GetComponent<MotionHammer>());
-                Collider[] objColliderHammer = selectedObject.GetComponents<Collider>();
-                objColliderHammer[1].enabled = true;
-                break;
-            case "GAS":
-                isToolSwitchOn = false;
-                selectedObject.SendMessage("Fire", isToolSwitchOn);
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-            case "Iron":
-            case "TestTube":
-            case "AlcoholLamp":
-            case "Paper":
-            case "DryIce":
-            case "Glass":
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-            //------------Stage 2--------------
-            case "GAS_2_1":
-                isToolSwitchOn = false;
-                selectedObject.SendMessage("Fire", isToolSwitchOn);
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-            case "Tweezers_2-2":
-            case "Tweezers_2-3":
-            case "Tweezers_2-6":
-                isToolSwitchOn = false;
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
-                objColliderTweezers[2].enabled = true;
-                break;
-            case "CalciumChloride_2-2":
-            case "SodiumCarbonate_2-2":
-            case "SodiumCarbonate_2-3":
-            case "HCI_2-3":
-            case "BakingSoda_2-4":
-            case "BakingSoda_2-5":
-            case "Rag_2-4": //抹布
-            case "Toner_2-6":   //碟子
-            case "CopperOxide_2-6":   //碟子
-            case "Glass_2-4":
-                isToolSwitchOn = false;
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-            case "Cap_2-2":
-            case "Balloon_2-3": //氣球
-            case "RubberBand_2-3":  //橡皮筋
-                Collider objColliderCap2_2 = selectedObject.GetComponent<Collider>();
-                objColliderCap2_2.isTrigger = false;
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-            case "WaterBottle_2-2": //恢復物理，但不回原位
-            case "WaterBottle_2-3":
-                selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                break;
-        }
-        selectedObject = null;
     }
 }

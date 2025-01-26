@@ -11,6 +11,10 @@ public class Exam_2_1 : MonoBehaviour
     [Tooltip("燒杯內的小蘇打粉")]
     [SerializeField] private GameObject bakingSodaPowderInWater;
 
+    [Tooltip("盤子")]
+    [SerializeField] private GameObject bakingSoda;
+    [Tooltip("玻璃棒")]
+    [SerializeField] private GameObject glass;
     [Tooltip("抹布")]
     [SerializeField] private GameObject rag;
     private MeshRenderer ragMesh;
@@ -48,7 +52,8 @@ public class Exam_2_1 : MonoBehaviour
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("E2_1_1");
         ragMesh = rag.GetComponent<MeshRenderer>();
-        bakingSodaPowderInWater.transform.localScale = new Vector3(0f, 0f, 0f);
+        rag.SetActive(false);
+        bakingSodaPowderInWater.transform.localScale = new Vector3(0f, 0f, 0f);        
     }
 
     public void Reaction(GameObject sender)
@@ -80,6 +85,7 @@ public class Exam_2_1 : MonoBehaviour
                     {
                         //跳出題目一
                         questionManager.ShowExamWithDelay(0, answerDelay, gameObject);
+                        hintManager.OnCloseBtnClicked();
                         Status++;
                     }
                 }
@@ -94,7 +100,9 @@ public class Exam_2_1 : MonoBehaviour
                     {
                         oilColor.a = 0f;
                         oilStain.material.color = oilColor;
-                        levelObjManager.LevelClear(0);
+                        hintManager.SwitchStep("E2_1_3");
+                        hintManager.ShowNextButton(this.gameObject);
+                        Status++;
                     }
                 }
                 break;
@@ -122,7 +130,20 @@ public class Exam_2_1 : MonoBehaviour
     //答題完畢
     public void FinishExam()
     {
-        hintManager.SwitchStep("E2_1_2");
-        Status++;
+        switch (Status)
+        {
+            case 2: //待攪拌完成
+                hintManager.SwitchStep("E2_1_2");
+                bakingSoda.SetActive(false);
+                glass.SetActive(false);
+                rag.SetActive(true);
+                Status++;
+                break;
+        }  
+    }
+
+    public void CloseHint()
+    {
+        levelObjManager.LevelClear(0);
     }
 }

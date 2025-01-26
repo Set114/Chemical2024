@@ -13,6 +13,9 @@ public class Tutorial_2_3 : MonoBehaviour
     [SerializeField] private Transform bottleCapPoint;
     [Tooltip("瓶內試管位置")]
     [SerializeField] private Transform testTubePoint;
+    [Tooltip("瓶內碰撞牆物件")]
+    [SerializeField] private GameObject bottleCollisionInside;
+
     [Tooltip("寶特瓶液體")]
     [SerializeField] private LiquidController bottleLiquid;
     [Tooltip("寶特瓶液體反應後顏色")]
@@ -175,12 +178,14 @@ public class Tutorial_2_3 : MonoBehaviour
             case 3: //套上氣球
                 if (sender.name == "Balloon_2-3")
                 {
-                    bottle.GetComponent<Rigidbody>().isKinematic = true;
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
 
-                    pcController.SendMessage("Reset");
+                    bottle.GetComponent<Rigidbody>().isKinematic = true;
                     balloon.GetComponent<XRGrabInteractable>().enabled = false;
                     balloon.tag = "Untagged";
                     balloon.GetComponent<Rigidbody>().isKinematic = true;
+                    balloon.GetComponent<Collider>().isTrigger = true;
                     balloon.transform.position = bottleCapPoint.position;
                     balloon.transform.rotation = bottleCapPoint.rotation;
                     balloon.transform.SetParent(bottleCapPoint);
@@ -193,10 +198,12 @@ public class Tutorial_2_3 : MonoBehaviour
             case 4: //套上橡皮筋
                 if (sender.name == "RubberBand_2-3")
                 {
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                     sender.gameObject.SetActive(false);
-                    pcController.SendMessage("Reset");
                     rubberBand_Cap.SetActive(true);
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
+                    balloon.GetComponent<Collider>().isTrigger = true;
                     //畫面跳轉至測量質量頁面
                     hintManager.SwitchStep("T2_3_4");
                     Status++;
@@ -237,6 +244,7 @@ public class Tutorial_2_3 : MonoBehaviour
             case 10: //氣球放上電子秤
                 if (sender.name == "KitchenScale")
                 {
+                    Debug.Log("Errow Case Sender_10_2");
                     //取得第三個數值
                     scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
                     massTexts[2].text = scaleVale.ToString("0") + "g";
@@ -261,7 +269,11 @@ public class Tutorial_2_3 : MonoBehaviour
             sender.transform.position = testTubePoint.position;
             sender.transform.rotation = testTubePoint.rotation;
             sender.transform.SetParent(testTubePoint);
-            sender.GetComponent<Rigidbody>().isKinematic = true;
+            sender.layer = 3;   //設定其碰撞牆與內部碰撞牆一樣
+            sender.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;   //取消物理限制
+            sender.GetComponent<Collider>().isTrigger = false;
+            //sender.GetComponent<Rigidbody>().isKinematic = true;
+            bottleCollisionInside.SetActive(true);  //開啟瓶內碰撞器
             hintManager.SwitchStep("T2_3_3");
             //場上只剩下後半部物件
             object_Step1.SetActive(false);
@@ -276,16 +288,12 @@ public class Tutorial_2_3 : MonoBehaviour
         switch (obj.name)
         {
             case "WaterBottle_2-3":
-                if (Status == 0)
-                {
-                    Status++;
-                }
-                break;
             case "TestTube_2-3":
-                if (Status == 1)
+                if (Status < 2)
                 {
-                    hintManager.SwitchStep("T2_3_2");
                     Status++;
+                    if (Status == 2)
+                        hintManager.SwitchStep("T2_3_2");
                 }
                 break;
         }
@@ -303,64 +311,78 @@ public class Tutorial_2_3 : MonoBehaviour
         switch (Status)
         {
             case 0: //等待寶特瓶液體倒滿
-                if (obj.name != "WaterBottle_2-3" && obj.name != "SodiumCarbonate_2-3")
-                {
-                    audioManager.PlayVoice("W_WrongObject");
-                }
-                break;
             case 1: //等待試管液體倒滿
-                if (obj.name != "TestTube_2-3" && obj.name != "HCI_2-3")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "SodiumCarbonate_2-3" && obj.name != "TestTube_2-3" && obj.name != "HCI_2-3" )
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
-                if (obj.name != "WaterBottle_2-3" && obj.name != "Tweezers_2-2")
+                if (obj.name != "WaterBottle_2-3" && obj.name != "Tweezers_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 3: //待氣球套上寶特瓶
                 if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 4: //待套上橡皮筋
                 if (obj.name != "WaterBottle_2-3" && obj.name != "RubberBand_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 5: //待寶特瓶放上電子秤
                 if (obj.name != "WaterBottle_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 6: //待寶特瓶搖晃
                 if (obj.name != "WaterBottle_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 8: //待寶特瓶放上電子秤
                 if (obj.name != "WaterBottle_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 9: //待拿掉氣球
                 if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 else if (obj.name == "Balloon_2-3")
                 {
-                    //拿掉氣球
-                    balloon.transform.SetParent(transform);
-                    balloon.GetComponent<Rigidbody>().isKinematic = false;
-
+                    //拿掉氣球                    
+                    if (!isPC)
+                    {
+                        balloon.GetComponent<Rigidbody>().isKinematic = false;
+                        balloon.transform.SetParent(transform);
+                    }
+                    
                     balloon_flat.SetActive(true);
                     balloon_inflated.SetActive(false);
                     rubberBand_Cap.SetActive(false);
@@ -372,7 +394,10 @@ public class Tutorial_2_3 : MonoBehaviour
             case 10: //待氣球放上電子秤
                 if (obj.name != "WaterBottle_2-3" && obj.name != "Balloon_2-3")
                 {
+                    Debug.Log("Errow Case 10_2");
                     audioManager.PlayVoice("W_WrongObject");
+                    if (isPC)
+                        pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
         }
