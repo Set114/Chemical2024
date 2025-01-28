@@ -159,18 +159,18 @@ public class MouseController : MonoBehaviour
                             planeDistance = 0.681f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
-                        case "卡牌":
-                        case "卡牌(1)":
-                        case "卡牌(2)":
-                        case "卡牌(3)":
-                        case "卡牌(4)":
-                        case "卡牌(5)":
-                        case "卡牌(6)":
-                        case "卡牌(7)":
-                        case "卡牌(8)":
-                        case "卡牌(9)":
-                        case "卡牌(10)":
-                        case "卡牌(11)":
+                        case "Card_01":
+                        case "Card_02":
+                        case "Card_03":
+                        case "Card_04":
+                        case "Card_05":
+                        case "Card_06":
+                        case "Card_07":
+                        case "Card_08":
+                        case "Card_09":
+                        case "Card_10":
+                        case "Card_11":
+                        case "Card_12":
                             planeDistance = 0.714f;//0.714f;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
@@ -183,6 +183,7 @@ public class MouseController : MonoBehaviour
         // 放開滑鼠，結束拖曳
         if (Input.GetMouseButtonUp(0) )
         {
+            Debug.Log("Reset");
             this.Reset();
         }
 
@@ -390,18 +391,19 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.rotation = initialRotation;       //恢復初始角度
                     isToolSwitchOn = false;                    
                     break;
-                case "卡牌":
-                case "卡牌(1)":
-                case "卡牌(2)":
-                case "卡牌(3)":
-                case "卡牌(4)":
-                case "卡牌(5)":
-                case "卡牌(6)":
-                case "卡牌(7)":
-                case "卡牌(8)":
-                case "卡牌(9)":
-                case "卡牌(10)":
-                case "卡牌(11)":
+                case "Card_01":
+                case "Card_02":
+                case "Card_03":
+                case "Card_04":
+                case "Card_05":
+                case "Card_06":
+                case "Card_07":
+                case "Card_08":
+                case "Card_09":
+                case "Card_10":
+                case "Card_11":
+                case "Card_12":
+                    Debug.Log("Reset卡牌");
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
