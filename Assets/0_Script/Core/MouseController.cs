@@ -171,8 +171,10 @@ public class MouseController : MonoBehaviour
                         case "Card_10":
                         case "Card_11":
                         case "Card_12":
-                            planeDistance = 0.714f;//0.714f;
-                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            selectedObject.SendMessage("OnCardClick");
+                            selectedObject.transform.parent = selectedObjectParent;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                            selectedObject = null;
                             break;
                     }
                     GameObject.FindWithTag("LevelObject").SendMessage("Grab", selectedObject, SendMessageOptions.DontRequireReceiver);
@@ -183,7 +185,6 @@ public class MouseController : MonoBehaviour
         // 放開滑鼠，結束拖曳
         if (Input.GetMouseButtonUp(0) )
         {
-            Debug.Log("Reset");
             this.Reset();
         }
 
@@ -403,9 +404,7 @@ public class MouseController : MonoBehaviour
                 case "Card_10":
                 case "Card_11":
                 case "Card_12":
-                    Debug.Log("Reset卡牌");
-                    selectedObject.transform.parent = selectedObjectParent;
-                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    
                     break;
             }
             selectedObject = null;

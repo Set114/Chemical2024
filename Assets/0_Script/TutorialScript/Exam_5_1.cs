@@ -12,6 +12,10 @@ public class Exam_5_1 : MonoBehaviour
     [Header("已配對的卡牌數量")]
     public int matchedCardsCount = 0;
 
+    private int totalPairs; // 配對的總數
+    private int matchedPairs = 0; // 已配對的數量
+
+
     [Header("UI")]
     [Tooltip("開始介面")]
     [SerializeField] private GameObject startMenu;
@@ -67,9 +71,36 @@ public class Exam_5_1 : MonoBehaviour
         cardComparison.Add(card);
     }
 
-    public void CompareCardsInList()
+    //初始化卡牌
+    void ShuffleCards()
     {
-        if (cardComparison.Count == 2)
+        // 將卡牌隨機排列
+        foreach (GameObject card in cards)
+        {
+            card.SetActive(true);
+        }
+        /*
+        for (int i = 0; i < cards.Length; i++)
+        {
+            int randomIndex = Random.Range(0, cards.Length);
+            var temp = cards[i].transform.position;
+            cards[i].transform.position = cards[randomIndex].transform.position;
+            cards[randomIndex].transform.position = temp;
+        }
+        */
+    }
+
+    //當卡片被翻開
+    public void OnCardClicked(Card clickedCard)
+    {
+        if (cardComparison.Count >= 2 || clickedCard.IsFlipped) return;
+
+        // 翻開卡牌
+        clickedCard.FlipCard();
+        cardComparison.Add(clickedCard);
+
+        // 檢查是否滿足配對條件
+         if (cardComparison.Count >= 2)
         {
             if (cardComparison[0].cardPattern == cardComparison[1].cardPattern)
             {
@@ -82,20 +113,16 @@ public class Exam_5_1 : MonoBehaviour
         }
     }
 
+
     IEnumerator HandleMatchedCards()
     {
-        foreach (var card in cardComparison)
-        {
-            card.ChangeDetectItemsColor(Color.green);
-        }
-
         yield return new WaitForSeconds(1f);
 
-        foreach (var card in cardComparison)
+        foreach (Card card in cardComparison)
         {
-            card.ChangeDetectItemsColor(Color.white);
-            Destroy(card.gameObject);
+            card.Matched();
         }
+
         cardComparison.Clear();
 
         matchedCardsCount += 2;
@@ -108,17 +135,12 @@ public class Exam_5_1 : MonoBehaviour
 
     IEnumerator MissMatchCards()
     {
-        questionManager.TriggerHapticFeedback();
-        foreach (var card in cardComparison)
-        {
-            card.ChangeDetectItemsColor(Color.red);
-        }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
-        foreach (var card in cardComparison)
+        questionManager.TriggerHapticFeedback();
+        foreach (Card card in cardComparison)
         {
-            card.ChangeDetectItemsColor(Color.white);
-            card.CloseCard();
+            card.FlipCard();
         }
         cardComparison.Clear();
     }
@@ -134,10 +156,10 @@ public class Exam_5_1 : MonoBehaviour
     public void OnStartButtonClicked()
     {
         startMenu.SetActive(false);
-        foreach(GameObject card in cards)
-        {
-            card.SetActive(true);
-        }
+        // 初始化卡牌
+        ShuffleCards();
+        matchedCardsCount = 0;
+        
         timer = 0f; // 重置计时器值
         Status = 1;
     }
