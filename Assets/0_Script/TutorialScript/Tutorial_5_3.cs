@@ -10,6 +10,8 @@ public class Tutorial_5_3 : MonoBehaviour
     [SerializeField] private Transform barA;
     [Tooltip("長條2")]
     [SerializeField] private Transform barB;
+    [Tooltip("長條長度比")]
+    [SerializeField] private float barOffset = 1.0f;
     private float scaleX;
     [Tooltip("蒸發速率數值文字")]
     [SerializeField] private Text textA;
@@ -29,10 +31,12 @@ public class Tutorial_5_3 : MonoBehaviour
     [SerializeField] private float valueB;
     [Tooltip("每階段的凝結速率")]
     [SerializeField] private float[] valuesB;
-    [Tooltip("反應時間")]
-    [SerializeField] private float reactionTime = 0f;
     [Tooltip("倒入葡萄糖速度")]
     [SerializeField] private float glucosePourSpeed = 1f;
+    [Tooltip("燒杯內的葡萄糖的融化速度")]
+    [SerializeField] private float glucoseMeltingSpeed = 0.2f;
+    [Tooltip("燒杯內的葡萄糖的最後剩餘比例")]
+    [SerializeField] private float glucoseUnmelting = 0.2f;
     [Tooltip("目前溫度")]
     [SerializeField] private float temperature = 20f;
     [Tooltip("每階段的溫度")]
@@ -49,9 +53,12 @@ public class Tutorial_5_3 : MonoBehaviour
     [SerializeField] private GameObject particleSystem_glucose;
     [Tooltip("燒杯內的葡萄糖")]
     [SerializeField] private GameObject glucosePowderInWater;
+    
+    float glucosePowderInWaterAlready;   //已經放入水裡的葡萄糖
+    float glucosePowderInWaterCurrent;   //目前水裡的葡萄糖
+    float glucosePowderInWaterMeltingAlready;   //已經融化的葡萄糖
 
-    private float timer = 0;
-    private int Status = 0;
+    public int Status = 0;
 
     private LevelObjManager levelObjManager;
     private AudioManager audioManager;          //音樂管理
@@ -75,26 +82,58 @@ public class Tutorial_5_3 : MonoBehaviour
         temperature = temperatures[0];
         concentration = concentrations[0];
         glucosePowderInWater.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        barA.localScale = new Vector3(scaleX, valueA * barOffset, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB * barOffset, scaleX);
+        textA.text = valueA.ToString("0.00") + "mg/s";
+        textB.text = valueB.ToString("0.00") + "mg/s";
+
+        temperatureText.text = temperature.ToString("0.0");
+        concentrationText.text = concentration.ToString("0.0");
+
+        glucosePowderInWaterAlready = glucosePowderInWater.transform.localScale.x;
+        glucosePowderInWaterCurrent = glucosePowderInWaterAlready;
+        glucosePowderInWaterMeltingAlready = 0.0f;
     }
 
     private void Update()
     {
-        float t = Mathf.Clamp01(timer / reactionTime);
         switch (Status)
         {
             case 0: //等待葡萄糖倒入
+                glucosePowderInWaterCurrent -= Time.deltaTime * glucoseMeltingSpeed;  //葡萄糖融化
+                //計算最小值，最後留指定比例作為沉澱物
+                glucosePowderInWaterCurrent = Mathf.Clamp(glucosePowderInWaterCurrent, glucosePowderInWaterAlready * glucoseUnmelting, 1f);
+                //紀錄已融化的葡萄糖
+                glucosePowderInWaterMeltingAlready = glucosePowderInWaterAlready - glucosePowderInWaterCurrent;
+                //依據現有葡萄糖來設定沉澱物
+                glucosePowderInWater.transform.localScale = Vector3.one * glucosePowderInWaterCurrent;
+                //濃度計算
+                concentration = Mathf.Lerp(concentrations[0], concentrations[1], glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting));
+                // 使用 Lerp 計算新的數值
+                valueA = Mathf.Lerp(valuesA[1], valuesA[2], GetValueA(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
+                valueB = Mathf.Lerp(valuesB[1], valuesB[2], GetValueB(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
                 break;
             case 1: //數值緩慢下降
-                // 計算經過的時間
-                timer += Time.deltaTime;
+                glucosePowderInWaterCurrent -= Time.deltaTime * glucoseMeltingSpeed;  //葡萄糖融化
+                //計算最小值，最後留指定比例作為沉澱物
+                glucosePowderInWaterCurrent = Mathf.Clamp(glucosePowderInWaterCurrent, glucosePowderInWaterAlready * glucoseUnmelting, 1f);
+                //紀錄已融化的葡萄糖
+                glucosePowderInWaterMeltingAlready = glucosePowderInWaterAlready - glucosePowderInWaterCurrent;
+                //依據現有葡萄糖來設定沉澱物
+                glucosePowderInWater.transform.localScale = Vector3.one * glucosePowderInWaterCurrent;
+                //濃度計算
+                concentration = Mathf.Lerp(concentrations[0], concentrations[1], glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting));
                 // 使用 Lerp 計算新的數值
-                valueA = Mathf.Lerp(valuesA[1], valuesA[2], t);
-                valueB = Mathf.Lerp(valuesB[1], valuesB[2], t);
+                valueA = Mathf.Lerp(valuesA[1], valuesA[2], GetValueA(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
+                valueB = Mathf.Lerp(valuesB[1], valuesB[2], GetValueB(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
 
-                if (timer >= reactionTime)
+                if ( (glucosePowderInWaterMeltingAlready >= (1.0f - glucoseUnmelting)) && glucosePowderInWaterAlready == 1.0f )
                 {
+                    
                     valueA = valuesA[2];
                     valueB = valuesB[2];
+                    concentration = concentrations[1];
                     hintManager.SwitchStep("T5_3_2");
                     hintManager.ShowNextButton(gameObject);
                     Status++;
@@ -105,14 +144,37 @@ public class Tutorial_5_3 : MonoBehaviour
                 break;
         }
 
-        barA.localScale = new Vector3(scaleX, valueA * 0.002f, scaleX);
-        barB.localScale = new Vector3(scaleX, valueB * 0.002f, scaleX);
+        barA.localScale = new Vector3(scaleX, valueA * barOffset, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB * barOffset, scaleX);
         textA.text = valueA.ToString("0.00") + "mg/s";
         textB.text = valueB.ToString("0.00") + "mg/s";
-        temperatureText.text = temperature.ToString("0");
-        concentrationText.text = concentration.ToString("0");
+
+        temperatureText.text = temperature.ToString("0.0");
+        concentrationText.text = concentration.ToString("0.0");
     }
 
+    public void PourGlucosePowder()
+    {
+        if (Status == 0)
+        {
+            glucosePowderInWaterAlready += Time.deltaTime * glucosePourSpeed;
+            glucosePowderInWaterCurrent += Time.deltaTime * glucosePourSpeed;
+            glucosePowderInWaterAlready = Mathf.Clamp(glucosePowderInWaterAlready, 0f, 1f);
+            glucosePowderInWaterCurrent = Mathf.Clamp(glucosePowderInWaterCurrent, 0f, 1f);
+
+            if (glucosePowderInWaterAlready >= 1f)
+            {
+                glucosePowder.SetActive(false);
+                glucosePowderInWater.SetActive(true);
+                particleSystem_glucose.SetActive(false);
+                moleculaManager.ShowMoleculas(2);
+                moleculaManager.PlayMoleculasAnimation();
+                Status++;
+            }
+        }
+    }
+
+    /*
     public void PourGlucosePowder()
     {
         if (Status == 0)
@@ -139,6 +201,35 @@ public class Tutorial_5_3 : MonoBehaviour
                 moleculaManager.PlayMoleculasAnimation();
                 Status++;
             }
+        }
+    }
+    */
+
+    float GetValueA(float percentage)
+    {
+        float x = Mathf.Clamp01(percentage); // 確保比例範圍在 0-1 之間
+        float k = 10.0f; // 曲線陡峭程度
+        return 1.0f / (1.0f + Mathf.Exp(-k * (x - 0.5f))); // Sigmoid 曲線
+    }
+
+    float GetValueB(float percentage)
+    {
+        float x = Mathf.Clamp01(percentage); // 確保比例範圍在 0-1 之間
+
+        if (x <= 0.3f)
+        {
+            // 前段：緩慢上升
+            return Mathf.Pow(x / 0.3f, 0.5f) * 0.3f; // 平方根曲線
+        }
+        else if (x <= 0.8f)
+        {
+            // 中段：線性上升
+            return 0.3f + (x - 0.3f) * 1.4f; // 斜率為 1.4
+        }
+        else
+        {
+            // 後段：逐漸放緩
+            return 0.95f + (x - 0.8f) * 0.25f; // 緩慢趨近 1.0
         }
     }
 

@@ -17,7 +17,7 @@ public class LiquidController : MonoBehaviour
     [Tooltip("最大容量")]
     [SerializeField] private float maxCapacity = 100f;
     [Tooltip("目前容量")]
-    [SerializeField] private float currCapacity = 0f;
+    [SerializeField] public float currCapacity = 0f;
     [Tooltip("目前容量比例")]
     private float ratio;
 

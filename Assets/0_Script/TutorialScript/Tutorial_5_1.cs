@@ -9,6 +9,8 @@ public class Tutorial_5_1 : MonoBehaviour
     [SerializeField] private Transform barA;
     [Tooltip("長條2")]
     [SerializeField] private Transform barB;
+    [Tooltip("長條長度比")]
+    [SerializeField] private float barOffset = 1.0f;
     private float scaleX;
     [Tooltip("蒸發速率數值文字")]
     [SerializeField] private Text textA;
@@ -21,6 +23,8 @@ public class Tutorial_5_1 : MonoBehaviour
     [Tooltip("凝結速率")]
     [SerializeField] private float valueB;
 
+    int Status = 0;                 //狀態值
+    float nextStepTimer = 0.0f;     //切換到完結的時間
 
     [Space]
     [Tooltip("互動按鈕")]
@@ -40,25 +44,42 @@ public class Tutorial_5_1 : MonoBehaviour
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("T5_1_1");
-        moleculaManager.ShowMoleculas(0);
+        
         questionMark.SetActive(true);
         scaleX = barA.localScale.x;
-    }
 
-    private void Update()
-    {
-        barA.localScale = new Vector3(scaleX, valueA, scaleX);
-        barB.localScale = new Vector3(scaleX, valueB, scaleX);
+        barA.localScale = new Vector3(scaleX, valueA* barOffset, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB* barOffset, scaleX);
         textA.text = valueA.ToString("0.00") + "mg/s";
         textB.text = valueB.ToString("0.00") + "mg/s";
     }
 
+    private void Update()
+    {
+        switch (Status)
+        {
+            case 0: //待機
+                break;
+            case 1: //計時中 
+                if (Time.time > nextStepTimer)
+                {
+                    hintManager.SwitchStep("T5_1_2");
+                    hintManager.ShowNextButton(gameObject);
+                    Status++;
+                }
+                break;
+            case 2: //完結
+                break;
+        }        
+    }
+
     public void ShowMoleculas()
     {
+        moleculaManager.ShowMoleculas(0);
         moleculaManager.PlayMoleculasAnimation();
-        hintManager.SwitchStep("T5_1_2");
-        hintManager.ShowNextButton(gameObject);
+        nextStepTimer = Time.time + 3.0f;        
         questionMark.SetActive(false);
+        Status = 1;
     }
 
     void CloseHint()    //關閉提示視窗

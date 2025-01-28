@@ -149,6 +149,31 @@ public class MouseController : MonoBehaviour
                             selectedObject.transform.localPosition = new Vector3(0.0f, -0.053f, 0.0f); 
                             selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                             break;
+                        //------------Stage 5--------------
+                        case "Cap_5-2":
+                            planeDistance = 0.753f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "Glucose_5-3":
+                        case "Water100ml_5-5":
+                            planeDistance = 0.681f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
+                        case "卡牌":
+                        case "卡牌(1)":
+                        case "卡牌(2)":
+                        case "卡牌(3)":
+                        case "卡牌(4)":
+                        case "卡牌(5)":
+                        case "卡牌(6)":
+                        case "卡牌(7)":
+                        case "卡牌(8)":
+                        case "卡牌(9)":
+                        case "卡牌(10)":
+                        case "卡牌(11)":
+                            planeDistance = 0.714f;//0.714f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
                     }
                     GameObject.FindWithTag("LevelObject").SendMessage("Grab", selectedObject, SendMessageOptions.DontRequireReceiver);
                 }
@@ -212,13 +237,14 @@ public class MouseController : MonoBehaviour
                     case "BakingSoda_2-5":
                     case "Toner_2-6":   //碟子
                     case "CopperOxide_2-6":   //碟子
+                    case "Glucose_5-3":   //碟子
+                    case "Water100ml_5-5":
                         targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 85.0f));
                         selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
                         break;
                     case "WaterBottle_2-2":
-                    case "WaterBottle_2-3":
-                        selectedObject.transform.localPosition = new Vector3(0.0146f, 0.1f, 0.0f);
-                        targetRotation = Quaternion.Euler(new Vector3( 0.0f, 0.0f, 105.0f));
+                    case "WaterBottle_2-3":                    
+                        targetRotation = Quaternion.Euler(new Vector3( 0.0f, 0.0f, 56.0f));
                         selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
                         break;
                 }
@@ -240,11 +266,13 @@ public class MouseController : MonoBehaviour
                     case "BakingSoda_2-5":
                     case "Toner_2-6":   //碟子
                     case "CopperOxide_2-6":   //碟子
+                    case "Glucose_5-3":
+                    case "Water100ml_5-5":
                         targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
                         selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
                         break;
                     case "WaterBottle_2-2":
-                    case "WaterBottle_2-3":
+                    case "WaterBottle_2-3": 
                         selectedObject.transform.localPosition = new Vector3(0.0f, -0.104f, 0.0f);
                         targetRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
                         selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
@@ -350,6 +378,32 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                    break;
+                //------------Stage 5--------------
+                case "Cap_5-2":                
+                    break;
+                case "Glucose_5-3":
+                case "Water100ml_5-5":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
+                    isToolSwitchOn = false;                    
+                    break;
+                case "卡牌":
+                case "卡牌(1)":
+                case "卡牌(2)":
+                case "卡牌(3)":
+                case "卡牌(4)":
+                case "卡牌(5)":
+                case "卡牌(6)":
+                case "卡牌(7)":
+                case "卡牌(8)":
+                case "卡牌(9)":
+                case "卡牌(10)":
+                case "卡牌(11)":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
             }
             selectedObject = null;

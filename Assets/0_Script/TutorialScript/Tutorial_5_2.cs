@@ -9,6 +9,8 @@ public class Tutorial_5_2 : MonoBehaviour
     [SerializeField] private Transform barA;
     [Tooltip("長條2")]
     [SerializeField] private Transform barB;
+    [Tooltip("長條長度比")]
+    [SerializeField] private float barOffset = 1.0f;
     private float scaleX;
     [Tooltip("蒸發速率數值文字")]
     [SerializeField] private Text textA;
@@ -38,10 +40,18 @@ public class Tutorial_5_2 : MonoBehaviour
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private HintManager hintManager;            //管理提示板
 
+    private bool isPC;                          //偵測是否是PC模式
 
     // Start is called before the first frame update
     void Start()
     {
+        //判斷平台
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        isPC = true;
+#else
+        isPC = false;
+#endif
+
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
@@ -53,7 +63,12 @@ public class Tutorial_5_2 : MonoBehaviour
         questionMark.SetActive(false);
         scaleX = barA.localScale.x;
         valueA = valuesA[0];
-        valueB = valuesA[0];
+        valueB = valuesB[0];
+
+        barA.localScale = new Vector3(scaleX, valueA * barOffset, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB * barOffset, scaleX);
+        textA.text = valueA.ToString("0.00") + "mg/s";
+        textB.text = valueB.ToString("0.00") + "mg/s";
     }
 
     private void Update()
@@ -79,8 +94,8 @@ public class Tutorial_5_2 : MonoBehaviour
                 break;
         }
 
-        barA.localScale = new Vector3(scaleX, valueA, scaleX);
-        barB.localScale = new Vector3(scaleX, valueB, scaleX);
+        barA.localScale = new Vector3(scaleX, valueA * barOffset, scaleX);
+        barB.localScale = new Vector3(scaleX, valueB * barOffset, scaleX);
         textA.text = valueA.ToString("0.00") + "mg/s";
         textB.text = valueB.ToString("0.00") + "mg/s";
     }
@@ -90,7 +105,8 @@ public class Tutorial_5_2 : MonoBehaviour
         if (sender.name == "Cap_5-2")
         {
             //打開瓶蓋
-            sender.GetComponent<Rigidbody>().isKinematic = false;
+            if(!isPC)
+                sender.GetComponent<Rigidbody>().isKinematic = false;
             moleculaManager.PlayMoleculasAnimation();
             timer = 0;
             Status++;
