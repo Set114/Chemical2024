@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class react : MonoBehaviour
 {
     public static int dcaseNow = 2;
@@ -11,7 +11,7 @@ public class react : MonoBehaviour
     public static string localIP;
     public static bool isConnected = false;
     public GameObject ShowWarnObj;
-    public Text ShowIP;
+    public TextMeshProUGUI ShowIP;
     private bool isSend = false;
     private string StudentIP;
     private int ScreenHeight, ScreenWidth;

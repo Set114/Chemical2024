@@ -16,8 +16,11 @@ public class ControlObj : MonoBehaviour
     public GameObject[] InfoUI;
     bool isDown, isUp;
     public GameObject Final;
+
+    public GameObject ObjTips;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         OriginalPosY = transform.localPosition.y;
     }
@@ -203,6 +206,7 @@ public class ControlObj : MonoBehaviour
         Final.SetActive(false);
         InfoUI[0].SetActive(false);
         InfoUI[1].SetActive(false);
+        ObjTips.SetActive(true);
 
     }
     IEnumerator FinalCheck()

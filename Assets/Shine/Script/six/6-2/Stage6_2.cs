@@ -16,6 +16,8 @@ public class Stage6_2 : MonoBehaviour
     public bool MaxTemp, MinTemp;
     public GameObject Final;
     public GameObject[] Info;
+
+    public GameObject ObjTips;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +89,7 @@ public class Stage6_2 : MonoBehaviour
         TempUI.SetActive(false);
         Info[0].SetActive(false);
         Info[1].SetActive(false);
+        ObjTips.SetActive(true);
 
     }
 }
