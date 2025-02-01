@@ -33,6 +33,7 @@ public class Stage4_5 : MonoBehaviour
         TableMarbles[2].transform.position= TableMarblesPos[2];
         for (int i = 0; i < TableMarbles.Length; i++)
         {
+            TableMarbles[i].GetComponent<Shine_MouseController>().Reset();
             TableMarbles[i].SetActive(true);
             CupMarbles[i].SetActive(false);
             MarbleUIs[i].SetActive(false);

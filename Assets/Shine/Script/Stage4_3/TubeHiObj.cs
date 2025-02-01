@@ -17,14 +17,14 @@ public class TubeHiObj : MonoBehaviour
     }
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.GetComponent<Collider>().name == "Manganese dioxide") {
+        if (hit.GetComponent<Collider>().name == "Manganese") {
             FindObjectOfType<Stage4_3>().ObjTouchTube(0);
         }
         if (hit.GetComponent<Collider>().name == "Potato")
         {
             FindObjectOfType<Stage4_3>().ObjTouchTube(1);
         }
-        if (hit.GetComponent<Collider>().name == "Pork liver")
+        if (hit.GetComponent<Collider>().name == "Pork")
         {
             FindObjectOfType<Stage4_3>().ObjTouchTube(2);
         }
@@ -32,7 +32,7 @@ public class TubeHiObj : MonoBehaviour
         {
             FindObjectOfType<Stage4_3>().ObjTouchTube(3);
         }
-        if (hit.GetComponent<Collider>().name == "Plastic sheet")
+        if (hit.GetComponent<Collider>().name == "Plastic")
         {
             FindObjectOfType<Stage4_3>().ObjTouchTube(4);
         }

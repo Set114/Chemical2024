@@ -30,6 +30,7 @@ public class Stage4_3 : MonoBehaviour
     public void Rebutton() {
         for (int i = 0; i < DeskObjs.Length; i++)
         {
+            DeskObjs[i].GetComponent<Shine_MouseController>().Reset();
            DeskObjs[i].transform.position= SaveDeskObjsPos[i];
             DeskObjs[i].transform.eulerAngles = SaveDeskObjsAng[i];
             TubeObjs[i].SetActive(false);

@@ -219,6 +219,12 @@ public class Level4_1 : MonoBehaviour
                 Destroy(TotalCO2UI[k]);
 
         }
+        for (int o = 0; o < TotalCO2UI.Count; o++)
+        {
+            if (TotalCO2UI.Count > 0)
+                Destroy(TotalCO2UI[o]);
+
+        }
         TotalCO2.Clear();
         TotalCO2UI.Clear();
     }

@@ -53,6 +53,11 @@ public class Water : MonoBehaviour
         Watermaterial.SetColor("_BottomColor", Color.white);
         Watermaterial.SetColor("_EdgeColor", Color.white);
         Watermaterial.SetColor("_GlowColor", Color.white);
+
+        TackObjs[0].GetComponent<Shine_MouseController>().Reset();
+        TackObjs[1].GetComponent<Shine_MouseController>().Reset();
+        TackObjs[2].GetComponent<Shine_MouseController>().Reset();
+
     }
     private void OnTriggerEnter(Collider other)
     {
