@@ -59,13 +59,17 @@ public class Tutorial_3_1 : MonoBehaviour
     [Tooltip("回答錯誤頁面")]
     [SerializeField] private GameObject wrongPage;
 
+    private GameManager gm;
     private LevelObjManager levelObjManager;
+    private QuestionManager questionManager;    //管理題目介面
     private AudioManager audioManager;          //音樂管理
     private DataManager_Stage3 myData;
     // Start is called before the first frame update
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         levelObjManager = FindObjectOfType<LevelObjManager>();
+        questionManager = FindObjectOfType<QuestionManager>();
         audioManager = FindObjectOfType<AudioManager>();
         myData = FindObjectOfType<DataManager_Stage3>();
         SwitchToShop();
@@ -124,11 +128,30 @@ public class Tutorial_3_1 : MonoBehaviour
     //切換到工作區
     public void SwitchToWorkSpace()
     {
+        workSpace.SetActive(false);
+        atoms_AreaA = new List<Atom>();
+        atoms_AreaB = new List<Atom>();
+        atoms_AreaC = new List<Atom>();
+        atoms_AreaD = new List<Atom>();
         shop.SetActive(false);
         workSpace.SetActive(true);
         correctPage.SetActive(false);
         wrongPage.SetActive(false);
         SpawnAtom();
+
+        switch (gm.currLevel)
+        {
+            case 0:
+                audioManager.PlayVoice("T3_1_1");
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                audioManager.PlayVoice("E3_1_1");
+                break;
+        }
     }
 
     //確認原子數量
@@ -317,10 +340,33 @@ public class Tutorial_3_1 : MonoBehaviour
             && CheakAnswer(atomsAnswer_AreaC, atoms_AreaC)&& CheakAnswer(atomsAnswer_AreaD, atoms_AreaD))
         {
             correctPage.SetActive(true);
+            audioManager.PlayVoice("Success");
         }
         else
         {
             wrongPage.SetActive(true);
+            switch (gm.currLevel)
+            {
+                case 0:
+                    audioManager.PlayVoice("Wrong");
+                    break;
+                case 1:
+                    audioManager.PlayVoice("QA3_1");
+                    break;
+                case 2:
+                    audioManager.PlayVoice("QA3_2");
+                    break;
+                case 3:
+                    audioManager.PlayVoice("QA3_3");
+                    break;
+                case 4:
+                    audioManager.PlayVoice("QA3_4");
+                    break;
+                case 5:
+                    audioManager.PlayVoice("QA3_5");
+                    break;
+            }
+            questionManager.TriggerHapticFeedback();
         }
     }
     public void OnNextLevelButtonClicked()
@@ -342,6 +388,20 @@ public class Tutorial_3_1 : MonoBehaviour
         {
             AtomReturn(atom.name);
         }
-        levelObjManager.LevelClear(0);
+        switch (gm.currLevel)
+        {
+            case 0:
+                levelObjManager.LevelClear(1);
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                levelObjManager.LevelClear(0);
+                break;
+            case 5:
+                levelObjManager.LevelClear(2);
+                break;
+        }
     }
 }
