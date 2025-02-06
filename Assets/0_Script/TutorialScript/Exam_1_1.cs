@@ -91,10 +91,13 @@ public class Exam_1_1 : MonoBehaviour
             case 4: //乾冰在水中反應完畢，Q2出現
 
                 break;
-            case 5: //回答Q2完畢，等待玻璃棒以及觸碰試紙
+            case 5: //回答Q2完畢，等待玻璃棒觸碰水
 
                 break;
-            case 6: //試紙開始變化
+            case 6: //等待玻璃棒觸碰試紙
+
+                break;
+            case 7: //試紙開始變化
                 timer += Time.deltaTime;
                 if (timer > paperReactionTime)
                 {
@@ -102,7 +105,7 @@ public class Exam_1_1 : MonoBehaviour
                     Status++;
                 }                    
                 break;
-            case 7: //結束狀態
+            case 8: //結束狀態
 
                 break;
         }
@@ -128,13 +131,16 @@ public class Exam_1_1 : MonoBehaviour
                 if (sender.name == "Glass")
                 {
                     glassWet = true;
+                    Status ++;
                 }
-                if (sender.name == "Paper" && glassWet )
+                break;
+            case 6:
+                if (sender.name == "Paper" && glassWet)
                 {
-                    paper.SetBool("move", true);
+                    paper.SetTrigger("isClick");
                     timer = 0.0f;
                     hintManager.OnCloseBtnClicked();
-                    Status = 6;
+                    Status ++;
                 }
                 break;
         }

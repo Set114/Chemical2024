@@ -31,9 +31,11 @@ public class Tutorial_1_6 : MonoBehaviour
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
         hintManager = FindObjectOfType<HintManager>();
+        zoomDisplay = FindObjectOfType<ZoomDisplay>();
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("T1_6_1");
+        zoomDisplay.ShowZoomObj(1);
     }
 
     private void Update()
@@ -55,7 +57,8 @@ public class Tutorial_1_6 : MonoBehaviour
     {
         if (!reaction)
         {
-            paper.SetBool("move", true);
+            paper.SetTrigger("isClick");
+            zoomDisplay.PlayAnimation();
             reaction = true;
         }
     }

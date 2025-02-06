@@ -6,7 +6,8 @@ using UnityEngine;
 public class Tutorial_1_2 : MonoBehaviour
 {
     [SerializeField] private GameObject gasCan;         //噴槍
-    [SerializeField] MeshRenderer[] irons;        //軟鐵片
+    [SerializeField] MeshRenderer[] irons;              //軟鐵片
+    private TextureScaler iron2TextureScaler;           //控制鐵片貼圖縮放
     private Color[] ironColors;
 
     [Tooltip("加熱速度")]
@@ -61,6 +62,8 @@ public class Tutorial_1_2 : MonoBehaviour
                 irons[i].material.color = invisible;
             }
         }
+        iron2TextureScaler = irons[1].GetComponent<TextureScaler>();
+        iron2TextureScaler.SetRatio(0f);
     }
 
     void Update()
@@ -73,7 +76,7 @@ public class Tutorial_1_2 : MonoBehaviour
         {
             currMaxIronTemp = ironTemp;
             moleculaManager.PlayMoleculasAnimation();
-            moleculaManager.SetMoleculasAnimationSpeed(heatingSpeed / maxTemp);
+            //moleculaManager.SetMoleculasAnimationSpeed(heatingSpeed / maxTemp);
         }
         else
         {
@@ -96,7 +99,7 @@ public class Tutorial_1_2 : MonoBehaviour
             heatingColor = ironColors[1];
             heatingColor.a = ironTemp / maxTemp;
             irons[1].material.color = heatingColor;
-
+            iron2TextureScaler.SetRatio(ironTemp / maxTemp);
             coolingColor = ironColors[2];
             coolingColor.a = roomTemp / ironTemp;
             irons[2].material.color = coolingColor;
@@ -131,6 +134,7 @@ public class Tutorial_1_2 : MonoBehaviour
             heatingColor = ironColors[1];
             heatingColor.a = ironTemp / maxTemp;
             irons[1].material.color = heatingColor;
+            //iron2TextureScaler.SetRatio(ironTemp / maxTemp);
         }
     }
 

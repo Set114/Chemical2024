@@ -19,14 +19,15 @@ public class Exam_1_2 : MonoBehaviour
     int Status = 0;
 
     LevelObjManager levelObjManager;
-
     QuestionManager questionManager; //管理題目介面
+    private ZoomDisplay zoomDisplay;            //管理近看視窗
     AudioManager audioManager;          //音樂管理
     // Start is called before the first frame update
     void OnEnable()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
         questionManager = FindObjectOfType<QuestionManager>();
+        zoomDisplay = FindObjectOfType<ZoomDisplay>();
         audioManager = FindObjectOfType<AudioManager>();
 
         timer = 0.0f;
@@ -49,14 +50,14 @@ public class Exam_1_2 : MonoBehaviour
         {
             case 0: //燃燒
                 timer = timer + Time.deltaTime;
-                if(timer > 5.0f)
+                if (timer > 5.0f)
                 {
                     QuestionMark_04.SetActive(true);
                     Status++;
                 }
                 break;
             case 1: //等待回答問題
-                
+
                 break;
             case 2: //繼續燃燒
                 timer = timer + Time.deltaTime;
@@ -79,7 +80,7 @@ public class Exam_1_2 : MonoBehaviour
         else
         {
             progressRatio = 0.0f;
-        }        
+        }
     }
 
     public void ShowExam()
@@ -99,10 +100,16 @@ public class Exam_1_2 : MonoBehaviour
 
     public void FinishExam()
     {
-        Status++;
-        if (Status == 4)
+        switch (Status)
         {
-            levelObjManager.LevelClear(2);
+            case 1:
+                zoomDisplay.ShowZoomObj(2);
+                zoomDisplay.PlayAnimation();
+                break;
+            case 3:
+                levelObjManager.LevelClear(2);
+                break;
         }
+        Status++;
     }
 }
