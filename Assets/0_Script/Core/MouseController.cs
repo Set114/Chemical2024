@@ -149,6 +149,15 @@ public class MouseController : MonoBehaviour
                             selectedObject.transform.localPosition = new Vector3(0.0f, -0.053f, 0.0f); 
                             selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                             break;
+                        //------------Stage 3--------------
+                        case "C":
+                        case "Fe":
+                        case "H":
+                        case "N2":
+                        case "O2":
+                            planeDistance = 0.953f;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
                         //------------Stage 5--------------
                         case "Cap_5-2":
                             planeDistance = 0.753f;
