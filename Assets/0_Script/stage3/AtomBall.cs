@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AtomBall : MonoBehaviour
 {
+    public bool isGrabbing = false;
+    public bool isUsing = false;
     private bool firstGrab = true;
     private Tutorial_3_1 tutorialObject;
     private Rigidbody myRb;
@@ -19,19 +21,20 @@ public class AtomBall : MonoBehaviour
     {
         if (isGrab)
         {
-            if (firstGrab)
-            {
-                tutorialObject.UseAtom(gameObject.name);
-                firstGrab = false;
-            }
-            //myRb.isKinematic = true;
+            myRb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {
-            //myRb.isKinematic = false;
+            myRb.constraints = RigidbodyConstraints.None;
+        }
+
+        isGrabbing = isGrab;
+        if (isGrab && firstGrab)
+        {
+            tutorialObject.UseAtom(gameObject.name);
+            firstGrab = false;
         }
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("TrashBin"))

@@ -156,7 +156,7 @@ public class MouseController : MonoBehaviour
                         case "N2":
                         case "O2":
                             planeDistance = 0.953f;
-                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            //selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         //------------Stage 5--------------
                         case "Cap_5-2":
@@ -390,6 +390,14 @@ public class MouseController : MonoBehaviour
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     selectedObject.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                     break;
+                //------------Stage 3--------------
+                case "C":
+                case "Fe":
+                case "H":
+                case "N2":
+                case "O2":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    break;
                 //------------Stage 5--------------
                 case "Cap_5-2":                
                     break;
@@ -416,6 +424,7 @@ public class MouseController : MonoBehaviour
                     
                     break;
             }
+            GameObject.FindWithTag("LevelObject").SendMessage("Release", selectedObject, SendMessageOptions.DontRequireReceiver);
             selectedObject = null;
         }
     }

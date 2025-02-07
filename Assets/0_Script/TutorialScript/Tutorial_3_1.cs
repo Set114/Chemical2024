@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -129,10 +130,10 @@ public class Tutorial_3_1 : MonoBehaviour
     public void SwitchToWorkSpace()
     {
         workSpace.SetActive(false);
-        atoms_AreaA = new List<Atom>();
-        atoms_AreaB = new List<Atom>();
-        atoms_AreaC = new List<Atom>();
-        atoms_AreaD = new List<Atom>();
+        //atoms_AreaA = new List<Atom>();
+        //atoms_AreaB = new List<Atom>();
+        //atoms_AreaC = new List<Atom>();
+        //atoms_AreaD = new List<Atom>();
         shop.SetActive(false);
         workSpace.SetActive(true);
         correctPage.SetActive(false);
@@ -271,6 +272,27 @@ public class Tutorial_3_1 : MonoBehaviour
             print("已回收：" + atomName);
         }
         SpawnAtom();
+    }
+
+
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
+    {
+        AtomBall atom = obj.GetComponent<AtomBall>();
+        if (atom)
+        {
+            atom.Grab(true);
+        }
+    }
+
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
+    {
+        AtomBall atom = obj.GetComponent<AtomBall>();
+        if (atom)
+        {
+            atom.Grab(false); 
+        }
     }
 
     public void Reaction(string area, string atomName, bool enter)

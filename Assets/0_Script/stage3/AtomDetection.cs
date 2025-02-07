@@ -15,32 +15,28 @@ public class AtomDetection : MonoBehaviour
     {
         tutorialObject = FindObjectOfType<Tutorial_3_1>();
     }
-    void OnTriggerEnter(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        switch (other.gameObject.name)
+        AtomBall atom = other.GetComponent<AtomBall>();
+        if (atom)
         {
-            case "C":
-            case "O2":
-            case "N2":
-            case "H":
-            case "Fe":
+            if (!atom.isGrabbing && !atom.isUsing)
+            {
+                atom.isUsing = true;
                 tutorialObject.Reaction(area.ToString(), other.gameObject.name, true);
                 other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                break;
+            }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        switch (other.gameObject.name)
+        AtomBall atom = other.GetComponent<AtomBall>();
+        if (atom && atom.isUsing)
         {
-            case "C":
-            case "O2":
-            case "N2":
-            case "H":
-            case "Fe":
-                tutorialObject.Reaction(area.ToString(), other.gameObject.name, false);
-                other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                break;
+            tutorialObject.Reaction(area.ToString(), atom.gameObject.name, false);
+            //atom.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            atom.isUsing = false;
         }
     }
 }
