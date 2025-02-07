@@ -84,19 +84,10 @@ public class Tutorial_3_1 : MonoBehaviour
     public void Buy(string atomName)
     {
         Atom result = atoms_Sell.Find(atom => atom.name == atomName);
-        if (result!=null)
+        if (result != null)
         {
-            int cost = result.cost;
-            if (myData.money >= cost)
-            {
-                myData.money -= cost;
-                myData.atoms_Buy.Add(result);
-                print("已購買：" + atomName);
-            }
-            else
-            {
-                print("金額不足");
-            }
+            myData.money -= result.cost;
+            myData.atoms_Buy.Add(result);
         }
         else
         {
@@ -396,8 +387,7 @@ public class Tutorial_3_1 : MonoBehaviour
 
         return true; // list2 至少有 list1 需要的所有種類與數量
     }
-
-    //回收區塊內多餘的原子
+    /*回收區塊內多餘的原子
     private void ExtraAtomsReturn(List<Atom> list1, List<Atom> list2)
     {
         // 統計 list1 內每種名稱的數量
@@ -429,7 +419,7 @@ public class Tutorial_3_1 : MonoBehaviour
             }
         }
     }
-
+    */
     public void OnSubmitButtonClicked()
     {
         if(CheakAnswer(atomsAnswer_AreaA, atoms_AreaA)&& CheakAnswer(atomsAnswer_AreaB, atoms_AreaB)
@@ -467,12 +457,12 @@ public class Tutorial_3_1 : MonoBehaviour
     }
     public void OnNextLevelButtonClicked()
     {
-        //回收原子
+        /*回收原子
         ExtraAtomsReturn(atomsAnswer_AreaA, atoms_AreaA);
         ExtraAtomsReturn(atomsAnswer_AreaB, atoms_AreaB);
         ExtraAtomsReturn(atomsAnswer_AreaC, atoms_AreaC);
         ExtraAtomsReturn(atomsAnswer_AreaD, atoms_AreaD);
-
+        */
         switch (gm.currLevel)
         {
             case 0:
