@@ -155,7 +155,7 @@ public class MouseController : MonoBehaviour
                         case "H":
                         case "N2":
                         case "O2":
-                            planeDistance = 0.953f;
+                            planeDistance = 0.933f;
                             //selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
                         //------------Stage 5--------------
