@@ -59,6 +59,10 @@ public class Tutorial_3_1 : MonoBehaviour
     [SerializeField] private GameObject correctPage;
     [Tooltip("回答錯誤頁面")]
     [SerializeField] private GameObject wrongPage;
+    [Tooltip("測驗過關頁面")]
+    [SerializeField] private GameObject clearPage;
+    [Tooltip("測驗過關頁面文字")]
+    [SerializeField] private Text clearText;
 
     private GameManager gm;
     private LevelObjManager levelObjManager;
@@ -124,6 +128,7 @@ public class Tutorial_3_1 : MonoBehaviour
         workSpace.SetActive(false);
         correctPage.SetActive(false);
         wrongPage.SetActive(false);
+        clearPage.SetActive(false);
         CheckMyAtom();
     }
     //切換到工作區
@@ -138,6 +143,7 @@ public class Tutorial_3_1 : MonoBehaviour
         workSpace.SetActive(true);
         correctPage.SetActive(false);
         wrongPage.SetActive(false);
+        clearPage.SetActive(false);
         SpawnAtom();
 
         switch (gm.currLevel)
@@ -206,25 +212,49 @@ public class Tutorial_3_1 : MonoBehaviour
             atomC = Instantiate(atomC_Prefab, atomC_Spawn);
             atomC.name = "C";
         }
+        else if (atomC != null && count_C < 1)
+        {
+            Destroy(atomC);
+        }
+
         if (atomO2 == null && count_O2 > 0)
         {
             atomO2 = Instantiate(atomO2_Prefab, atomO2_Spawn);
             atomO2.name = "O2";
         }
+        else if (atomO2 != null && count_O2 < 1)
+        {
+            Destroy(atomO2);
+        }
+
         if (atomN2 == null && count_N2 > 0)
         {
             atomN2 = Instantiate(atomN2_Prefab, atomN2_Spawn);
             atomN2.name = "N2";
         }
+        else if (atomN2 != null && count_N2 < 1)
+        {
+            Destroy(atomN2);
+        }
+
         if (atomH == null && count_H > 0)
         {
             atomH = Instantiate(atomH_Prefab, atomH_Spawn);
             atomH.name = "H";
         }
+        else if (atomH != null && count_H < 1)
+        {
+            Destroy(atomH);
+        }
+
         if (atomFe == null && count_Fe > 0)
         {
             atomFe = Instantiate(atomFe_Prefab, atomFe_Spawn);
             atomFe.name = "Fe";
+        }
+        else if (atomFe!= null && count_Fe < 1)
+        {
+            Destroy(atomFe);
         }
     }
 
@@ -342,18 +372,62 @@ public class Tutorial_3_1 : MonoBehaviour
     private bool CheakAnswer(List<Atom> list1, List<Atom> list2)
     {
         // 先檢查數量是否相同
-        if (list1.Count != list2.Count) return false;
+        //if (list1.Count != list2.Count) return false;
 
-        // 使用 GroupBy 按名稱統計數量，然後比對是否相等
-        var grouped1 = list1.GroupBy(a => a.name)
-                            .Select(g => new { Name = g.Key, Count = g.Count() })
-                            .OrderBy(g => g.Name);
+        // 統計 list1 內每種名稱的數量
+        var list1Count = list1.GroupBy(a => a.name)
+                              .ToDictionary(g => g.Key, g => g.Count());
 
-        var grouped2 = list2.GroupBy(a => a.name)
-                            .Select(g => new { Name = g.Key, Count = g.Count() })
-                            .OrderBy(g => g.Name);
+        // 統計 list2 內每種名稱的數量
+        var list2Count = list2.GroupBy(a => a.name)
+                              .ToDictionary(g => g.Key, g => g.Count());
 
-        return grouped1.SequenceEqual(grouped2);
+        // 檢查 list2 是否至少包含 list1 需要的種類與數量
+        foreach (var kvp in list1Count)
+        {
+            string atomName = kvp.Key;
+            int requiredCount = kvp.Value;
+
+            if (!list2Count.TryGetValue(atomName, out int availableCount) || availableCount < requiredCount)
+            {
+                return false; // 如果某種類在 list2 不足，直接回傳 false
+            }
+        }
+
+        return true; // list2 至少有 list1 需要的所有種類與數量
+    }
+
+    //回收區塊內多餘的原子
+    private void ExtraAtomsReturn(List<Atom> list1, List<Atom> list2)
+    {
+        // 統計 list1 內每種名稱的數量
+        var list1Count = list1.GroupBy(a => a.name)
+                              .ToDictionary(g => g.Key, g => g.Count());
+
+        // 統計 list2 內每種名稱的數量
+        var list2Count = list2.GroupBy(a => a.name)
+                              .ToDictionary(g => g.Key, g => g.Count());
+
+        // 計算 list2 多出來的部分
+        List<Atom> extraAtoms = new List<Atom>();
+
+        foreach (var kvp in list2Count)
+        {
+            string atomName = kvp.Key;
+            int availableCount = kvp.Value;
+            int requiredCount = list1Count.ContainsKey(atomName) ? list1Count[atomName] : 0;
+
+            int extraCount = availableCount - requiredCount;
+
+            if (extraCount > 0)
+            {
+                // 加入多出來的 Atom
+                for (int i = 0; i < extraCount; i++)
+                {
+                    AtomReturn(atomName);
+                }
+            }
+        }
     }
 
     public void OnSubmitButtonClicked()
@@ -394,26 +468,16 @@ public class Tutorial_3_1 : MonoBehaviour
     public void OnNextLevelButtonClicked()
     {
         //回收原子
-        foreach (Atom atom in atoms_AreaA)
-        {
-            AtomReturn(atom.name);
-        }
-        foreach (Atom atom in atoms_AreaB)
-        {
-            AtomReturn(atom.name);
-        }
-        foreach (Atom atom in atoms_AreaC)
-        {
-            AtomReturn(atom.name);
-        }
-        foreach (Atom atom in atoms_AreaD)
-        {
-            AtomReturn(atom.name);
-        }
+        ExtraAtomsReturn(atomsAnswer_AreaA, atoms_AreaA);
+        ExtraAtomsReturn(atomsAnswer_AreaB, atoms_AreaB);
+        ExtraAtomsReturn(atomsAnswer_AreaC, atoms_AreaC);
+        ExtraAtomsReturn(atomsAnswer_AreaD, atoms_AreaD);
+
         switch (gm.currLevel)
         {
             case 0:
                 levelObjManager.LevelClear(1);
+                myData.Reset();
                 break;
             case 1:
             case 2:
@@ -422,8 +486,13 @@ public class Tutorial_3_1 : MonoBehaviour
                 levelObjManager.LevelClear(0);
                 break;
             case 5:
-                levelObjManager.LevelClear(2);
+                clearPage.SetActive(true);
+                clearText.text = "恭喜你已經全部答對了，\n你還剩餘" + myData.money + "枚金幣，\n真是太厲害了！";
                 break;
         }
+    }
+    public void OnClearButtonClicked()
+    {
+        levelObjManager.LevelClear(2);
     }
 }
