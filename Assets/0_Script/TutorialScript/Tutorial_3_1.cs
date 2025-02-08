@@ -426,6 +426,7 @@ public class Tutorial_3_1 : MonoBehaviour
             && CheakAnswer(atomsAnswer_AreaC, atoms_AreaC)&& CheakAnswer(atomsAnswer_AreaD, atoms_AreaD))
         {
             correctPage.SetActive(true);
+            workSpace.SetActive(false);
             audioManager.PlayVoice("Success");
         }
         else
