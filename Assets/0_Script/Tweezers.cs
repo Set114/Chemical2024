@@ -13,6 +13,7 @@ public class Tweezers : MonoBehaviour
     private GameObject clampingObj;     //夾取中的物件
     private string clampingObjName;     //夾取中的物件原名稱
     private Transform clampingObjParent;//夾取中的物件的元父物件
+    private RigidbodyConstraints constraints;
 
     private bool isPC;
 
@@ -79,6 +80,10 @@ public class Tweezers : MonoBehaviour
         if (clamp && readyToClampObj&& readyToClampObj.CompareTag("TweezersClamp"))
         {
             clampingObj = readyToClampObj;
+            Rigidbody clampingRb = clampingObj.GetComponent<Rigidbody>();
+            constraints = clampingRb.constraints;
+            clampingRb.constraints = RigidbodyConstraints.FreezeAll;
+
             clampingObjName = clampingObj.name;
             clampingObj.name = clampingObjName + "_Clamp";
             clampingObjParent = clampingObj.transform.parent;
@@ -90,6 +95,7 @@ public class Tweezers : MonoBehaviour
         {
             clampingObj.transform.SetParent(clampingObjParent);
             clampingObj.name = clampingObjName;
+            clampingObj.GetComponent<Rigidbody>().constraints = constraints;
             clampingObj = null;
         }
     }

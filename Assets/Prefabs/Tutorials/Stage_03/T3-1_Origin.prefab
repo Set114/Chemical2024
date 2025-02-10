@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3043716624102089490}
   m_Layer: 0
-  m_Name: Spawn_H
+  m_Name: Spawn_H2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2309,7 +2309,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: H
+          m_StringArgument: H2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5206354887566889468
@@ -7473,7 +7473,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: H
+          m_StringArgument: H2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5206354888409931868
@@ -10139,7 +10139,7 @@ GameObject:
   - component: {fileID: 5206354888739242777}
   - component: {fileID: 5206354888739242776}
   m_Layer: 0
-  m_Name: Cube (H)
+  m_Name: Cube (H2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10190,7 +10190,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97753a4714f191d4283dbc64eb986f4b, type: 2}
+  - {fileID: 2100000, guid: 8ec4f7aeea2c5450e9e0ff025abbf5df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11129,7 +11129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5206354888960271877}
   m_Layer: 0
-  m_Name: H
+  m_Name: H2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11305,7 +11305,7 @@ MonoBehaviour:
     cost: 6
   - name: N2
     cost: 3
-  - name: H
+  - name: H2
     cost: 2
   - name: Fe
     cost: 10
@@ -11313,18 +11313,18 @@ MonoBehaviour:
   countText_shopC: {fileID: 5206354887436438744}
   countText_shopO2: {fileID: 5206354888361600162}
   countText_shopN2: {fileID: 5206354888369298394}
-  countText_shopH: {fileID: 5206354887872154631}
+  countText_shopH2: {fileID: 5206354887872154631}
   countText_shopFe: {fileID: 5206354887734411572}
   workSpace: {fileID: 5206354887934460181}
   atomC_Prefab: {fileID: 4095508254466791213, guid: de9018ac908594298883e57e1fbff9f1, type: 3}
   atomO2_Prefab: {fileID: 4908139686722128720, guid: 71e0465d92a1f4e468150e0a3c80664e, type: 3}
   atomN2_Prefab: {fileID: 7138615196542295179, guid: e3791791248c44becb743c2fb94ca91a, type: 3}
-  atomH_Prefab: {fileID: 2370208237950818847, guid: 3f8c50570e5a447a99933ed7317aeaba, type: 3}
+  atomH2_Prefab: {fileID: 2370208237950818847, guid: 3f8c50570e5a447a99933ed7317aeaba, type: 3}
   atomFe_Prefab: {fileID: 4643328564697227898, guid: 403617c864f5e48679e0d49b3a449ccc, type: 3}
   atomC_Spawn: {fileID: 6627077784223530100}
   atomO2_Spawn: {fileID: 3672309492531818988}
   atomN2_Spawn: {fileID: 7905874536610097994}
-  atomH_Spawn: {fileID: 3043716624102089490}
+  atomH2_Spawn: {fileID: 3043716624102089490}
   atomFe_Spawn: {fileID: 7199776233578551242}
   atoms_AreaA: []
   atoms_AreaB: []
@@ -11337,7 +11337,7 @@ MonoBehaviour:
   countText_workC: {fileID: 5206354889229941340}
   countText_workO2: {fileID: 5206354887359567201}
   countText_workN2: {fileID: 5206354888614215408}
-  countText_workH: {fileID: 5206354888200633661}
+  countText_workH2: {fileID: 5206354888200633661}
   countText_workFe: {fileID: 5206354889199041282}
   correctPage: {fileID: 5206354888963110572}
   wrongPage: {fileID: 5206354888562297300}
@@ -15375,8 +15375,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831003530683992818, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_Name
-      value: H
+      value: H2
       objectReference: {fileID: 0}
+    - target: {fileID: 4871050688208547507, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ec4f7aeea2c5450e9e0ff025abbf5df, type: 2}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -15407,7 +15411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.65152
+      value: 0.5854294
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalRotation.x
@@ -15415,7 +15419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.75863147
+      value: 0.8107234
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalRotation.z
@@ -15427,7 +15431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 98.687
+      value: 108.333
       objectReference: {fileID: 0}
     - target: {fileID: 6685235500821516291, guid: 379727c2e1721b748b613f1daeaa5d20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

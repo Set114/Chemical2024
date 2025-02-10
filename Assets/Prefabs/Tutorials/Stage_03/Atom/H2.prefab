@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 553121846842134770}
   - component: {fileID: 4575914953061358031}
   m_Layer: 0
-  m_Name: H
+  m_Name: H2
   m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97753a4714f191d4283dbc64eb986f4b, type: 2}
+  - {fileID: 2100000, guid: 8ec4f7aeea2c5450e9e0ff025abbf5df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,3 +304,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f47d96dc3694b1190a5094cbc62433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrabbing: 0
+  isUsing: 0

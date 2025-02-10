@@ -44,6 +44,8 @@ public class Tutorial_2_2 : MonoBehaviour
     [SerializeField] private GameObject tweezers;
 
     [Header("質量設定")]
+    [Tooltip("磅秤")]
+    [SerializeField] private GameObject kitchenScale;
     [Tooltip("磅秤文字")]
     [SerializeField] Text weightText;
     [Tooltip("磅秤文字_放大螢幕")]
@@ -91,6 +93,7 @@ public class Tutorial_2_2 : MonoBehaviour
         particlePage.SetActive(false);
 
         hintManager.SwitchStep("T2_2_1");
+        kitchenScale.SetActive(false);
     }
     
     // Update is called once per frame
@@ -140,6 +143,15 @@ public class Tutorial_2_2 : MonoBehaviour
             case 7: //待寶特瓶放上電子秤
                 break;
             case 8: //待打開瓶蓋
+                float distance = Vector3.Distance(bottleCap.transform.position, bottleCapPoint.position);
+                if (distance > 0.01f)
+                {
+                    //打開瓶蓋
+                    bottleCap.transform.SetParent(transform);
+                    bottleCap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    scaleVale = weight_Bottle + weight_TestTube;
+                    Status++;
+                }
                 break;
             case 9: //待瓶蓋放上電子秤
                 break;
@@ -162,7 +174,7 @@ public class Tutorial_2_2 : MonoBehaviour
 
                     bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
                     bottleCap.tag = "Untagged";
-                    bottleCap.GetComponent<Rigidbody>().isKinematic = true;
+                    bottleCap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                     bottleCap.transform.position = bottleCapPoint.position;
                     bottleCap.transform.rotation = bottleCapPoint.rotation;
                     bottleCap.transform.SetParent(bottleCapPoint);                    
@@ -175,6 +187,8 @@ public class Tutorial_2_2 : MonoBehaviour
                     testTubeRack.SetActive(false);
                     tweezers.SetActive(false);
 
+                    kitchenScale.SetActive(true);
+                    scaleVale = 0f;
                     hintManager.SwitchStep("T2_2_4");
                     Status++;
                 }
@@ -186,6 +200,13 @@ public class Tutorial_2_2 : MonoBehaviour
                     massTexts[0].text = scaleVale.ToString("0") + "g";
                     hintManager.SwitchStep("T2_2_5");
                     Status++;
+                }
+                break;
+            case 5: //待寶特瓶搖晃
+            case 6: //待反應結束
+                if (sender.name == "KitchenScale")
+                {
+                    scaleVale = weight_Bottle + weight_BottleCap + weight_TestTube;
                 }
                 break;
             case 7: //搖晃後放上電子秤
@@ -217,13 +238,13 @@ public class Tutorial_2_2 : MonoBehaviour
                     //取得第三個數值
                     scaleVale = weight_Bottle + weight_BottleCap + weight_TestTube;
                     massTexts[2].text = scaleVale.ToString("0") + "g";
-
+                    
                     //讓瓶蓋不可被拿起
                     if(isPC)
                         pcController.SendMessage("Reset",SendMessageOptions.DontRequireReceiver);
                     bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
                     bottleCap.tag = "Untagged";                    
-
+                    
                     EndTheTutorial();
                     Status++;
                 }
@@ -231,7 +252,6 @@ public class Tutorial_2_2 : MonoBehaviour
         }
         weightText.text = scaleVale.ToString("0") + "g";
         weightTextDisplay.text = scaleVale.ToString("0") + "g";
-
     }
     public void ReactionStay(GameObject sender)
     {
@@ -252,13 +272,15 @@ public class Tutorial_2_2 : MonoBehaviour
     }
     public void ReactionExit(GameObject sender)
     {
-        if (sender.name == "Cap_2-2" && Status == 8)
+        switch (Status)
         {
-            //打開瓶蓋
-            bottleCap.transform.SetParent(transform);
-            bottleCap.GetComponent<Rigidbody>().isKinematic = false;
-            scaleVale = weight_Bottle + weight_TestTube;
-            Status++;
+            case 5: //待寶特瓶搖晃
+            case 6: //待反應結束
+                if (sender.name == "KitchenScale")
+                {
+                    scaleVale = 0f;
+                }
+                break;
         }
         weightText.text = scaleVale.ToString("0") + "g";
         weightTextDisplay.text = scaleVale.ToString("0") + "g";

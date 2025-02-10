@@ -7485,7 +7485,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &3810797919557156340
 MonoBehaviour:
@@ -7668,6 +7668,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 500
   currCapacity: 500
+  ratio: 0
   stream: {fileID: 140505702981855959}
   minPourOutAngle: 0
   maxPourOutAngle: 0.7
@@ -7675,6 +7676,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -8016,7 +8018,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &5769349461390181503
 MonoBehaviour:
@@ -8199,6 +8201,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 500
   currCapacity: 500
+  ratio: 0
   stream: {fileID: 8476025546789488341}
   minPourOutAngle: 0
   maxPourOutAngle: 0.7
@@ -8206,6 +8209,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -8837,8 +8841,8 @@ GameObject:
   - component: {fileID: 5587250527267303906}
   - component: {fileID: 5587250527267303908}
   - component: {fileID: 3810797918958543142}
-  - component: {fileID: 7083682515208266339}
   - component: {fileID: 6677689743587005037}
+  - component: {fileID: 507051890665577370}
   m_Layer: 0
   m_Name: WaterBottle_2-3
   m_TagString: Pickable
@@ -8880,7 +8884,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &5587250527267303908
 MonoBehaviour:
@@ -9063,6 +9067,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 100
   currCapacity: 0
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -9070,6 +9075,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: SodiumCarbonate_2-3
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -9110,20 +9116,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!136 &7083682515208266339
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587250527267303912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.035
-  m_Height: 0.22864832
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.11674214, z: 0}
 --- !u!114 &6677689743587005037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9136,6 +9128,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &507051890665577370
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587250527267303912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.075, y: 0.22310056, z: 0.075}
+  m_Center: {x: 0, y: 0.111305766, z: 0.0014298968}
 --- !u!1 &5587250527702132014
 GameObject:
   m_ObjectHideFlags: 0
@@ -10912,6 +10917,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 100
   currCapacity: 0
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -10919,6 +10925,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: HCI_2-3
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:

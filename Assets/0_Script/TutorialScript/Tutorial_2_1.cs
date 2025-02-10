@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Tutorial_2_1 : MonoBehaviour
 {
+    [SerializeField] private Blowtorch gasCan;         //噴槍
     [Header("木屑")]
     [Tooltip("用於縮放的parent")]
     [SerializeField] Transform woodPowder;
@@ -237,18 +238,26 @@ public class Tutorial_2_1 : MonoBehaviour
         }
     }
 
-    public void OnBlowtorchGrabbed()
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
     {
-        if (firstTimeWarning)
+        if (obj == gasCan)
         {
-            audioManager.PlayVoice("W_Blowtorch");
-            firstTimeWarning = false;
+            if (firstTimeWarning)
+            {
+                audioManager.PlayVoice("W_Blowtorch");
+                firstTimeWarning = false;
+            }
+            gasCan.Grab(true);
         }
     }
-
-    void StartHeating(bool on)
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
     {
-
+        if (obj == gasCan)
+        {
+            gasCan.Grab(false);
+        }
     }
 
     private void EndTheTutorial()   //完成教學

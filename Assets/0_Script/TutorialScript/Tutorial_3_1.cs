@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,19 +23,19 @@ public class Tutorial_3_1 : MonoBehaviour
     [SerializeField] private Text myMoneyText;
     [Tooltip("商店原子數量文字")]
     [SerializeField] private Text countText_shopC, countText_shopO2, countText_shopN2,
-        countText_shopH, countText_shopFe;
+        countText_shopH2, countText_shopFe;
 
     [Header("工作區")]
     [Tooltip("組合原子的工作區")]
     [SerializeField] private GameObject workSpace;
     [Tooltip("原子Prefab")]
     [SerializeField] private GameObject atomC_Prefab, atomO2_Prefab, atomN2_Prefab,
-        atomH_Prefab, atomFe_Prefab;
+        atomH2_Prefab, atomFe_Prefab;
     [Tooltip("生成出的原子")]
-    private GameObject atomC, atomO2, atomN2, atomH, atomFe;
+    private GameObject atomC, atomO2, atomN2, atomH2, atomFe;
     [Tooltip("原子生成點")]
     [SerializeField] private Transform atomC_Spawn, atomO2_Spawn, atomN2_Spawn,
-    atomH_Spawn, atomFe_Spawn;
+    atomH2_Spawn, atomFe_Spawn;
 
     [Tooltip("工作區內存在的原子")]
     [SerializeField] private List<Atom> atoms_AreaA, atoms_AreaB,
@@ -46,12 +45,12 @@ public class Tutorial_3_1 : MonoBehaviour
         atomsAnswer_AreaC, atomsAnswer_AreaD;
     [Tooltip("工作區原子數量文字")]
     [SerializeField] private Text countText_workC, countText_workO2, countText_workN2,
-    countText_workH, countText_workFe;
+    countText_workH2, countText_workFe;
 
     private int count_C = 0;
     private int count_O2 = 0;
     private int count_N2 = 0;
-    private int count_H = 0;
+    private int count_H2 = 0;
     private int count_Fe = 0;
 
     [Header("UI")]
@@ -158,7 +157,7 @@ public class Tutorial_3_1 : MonoBehaviour
         count_C = 0;
         count_O2 = 0;
         count_N2 = 0;
-        count_H = 0;
+        count_H2 = 0;
         count_Fe = 0;
         foreach (Atom atom in myData.atoms_Buy)
         {
@@ -173,8 +172,8 @@ public class Tutorial_3_1 : MonoBehaviour
                 case "N2":
                     count_N2++;
                     break;
-                case "H":
-                    count_H++;
+                case "H2":
+                    count_H2++;
                     break;
                 case "Fe":
                     count_Fe++;
@@ -184,14 +183,14 @@ public class Tutorial_3_1 : MonoBehaviour
         countText_shopC.text = count_C.ToString();
         countText_shopO2.text = count_O2.ToString();
         countText_shopN2.text = count_N2.ToString();
-        countText_shopH.text = count_H.ToString();
+        countText_shopH2.text = count_H2.ToString();
         countText_shopFe.text = count_Fe.ToString();
         myMoneyText.text = myData.money.ToString();
 
         countText_workC.text = count_C.ToString();
         countText_workO2.text = count_O2.ToString();
         countText_workN2.text = count_N2.ToString();
-        countText_workH.text = count_H.ToString();
+        countText_workH2.text = count_H2.ToString();
         countText_workFe.text = count_Fe.ToString();
     }
 
@@ -228,14 +227,14 @@ public class Tutorial_3_1 : MonoBehaviour
             Destroy(atomN2);
         }
 
-        if (atomH == null && count_H > 0)
+        if (atomH2 == null && count_H2 > 0)
         {
-            atomH = Instantiate(atomH_Prefab, atomH_Spawn);
-            atomH.name = "H";
+            atomH2 = Instantiate(atomH2_Prefab, atomH2_Spawn);
+            atomH2.name = "H2";
         }
-        else if (atomH != null && count_H < 1)
+        else if (atomH2 != null && count_H2 < 1)
         {
-            Destroy(atomH);
+            Destroy(atomH2);
         }
 
         if (atomFe == null && count_Fe > 0)
@@ -267,8 +266,8 @@ public class Tutorial_3_1 : MonoBehaviour
                 case "N2":
                     atomN2 = null;
                     break;
-                case "H":
-                    atomH = null;
+                case "H2":
+                    atomH2 = null;
                     break;
                 case "Fe":
                     atomFe = null;
@@ -360,6 +359,7 @@ public class Tutorial_3_1 : MonoBehaviour
         }
     }
 
+    //標準答案跟玩家提交的答案做對比
     private bool CheakAnswer(List<Atom> list1, List<Atom> list2)
     {
         // 先檢查數量是否相同
@@ -454,6 +454,23 @@ public class Tutorial_3_1 : MonoBehaviour
                     break;
             }
             questionManager.TriggerHapticFeedback();
+        }
+        //移除提交的原子球
+        AtomBall[] atoms = FindObjectsOfType<AtomBall>();
+        foreach(AtomBall atom in atoms)
+        {
+            GameObject atomObj = atom.gameObject;
+            if (atomObj != atomC && atomObj != atomO2 && atomObj != atomN2
+                && atomObj != atomH2 && atomObj != atomFe)
+            {
+                Atom result = myData.atoms_Buy.Find(atom => atom.name == atomObj.name);
+                if (result != null)
+                {
+                    //myData.atoms_Buy.Remove(result);
+                }
+                Destroy(atomObj);
+            }
+
         }
     }
     public void OnNextLevelButtonClicked()

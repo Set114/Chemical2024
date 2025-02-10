@@ -21141,6 +21141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d4e1d9133ab4a93bdf73350f741c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gasCan: {fileID: 4774141035854031753}
   woodPowder: {fileID: 7538269954015908266}
   meshRenderer_woodPowder: {fileID: 4774141035407937281}
   fire_woodPowder: {fileID: 5130259668932751770}
@@ -21390,7 +21391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4774141035854031753}
         m_TargetAssemblyTypeName: Blowtorch, Assembly-CSharp
-        m_MethodName: Fire
+        m_MethodName: Grab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21405,7 +21406,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4774141035854031753}
         m_TargetAssemblyTypeName: Blowtorch, Assembly-CSharp
-        m_MethodName: Fire
+        m_MethodName: Grab
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21413,18 +21414,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4774141035813928222}
-        m_TargetAssemblyTypeName: Tutorial_2_1, Assembly-CSharp
-        m_MethodName: OnBlowtorchGrabbed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: false
           m_BoolArgument: 0
         m_CallState: 2
   m_FirstFocusEntered:

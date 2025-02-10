@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Tutorial_1_1 : MonoBehaviour
 {
     [SerializeField] GameObject iron;           //軟鐵片
     [SerializeField] GameObject hammer;         //槌子
     [SerializeField] GameObject[] ironObjects;  //軟鐵片的四個狀況
+    [SerializeField] Image fillBar;             // 進度條
     [SerializeField] AudioClip hitSound;        // 敲击音效
 
     int currentIronIndex = 0; //当前铁块索引
@@ -38,6 +39,7 @@ public class Tutorial_1_1 : MonoBehaviour
         ironObjects[0].SetActive(true);
 
         currentIronIndex = 0;
+        fillBar.fillAmount = 0;
         isEnd = false;
     }
 
@@ -64,6 +66,8 @@ public class Tutorial_1_1 : MonoBehaviour
             ironObjects[currentIronIndex].SetActive(false);
             currentIronIndex++;
             ironObjects[currentIronIndex].SetActive(true);
+            float ratio = (float)currentIronIndex / (float)(ironObjects.Length - 1);
+            fillBar.fillAmount = ratio;
             //粒子視窗動畫
             moleculaManager.PlayMoleculasAnimation();
 

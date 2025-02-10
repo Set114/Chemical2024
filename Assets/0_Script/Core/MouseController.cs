@@ -46,7 +46,6 @@ public class MouseController : MonoBehaviour
                     //parentEmpty.transform.rotation = initialRotation;
                     selectedObjectParent = selectedObject.transform.parent;
                     selectedObject.transform.parent = parentEmpty.transform;
-                    
                     switch (selectedObject.name)
                     {
                         //------------Stage 1--------------
@@ -55,7 +54,7 @@ public class MouseController : MonoBehaviour
                             Collider[] objColliderhammer = selectedObject.GetComponents<Collider>();
                             objColliderhammer[1].enabled = false;
                             selectedObject.transform.localPosition = new Vector3(0.0013f, 0.0f, 0.0f);
-                            selectedObject.transform.localEulerAngles = new Vector3(75.0f, -90.0f, 0.0f);
+                            selectedObject.transform.localEulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
                             break;
                         case "GAS":
                             planeDistance = 0.717f;
@@ -94,6 +93,12 @@ public class MouseController : MonoBehaviour
                             selectedObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.053f); 
                             selectedObject.transform.localEulerAngles = new Vector3( 0.0f, 0.0f, 0.0f);
                             break;
+                        case "Tweezers_1-7":
+                            planeDistance = 0.6f;
+                            Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                            objColliderTweezers[2].enabled = false;
+                            selectedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            break;
                         //------------Stage 2--------------
                         case "GAS_2_1":
                             planeDistance = 0.77f;
@@ -113,7 +118,7 @@ public class MouseController : MonoBehaviour
                         case "Tweezers_2-3":
                         case "Tweezers_2-6":
                             planeDistance = 0.671f;
-                            Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                            objColliderTweezers = selectedObject.GetComponents<Collider>();
                             objColliderTweezers[2].enabled = false;
                             selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
@@ -152,7 +157,7 @@ public class MouseController : MonoBehaviour
                         //------------Stage 3--------------
                         case "C":
                         case "Fe":
-                        case "H":
+                        case "H2":
                         case "N2":
                         case "O2":
                             planeDistance = 0.933f;
@@ -339,6 +344,15 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
+                case "Tweezers_1-7":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.transform.position = initialPosition;       //恢復初始位置
+                    selectedObject.transform.rotation = initialRotation;       //恢復初始角度
+                    isToolSwitchOn = false;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                    objColliderTweezers[2].enabled = true;
+                    break;
                 //------------Stage 2--------------
                 case "GAS_2_1":
                     selectedObject.transform.parent = selectedObjectParent;
@@ -356,7 +370,7 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.rotation = initialRotation;       //恢復初始角度
                     isToolSwitchOn = false;
                     selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-                    Collider[] objColliderTweezers = selectedObject.GetComponents<Collider>();
+                    objColliderTweezers = selectedObject.GetComponents<Collider>();
                     objColliderTweezers[2].enabled = true;
                     break;
                 case "CalciumChloride_2-2":
@@ -393,7 +407,7 @@ public class MouseController : MonoBehaviour
                 //------------Stage 3--------------
                 case "C":
                 case "Fe":
-                case "H":
+                case "H2":
                 case "N2":
                 case "O2":
                     selectedObject.transform.parent = selectedObjectParent;

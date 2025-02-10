@@ -2,14 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tutorial_1_2 : MonoBehaviour
 {
-    [SerializeField] private GameObject gasCan;         //噴槍
+    [SerializeField] private Blowtorch gasCan;         //噴槍
     [SerializeField] MeshRenderer[] irons;              //軟鐵片
     private TextureScaler iron2TextureScaler;           //控制鐵片貼圖縮放
     private Color[] ironColors;
-
+    [SerializeField] Image fillBar;             // 進度條
     [Tooltip("加熱速度")]
     [SerializeField] private float heatingSpeed = 0.5f;
     [Tooltip("冷卻速度")]
@@ -64,6 +65,7 @@ public class Tutorial_1_2 : MonoBehaviour
         }
         iron2TextureScaler = irons[1].GetComponent<TextureScaler>();
         iron2TextureScaler.SetRatio(0f);
+        fillBar.fillAmount = 0;
     }
 
     void Update()
@@ -136,6 +138,7 @@ public class Tutorial_1_2 : MonoBehaviour
             irons[1].material.color = heatingColor;
             //iron2TextureScaler.SetRatio(ironTemp / maxTemp);
         }
+        fillBar.fillAmount = (ironTemp - roomTemp) / maxTemp;
     }
 
     public void StartHeating(bool on)
@@ -145,21 +148,32 @@ public class Tutorial_1_2 : MonoBehaviour
         heating = on;
     }
 
-    public void OnBlowtorchGrabbed()
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
     {
-        if (firstTimeWarning)
+        if (obj == gasCan)
         {
-            audioManager.PlayVoice("W_Blowtorch");
-            firstTimeWarning = false;
+            if (firstTimeWarning)
+            {
+                audioManager.PlayVoice("W_Blowtorch");
+                firstTimeWarning = false;
+            }
+            gasCan.Grab(true);
         }
     }
-
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
+    {
+        if (obj == gasCan)
+        {
+            gasCan.Grab(false);
+        }
+    }
     private void EndTheTutorial()   //完成教學
     {
         hintManager.SwitchStep("T1_2_2");
         hintManager.ShowNextButton(this.gameObject);
         isEnd = true;
-        gasCan.SendMessage("BackToInitial");
     }
 
     void CloseHint()    //關閉提示視窗
