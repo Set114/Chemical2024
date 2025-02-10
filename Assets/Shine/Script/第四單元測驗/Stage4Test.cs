@@ -195,12 +195,17 @@ public class Stage4Test : MonoBehaviour
 
                         break;
                 }
+                FindObjectOfType<DataInDevice>().SaveData4Test.Add(Ans5[0]);
+
             }
             if (i>0)
             {
                 Iteams[i].text = (i+1) + "." + Ans5[i];
+                FindObjectOfType<DataInDevice>().SaveData4Test.Add(Ans5[i]);
+
             }
         }
+
         ScoreText.text = Score + "¤À";
         if (Score < 60)
         {
@@ -209,6 +214,7 @@ public class Stage4Test : MonoBehaviour
         else {
             ScoreText.color = Color.black;
         }
+        FindObjectOfType<DataInDevice>().AddDataTeach(1);
 
     }
 }

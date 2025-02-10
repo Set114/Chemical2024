@@ -16,6 +16,7 @@ public class Shine_GM : MonoBehaviour
     public GameObject[] Infos;
 
     public GameObject VRMode, PCMode;
+    public DataInDevice DataInDeviceScript;
     private void Awake()
     {
 #if UNITY_STANDALONE_WIN
@@ -31,8 +32,7 @@ PCMode.SetActive(false);
     // Start is called before the first frame update
     void Start()
     {
-        UserID.text = FindObjectOfType<UserDataManager>().currentPlayerID;
-        UserName.text = FindObjectOfType<UserDataManager>().currentPlayerName;
+      
         //MenuUIManager.SharedChapterModeData = 1;
         switch (MenuUIManager.SharedChapterModeData) {
             case 0:
@@ -52,7 +52,34 @@ PCMode.SetActive(false);
         }
        
     }
+    private void Update()
+    {
+        if (UserID.text == "")
+        {
+            if (GameObject.Find("UserDataManager"))
+            {
+                UserID.text = FindObjectOfType<UserDataManager>().currentPlayerID;
+                UserName.text = FindObjectOfType<UserDataManager>().currentPlayerName;
 
+            }
+            else
+            {
+                UserID.text = "1234";
+                UserName.text = "Test";
+            }
+            #region ¼È¦s¸ê®Æ
+            DataInDeviceScript.SaveData4Teach.Add(UserID.text);
+            DataInDeviceScript.SaveData4Teach.Add(UserName.text);
+            DataInDeviceScript.SaveData4Test.Add(UserID.text);
+            DataInDeviceScript.SaveData4Test.Add(UserName.text);
+            DataInDeviceScript.SaveData6Teach.Add(UserID.text);
+            DataInDeviceScript.SaveData6Teach.Add(UserName.text);
+            DataInDeviceScript.SaveData6Test.Add(UserID.text);
+            DataInDeviceScript.SaveData6Test.Add(UserName.text);
+            #endregion
+        }
+       
+    }
     public void SelectTestMode() {
         MenuUIManager.SharedChapterModeData= 1;
         Application.LoadLevel(Application.loadedLevel);
@@ -87,5 +114,24 @@ PCMode.SetActive(false);
         for (int i = 0; i < Infos.Length; i++) {
             Infos[i].SetActive(false);
         }
+    }
+    public void Stage4RecordTeachTime() {
+        DataInDeviceScript.SaveData4Teach.Add(DateTime.Now.ToString());
+
+    }
+    public void Stage4PushToExcel()
+    {
+        DataInDeviceScript.AddDataTeach(0);
+
+    }
+    public void Stage6RecordTeachTime()
+    {
+        DataInDeviceScript.SaveData6Teach.Add(DateTime.Now.ToString());
+
+    }
+    public void Stage6PushToExcel()
+    {
+        DataInDeviceScript.AddDataTeach(2);
+
     }
 }

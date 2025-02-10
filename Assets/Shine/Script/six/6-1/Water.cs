@@ -18,7 +18,6 @@ public class Water : MonoBehaviour
         RecordObjs[0] = TackObjs[0].transform.position;
         RecordObjs[1] = TackObjs[1].transform.position;
         RecordObjs[2] = TackObjs[2].transform.position;
-
     }
 
     // Update is called once per frame

@@ -192,8 +192,9 @@ public class Stage6Test : MonoBehaviour
             
            
                 Iteams[i].text = (i + 1) + "." + Ans5[i];
-            
+            FindObjectOfType<DataInDevice>().SaveData6Test.Add(Ans5[i]);
         }
+
         ScoreText.text = Score + "¤À";
         if (Score < 60)
         {
@@ -203,6 +204,7 @@ public class Stage6Test : MonoBehaviour
         {
             ScoreText.color = Color.black;
         }
+        FindObjectOfType<DataInDevice>().AddDataTeach(3);
 
     }
 }
