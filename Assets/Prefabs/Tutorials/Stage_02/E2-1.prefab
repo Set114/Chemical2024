@@ -938,6 +938,9 @@ MonoBehaviour:
   _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls: []
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2233553971728608135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,6 +5924,9 @@ MonoBehaviour:
   _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls: []
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &2233553971867589123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6441,6 +6447,7 @@ GameObject:
   - component: {fileID: 6116119675330166323}
   - component: {fileID: 6116119675330166320}
   - component: {fileID: 6116119675330166346}
+  - component: {fileID: 7298473380622273580}
   m_Layer: 0
   m_Name: Glass_2-4
   m_TagString: Pickable
@@ -6724,6 +6731,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 5341269089730627001}
   targetName: Water
   sendObj: 1
+--- !u!114 &7298473380622273580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116119675330166334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &894605737928041526
 PrefabInstance:
   m_ObjectHideFlags: 0

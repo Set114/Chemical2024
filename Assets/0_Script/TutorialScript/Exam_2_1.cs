@@ -86,6 +86,7 @@ public class Exam_2_1 : MonoBehaviour
                         //跳出題目一
                         questionManager.ShowExamWithDelay(0, answerDelay, gameObject);
                         hintManager.OnCloseBtnClicked();
+                        sender.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
                         Status++;
                     }
                 }

@@ -336,7 +336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testTube: {fileID: 6838465980632390165}
-  testTubePowder: {fileID: 6838465980632390162}
+  testTubeToner: {fileID: 1749829231001361356}
+  testTubeCopperOxide: {fileID: 7973196110885749179}
   testTubePowderColor_final: {r: 0.603, g: 0.21448395, b: 0.07679717, a: 1}
   testTubePoint: {fileID: 6838465979315273446}
   tonerPowder: {fileID: 6838465980946547664}
@@ -489,6 +490,205 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1310550162130365405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1067401997396727591}
+  - component: {fileID: 391422614058655032}
+  - component: {fileID: 2574219859490929389}
+  - component: {fileID: 4273687024720234872}
+  - component: {fileID: 6147055571004998447}
+  - component: {fileID: 7973196110885749179}
+  - component: {fileID: 6440958407493492275}
+  m_Layer: 0
+  m_Name: TestTube_CopperOxide_2-6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1067401997396727591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.89008754, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 5864596194199527859}
+  m_Father: {fileID: 6838465979315273446}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &391422614058655032
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Mesh: {fileID: 4300000, guid: 85ba036d35b7952428741f647d58ca24, type: 3}
+--- !u!23 &2574219859490929389
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 868c49b78b2986d42a241494309aa253, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &4273687024720234872
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  serializedVersion: 2
+  m_Mass: 0.07
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &6147055571004998447
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0069550574
+  m_Height: 0.12545796
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.06327102, z: 0}
+--- !u!114 &7973196110885749179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85aa0af28045f46d18460f4a6802d4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: {fileID: 0}
+  myLiquid: {fileID: 8872983064979771064}
+  liquidColor: {r: 0.128, g: 0.128, b: 0.128, a: 1}
+  maxCapacity: 100
+  currCapacity: 0
+  ratio: 0
+  stream: {fileID: 0}
+  minPourOutAngle: 0
+  maxPourOutAngle: 0
+  pourOutAngle: 0
+  maxPourOutSpeed: 10000
+  injectFilter: CopperOxide_2-6
+  isUnlimited: 0
+  isFull: 0
+  targerRatio: 0.5
+  _whenInject:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenPourOut:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenFull:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5139042164459288639}
+        m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
+        m_MethodName: PowderFull
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1310550162130365405}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5139042164459288639}
+        m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
+        m_MethodName: PowderFull
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1310550162130365405}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6440958407493492275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ec7dcffd11ed240a8c0b178423b482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialObject: {fileID: 257893074903362644}
+  targetName: 
+  sendObj: 1
 --- !u!1 &1473475703868501999
 GameObject:
   m_ObjectHideFlags: 0
@@ -24710,6 +24910,89 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &2166503346406686704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5864596194199527859}
+  - component: {fileID: 3705664109158722621}
+  - component: {fileID: 8872983064979771064}
+  m_Layer: 0
+  m_Name: Liquid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5864596194199527859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166503346406686704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1067401997396727591}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3705664109158722621
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166503346406686704}
+  m_Mesh: {fileID: 4300002, guid: 85ba036d35b7952428741f647d58ca24, type: 3}
+--- !u!23 &8872983064979771064
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2166503346406686704}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0b423d88084864537a6f75444146a5ff, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2381882490514208507
 GameObject:
   m_ObjectHideFlags: 0
@@ -25443,6 +25726,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6838465980632390164}
+  - {fileID: 1067401997396727591}
   m_Father: {fileID: 1411501896849242949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25895,6 +26179,7 @@ MonoBehaviour:
   liquidColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
   maxCapacity: 100
   currCapacity: 100
+  ratio: 0
   stream: {fileID: 6838465980026094515}
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
@@ -25902,6 +26187,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -25913,6 +26199,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &6838465979782168620
@@ -25981,7 +26270,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5139042164459288639}
+        m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6838465979782168608}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -36131,6 +36432,7 @@ MonoBehaviour:
   liquidColor: {r: 0.16862746, g: 0.15686275, b: 0.18039216, a: 1}
   maxCapacity: 100
   currCapacity: 100
+  ratio: 0
   stream: {fileID: 6838465980018267241}
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
@@ -36138,6 +36440,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -36149,6 +36452,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &6838465980068599551
@@ -36217,7 +36523,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5139042164459288639}
+        m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6838465980068599539}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -37032,10 +37350,10 @@ GameObject:
   - component: {fileID: 6838465980632390175}
   - component: {fileID: 6838465980632390160}
   - component: {fileID: 6838465980632390161}
-  - component: {fileID: 6838465980632390162}
+  - component: {fileID: 1749829231001361356}
   - component: {fileID: 6838465980632390163}
   m_Layer: 0
-  m_Name: TestTube_Empty_2-6
+  m_Name: TestTube_Toner_2-6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37137,7 +37455,7 @@ CapsuleCollider:
   m_Height: 0.12545796
   m_Direction: 1
   m_Center: {x: 0, y: -0.06327102, z: 0}
---- !u!114 &6838465980632390162
+--- !u!114 &1749829231001361356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37154,6 +37472,7 @@ MonoBehaviour:
   liquidColor: {r: 0.128, g: 0.128, b: 0.128, a: 1}
   maxCapacity: 100
   currCapacity: 0
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -37161,6 +37480,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: Toner_2-6
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0.5
   _whenInject:
     m_PersistentCalls:
@@ -37173,7 +37493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5139042164459288639}
         m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
-        m_MethodName: LiquidFull
+        m_MethodName: PowderFull
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6838465980632390165}
@@ -37188,7 +37508,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5139042164459288639}
         m_TargetAssemblyTypeName: Exam_2_3, Assembly-CSharp
-        m_MethodName: LiquidFull
+        m_MethodName: PowderFull
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6838465980632390165}
@@ -37198,6 +37518,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6838465980632390163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38283,7 +38606,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10g
+  m_Text: 0g
 --- !u!1 &7614760133298533413
 GameObject:
   m_ObjectHideFlags: 0

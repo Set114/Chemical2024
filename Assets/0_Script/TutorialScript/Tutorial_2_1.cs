@@ -39,6 +39,7 @@ public class Tutorial_2_1 : MonoBehaviour
 
     [Header("鋼絲絨")]
     [SerializeField] MeshRenderer[] steelWools;         //  鋼絲絨
+    [SerializeField] Transform steelWool_burning;       //  燃燒中的鋼絲絨
     private Color[] steelWoolColors;
     [Tooltip("鋼絲絨燃燒效果")]
     [SerializeField] private ParticleSystem fire_steelWool;
@@ -157,19 +158,12 @@ public class Tutorial_2_1 : MonoBehaviour
         switch (status_steelWool)
         {
             case 0:     //  待加熱
-                //處理變色
-                steelWoolColors[1].a = timer_steelWool / heatingTime_steelWool;
                 if (timer_steelWool >= heatingTime_steelWool)
                 {
                     timer_steelWool = burningTime_steelWool;
                     fire_steelWool.Play();
-                    steelWoolColors[1].a = 1f;
-                    steelWoolColors[2].a = 1f;
-                    steelWools[2].material.color = steelWoolColors[2];
                     status_steelWool++;
                 }
-                steelWools[1].material.color = steelWoolColors[1];
-
                 break;
             case 1:     //  燃燒中
                 timer_steelWool -= Time.deltaTime;
@@ -180,15 +174,19 @@ public class Tutorial_2_1 : MonoBehaviour
                 currentWeight_steelWool = (initialWeight_steelWool - finalWeight_steelWool) * (1.0f - processPercent) + finalWeight_steelWool;
                 //處理變色
                 steelWoolColors[1].a = timer_steelWool / burningTime_steelWool;
-
+                steelWoolColors[2].a = processPercent;
+                steelWool_burning.localScale = new Vector3(processPercent, processPercent, processPercent);
                 if (timer_steelWool <= 0f)
                 {
                     timer_steelWool = coolingTime_steelWool;
                     fire_steelWool.Stop();
                     steelWoolColors[1].a = 0f;
+                    steelWool_burning.localScale = new Vector3(1f, 1f, 1f);
+                    steelWoolColors[2].a = 1f;
                     status_steelWool++;
                 }
                 steelWools[1].material.color = steelWoolColors[1];
+                steelWools[2].material.color = steelWoolColors[2];
                 break;
             case 2:     //  冷卻中
                 timer_steelWool -= Time.deltaTime;

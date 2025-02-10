@@ -69,6 +69,7 @@ public class Tweezers : MonoBehaviour
         {
             readyToClampObj = null;
         }
+        Clamp(false);
     }
 
     public void Clamp(bool clamp)

@@ -7688,6 +7688,9 @@ MonoBehaviour:
   _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls: []
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1409276815341749782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8214,6 +8217,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &8609956204785123182
@@ -8832,6 +8838,7 @@ GameObject:
   - component: {fileID: 5587250527267303908}
   - component: {fileID: 3810797918958543142}
   - component: {fileID: 7083682515208266339}
+  - component: {fileID: 6677689743587005037}
   m_Layer: 0
   m_Name: WaterBottle_2-3
   m_TagString: Pickable
@@ -9088,6 +9095,21 @@ MonoBehaviour:
   _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls: []
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2989143856646509242}
+        m_TargetAssemblyTypeName: Tutorial_2_3, Assembly-CSharp
+        m_MethodName: InjectWrongFluid
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5587250527267303912}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!136 &7083682515208266339
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9102,6 +9124,18 @@ CapsuleCollider:
   m_Height: 0.22864832
   m_Direction: 1
   m_Center: {x: 0, y: 0.11674214, z: 0}
+--- !u!114 &6677689743587005037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587250527267303912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5587250527702132014
 GameObject:
   m_ObjectHideFlags: 0
@@ -9889,7 +9923,7 @@ MonoBehaviour:
   bottleLiquid: {fileID: 3810797918958543142}
   bottleLiquidColor_final: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
   reactionTime: 5
-  shakeThreshold: 90
+  shakeThreshold: 45
   colorChangeSpeed: 1
   balloon: {fileID: 6793589655314195717}
   balloon_flat: {fileID: 4621550238091996552}
@@ -9901,6 +9935,7 @@ MonoBehaviour:
   object_Step2: {fileID: 8038209183476377585}
   tweezers: {fileID: 5743555228797103420}
   weightText: {fileID: 3366517919563182863}
+  weightTextDisplay: {fileID: 4331931695240838296}
   scaleVale: 0
   weight_Bottle: 30
   weight_Balloon: 10
@@ -10421,7 +10456,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6631507454174486049}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.27}
+  m_LocalPosition: {x: 0, y: 0, z: 0.89}
   m_LocalScale: {x: 11.250001, y: 10, z: 11.250001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10431,7 +10466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.03, y: 0.32}
+  m_AnchoredPosition: {x: 0, y: 0.7}
   m_SizeDelta: {x: 0.2, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7795607573337983418
@@ -10756,6 +10791,7 @@ GameObject:
   - component: {fileID: 5743555228838832214}
   - component: {fileID: 5769349462264871983}
   - component: {fileID: 8609956203507779550}
+  - component: {fileID: 5930321558799095067}
   m_Layer: 0
   m_Name: TestTube_2-3
   m_TagString: TweezersClamp
@@ -10908,6 +10944,21 @@ MonoBehaviour:
   _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls: []
+  _whenInjectWrongLiquid:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2989143856646509242}
+        m_TargetAssemblyTypeName: Tutorial_2_3, Assembly-CSharp
+        m_MethodName: InjectWrongFluid
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7122119233811356632}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8609956203507779550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10923,6 +10974,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 5743555228465077439}
   targetName: Cap_Point
   sendObj: 1
+--- !u!114 &5930321558799095067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122119233811356632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7236208904868253058
 GameObject:
   m_ObjectHideFlags: 0

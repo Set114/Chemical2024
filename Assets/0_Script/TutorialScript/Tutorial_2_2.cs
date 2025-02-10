@@ -64,7 +64,6 @@ public class Tutorial_2_2 : MonoBehaviour
     [SerializeField] private GameObject particlePage;
 
     private float timer = 0;
-    private bool bottleRotationWarning = false; //警告寶特瓶不可傾倒
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -106,18 +105,13 @@ public class Tutorial_2_2 : MonoBehaviour
             case 1: //等待試管液體倒滿
                 break;
             case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
-                break;
             case 3: //待鎖上寶特瓶蓋後， 畫面跳轉至測量質量頁面。
-                break;
             case 4: //待寶特瓶放上電子秤
-                if (!bottleRotationWarning)
+                if (bottleAngle >= shakeThreshold)
                 {
-                    if (bottleAngle >= shakeThreshold * 0.5f)
-                    {
-                        audioManager.PlayVoice("W_BottleRotation");
-                        print("現在請勿傾倒寶特瓶。");
-                        bottleRotationWarning = true;
-                    }
+                    audioManager.PlayVoice("W_BottleRotation");
+                    print("現在請勿傾倒寶特瓶。");
+                    bottle.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
             case 5: //待寶特瓶搖晃
@@ -236,6 +230,8 @@ public class Tutorial_2_2 : MonoBehaviour
                 break;
         }
         weightText.text = scaleVale.ToString("0") + "g";
+        weightTextDisplay.text = scaleVale.ToString("0") + "g";
+
     }
     public void ReactionStay(GameObject sender)
     {
@@ -265,6 +261,19 @@ public class Tutorial_2_2 : MonoBehaviour
             Status++;
         }
         weightText.text = scaleVale.ToString("0") + "g";
+        weightTextDisplay.text = scaleVale.ToString("0") + "g";
+    }
+    //  注入錯液體時通知
+    public void InjectWrongFluid(GameObject obj)
+    {
+        switch (obj.name)
+        {
+            case "WaterBottle_2-2":
+            case "TestTube_2-2":
+                obj.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
+                audioManager.PlayVoice("W_WrongLiquid");
+                break;
+        }
     }
     //  液體裝滿時通知
     public void LiquidFull(GameObject obj)
@@ -273,6 +282,7 @@ public class Tutorial_2_2 : MonoBehaviour
         {
             case "WaterBottle_2-2":
             case "TestTube_2-2":
+                obj.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
                 if (Status < 2) {
                     Status++; 
                     if(Status == 2)

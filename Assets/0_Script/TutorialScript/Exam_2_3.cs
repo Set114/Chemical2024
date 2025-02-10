@@ -9,7 +9,11 @@ public class Exam_2_3 : MonoBehaviour
     [Tooltip("試管")]
     [SerializeField] private GameObject testTube;
     [Tooltip("試管內粉末")]
-    [SerializeField] private LiquidController testTubePowder;
+    private LiquidController testTubePowder;
+    [Tooltip("試管內碳粉")]
+    [SerializeField] private LiquidController testTubeToner;
+    [Tooltip("試管內氧化銅粉")]
+    [SerializeField] private LiquidController testTubeCopperOxide;
     [Tooltip("試管內粉末顏色")]
     private Color testTubePowderColor;
     [Tooltip("試管內粉末反應後顏色")]
@@ -28,7 +32,6 @@ public class Exam_2_3 : MonoBehaviour
     [SerializeField] private Animator cap;
     [Tooltip("酒精燈火焰")]
     [SerializeField] private GameObject fire;
-
 
     [Header("質量設定")]
     [Tooltip("磅秤文字")]
@@ -72,7 +75,6 @@ public class Exam_2_3 : MonoBehaviour
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
         weightTextDisplay.text = "0g";
-        testTubePowderColor = testTubePowder.liquidColor;
     }
 
     private void Update()
@@ -83,15 +85,25 @@ public class Exam_2_3 : MonoBehaviour
                 break;
             case 1://待點燃酒精燈
                 break;
-            case 2://待試管加熱完成
+            case 2://待夾起試管離開試管架
+                float distance = Vector3.Distance(testTube.transform.position, testTubePoint.position);
+                if (distance > 0.01f)
+                {
+                    scaleVale = -10f;
+                    weightText.text = scaleVale.ToString("0") + "g";
+                    weightTextDisplay.text = scaleVale.ToString("0") + "g";
+                    Status++;
+                }
                 break;
-            case 3://待試管放置於架上
+            case 3://待試管加熱完成
                 break;
-            case 4://回答第一題
+            case 4://待試管放置於架上
                 break;
-            case 5://回答第二題
+            case 5://回答第一題
                 break;
-            case 6://回答第三題
+            case 6://回答第二題
+                break;
+            case 7://回答第三題
                 break;
         }
     }
@@ -103,90 +115,135 @@ public class Exam_2_3 : MonoBehaviour
 
     public void ReactionStay(GameObject sender)
     {
+        switch (Status)
         {
-            switch (Status)
-            {
-                case 2://試管加熱
-                    if (sender.name == "TestTube_Mixed_2-6_Clamp")
+            case 3://試管加熱
+                if (sender.name == "TestTube_Mixed_2-6_Clamp")
+                {
+                    timer += Time.deltaTime;
+                    //計算比例 0% > 100%
+                    float processPercent = timer / reactionTime;
+
+                    // 使用 Lerp 混合顏色
+                    testTubePowderColor = Color.Lerp(testTubePowderColor, testTubePowderColor_final, processPercent);
+                    // 更新物件的顏色
+                    testTubePowder.liquidColor = testTubePowderColor;
+
+                    if (timer >= reactionTime)
                     {
-                        timer += Time.deltaTime;
-                        //計算比例 0% > 100%
-                        float processPercent = timer / reactionTime;
-
-                        // 使用 Lerp 混合顏色
-                        testTubePowderColor = Color.Lerp(testTubePowderColor, testTubePowderColor_final, processPercent);
-                        // 更新物件的顏色
-                        testTubePowder.liquidColor = testTubePowderColor;
-
-                        if (timer >= reactionTime)
-                        {
-                            testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
-                            hintManager.SwitchStep("E2_3_5");
-                            timer = 0f;
-                            Status++;
-                        }
-                    }
-                    break;
-                case 3://加熱完的試管放置於架上
-                    if (sender.name == "TestTube_Mixed_2-6")
-                    {
-                        testTube.tag = "Untagged";
-                        testTube.transform.SetParent(testTubePoint);
-                        testTube.transform.localPosition = new Vector3(0f, 0f, 0f);
-                        testTube.transform.localRotation = Quaternion.identity;
-
-                        //記錄反應後重量
-                        scaleVale = weight_finsh;
-                        weightText.text = scaleVale.ToString("0") + "g";
-                        weightTextDisplay.text = scaleVale.ToString("0") + "g";
-                        massTexts[1].text = scaleVale.ToString("0") + "g";
-                        questionManager.ShowExamWithDelay(2, answerDelay, gameObject);
-
+                        testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
+                        hintManager.SwitchStep("E2_3_5");
+                        timer = 0f;
                         Status++;
                     }
-                    break;
-            }
-        }
-    }
-
-    //  液體裝滿時通知
-    public void LiquidFull(GameObject obj)
-    {
-        switch (obj.name)
-        {
-            case "TestTube_Empty_2-6":
-                if (Status == 0)
-                {
-                    //將試管倒入篩選改為氧化銅粉
-                    testTube.GetComponent<LiquidController>().injectFilter = "CopperOxide_2-6";
-                    testTube.name = "TestTube_Toner_2-6";
-                    tonerPowder.SetActive(false);
-                    particleSystem_toner.SetActive(false);
-                    scaleVale = weight_toner;
-                    weightText.text = scaleVale.ToString("0") + "g";
-                    weightTextDisplay.text = scaleVale.ToString("0") + "g";
                 }
                 break;
-            case "TestTube_Toner_2-6":
-                if (Status == 0)
+            case 4://加熱完的試管放置於架上
+                if (sender.name == "TestTube_Mixed_2-6")
                 {
-                    testTube.GetComponent<CollisionDetection>().targetName = "Alcohol Lamp Flame";
-                    testTube.name = "TestTube_Mixed_2-6";
-                    testTube.tag = "TweezersClamp";
-                    copperOxidePowder.SetActive(false);
-                    particleSystem_copperOxide.SetActive(false);
-                    scaleVale = weight_toner + weight_copperOxide;
+                    testTube.tag = "Untagged";
+                    testTube.transform.SetParent(testTubePoint);
+                    testTube.transform.localPosition = new Vector3(0f, 0f, 0f);
+                    testTube.transform.localRotation = Quaternion.identity;
+
+                    //記錄反應後重量
+                    scaleVale = weight_finsh;
                     weightText.text = scaleVale.ToString("0") + "g";
                     weightTextDisplay.text = scaleVale.ToString("0") + "g";
-                    //記錄反應前重量
-                    massTexts[0].text = scaleVale.ToString("0") + "g";
-                    hintManager.SwitchStep("E2_3_2");
+                    massTexts[1].text = scaleVale.ToString("0") + "g";
+                    questionManager.ShowExamWithDelay(2, answerDelay, gameObject);
+
                     Status++;
                 }
                 break;
         }
     }
 
+    //  粉末倒滿時觸發
+    public void PowderFull(GameObject sender)
+    {
+        if (Status != 0)
+            return;
+
+        if (testTubeToner.isFull && testTubeCopperOxide.isFull)
+        {
+            testTube.GetComponent<CollisionDetection>().targetName = "Alcohol Lamp Flame";
+            testTube.name = "TestTube_Mixed_2-6";
+            testTubePowderColor = testTubePowder.liquidColor;
+
+            tonerPowder.SetActive(false);
+            particleSystem_toner.SetActive(false);
+            copperOxidePowder.SetActive(false);
+            particleSystem_copperOxide.SetActive(false);
+
+            scaleVale = weight_toner + weight_copperOxide;
+            //記錄反應前重量
+            massTexts[0].text = scaleVale.ToString("0") + "g";
+            hintManager.SwitchStep("E2_3_2");
+            Status++;
+        }
+        else
+        {
+            if (sender == testTubeToner.gameObject)
+            {
+                print("testTubeToner full");
+                testTubePowder = testTubeCopperOxide;
+                testTubeCopperOxide.targerRatio = 0f;
+                testTubeCopperOxide.currCapacity += testTubeToner.currCapacity;
+                testTubeToner.currCapacity = 0f;
+                testTubeToner.isFull = true;
+                testTubeToner.gameObject.SetActive(false);
+                testTubeCopperOxide.gameObject.SetActive(true);
+
+                tonerPowder.SetActive(false);
+                particleSystem_toner.SetActive(false);
+            }
+            else if (sender == testTubeCopperOxide.gameObject)
+            {
+                print("testTubeCopperOxide full");
+                testTubePowder = testTubeToner;
+                testTubeToner.targerRatio = 0f;
+                testTubeToner.currCapacity += testTubeCopperOxide.currCapacity;
+                testTubeCopperOxide.currCapacity = 0f;
+                testTubeCopperOxide.isFull = true;
+                testTubeToner.gameObject.SetActive(true);
+                testTubeCopperOxide.gameObject.SetActive(false);
+
+                copperOxidePowder.SetActive(false);
+                particleSystem_copperOxide.SetActive(false);
+            }
+            scaleVale = testTubeToner.currCapacity + testTubeCopperOxide.currCapacity;
+        }
+        weightText.text = scaleVale.ToString("0") + "g";
+        weightTextDisplay.text = scaleVale.ToString("0") + "g";
+    }
+
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
+    {
+        switch (Status)
+        {
+            case 0: //待粉末裝滿
+                if (!testTubeToner.isFull || !testTubeCopperOxide.isFull)
+                {
+                    if (obj.name == "Toner_2-6")
+                    {
+                        testTubeToner.gameObject.SetActive(true);
+                        testTubeCopperOxide.gameObject.SetActive(false);
+                        testTubeToner.currCapacity += testTubeCopperOxide.currCapacity;
+                        testTubeCopperOxide.currCapacity = 0f;
+                    }
+                    else if (obj.name == "CopperOxide_2-6")
+                    {
+                        testTubeToner.gameObject.SetActive(false);
+                        testTubeCopperOxide.gameObject.SetActive(true);
+                        testTubeCopperOxide.currCapacity += testTubeToner.currCapacity;
+                        testTubeToner.currCapacity = 0f;
+                    }
+                }
+                break;
+        }
+    }
     public void OnAlcoholLampTouched()
     {
         if (Status == 1)
@@ -196,6 +253,7 @@ public class Exam_2_3 : MonoBehaviour
             fire.SetActive(true);
 
             hintManager.SwitchStep("E2_3_4");
+            testTube.tag = "TweezersClamp";
             Status++;
         }
     }
@@ -205,15 +263,15 @@ public class Exam_2_3 : MonoBehaviour
     {
         switch (Status)
         {
-            case 4://回答第一題
+            case 5://回答第一題
                 questionManager.ShowExamWithDelay(3, answerDelay, gameObject);
                 Status++;
                 break;
-            case 5://回答第二題
+            case 6://回答第二題
                 questionManager.ShowExamWithDelay(4, answerDelay, gameObject);
                 Status++;
                 break;
-            case 6://回答第三題
+            case 7://回答第三題
                 levelObjManager.LevelClear(2);
                 break;
         }

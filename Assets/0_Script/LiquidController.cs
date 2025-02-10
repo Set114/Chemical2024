@@ -15,11 +15,11 @@ public class LiquidController : MonoBehaviour
     public Color liquidColor;
 
     [Tooltip("最大容量")]
-    [SerializeField] private float maxCapacity = 100f;
+    public float maxCapacity = 100f;
     [Tooltip("目前容量")]
-    [SerializeField] public float currCapacity = 0f;
+    public float currCapacity = 0f;
     [Tooltip("目前容量比例")]
-    private float ratio;
+    public float ratio;
 
     [Header("倒出相關設定")]
     [Tooltip("流體效果")]
@@ -38,7 +38,7 @@ public class LiquidController : MonoBehaviour
     public string injectFilter = "";
     [Tooltip("無限液體")]
     [SerializeField] private bool isUnlimited = false;
-    private bool isFull = false;
+    public bool isFull = false;
     private bool isReach = false;
     [Space]
 
@@ -53,12 +53,14 @@ public class LiquidController : MonoBehaviour
     [SerializeField] private UnityEvent _whenFull;
     [Tooltip("達成指定比例時觸發")]
     [SerializeField] private UnityEvent _whenReachTargerRatio;
+    [Tooltip("注入錯液體時觸發")]
+    [SerializeField] private UnityEvent _whenInjectWrongLiquid;
 
     public UnityEvent WhenInject => _whenInject;
     public UnityEvent WhenPourOut => _whenPourOut;
     public UnityEvent WhenFull => _whenFull;
     public UnityEvent WhenReachTargerRatio => _whenReachTargerRatio;
-
+    public UnityEvent WhenInjectWrongLiquid => _whenInjectWrongLiquid;
     // Start is called before the first frame update
     void Start()
     {
@@ -172,8 +174,6 @@ public class LiquidController : MonoBehaviour
                 isReach = true;
             }
         }
-
-
         if (isFull)
             return;
         //判斷是否指定注入液體
@@ -181,6 +181,7 @@ public class LiquidController : MonoBehaviour
         {
             if (pourInto != injectFilter)
             {
+                _whenInjectWrongLiquid.Invoke();
                 print("wrong inject");
                 return;
             }
@@ -189,8 +190,8 @@ public class LiquidController : MonoBehaviour
         //如果滿了
         if (ratio >= 0.99f)
         {
-            _whenFull.Invoke();
             isFull = true;
+            _whenFull.Invoke();
             return;
         }
         currCapacity += speed * Time.deltaTime;

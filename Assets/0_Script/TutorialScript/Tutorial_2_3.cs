@@ -54,6 +54,8 @@ public class Tutorial_2_3 : MonoBehaviour
     [Header("質量設定")]
     [Tooltip("磅秤文字")]
     [SerializeField] Text weightText;
+    [Tooltip("磅秤文字_放大螢幕")]
+    [SerializeField] Text weightTextDisplay;
     [Tooltip("磅秤目前數值")]
     [SerializeField] private float scaleVale = 0f;
     [Tooltip("寶特瓶重量")]
@@ -71,7 +73,6 @@ public class Tutorial_2_3 : MonoBehaviour
 
     private float timer = 0;
     private bool firstTimeWarning = true;       // 第一次抓取危險物品的通知
-    private bool bottleRotationWarning = false; //警告寶特瓶不可傾倒
     private int Status = 0;
 
     private LevelObjManager levelObjManager;
@@ -117,19 +118,14 @@ public class Tutorial_2_3 : MonoBehaviour
             case 2: //兩邊的液體已倒入，待試管放進寶特瓶內
                 break;
             case 3: //待氣球套上寶特瓶
-                break;
             case 4: //待套上橡皮筋
-                break;
             case 5: //待寶特瓶放上電子秤
-                if (!bottleRotationWarning)
+                if (bottleAngle >= shakeThreshold)
                 {
-                    if (bottleAngle >= shakeThreshold * 0.5f)
-                    {
-                        audioManager.PlayVoice("W_BottleRotation");
-                        print("現在請勿傾倒寶特瓶。");
-                        bottleRotationWarning = true;
-                    }
-                }
+                    audioManager.PlayVoice("W_BottleRotation");
+                    print("現在請勿傾倒寶特瓶。");
+                    bottle.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
+                }          
                 break;
             case 6: //待寶特瓶搖晃
                 // 判斷是否達到搖晃的閾值
@@ -259,6 +255,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 break;
         }
         weightText.text = scaleVale.ToString("0") + "g";
+        weightTextDisplay.text = scaleVale.ToString("0") + "g";
     }
 
     public void ReactionStay(GameObject sender)
@@ -280,6 +277,18 @@ public class Tutorial_2_3 : MonoBehaviour
             object_Step2.SetActive(true);
             tweezers.transform.SetParent(object_Step1.transform);
             Status++;
+        }
+    }
+    //  注入錯液體時通知
+    public void InjectWrongFluid(GameObject obj)
+    {
+        switch (obj.name)
+        {
+            case "WaterBottle_2-3":
+            case "TestTube_2-3":
+                obj.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
+                audioManager.PlayVoice("W_WrongLiquid");
+                break;
         }
     }
     //  液體裝滿時通知
@@ -388,6 +397,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     rubberBand_Cap.SetActive(false);
                     scaleVale = weight_Bottle + weight_TestTube;
                     weightText.text = scaleVale.ToString("0") + "g";
+                    weightTextDisplay.text = scaleVale.ToString("0") + "g";
                     Status++;
                 }
                 break;
