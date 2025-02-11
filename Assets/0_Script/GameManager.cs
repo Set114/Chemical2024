@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,12 +12,14 @@ public class GameManager : MonoBehaviour
     [Tooltip("目前關卡")]
     public int currLevel = 0;   //這個直接開放給其他物件使用，要正式一點就設定只能讀取
     [Tooltip("輸入測驗的第一個UI在第幾個levelUIs")]
-    [SerializeField] private int examIndex;
+    public int examIndex;
 
-    [Tooltip("管理關卡物件")]
-    [SerializeField] private LevelObjManager levelObjManager;
     [Tooltip("管理播放音效")]
     [SerializeField] private AudioManager audioManager;
+    [Tooltip("管理關卡物件")]
+    [SerializeField] private LevelObjManager levelObjManager;
+    [Tooltip("管理左上角控制板")]
+    private SettingUIManager controlPanel;
 
     [Tooltip("讀取玩家資料")]
     private UserDataManager userDataManager;
@@ -36,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controlPanel = FindObjectOfType<SettingUIManager>();
         userDataManager = UserDataManager.Instance;
         gameMode = userDataManager.GetChapterMode();
         //整合gameMode 與 currentLevel 的運用
@@ -47,7 +46,7 @@ public class GameManager : MonoBehaviour
         else if (gameMode == 1)
         {
             SwitchToExamLevel();
-        }        
+        }
     }
 
     //  關卡開始------------可能要搬到上面
@@ -58,7 +57,14 @@ public class GameManager : MonoBehaviour
             // 紀錄學生關卡的學習歷程資料
             learnDataManager.GetsId(currLevel);
             learnDataManager.StartLevel();
+
+            controlPanel.SetStageText(currStage + "-" + (currLevel + 1).ToString("0"));
         }
+        else
+        {
+            controlPanel.SetStageText(currStage + "-" + (currLevel + 1 - examIndex).ToString("0"));
+        }
+
     }
 
     //  切換到測驗關卡
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour
     //  關卡結束 儲存資料以及切換關卡編號
     public void LevelClear(string answer)
     {
+        controlPanel.LevelClear(currLevel);
         // answer用意待確認
         currLevel++;
         //結束

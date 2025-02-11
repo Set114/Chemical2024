@@ -45,6 +45,7 @@ public class LevelObjManager : MonoBehaviour
             {
                 currentScene = Instantiate(levelObjects[gm.currLevel], this.transform);
                 currentScene.SetActive(true);
+                gm.LevelStart();
             }
         }
     }

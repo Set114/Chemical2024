@@ -9,7 +9,7 @@ public class QuestionManager : MonoBehaviour
 {
     [Header("章節起始UI")]
     [Tooltip("章節起始介面")] [SerializeField] GameObject mainCanvas;
-    [Tooltip("內容文字")] [SerializeField] DialogData dialogContent;
+    [Tooltip("內容文字")] public DialogData dialogContent;
     [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_M_Title, UI_M_Question, UI_M_Warning;
     [Tooltip("警告訊息圖片")] [SerializeField] GameObject Image_Warning;
     [Header("提問UI")]

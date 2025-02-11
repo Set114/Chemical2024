@@ -378,6 +378,8 @@
     <Compile Include="Assets/Shine/PowerUp/Scripts/ScaleParticles.cs" />
     <Compile Include="Assets/0_Script/UI/OLD_Stage5/Stage5_UIManager.cs" />
     <Compile Include="Assets/0_Script/Script/IronDetection.cs" />
+    <Compile Include="Assets/Shine/Script/DataInDevice.cs" />
+    <Compile Include="Assets/0_Script/LessonListButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/FMTurboJpegWrapper/FMTurbojpegWrapper.dll" />
@@ -407,6 +409,7 @@
     <None Include="Assets/3_Model/Props/ChemLabEquipment2/Shaders/TransparentBlendWater.shader" />
     <None Include="Assets/JMO Assets/Cartoon FX Easy Editor/CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets/Shine/3DModel/Gas_Cylinder/Documentation/Documentation.txt" />
     <None Include="Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/Mac/ReadMe_Mac.txt" />
     <None Include="Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/UWP/arm-uwp/turbojpeg.dll" />
     <None Include="Assets/JMO Assets/Cartoon FX (legacy)/CartoonFX Readme.txt" />
@@ -805,6 +808,38 @@
     </Reference>
     <Reference Include="FMTurbojpegWrapper">
       <HintPath>Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/FMTurboJpegWrapper/FMTurbojpegWrapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.Other">
+      <HintPath>Assets/Plugins/I18N.Other.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.Rare">
+      <HintPath>Assets/Plugins/I18N.Rare.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Excel">
+      <HintPath>Assets/Plugins/Excel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.CJK">
+      <HintPath>Assets/Plugins/I18N.CJK.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>Assets/Plugins/I18N.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.West">
+      <HintPath>Assets/Plugins/I18N.West.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>Assets/Plugins/EPPlus.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="I18N.MidEast">
+      <HintPath>Assets/Plugins/I18N.MidEast.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

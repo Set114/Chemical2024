@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class SettingUIManager : MonoBehaviour
 {
-    //public static AudioManager instance { get; private set; }
-
     [Header("Button")]
     [SerializeField] Button setting_btn;
     [SerializeField] Button settingBack_btn;
@@ -17,7 +14,8 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Button logout_btn;
     [SerializeField] Button levlMenu_btn;
     [SerializeField] Button refresh_btn;
-    [SerializeField] Button chapterMode_btn;
+
+
 
     [SerializeField] Button bgmMax_btn;
     [SerializeField] Button bgmMin_btn;    
@@ -25,6 +23,7 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Button UIeffectMin_btn;
 
     [Header("Image")]
+    [SerializeField] Image modeButton_img;
     [SerializeField] Sprite learnMode_img;
     [SerializeField] Sprite testMode_img;
     
@@ -37,24 +36,27 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] GameObject Account;
     [SerializeField] GameObject Lesson_List;
     [SerializeField] GameObject Setting;
-    [SerializeField] GameObject Learnimg;
-    [SerializeField] GameObject Testing;
+    [SerializeField] GameObject LearnBtns;
+    [SerializeField] GameObject TestBtns;
+    [SerializeField] private List<LessonListButton> lessonListButtons;
+    [SerializeField] private GameObject lessonListBtnPrefab;
 
     [Header("Slider")]
-    [SerializeField] Slider bgmSlider;
-    [SerializeField] Slider UIeffectSlider;
+    public Slider bgmSlider;
+    public Slider UIeffectSlider;
 
     private string studentData;
     private string studentDataID;
     public int chapterModeData = 0;
-    //public SwitchUI switchUI;
+
     private GameManager gm;
-    public AudioManager audioManager;
-    public UserDataManager userDataManager;
+    private UserDataManager userDataManager;
+    private QuestionManager questionManager;    //取得題目
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
         userDataManager = UserDataManager.Instance;
+        questionManager = FindObjectOfType<QuestionManager>();
         // 確保 gameManager 實例已初始化
         if (userDataManager != null)
         {
@@ -80,25 +82,30 @@ public class SettingUIManager : MonoBehaviour
         }
 
         // 學習模式切換
-        if (chapterMode_btn != null)
+        if (modeButton_img != null)
         {
-            Image modeButton_img = chapterMode_btn.GetComponent<Image>();
-            if (modeButton_img != null)
-            {
-                UpdateChapterModeImage(modeButton_img);
-            }
-            else
-            {
-                Debug.LogError("chapterMode_btn 沒有 Image 組件。");
-            }
-        }
-        else
-        {
-            Debug.LogError("chapterMode_btn 在檢視面板中未指定。");
+            UpdateChapterModeImage(modeButton_img);
         }
 
         BindButtonEvents();
 
+        lessonListButtons = new List<LessonListButton>();
+
+
+
+        foreach (DialogMapping data in questionManager.dialogContent.dialogContent)
+        {
+            LessonListButton btn = Instantiate(lessonListBtnPrefab, LearnBtns.transform).GetComponent<LessonListButton>();
+            lessonListButtons.Add(btn);
+            btn.SetLessonName(data.title);
+            int index = lessonListButtons.Count - 1;
+            btn.GetComponent<Button>().onClick.AddListener(() => OnLessonButtonClicked(index));
+
+            if (index >= gm.examIndex)
+            {
+                btn.transform.SetParent(TestBtns.transform);
+            }
+        }
     }
 
     private void BindButtonEvents()
@@ -112,7 +119,6 @@ public class SettingUIManager : MonoBehaviour
         logout_btn.onClick.AddListener(Logout);
         levlMenu_btn.onClick.AddListener(LevlMenu);
         refresh_btn.onClick.AddListener(RefreshScene);
-        chapterMode_btn.onClick.AddListener(ChapterMode);
     }
 
     private void UpdateChapterModeImage(Image modeButton_img)
@@ -120,14 +126,14 @@ public class SettingUIManager : MonoBehaviour
         if (chapterModeData == 0)
         {
             modeButton_img.sprite = learnMode_img;
-            Learnimg.SetActive(true);
-            Testing.SetActive(false);
+            LearnBtns.SetActive(true);
+            TestBtns.SetActive(false);
         }
         else if (chapterModeData == 1)
         {
             modeButton_img.sprite = testMode_img;
-            Learnimg.SetActive(false);
-            Testing.SetActive(true);
+            LearnBtns.SetActive(false);
+            TestBtns.SetActive(true);
         }
     }
 
@@ -136,30 +142,32 @@ public class SettingUIManager : MonoBehaviour
         int uidlevel = userDataManager.GetUid();
         if (uidlevel != 3)
         {
-            Image modeButton_img = chapterMode_btn.GetComponent<Image>();
-
             if (modeButton_img.sprite == learnMode_img)
             {
-                audioManager.Stop();
                 modeButton_img.sprite = testMode_img;
                 chapterModeData = 1;
                 userDataManager.UpdateChapterMode(chapterModeData);
-                Learnimg.SetActive(false);
-                Testing.SetActive(true);
+                LearnBtns.SetActive(false);
+                TestBtns.SetActive(true);
                 gm.SwitchToExamLevel();
 
             }
             else if (modeButton_img.sprite == testMode_img)
             {
-                audioManager.Stop();
                 modeButton_img.sprite = learnMode_img;
                 chapterModeData = 0;
                 userDataManager.UpdateChapterMode(chapterModeData);
-                Learnimg.SetActive(true);
-                Testing.SetActive(false);
+                LearnBtns.SetActive(true);
+                TestBtns.SetActive(false);
                 RefreshScene();
             }
         }
+    }
+
+    public void OnLessonButtonClicked(int level)
+    {
+        LessonList_Close();
+        gm.SwitchLevel(level);
     }
 
     public void LessonList_Open()
@@ -211,11 +219,8 @@ public class SettingUIManager : MonoBehaviour
 
     public void TempChapterMode()
     {
-        Image modeButton_img = chapterMode_btn.GetComponent<Image>();
-
         if (modeButton_img.sprite == learnMode_img)
         {
-            audioManager.Stop();
             modeButton_img.sprite = testMode_img;
             chapterModeData = 1;
             userDataManager.UpdateChapterMode(chapterModeData);
@@ -223,10 +228,17 @@ public class SettingUIManager : MonoBehaviour
         }
         else if (modeButton_img.sprite == testMode_img)
         {
-            audioManager.Stop();
             modeButton_img.sprite = learnMode_img;
             chapterModeData = 0;
             userDataManager.UpdateChapterMode(chapterModeData);
         }
+    }
+    public void SetStageText(string stage)
+    {
+        stage_txt.text = stage;
+    }
+    public void LevelClear(int level)
+    {
+        lessonListButtons[level].CheckLessonClear(true);
     }
 }

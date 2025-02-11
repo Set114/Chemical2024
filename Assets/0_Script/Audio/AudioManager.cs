@@ -50,9 +50,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private GameObject soundSource; //音效物件
     public AudioClip bgmClip; // 用於儲存背景音樂的 AudioClip
 
-    public Slider soundsSlider; // 用於控制音效音量的滑塊
-    public Slider bgmSlider; // 用於控制背景音樂音量的滑塊
-
+    private SettingUIManager controlPanel;      //左上角控制板
+    private Slider soundsSlider; // 用於控制音效音量的滑塊
+    private Slider bgmSlider; // 用於控制背景音樂音量的滑塊
     void Awake()
     {
         if (instance == null)
@@ -62,26 +62,29 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        controlPanel = FindObjectOfType<SettingUIManager>();
 
-        /*foreach (Sound s in Sounds)
+        soundsSlider = controlPanel.UIeffectSlider;
+        bgmSlider = controlPanel.bgmSlider;
+    /*foreach (Sound s in Sounds)
+    {
+        if (s.name == "BackgroundMusic")
         {
-            if (s.name == "BackgroundMusic")
-            {
-                // 如果Sound是BackgroundMusic，不做处理
-                continue;
-            }
-            else
-            {
-                s.source = gameObject.AddComponent<AudioSource>();
-                s.source.clip = s.clip;
-                s.source.volume = s.volume;
-                s.source.pitch = s.pitch;
-                s.source.loop = s.loop;
-            }
-        }*/
+            // 如果Sound是BackgroundMusic，不做处理
+            continue;
+        }
+        else
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
+    }*/
 
-        // 初始化背景音樂的AudioSource
-        bgmSource.clip = bgmClip;
+    // 初始化背景音樂的AudioSource
+    bgmSource.clip = bgmClip;
         bgmSource.loop = true;
         bgmSource.volume = 0.5f; // 設置初始音量
 
