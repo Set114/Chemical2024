@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
-    [SerializeField] GameObject pcController;
-    [SerializeField] GameObject vrController;
+    [SerializeField] private GameObject pcController;
+    [SerializeField] private GameObject vrController;
+
+    [SerializeField] private GameObject tutorialUI_pc;
+    [SerializeField] private GameObject tutorialUI_vr;
+
+    private GameManager gm;
     bool isPC = false;
 
     // Start is called before the first frame update
     void Awake()
     {
+        gm = GetComponent<GameManager>();
+
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
         // �b�s�边���Ҷ}�Ҫ���
         isPC = true;
@@ -20,5 +27,21 @@ public class PlatformManager : MonoBehaviour
 #endif
         pcController.SetActive(isPC);
         vrController.SetActive(!isPC);
+
+        if (tutorialUI_pc)
+            tutorialUI_pc.SetActive(isPC);
+        if (tutorialUI_vr)
+            tutorialUI_vr.SetActive(!isPC);
+    }
+
+    //按下操作教學確認按鈕
+    public void OnConfirmButtonClicked()
+    {
+        if (gm)
+            gm.enabled = true;
+        if (tutorialUI_pc)
+            tutorialUI_pc.SetActive(false);
+        if (tutorialUI_vr)
+            tutorialUI_vr.SetActive(false);
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18388174, g: 0.22897552, b: 0.30280173, a: 1}
+  m_IndirectSpecularColor: {r: 0.18388127, g: 0.22897506, b: 0.30280057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4638,6 +4638,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6444913747618895745, guid: 2dfabc429fd3e1741bf11e67fdbcfca5, type: 3}
+      propertyPath: bgmSlider
+      value: 
+      objectReference: {fileID: 1421385805}
     - target: {fileID: 6444913747618895746, guid: 2dfabc429fd3e1741bf11e67fdbcfca5, type: 3}
       propertyPath: bgmSlider
       value: 
@@ -5493,7 +5497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 460770251}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: BGMVolumeOff
         m_Mode: 1
@@ -5878,6 +5882,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pcController: {fileID: 773023854}
   vrController: {fileID: 220123607}
+  tutorialUI_pc: {fileID: 0}
+  tutorialUI_vr: {fileID: 0}
 --- !u!1 &686077448
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,7 +7472,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 460770251}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: VolumeOn
         m_Mode: 1
@@ -12070,7 +12076,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 460770251}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: VolumeOff
         m_Mode: 1
@@ -14225,7 +14231,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 460770251}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: BGMVolumeOn
         m_Mode: 1
