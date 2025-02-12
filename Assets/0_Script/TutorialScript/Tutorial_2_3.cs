@@ -244,7 +244,7 @@ public class Tutorial_2_3 : MonoBehaviour
                 {
                     Debug.Log("Errow Case Sender_10_2");
                     //取得第三個數值
-                    scaleVale = weight_Bottle + weight_Balloon + weight_TestTube;
+                    scaleVale = 78f;
                     massTexts[2].text = scaleVale.ToString("0") + "g";
 
                     //讓氣球不可被拿起

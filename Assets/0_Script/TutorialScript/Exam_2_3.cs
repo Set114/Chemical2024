@@ -7,7 +7,7 @@ public class Exam_2_3 : MonoBehaviour
 {
     [Header("實驗道具")]
     [Tooltip("試管")]
-    [SerializeField] private GameObject testTube;
+    private GameObject testTube;
     [Tooltip("試管內粉末")]
     private LiquidController testTubePowder;
     [Tooltip("試管內碳粉")]
@@ -75,6 +75,7 @@ public class Exam_2_3 : MonoBehaviour
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
         weightTextDisplay.text = "0g";
+        testTube = testTubeToner.gameObject;
     }
 
     private void Update()
@@ -193,10 +194,10 @@ public class Exam_2_3 : MonoBehaviour
                 testTubeToner.currCapacity = 0f;
                 testTubeToner.isFull = true;
                 testTubeToner.gameObject.SetActive(false);
-                testTubeCopperOxide.gameObject.SetActive(true);
 
                 tonerPowder.SetActive(false);
                 particleSystem_toner.SetActive(false);
+                testTube = testTubeCopperOxide.gameObject;
             }
             else if (sender == testTubeCopperOxide.gameObject)
             {
@@ -206,12 +207,13 @@ public class Exam_2_3 : MonoBehaviour
                 testTubeToner.currCapacity += testTubeCopperOxide.currCapacity;
                 testTubeCopperOxide.currCapacity = 0f;
                 testTubeCopperOxide.isFull = true;
-                testTubeToner.gameObject.SetActive(true);
                 testTubeCopperOxide.gameObject.SetActive(false);
 
                 copperOxidePowder.SetActive(false);
                 particleSystem_copperOxide.SetActive(false);
+                testTube = testTubeToner.gameObject;
             }
+            testTube.SetActive(true);
             scaleVale = testTubeToner.currCapacity + testTubeCopperOxide.currCapacity;
         }
         weightText.text = scaleVale.ToString("0") + "g";
@@ -228,18 +230,19 @@ public class Exam_2_3 : MonoBehaviour
                 {
                     if (obj.name == "Toner_2-6")
                     {
-                        testTubeToner.gameObject.SetActive(true);
                         testTubeCopperOxide.gameObject.SetActive(false);
                         testTubeToner.currCapacity += testTubeCopperOxide.currCapacity;
                         testTubeCopperOxide.currCapacity = 0f;
+                        testTube = testTubeToner.gameObject;
                     }
                     else if (obj.name == "CopperOxide_2-6")
                     {
-                        testTubeToner.gameObject.SetActive(false);
-                        testTubeCopperOxide.gameObject.SetActive(true);
+                        testTubeToner.gameObject.SetActive(false);       
                         testTubeCopperOxide.currCapacity += testTubeToner.currCapacity;
                         testTubeToner.currCapacity = 0f;
+                        testTube = testTubeCopperOxide.gameObject;
                     }
+                    testTube.SetActive(true);
                 }
                 break;
         }
