@@ -230,6 +230,7 @@ public class Tutorial_2_3 : MonoBehaviour
 
                     //讓氣球可以被拿起
                     balloon.GetComponent<XRGrabInteractable>().enabled = true;
+                    balloon.GetComponent<Collider>().isTrigger = false;
                     balloon.tag = "Pickable";
                     hintManager.SwitchStep("T2_3_7");
 
@@ -250,7 +251,8 @@ public class Tutorial_2_3 : MonoBehaviour
                     //讓氣球不可被拿起
                     balloon.GetComponent<XRGrabInteractable>().enabled = false;
                     balloon.tag = "Untagged";
-                    pcController.SendMessage("Reset");
+                    if (isPC)
+                        pcController.SendMessage("Reset");
                     EndTheTutorial();
                     Status++;
                 }
