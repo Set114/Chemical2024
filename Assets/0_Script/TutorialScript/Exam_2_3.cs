@@ -20,6 +20,8 @@ public class Exam_2_3 : MonoBehaviour
     [SerializeField] private Color testTubePowderColor_final;
     [Tooltip("試管架位置")]
     [SerializeField] private Transform testTubePoint;
+    [Tooltip("試管架Trigger")]
+    [SerializeField] private BoxCollider testTubePointTrigger;
     [Tooltip("盤子內的碳粉")]
     [SerializeField] private GameObject tonerPowder;
     [Tooltip("盤子內的氧化銅粉")]
@@ -76,6 +78,8 @@ public class Exam_2_3 : MonoBehaviour
         weightText.text = "0g";
         weightTextDisplay.text = "0g";
         testTube = testTubeToner.gameObject;
+        testTubePointTrigger = testTubePoint.GetComponent<BoxCollider>();
+        testTubePointTrigger.enabled = false;
     }
 
     private void Update()
@@ -133,6 +137,7 @@ public class Exam_2_3 : MonoBehaviour
                     if (timer >= reactionTime)
                     {
                         testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
+                        testTubePointTrigger.enabled = true;
                         hintManager.SwitchStep("E2_3_5");
                         timer = 0f;
                         Status++;
