@@ -24,6 +24,7 @@ public class LogInSystem : MonoBehaviour
     private string classData = "";
     private string studentNameData = "";
     private string studentIDData = "";
+    private string startTime = "";
 
     public MenuUIManager menuUIManager;
 

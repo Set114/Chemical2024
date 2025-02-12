@@ -138,7 +138,7 @@ public class MenuUIManager : MonoBehaviour
         }
 
         userDataManager.UpdateUid(chapterIndex);
-        PlayUIeffect();
+        //PlayUIeffect();   //2025.2.12 戴偉勝 關閉音效
         chapterData = chapterIndex;
         SelectionModeUI.SetActive(true);
         levelPanelUI.SetActive(false);

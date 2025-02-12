@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         {
             // 紀錄學生關卡的學習歷程資料
             learnDataManager.GetsId(currLevel);
+            userDataManager.UpdateStartTime(); // 2025.2.12 戴偉勝
             learnDataManager.StartLevel();
 
             controlPanel.SetStageText(currStage + "-" + (currLevel + 1).ToString("0"));
