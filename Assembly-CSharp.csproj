@@ -337,6 +337,7 @@
     <Compile Include="Assets/zz/ElementDisplay.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Scripts/UI/ViewModel.cs" />
     <Compile Include="Assets/0_Script/UI/Stage0/Test.cs" />
+    <Compile Include="Assets/0_Script/LessonListButton.cs" />
     <Compile Include="Assets/0_Script/UI/UI/QuestionCheck.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Networking/NetworkAction/NetworkActionServer.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_4/MoveTowards1.cs" />
@@ -351,6 +352,7 @@
     <Compile Include="Assets/YiHua/IBCS_UI.cs" />
     <Compile Include="Assets/0_Script/ScriptObject/StructList.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMNetwork/Scripts/Demo/FMNetwork_DemoAnimation.cs" />
+    <Compile Include="Assets/Shine/Script/DataInDevice.cs" />
     <Compile Include="Assets/Scripts/react.cs" />
     <Compile Include="Assets/zz/ElementalBallCounter.cs" />
     <Compile Include="Assets/0_Script/Audio/Level3AudioSet.cs" />
@@ -378,8 +380,6 @@
     <Compile Include="Assets/Shine/PowerUp/Scripts/ScaleParticles.cs" />
     <Compile Include="Assets/0_Script/UI/OLD_Stage5/Stage5_UIManager.cs" />
     <Compile Include="Assets/0_Script/Script/IronDetection.cs" />
-    <Compile Include="Assets/Shine/Script/DataInDevice.cs" />
-    <Compile Include="Assets/0_Script/LessonListButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/FMTurboJpegWrapper/FMTurbojpegWrapper.dll" />
@@ -790,32 +790,16 @@
       <HintPath>/Applications/Unity/Hub/Editor/2021.3.36f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ReportGeneratorMerged">
-      <HintPath>Library/PackageCache/com.unity.testtools.codecoverage@1.2.5/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets/FMETP_STREAM/FMWebSocket/Plugins/WebsocketSharp/websocket-sharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FMSharpZip">
-      <HintPath>Assets/FMETP_STREAM/FMCore/Plugins/FMZip/FMSharpZip.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FMTurbojpegWrapper">
-      <HintPath>Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/FMTurboJpegWrapper/FMTurbojpegWrapper.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="I18N.Other">
       <HintPath>Assets/Plugins/I18N.Other.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.Rare">
       <HintPath>Assets/Plugins/I18N.Rare.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReportGeneratorMerged">
+      <HintPath>Library/PackageCache/com.unity.testtools.codecoverage@1.2.5/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Excel">
@@ -826,12 +810,28 @@
       <HintPath>Assets/Plugins/I18N.CJK.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets/FMETP_STREAM/FMWebSocket/Plugins/WebsocketSharp/websocket-sharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="I18N">
       <HintPath>Assets/Plugins/I18N.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.West">
       <HintPath>Assets/Plugins/I18N.West.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FMSharpZip">
+      <HintPath>Assets/FMETP_STREAM/FMCore/Plugins/FMZip/FMSharpZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FMTurbojpegWrapper">
+      <HintPath>Assets/FMETP_STREAM/FMCore/Plugins/FMTurboJpeg/FMTurboJpegWrapper/FMTurbojpegWrapper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="EPPlus">

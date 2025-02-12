@@ -669,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 438734193597551962}
   - component: {fileID: 438734193597551965}
-  - component: {fileID: 438734193597551964}
+  - component: {fileID: 8474679079010768416}
   m_Layer: 0
   m_Name: IronCenter
   m_TagString: Untagged
@@ -707,9 +707,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.003, z: 0.07}
+  m_Size: {x: 0.15, y: 0.01, z: 0.07}
   m_Center: {x: 0, y: -0.001, z: 0}
---- !u!54 &438734193597551964
+--- !u!54 &8474679079010768416
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -781,7 +781,7 @@ SpringJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438734193822233483}
-  m_ConnectedBody: {fileID: 438734193597551964}
+  m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
@@ -1784,7 +1784,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &438734194023903987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1809,8 +1809,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0.055}
+  m_Size: {x: 0.02, y: 0.02, z: 0.15}
+  m_Center: {x: 0, y: 0, z: 0.03}
 --- !u!114 &438734194023903998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1927,11 +1927,11 @@ MonoBehaviour:
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 0
+  m_SmoothPosition: 1
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
   m_TrackRotation: 1
-  m_SmoothRotation: 0
+  m_SmoothRotation: 1
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
   m_TrackScale: 1

@@ -51,8 +51,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip bgmClip; // 用於儲存背景音樂的 AudioClip
 
     private SettingUIManager controlPanel;      //左上角控制板
-    private Slider soundsSlider; // 用於控制音效音量的滑塊
-    private Slider bgmSlider; // 用於控制背景音樂音量的滑塊
+    [SerializeField] private Slider soundsSlider; // 用於控制音效音量的滑塊
+    [SerializeField] private Slider bgmSlider; // 用於控制背景音樂音量的滑塊
     void Awake()
     {
         if (instance == null)
@@ -62,10 +62,16 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        controlPanel = FindObjectOfType<SettingUIManager>();
+        if (soundsSlider == null || bgmSlider == null)
+        {
+            controlPanel = FindObjectOfType<SettingUIManager>();
+            if (controlPanel)
+            {
+                soundsSlider = controlPanel.UIeffectSlider;
+                bgmSlider = controlPanel.bgmSlider;
+            }
+        }
 
-        soundsSlider = controlPanel.UIeffectSlider;
-        bgmSlider = controlPanel.bgmSlider;
     /*foreach (Sound s in Sounds)
     {
         if (s.name == "BackgroundMusic")

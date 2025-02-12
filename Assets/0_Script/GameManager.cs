@@ -15,27 +15,31 @@ public class GameManager : MonoBehaviour
     public int examIndex;
 
     [Tooltip("管理播放音效")]
-    [SerializeField] private AudioManager audioManager;
+    private AudioManager audioManager;
     [Tooltip("管理關卡物件")]
-    [SerializeField] private LevelObjManager levelObjManager;
+    private LevelObjManager levelObjManager;
     [Tooltip("管理左上角控制板")]
     private SettingUIManager controlPanel;
 
     [Tooltip("讀取玩家資料")]
     private UserDataManager userDataManager;
     [Tooltip("紀錄學生的教學資料")]
-    [SerializeField] private LearnDataManager learnDataManager;
+    private LearnDataManager learnDataManager;
     [Tooltip("紀錄學生的測驗資料")]
-    [SerializeField] private TestDataManager testDataManager;
+    private TestDataManager testDataManager;
 
     [Tooltip("緩衝時間")]
     [SerializeField] private float defaultDelay = 3f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         controlPanel = FindObjectOfType<SettingUIManager>();
+        levelObjManager = FindObjectOfType<LevelObjManager>();
+        audioManager = FindObjectOfType<AudioManager>();
+
         userDataManager = UserDataManager.Instance;
+        learnDataManager = FindObjectOfType<LearnDataManager>();
+        testDataManager = FindObjectOfType<TestDataManager>();
         gameMode = userDataManager.GetChapterMode();
         //整合gameMode 與 currentLevel 的運用
         //  根據模式切換介面
