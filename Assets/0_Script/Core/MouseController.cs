@@ -260,7 +260,7 @@ public class MouseController : MonoBehaviour
                         break;
                     case "WaterBottle_2-2":
                     case "WaterBottle_2-3":                    
-                        targetRotation = Quaternion.Euler(new Vector3( 0.0f, 0.0f, 56.0f));
+                        targetRotation = Quaternion.Euler(new Vector3( 0.0f, 0.0f, 92.0f));
                         selectedObject.transform.localRotation = Quaternion.Slerp(selectedObject.transform.localRotation, targetRotation, Time.deltaTime * 1.0f / 0.07f);
                         break;
                 }
