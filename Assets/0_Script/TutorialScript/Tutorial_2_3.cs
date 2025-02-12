@@ -125,6 +125,8 @@ public class Tutorial_2_3 : MonoBehaviour
                     audioManager.PlayVoice("W_BottleRotation");
                     print("現在請勿傾倒寶特瓶。");
                     bottle.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
+                    if (isPC)
+                        pcController.SendMessage("Reset");
                 }          
                 break;
             case 6: //待寶特瓶搖晃
@@ -268,8 +270,8 @@ public class Tutorial_2_3 : MonoBehaviour
             sender.transform.SetParent(testTubePoint);
             sender.layer = 3;   //設定其碰撞牆與內部碰撞牆一樣
             sender.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;   //取消物理限制
-            sender.GetComponent<Collider>().isTrigger = false;
-            //sender.GetComponent<Rigidbody>().isKinematic = true;
+            sender.GetComponent<Collider>().isTrigger = true;
+            sender.GetComponent<Rigidbody>().isKinematic = true;
             bottleCollisionInside.SetActive(true);  //開啟瓶內碰撞器
             hintManager.SwitchStep("T2_3_3");
             //場上只剩下後半部物件
