@@ -15,6 +15,7 @@ public class LevelObjManager : MonoBehaviour
     //---system
     private GameManager gm;
     private QuestionManager questionManager;    //管理題目介面
+    private HintManager hintManager;            //管理提示板
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private ZoomDisplay zoomDisplay;            //管理近看視窗
 
@@ -22,6 +23,7 @@ public class LevelObjManager : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
         questionManager = FindObjectOfType<QuestionManager>();
+        hintManager = FindObjectOfType<HintManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
         zoomDisplay = FindObjectOfType<ZoomDisplay>();
         loading_sign.SetActive(false);
@@ -31,6 +33,7 @@ public class LevelObjManager : MonoBehaviour
     {
         if (currentScene)
             Destroy(currentScene);
+        hintManager.OnCloseBtnClicked();
         moleculaManager.CloseDisplay();
         zoomDisplay.CloseDisplay();
         //應該要依照currentLevel 去切換對應的

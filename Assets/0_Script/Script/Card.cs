@@ -89,7 +89,7 @@ public class Card : MonoBehaviour
         Status = 1;
     }
 
-    private void OnCardClick()
+    public void OnCardClick()
     {
         gameManager.SendMessage("OnCardClicked", this);
     }

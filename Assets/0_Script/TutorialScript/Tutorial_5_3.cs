@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
+
 public class Tutorial_5_3 : MonoBehaviour
 {
     [Header("長條圖")]
@@ -47,6 +49,8 @@ public class Tutorial_5_3 : MonoBehaviour
     [SerializeField] private float[] concentrations;
 
     [Space]
+    [Tooltip("盤子")]
+    [SerializeField] private GameObject plate;
     [Tooltip("盤子內的葡萄糖")]
     [SerializeField] private GameObject glucosePowder;
     [Tooltip("葡萄糖粉效果")]
@@ -65,10 +69,19 @@ public class Tutorial_5_3 : MonoBehaviour
     private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private HintManager hintManager;            //管理提示板
 
+    private MouseController pcController;
+    private bool isPC;
 
     // Start is called before the first frame update
     void Start()
     {
+        //判斷平台
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        isPC = true;
+        pcController = FindObjectOfType<MouseController>();
+#else
+        isPC = false;
+#endif
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         moleculaManager = FindObjectOfType<MoleculaDisplay>();
@@ -169,6 +182,12 @@ public class Tutorial_5_3 : MonoBehaviour
                 particleSystem_glucose.SetActive(false);
                 moleculaManager.ShowMoleculas(2);
                 moleculaManager.PlayMoleculasAnimation();
+
+                if (isPC)
+                    pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
+                plate.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
+                plate.GetComponent<XRGrabInteractable>().enabled = false;
+                plate.tag = "Untagged";
                 Status++;
             }
         }

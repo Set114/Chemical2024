@@ -105,10 +105,14 @@ public class Exam_5_1 : MonoBehaviour
             if (cardComparison[0].cardPattern == cardComparison[1].cardPattern)
             {
                 StartCoroutine(HandleMatchedCards());
+
+                audioManager.PlaySound(2);
             }
             else
             {
                 StartCoroutine(MissMatchCards());
+
+                audioManager.PlaySound(3);
             }
         }
     }

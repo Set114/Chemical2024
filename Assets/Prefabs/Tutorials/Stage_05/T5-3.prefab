@@ -235,6 +235,7 @@ MonoBehaviour:
   concentrations:
   - 0
   - 47
+  plate: {fileID: 1509885527417023919}
   glucosePowder: {fileID: 1509885528506565361}
   particleSystem_glucose: {fileID: 1509885527147009311}
   glucosePowderInWater: {fileID: 6244292433272393509}
@@ -5391,6 +5392,7 @@ GameObject:
   - component: {fileID: 1509885527417023907}
   - component: {fileID: 1509885527417023906}
   - component: {fileID: 1509885527417023905}
+  - component: {fileID: 2998668672964437346}
   m_Layer: 0
   m_Name: Glucose_5-3
   m_TagString: Pickable
@@ -5432,6 +5434,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 1}
   maxCapacity: 100
   currCapacity: 100
+  ratio: 0
   stream: {fileID: 1509885527147009298}
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
@@ -5439,6 +5442,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -5450,6 +5454,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &1509885527417023907
@@ -5633,6 +5640,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07, y: 0.01449603, z: 0.07}
   m_Center: {x: 0, y: 0.007248015, z: 0}
+--- !u!114 &2998668672964437346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509885527417023919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509885528506565361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6440,6 +6459,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 500
   currCapacity: 300
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -6447,6 +6467,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -6470,6 +6491,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6244292431923928235

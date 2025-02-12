@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             controlPanel.SetStageText(currStage + "-" + (currLevel + 1 - examIndex).ToString("0"));
         }
-
+        controlPanel.LessonList_Close();
     }
 
     //  切換到測驗關卡
