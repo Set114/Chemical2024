@@ -14,6 +14,7 @@ public class UserDataManager : MonoBehaviour
     public string currentClass;
     public int currentUid;
     public int chapterMode;
+    public string startTime; // 2025.2.12 戴偉勝
 
     // 單例實例的取得方式
     public static UserDataManager Instance
@@ -50,7 +51,16 @@ public class UserDataManager : MonoBehaviour
             Destroy(gameObject); // 避免重複的 UserDataManager 實例
         }
     }
-
+    // 2025.2.12 戴偉勝 更新開始時間
+    public void UpdateStartTime()
+    {
+        startTime = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+    }
+    // 2025.2.12 戴偉勝 取得開始時間
+    public string GetStartTime()
+    {
+        return startTime;
+    }
     // 更新玩家資料
     public void UpdatePlayerData(string playerName)
     {

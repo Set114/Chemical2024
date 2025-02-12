@@ -114,7 +114,8 @@ public class LearnDataManager : MonoBehaviour
     }
     private IEnumerator LearnUploadData()
     {
-    if (startTime != null && completionTime != null)
+        startTime = userDataManager.GetStartTime(); // 2025.2.12 戴偉勝
+        if (startTime != null && completionTime != null)
     {
         WWWForm form = new WWWForm();
         form.AddField("method", "writeLearnData");
