@@ -149,7 +149,8 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (distance > 0.01f)
                 {
                     //打開瓶蓋
-                    bottleCap.transform.SetParent(transform);
+                    if(!isPC)
+                        bottleCap.transform.SetParent(transform);
                     bottleCap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                     scaleVale = weight_Bottle + weight_TestTube;
                     Status++;

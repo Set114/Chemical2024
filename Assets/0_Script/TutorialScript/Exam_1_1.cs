@@ -103,7 +103,7 @@ public class Exam_1_1 : MonoBehaviour
                 {
                     ShowExam(2);
                     Status++;
-                }                    
+                }
                 break;
             case 8: //結束狀態
 
