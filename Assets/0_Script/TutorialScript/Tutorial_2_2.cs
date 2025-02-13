@@ -175,13 +175,13 @@ public class Tutorial_2_2 : MonoBehaviour
                     if(isPC)
                         pcController.SendMessage("Reset",SendMessageOptions.DontRequireReceiver);
 
-                    bottleCap.GetComponent<Rigidbody>().isKinematic = true;
+                    //bottleCap.GetComponent<Rigidbody>().isKinematic = true;
                     bottleCap.GetComponent<XRGrabInteractable>().enabled = false;
                     bottleCap.tag = "Untagged";
-                    //bottleCap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    bottleCap.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                     bottleCap.transform.position = bottleCapPoint.position;
                     bottleCap.transform.rotation = bottleCapPoint.rotation;
-                    bottleCap.transform.SetParent(bottleCapPoint);                    
+                    bottleCap.transform.SetParent(bottleCapPoint);
 
                     bottle.GetComponent<Rigidbody>().isKinematic = false;
 
