@@ -985,6 +985,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7761484016661938138, guid: 7307b95d869dd44d2875be74d57854b6, type: 3}
   m_PrefabInstance: {fileID: 160309452}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &205718183 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 248573176498106674, guid: ecdc0cd11a7f84fa8be7cf95015cc784, type: 3}
+  m_PrefabInstance: {fileID: 404237379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &278351262
 GameObject:
   m_ObjectHideFlags: 0
@@ -27838,7 +27843,7 @@ MonoBehaviour:
   CaptureMode: 0
   Resize: 2
   MainCam: {fileID: 0}
-  RenderCam: {fileID: 0}
+  RenderCam: {fileID: 205718183}
   Resolution: {x: 512, y: 288}
   MatchScreenAspect: 1
   FastMode: 1

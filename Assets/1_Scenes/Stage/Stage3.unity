@@ -8111,6 +8111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccff86f64aa28134398e2d24ac092620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1835439793 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 248573176498106674, guid: ecdc0cd11a7f84fa8be7cf95015cc784, type: 3}
+  m_PrefabInstance: {fileID: 1835439790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972460975
 GameObject:
   m_ObjectHideFlags: 0
@@ -8143,7 +8148,7 @@ MonoBehaviour:
   CaptureMode: 0
   Resize: 2
   MainCam: {fileID: 0}
-  RenderCam: {fileID: 0}
+  RenderCam: {fileID: 1835439793}
   Resolution: {x: 512, y: 288}
   MatchScreenAspect: 1
   FastMode: 1

@@ -7253,7 +7253,7 @@ MonoBehaviour:
   CaptureMode: 0
   Resize: 2
   MainCam: {fileID: 0}
-  RenderCam: {fileID: 0}
+  RenderCam: {fileID: 3871621534745364132}
   Resolution: {x: 512, y: 288}
   MatchScreenAspect: 1
   FastMode: 1
@@ -26217,6 +26217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controller_VR
       objectReference: {fileID: 0}
+    - target: {fileID: 3871621534663497589, guid: ecdc0cd11a7f84fa8be7cf95015cc784, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3871621534663497594, guid: ecdc0cd11a7f84fa8be7cf95015cc784, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -26274,6 +26278,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccff86f64aa28134398e2d24ac092620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &3871621534745364132 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 248573176498106674, guid: ecdc0cd11a7f84fa8be7cf95015cc784, type: 3}
+  m_PrefabInstance: {fileID: 3871621534745364130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &4153783618249672991
 BoxCollider:
   m_ObjectHideFlags: 0

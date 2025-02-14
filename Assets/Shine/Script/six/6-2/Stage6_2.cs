@@ -61,7 +61,7 @@ public class Stage6_2 : MonoBehaviour
         ChemicaImage[i+1].SetActive(false);
         ChemicaObj[i+1].SetActive(false);
         ChemicaImage[i].SetActive(true);
-        TempText.text = "Temp:" + (i * 100);
+        TempText.text = (i * 100) + "C<sup>o</sup>";
         if (i == 0)
         {
             Info[1].SetActive(true);

@@ -47,11 +47,12 @@ public class Water : MonoBehaviour
         TackObjs[1].transform.localEulerAngles = Vector3.zero;
         TackObjs[2].transform.localEulerAngles = Vector3.zero;
 
-        Watermaterial.SetColor("_SpecColor", Color.white);
+       /* Watermaterial.SetColor("_SpecColor", Color.white);
         Watermaterial.SetColor("_TopColor", Color.white);
         Watermaterial.SetColor("_BottomColor", Color.white);
         Watermaterial.SetColor("_EdgeColor", Color.white);
-        Watermaterial.SetColor("_GlowColor", Color.white);
+        Watermaterial.SetColor("_GlowColor", Color.white);*/
+        Watermaterial.SetColor("_Color", new Color32(191, 234, 255, 64));
 
         TackObjs[0].GetComponent<Shine_MouseController>().Reset();
         TackObjs[1].GetComponent<Shine_MouseController>().Reset();
@@ -64,13 +65,15 @@ public class Water : MonoBehaviour
         Debug.Log("layer"+other.gameObject.layer);
         if (other.gameObject.name == "yellowObj")
         {
-            Watermaterial = this.gameObject.GetComponent<Renderer>().material;
+            Watermaterial = this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material;
             other.gameObject.SetActive(false);
-            Watermaterial.SetColor("_SpecColor", Color.yellow);
+            /*Watermaterial.SetColor("_SpecColor", Color.yellow);
             Watermaterial.SetColor("_TopColor", Color.yellow);
             Watermaterial.SetColor("_BottomColor", Color.yellow);
             Watermaterial.SetColor("_EdgeColor", Color.yellow);
-            Watermaterial.SetColor("_GlowColor", Color.yellow);
+            Watermaterial.SetColor("_GlowColor", Color.yellow);*/
+            Watermaterial.SetColor("_Color", new Color32(255, 235, 4, 64));
+
             ChemicalImage[0].SetActive(true);
             PotassiumCollider.enabled = true;
             AcidCollider.enabled = true;
@@ -79,13 +82,15 @@ public class Water : MonoBehaviour
         }
         if (other.gameObject.name == "Acid")
         {
-            Material Auid= this.gameObject.GetComponent<Renderer>().material;
+           // Material Auid= this.gameObject.transform.GetChild(0).GetComponent<Renderer>().material;
             other.gameObject.SetActive(false);
-            Auid.SetColor("_SpecColor", new Color32(255,100,0,255));
+            /*Auid.SetColor("_SpecColor", new Color32(255,100,0,255));
             Auid.SetColor("_TopColor", new Color32(255, 100, 0, 255));
             Auid.SetColor("_BottomColor", new Color32(255, 100, 0, 255));
             Auid.SetColor("_EdgeColor", new Color32(255,100,0,255));
-            Auid.SetColor("_GlowColor", new Color32(255, 100, 0, 255));
+            Auid.SetColor("_GlowColor", new Color32(255, 100, 0, 255));*/
+            Watermaterial.SetColor("_Color", new Color32(255, 100, 0, 64));
+
             ChemicalImage[1].SetActive(true);
             ChemicalImage[0].SetActive(false);
             ChemicalImage[2].SetActive(false);
@@ -93,7 +98,7 @@ public class Water : MonoBehaviour
         }
         if (other.gameObject.name == "Potassium")
         {
-            Material pota = this.gameObject.GetComponent<Renderer>().material;
+            //Material pota = this.gameObject.GetComponent<Renderer>().material;
             other.gameObject.SetActive(false);
            /* pota.SetColor("_SpecColor", Color.yellow);
             pota.SetColor("_TopColor", Color.yellow);
