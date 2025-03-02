@@ -35,7 +35,7 @@ public class DataInDevice : MonoBehaviour
     {
         string DataFileName = DateTime.Now.ToString("yyyyMMdd") +".xlsx";
         #if PLATFORM_ANDROID
-                filePath = Path.Combine(Application.persistentDataPath, DataPath);
+                filePath = Path.Combine(Application.persistentDataPath, DataFileName);
         #elif PLATFORM_STANDALONE_WIN
                 filePath = Path.Combine(Application.streamingAssetsPath, DataFileName);
         #endif
