@@ -3814,11 +3814,11 @@ MonoBehaviour:
   similarByteSizeThreshold: 8
   EnableAsyncGPUReadback: 1
   CapturedTexture: {fileID: 0}
-  MatPano: {fileID: 1598225981}
-  MatFMDesktop: {fileID: 800592563}
-  MatColorAdjustment: {fileID: 1165919147}
+  MatPano: {fileID: 0}
+  MatFMDesktop: {fileID: 0}
+  MatColorAdjustment: {fileID: 0}
   ColorReductionLevel: 0
-  mat_source: {fileID: 721103571}
+  mat_source: {fileID: 0}
   CubemapResolution: 1024
   FMDesktopRotation: 0
   FMDesktopResolution: {x: 0, y: 0}
@@ -6086,34 +6086,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720021641}
   m_CullTransparentMesh: 1
---- !u!21 &721103571
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit/Texture
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &727250851
 GameObject:
   m_ObjectHideFlags: 0
@@ -6689,42 +6661,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785140078}
   m_CullTransparentMesh: 1
---- !u!21 &800592563
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/FMDesktopMask
-  m_Shader: {fileID: 4800000, guid: 3f3411c65647b4a39844b0c92562d822, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Brightness: 1
-    - _FlipX: 0
-    - _FlipY: 0
-    - _OffsetX: 1
-    - _OffsetY: 1
-    - _RangeX: 1
-    - _RangeY: 1
-    - _RotationAngle: 1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &808502141
 GameObject:
   m_ObjectHideFlags: 0
@@ -6985,7 +6921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 109434732395451517, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 109434732395451517, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8473,7 +8409,6 @@ GameObject:
   - component: {fileID: 940713758}
   - component: {fileID: 940713759}
   - component: {fileID: 940713760}
-  - component: {fileID: 940713761}
   m_Layer: 5
   m_Name: StartMenu
   m_TagString: Untagged
@@ -8509,7 +8444,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940713757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90edf40189c6614eb6d6554a5ac5e15, type: 3}
   m_Name: 
@@ -8530,40 +8465,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940713757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf14d19a275b224a88906e1cc6e5dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Loading_sign: {fileID: 1755019014}
   login_btn: {fileID: 306379982}
-  cityDropdown: {fileID: 603298575}
-  areaDropdown: {fileID: 107058612}
-  schoolDropdown: {fileID: 1460757988}
-  yearDrop: {fileID: 1721852868}
-  classDrop: {fileID: 1951603933}
-  studentDropdown: {fileID: 533968196}
-  menuUIManager: {fileID: 1566999637}
---- !u!114 &940713761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940713757}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a520b29b9d0985c49b0b350af2333339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadingUI: {fileID: 1755019014}
-  login_btn: {fileID: 306379982}
-  city_drop: {fileID: 603298575}
-  region_drop: {fileID: 107058612}
-  school_drop: {fileID: 1460757988}
-  yearDrop: {fileID: 1721852868}
-  classDrop: {fileID: 1951603933}
-  studentDrop: {fileID: 533968196}
+  DropdownCity: {fileID: 603298575}
+  DropdownArea: {fileID: 107058612}
+  DropdownSchool: {fileID: 1460757988}
+  DropdownYear: {fileID: 1721852868}
+  DropdownClass: {fileID: 1951603933}
+  DropdownStudent: {fileID: 533968196}
   menuUIManager: {fileID: 1566999637}
 --- !u!1 &952872567
 GameObject:
@@ -10634,35 +10548,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!21 &1165919147
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/FMETPColorAdjustment
-  m_Shader: {fileID: 4800000, guid: 8efd175de28eb49ddbf9cbf8155d61ba, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Brightness: 1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &1166426169
 GameObject:
   m_ObjectHideFlags: 0
@@ -15173,35 +15058,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598222217}
   m_CullTransparentMesh: 1
---- !u!21 &1598225981
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/FMCubemapToEquirect
-  m_Shader: {fileID: 4800000, guid: d9cdde4a4997d467b99c1360420f5ce1, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Brightness: 1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &1600541191
 GameObject:
   m_ObjectHideFlags: 0
@@ -15797,7 +15653,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17080,6 +16936,8 @@ MonoBehaviour:
   currentPlayerID: 
   currentPlayerName: 
   currentSchID: 
+  currrentSchoolName: 
+  currentYear: 
   currentClass: 
   currentUid: 0
   chapterMode: 0

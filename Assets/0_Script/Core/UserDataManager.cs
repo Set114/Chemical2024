@@ -9,8 +9,9 @@ public class UserDataManager : MonoBehaviour
     public string currentPlayerID;
     public string currentPlayerName;
     public string currentSchID;
+    public string currrentSchoolName;
     // public string currentMail;
-    // public string currentYear;
+    public string currentYear;
     public string currentClass;
     public int currentUid;
     public int chapterMode;
@@ -129,6 +130,16 @@ public class UserDataManager : MonoBehaviour
         currentPlayerName = studentName; 
         currentSchID = schoolID;
         currentClass = classData;
+        // Debug.Log("Set player data in UserDataManager.");
+    }
+    public void SetPlayerData(string schoolID, string classData, string studentID, string studentName, string schoolName, string year)
+    {
+        currentPlayerID = studentID;
+        currentPlayerName = studentName;
+        currentSchID = schoolID;
+        currentClass = classData;
+        currrentSchoolName = schoolName;
+        currentYear = year;
         // Debug.Log("Set player data in UserDataManager.");
     }
 }

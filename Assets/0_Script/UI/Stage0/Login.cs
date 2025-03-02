@@ -1,117 +1,184 @@
+/*
+ * 2025.3.1
+ * 戴偉勝
+ * 改為使用 內部xlsx來獲取資料
+ * 使用者放置student.xlsx於Download資料夾下
+ * 
+ */
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+using OfficeOpenXml; // 引入 EPPlus 命名空間
+using System.IO;
+using System.ComponentModel;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 public class Login : MonoBehaviour
 {
-    // Google Apps Script 的 API URL
-    private string API_URL;
-    //資料
-    private string CityDataID = "";
-    private string AreaDataID = "";
-    private string SchoolDataID = "";
-    private string ClassID = "";
-    private string selectedStudentID = "";
-    private string selectedStudentName = "";
-    
-    //中文資料
-    private string CityData;
-    private string AreaData;
-    private string SchoolData;
-
-
-    [Header("Loading")]
+    #region UI Elements and Variables
+    [Header("Loading sign")]
     public GameObject Loading_sign;
-    [Header("Button")]
-    [SerializeField] Button login_btn;
-    [Header("SignUp")]
-    public Dropdown cityDropdown;
-    public Dropdown areaDropdown;
-    public Dropdown schoolDropdown;
-    [Header("Class Dropdowns")]
-    public Dropdown yearDrop;
-    public Dropdown classDrop;
-    [Header("Student Dropdowns")]
-    public Dropdown studentDropdown;
-
-
-    // SheetsList 類別，用於解析 JSON 數據
-    [System.Serializable]
-    public class SheetsWrapper
-    {
-        public SheetsList sheets;
-    }
-
-    [System.Serializable]
-    public class SheetsList
-    {
-        public List<string> sheets;
-    }
-
-    [System.Serializable]
-    public class ClassDataListWrapper
-    {
-        public List<ClassData> classDataList;
-    }
-    // 學年資料
-    private List<ClassData> classDataList = new List<ClassData>();
-    // 用於存儲不重複的資料配對
-    private Dictionary<string, string> cityData = new Dictionary<string, string>();
-    private Dictionary<string, string> areaData = new Dictionary<string, string>();
-    private Dictionary<string, string> schoolData = new Dictionary<string, string>();
-    // 紀錄已有的地區
-    private List<string> schoolidList = new List<string>();
-    private List<string> areaList = new List<string>();
-    // 學年對應的班級資料
-    private Dictionary<string, List<string>> classesByYear = new Dictionary<string, List<string>>();
-    // 學年和班級對應的 classCode（ID）
-    private Dictionary<string, Dictionary<string, string>> classCodeByYearGrade = new Dictionary<string, Dictionary<string, string>>();
-    private Dictionary<string, string> studentData = new Dictionary<string, string>();
-
-    [System.Serializable]
-    public class ClassData
-    {
-        public string year;
-        public string grade;
-        public string className;
-        public string classCode;
-    }
-    [System.Serializable]
-    public class ResponseWrapper
-    {
-        public string[] data;
-    }
-    [System.Serializable]
-    public class Wrapper<T>
-    {
-        public T data;
-    }
-    public static class JsonHelper
-    {
-        // 用於解析純陣列 JSON 字串的幫助方法
-        public static List<T> GetListFromJson<T>(string json)
-        {
-            // 格式化 JSON 字串為 Unity 可處理的格式
-            string newJson = "{ \"array\": " + json + "}";
-            
-            // 使用 JsonUtility 來反序列化 JSON，並將結果放入 array 屬性中
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
-            return wrapper.array;
-        }
-
-        // 用來包裹 JSON 陣列的類別
-        [System.Serializable]
-        private class Wrapper<T>
-        {
-            public List<T> array;
-        }
-    }
+    [Header("Login button")]
+    public Button login_btn;
+    [Header("Dropdowns")]
+    public Dropdown DropdownCity;
+    public Dropdown DropdownArea;
+    public Dropdown DropdownSchool;
+    public Dropdown DropdownYear;
+    public Dropdown DropdownClass;
+    public Dropdown DropdownStudent;
+    [Header("UI Manager")]
     public MenuUIManager menuUIManager;
+    // Google Apps Script 的 API URL
+    //private string API_URL;
+    private string sourcePath, filePath, logFilePath;
+    private readonly string fileName = "student.xlsx";
+    private readonly string logFileName = "log.txt";
+    // 結構: 學校名稱 → 學年 → 班級 → 學生清單
+    private readonly Dictionary<string, Dictionary<string, Dictionary<string, List<string[]>>>> schoolData = new();
+    private readonly Dictionary<string, string> schoolIDMapping = new(); // 學校名稱對應 SchoolID
+    private readonly Dictionary<string, string> studentIDMapping = new(); // 學生姓名對應 StudentID
+    #endregion
+    void Start()
+    {   
+        StartCoroutine(ReadExcel());
+        DropdownCity.interactable = false; // 關閉城市選項
+        DropdownArea.interactable = false; // 關閉區域選項
+        // 設置下拉選單監聽
+        DropdownSchool.onValueChanged.AddListener(delegate { PopulateYearDropdown(); });
+        DropdownYear.onValueChanged.AddListener(delegate { PopulateClassDropdown(); });
+        DropdownClass.onValueChanged.AddListener(delegate { PopulateStudentDropdown(); });
+        DropdownStudent.onValueChanged.AddListener(delegate { DisplayStudentInfo(); });
+        login_btn.onClick.AddListener(LoginButton);
+    }
+    private IEnumerator ReadExcel()
+    {
+#if UNITY_ANDROID
+        sourcePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        filePath = Path.Combine(Application.persistentDataPath, fileName);
+        //string sdFilePath = "/sdcard/Download/" + fileName;
+        logFilePath = Path.Combine(Application.persistentDataPath, logFileName);
+#elif UNITY_STANDALONE_WIN
+        filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        logFilePath = Path.Combine(Application.streamingAssetsPath, logFileName);
+#endif  
+        if (Application.platform == RuntimePlatform.Android && !File.Exists(filePath))
+        {
+            // Quest 2 (Android) 必須用 `UnityWebRequest` ，對應位置不存在時，複製檔案到指定位置
+            using UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Get(sourcePath);
+            yield return request.SendWebRequest();
 
+            if (request.result != UnityEngine.Networking.UnityWebRequest.Result.Success)
+            {   
+                File.AppendAllText(logFilePath, "讀取檔案失敗：" + request.error);
+                yield break;
+            }
+            File.WriteAllBytes(filePath, request.downloadHandler.data);
+        }
+        //ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 設定 EPPlus 為非商業模式 
+        File.AppendAllText(logFilePath, "\nReadExcel讀取檔案1 from:" + filePath);
+        using (var package = new ExcelPackage(new FileInfo(filePath)))
+        {
+            if (package.Workbook.Worksheets.Count == 0)
+            {
+                File.AppendAllText(logFilePath, "Excel 文件沒有任何工作表！" + filePath);
+                yield break;
+            }
+            ExcelWorksheet sheet = package.Workbook.Worksheets["工作表1"]; // 讀取工作表1
+            int rowCount = sheet.Dimension.Rows; // 取得總行數
+            File.AppendAllText(logFilePath, "\nReadExcel讀取檔案2-" + rowCount + "\nfrom:" + filePath);
+            for (int i = 2; i <= rowCount; i++) // 跳過標題行（從第2行開始）
+            {
+                string schoolID = sheet.Cells[i, 1].Text.Trim();   // SchoolID
+                string schoolName = sheet.Cells[i, 2].Text.Trim(); // SchoolName
+                string year = sheet.Cells[i, 3].Text.Trim();       // Year (string)
+                string classId = sheet.Cells[i, 4].Text.Trim();    // ClassId (string)
+                string studentID = sheet.Cells[i, 5].Text.Trim();  // StudentID
+                string studentName = sheet.Cells[i, 6].Text.Trim(); // StudentName
+
+                // 存儲學校名稱與學校代碼對應關係
+                if (!schoolIDMapping.ContainsKey(schoolName))
+                    schoolIDMapping[schoolName] = schoolID;
+
+                // 存儲學生姓名與學生代碼對應關係
+                string studentKey = $"{studentName} ({studentID})";
+                if (!studentIDMapping.ContainsKey(studentKey))
+                    studentIDMapping[studentKey] = studentID;
+
+                // 學校 → 學年 → 班級 → 學生
+                if (!schoolData.ContainsKey(schoolName))
+                    schoolData[schoolName] = new Dictionary<string, Dictionary<string, List<string[]>>>();
+
+                if (!schoolData[schoolName].ContainsKey(year))
+                    schoolData[schoolName][year] = new Dictionary<string, List<string[]>>();
+
+                if (!schoolData[schoolName][year].ContainsKey(classId))
+                    schoolData[schoolName][year][classId] = new List<string[]>();
+
+                // 添加學生數據
+                schoolData[schoolName][year][classId].Add(new string[] { schoolID, schoolName, year, classId, studentID, studentName });
+                File.AppendAllText(logFilePath, "\nReadExcel讀取檔案3學生-" + studentName );
+            }
+        }
+        PopulateSchoolDropdown();
+        yield return null;
+    }
+    #region PopulateDropdowns
+    void PopulateSchoolDropdown()
+    {
+        DropdownSchool.ClearOptions();
+        DropdownSchool.AddOptions(new List<string>(schoolData.Keys));
+        PopulateYearDropdown();
+    }
+    void PopulateYearDropdown()
+    {
+        DropdownYear.ClearOptions();
+        string selectedSchool = DropdownSchool.options[DropdownSchool.value].text;
+        if (schoolData.ContainsKey(selectedSchool))
+        {
+            DropdownYear.AddOptions(new List<string>(schoolData[selectedSchool].Keys));
+        }
+        PopulateClassDropdown();
+    }
+
+    void PopulateClassDropdown()
+    {
+        DropdownClass.ClearOptions();
+        string selectedSchool = DropdownSchool.options[DropdownSchool.value].text;
+        string selectedYear = DropdownYear.options[DropdownYear.value].text;
+
+        if (schoolData.ContainsKey(selectedSchool) && schoolData[selectedSchool].ContainsKey(selectedYear))
+        {
+            DropdownClass.AddOptions(new List<string>(schoolData[selectedSchool][selectedYear].Keys));
+        }
+        PopulateStudentDropdown();
+    }
+    void PopulateStudentDropdown()
+    {
+        DropdownStudent.ClearOptions();
+        string selectedSchool = DropdownSchool.options[DropdownSchool.value].text;
+        string selectedYear = DropdownYear.options[DropdownYear.value].text;
+        string selectedClass = DropdownClass.options[DropdownClass.value].text;
+
+        if (schoolData.ContainsKey(selectedSchool) &&
+            schoolData[selectedSchool].ContainsKey(selectedYear) &&
+            schoolData[selectedSchool][selectedYear].ContainsKey(selectedClass))
+        {
+            List<string[]> students = schoolData[selectedSchool][selectedYear][selectedClass];
+            List<string> studentOptions = new();
+
+            foreach (var student in students)
+            {
+                studentOptions.Add($"{student[5]} ({student[4]})"); // 姓名 (學號)
+            }
+
+            DropdownStudent.AddOptions(studentOptions);
+        }
+    }
+    #endregion
+    #region keyboard login
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -119,670 +186,55 @@ public class Login : MonoBehaviour
             LoginButton();
         }
     }
-    void OnEnable()
-    {
-        // StartCoroutine(GetCityData());
-        StartCoroutine(GetSheetNamePrefixes());
-        // 設定下拉選單的選擇變更事件
-        cityDropdown.onValueChanged.AddListener(delegate {
-            CityDropdownValueChanged(cityDropdown);
-        });
-        areaDropdown.onValueChanged.AddListener(delegate {
-            AreaDropdownValueChanged(areaDropdown);
-        });
-        schoolDropdown.onValueChanged.AddListener(delegate {
-            SchoolDropdownValueChanged(schoolDropdown);
-        });
-        yearDrop.onValueChanged.AddListener(delegate {
-            YearDropdownValueChanged(yearDrop);
-        });
-        classDrop.onValueChanged.AddListener(delegate {
-            ClassDropdownValueChanged(classDrop);
-        });
-        studentDropdown.onValueChanged.AddListener(delegate {
-            StudentDropdownValueChanged(studentDropdown);
-        });
-        login_btn.onClick.AddListener(LoginButton);
-    }
-    #region GetWhichSchoolID
-    public IEnumerator GetSheetNamePrefixes()
-    {
-        string[] schoolid = new string[0]; 
-        Loading_sign.SetActive(true);
-
-        API_URL = "https://script.google.com/macros/s/AKfycbwty-JjrwZQmHm6ZVKwQU5aeis_BsXVOeomFET_fdG5CCVghjfoTu_7NZo31YBzFwrj/exec";
-        WWWForm form = new WWWForm();
-        form.AddField("method", "getSheetNamePrefixes");
-
-        List<string> prefixes = new List<string>();
-        
-
-        using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError(www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                Debug.Log("Response: " + responseText);
-
-                bool parsingSuccess = false;
-                try
-                {
-                    prefixes = JsonHelper.GetListFromJson<string>(responseText);
-                    parsingSuccess = true;
-                    Debug.Log("Parsed prefixes: " + string.Join(", ", prefixes));
-
-                    foreach (string data in prefixes)
-                    {
-                        schoolidList.Add(data);
-                    }
-                    Debug.Log("schoolidList: " + string.Join(", ", schoolidList));
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError("Error parsing response: " + ex.Message);
-                }
-
-                if (parsingSuccess)
-                {
-                    string schoolidString = string.Join(",", schoolidList); 
-                    StartCoroutine(GetSheetNameData(schoolidString)); 
-                }
-            }
-        }
-    }
     #endregion
-
-    #region GetWhichCityID
-    public IEnumerator GetSheetNameData(string schoolidString)
-    {
-        Loading_sign.SetActive(true);
-        API_URL = "https://script.google.com/macros/s/AKfycbyWEg90oNk-Qv7Br4nwrlSO0Fg7P_wxChpkkMBzteWR0DR9bUWZYEPuSoyHpqyadlxkMA/exec";
-        WWWForm form = new WWWForm();
-        form.AddField("method", "getSchoolIDData");
-        form.AddField("prefixes", schoolidString);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError(www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                // Debug.Log("Response: " + responseText);
-
-                ResponseWrapper responseWrapper = null;
-                try
-                {
-                    // 嘗試解析回應資料
-                    responseWrapper = JsonUtility.FromJson<ResponseWrapper>(responseText);
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError("Error parsing response: " + ex.Message);
-                }
-
-                if (responseWrapper != null && responseWrapper.data != null)
-                {
-                    // 逐一處理返回的資料
-                    foreach (string data in responseWrapper.data)
-                    {
-                        Debug.Log("Sheet Data: " + data);
-                        areaList.Add(data);
-                    }
-
-                    foreach (string data in responseWrapper.data)
-                    {
-                        yield return StartCoroutine(ReadCityDataFromSheet(data));
-                    }
-                    
-                    CityFillDropdown();
-                    CityDropdownValueChanged(cityDropdown);
-                }
-                else
-                {
-                    Debug.LogError("Error: No data found in response.");
-                }
-            }
-        }
-    }
-    #endregion
-
-    #region City
-    // 獲取城市資料的協程// 先獲取所有 sheet 名稱
-    public IEnumerator GetCityData()
-    {
-        Loading_sign.SetActive(true);
-        API_URL = "https://script.google.com/macros/s/AKfycbwseWfABq5wX0WhdhbBmtHRJSS16VogH8NB3pcXWw7Xk7a1tVt5RE-XfGUUN70EhZusrA/exec";
-        WWWForm form = new WWWForm();
-        form.AddField("method", "cityListSheets");
-
-        using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                SheetsList sheetNames = null;
-
-                try
-                {
-                    // check sheetname
-                    // Debug.Log("{\"sheets\":" + responseText + "}");
-                    SheetsWrapper sheetWrapper = JsonUtility.FromJson<SheetsWrapper>("{\"sheets\":" + responseText + "}");
-                    sheetNames = sheetWrapper.sheets;
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log("JSON 解析錯誤: " + e.Message);
-                    yield break;  // 結束協程，避免進一步錯誤
-                }
-
-                
-                // 逐一讀取每個 sheet 的資料
-                foreach (string sheetName in sheetNames.sheets)
-                {
-                    // Debug.Log("GetCityData:" + sheetName);
-                    yield return StartCoroutine(ReadCityDataFromSheet(sheetName));
-                }
-
-                // 顯示結果
-                // foreach (var entry in cityData)
-                // {
-                //     Debug.Log($"代號: {entry.Key}, 城市: {entry.Value}");
-                // }
-                
-                // CityFillDropdown();
-                // CityDropdownValueChanged(cityDropdown);
-            }
-        }
-    }
-
-    // 從單個 sheet 中讀取城市資料
-    private IEnumerator ReadCityDataFromSheet(string sheetName)
-    {
-        API_URL = "https://script.google.com/macros/s/AKfycbwseWfABq5wX0WhdhbBmtHRJSS16VogH8NB3pcXWw7Xk7a1tVt5RE-XfGUUN70EhZusrA/exec";
-        WWWForm form = new WWWForm();
-        form.AddField("method", "cityReadSheet");
-        form.AddField("sheetName", sheetName);
-
-
-        using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                Debug.Log("responseText" + responseText);
-                // 假設返回的資料是以逗號分隔的字符串格式，如 "B,台中市"
-                string[] data = responseText.Split(',');
-
-                if (data.Length >= 2)
-                {
-                    string code = data[0].Trim();  // 代號
-                    string city = data[1].Trim();  // 城市名稱
-                    // check id and cityname is right
-                    Debug.Log("code" + code + "city" + city);
-
-                    // 如果該代號尚未記錄過，則添加到字典中
-                    if (!cityData.ContainsKey(code))
-                    {
-                        cityData[code] = city;
-                    }
-                }
-            }
-        }
-    }
-
-    private void CityFillDropdown()
-    {
-        cityDropdown.ClearOptions();
-
-        // 從 cityData 字典中獲取所有城市名稱
-        List<string> cityNames = cityData.Values.ToList();
-        // 將城市名稱加入下拉選單選項中
-        cityDropdown.AddOptions(cityNames);
-
-    }
-
-    private void CityDropdownValueChanged(Dropdown dropdown)
-    {
-        Loading_sign.SetActive(true);
-        // 獲取選中的城市名稱
-        string selectedCity = dropdown.options[dropdown.value].text;
-        // 根據選中的城市名稱找到對應的代號
-        string key = cityData.FirstOrDefault(x => x.Value == selectedCity).Key;
-        // 顯示選中的城市及其代號
-        // Debug.Log($"選擇的城市: {selectedCity}, 代號: {key}");
-        CityDataID = key;
-        CityData = selectedCity;
-        
-        areaData.Clear();
-        StartCoroutine(GetAreaData());
-    }
-
-    #endregion
-    #region Area
-
-    private IEnumerator GetAreaData()
-    {
-        Dictionary<string, string> tempAreaData = new Dictionary<string, string>();
-        
-        API_URL = "https://script.google.com/macros/s/AKfycbzbG9biT7taipSCbSLUVAbsyJna_40ekqC1d10KO1GQOUw9aMELpWZQ6oyH8fJ8quvSbg/exec";
-        WWWForm form = new WWWForm();
-        form.AddField("method", "areaReadSheet");
-        form.AddField("cityData", CityDataID);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                // 處理返回的資料
-                // Debug.Log("檢查結果: " + responseText);
-                // 手動解析 JSON 字符串
-                tempAreaData = ParseJsonToDictionary(responseText);
-
-                // int count = 0;
-                // 顯示解析的結果
-                foreach (var entry in tempAreaData)
-                {
-                    Debug.Log($"代號: {entry.Key}, 區域: {entry.Value}");
-                    foreach (string data in areaList)
-                    {
-                        // Debug.Log("count" + count);
-                        // Debug.Log("data" + data);
-                        // Debug.Log("AreaDataID" +entry.Key);
-                        if (data == (entry.Key))
-                        {
-                            areaData.Add(entry.Key, entry.Value);
-                        }
-                        // count++;
-                    }
-                }
-                AreaFillDropdown(areaData);
-                AreaDropdownValueChanged(areaDropdown);
-            }
-        }
-    }
-
-    private Dictionary<string, string> ParseJsonToDictionary(string json)
-    {
-        var dict = new Dictionary<string, string>();
-        string pattern = "\"([^\"]+)\":\"([^\"]+)\"";
-        MatchCollection matches = Regex.Matches(json, pattern);
-
-        foreach (Match match in matches)
-        {
-            string key = match.Groups[1].Value;
-            string value = match.Groups[2].Value;
-            dict[key] = value;
-        }
-
-        return dict;
-    }
-
-    private void AreaFillDropdown(Dictionary<string, string> areaData)
-    {
-        areaDropdown.ClearOptions();
-        List<string> areaNames = areaData.Values.ToList();
-        areaDropdown.AddOptions(areaNames);
-    }
-
-    private void AreaDropdownValueChanged(Dropdown dropdown)
-    {
-        Loading_sign.SetActive(true);
-        string selectedArea = dropdown.options[dropdown.value].text;
-        string key = areaData.FirstOrDefault(x => x.Value == selectedArea).Key;  
-        Debug.Log($"選擇的區域: {selectedArea}, 代號: {key}");
-        AreaDataID = key;
-        AreaData = selectedArea;
-        schoolData.Clear();
-        StartCoroutine(GetSchoolData());
-    }
-
-    #endregion
-    #region School
-    private IEnumerator GetSchoolData()
-    {
-        // bool flag = false;
-        // foreach (string data in areaList)
-        // {
-        //     Debug.Log("data" + data);
-        //     Debug.Log("AreaDataID" + AreaDataID);
-        //     if (data == AreaDataID)
-        //     flag = true;
-        // }
-        // if(flag)
-        // {
-            Dictionary<string, string> tempSchoolData = new Dictionary<string, string>();
-            API_URL = "https://script.google.com/macros/s/AKfycbwy9hDMJHYrc5lmZ1mfU-R7oMvGFCwovC2gdGGqqVEYOnN13snWqYIMKQJHkDwBQlFtxA/exec";
-            WWWForm form = new WWWForm();
-            form.AddField("method", "schoolReadSheet");
-            form.AddField("areaData", AreaDataID);
-            Debug.Log("data" + AreaDataID);
-
-            using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-            {
-                yield return www.SendWebRequest();
-                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)        
-                {
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    string responseText = www.downloadHandler.text;
-                    // 處理返回的資料
-                    // Debug.Log("檢查結果: " + responseText);
-                    // 手動解析 JSON 字符串
-                    tempSchoolData = ParseJsonToDictionary(responseText);
-
-                    // 顯示解析的結果
-                    foreach (var entry in tempSchoolData)
-                    {
-                        // Debug.Log($"代號: {entry.Key}, 學校: {entry.Value}");
-                        foreach (string data in schoolidList)
-                        {
-                            // Debug.Log("data" + data);
-                            // Debug.Log("AreaDataID" +entry.Key);
-                            if (data == (entry.Key))
-                            {
-                                schoolData.Add(entry.Key, entry.Value);
-                            }
-                        }
-                    }
-                    SchoolFillDropdown(schoolData);
-                    SchoolDropdownValueChanged(schoolDropdown);
-                }
-                
-            // }
-        }
-    }
-
-    private void SchoolFillDropdown(Dictionary<string, string> schoolData)
-    {
-        schoolDropdown.ClearOptions();
-        List<string> schoolsNames = schoolData.Values.ToList();
-        schoolDropdown.AddOptions(schoolsNames);
-    }
-
-    private void SchoolDropdownValueChanged(Dropdown dropdown)
-    {
-        Loading_sign.SetActive(true);
-        string selectedSchool = dropdown.options[dropdown.value].text;
-        string key = schoolData.FirstOrDefault(x => x.Value == selectedSchool).Key;  // 修正代碼
-        // Debug.Log($"選擇的學校: {selectedSchool}, 代號: {key}");
-        SchoolDataID = key;
-        SchoolData = selectedSchool;
-        
-        StartCoroutine(GetClassData());
-    }
-    #endregion
-    #region Class
-    private IEnumerator GetClassData()
-    {
-        // bool flag = false;
-        // foreach (string data in schoolidList)
-        // {
-        //     Debug.Log("data" + data);
-        //     Debug.Log("SchoolDataID" + SchoolDataID);
-        //     if (data == SchoolDataID)
-        //     flag = true;
-        // }
-        // if(flag)
-        // {
-            //class
-            API_URL = "https://script.google.com/macros/s/AKfycbw24_cKIaIOlRuosTJPcJueQVJumqXC1pWyNpGK-ekBBIUE8Df2O1HgYysR_LkTUmZj/exec";
-            WWWForm form = new WWWForm();
-            form.AddField("method", "findSchoolClass");
-            form.AddField("schoolID", SchoolDataID);
-            // form.AddField("schoolID", "173510");
-
-            using (UnityWebRequest www = UnityWebRequest.Post(API_URL, form))
-            {
-                yield return www.SendWebRequest();
-
-                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-                {
-                    Debug.Log(www.error);
-                }
-                else
-                {
-                    string responseText = www.downloadHandler.text;
-                    // 處理返回的資料
-                    Debug.Log("檢查結果: " + responseText);
-                    ClassParseJsonData(responseText);
-                }
-            }
-        // }
-    }
-        
-
-    void ClassParseJsonData(string jsonData)
-    {
-        // Debug.Log($"Raw JSON Data: {jsonData}");
-
-        // 使用 JsonUtility 解析 JSON 字符串
-        ClassDataListWrapper wrapper = JsonUtility.FromJson<ClassDataListWrapper>("{\"classDataList\":" + jsonData + "}");
-
-        // 確保列表不為空
-        if (wrapper != null && wrapper.classDataList != null)
-        {
-            classDataList = wrapper.classDataList;
-
-            // 清空現有的選項
-            yearDrop.ClearOptions();
-            classDrop.ClearOptions();
-
-            // 用來存儲唯一的學年和班級資料
-            List<string> yearsList = new List<string>();
-            classesByYear.Clear();
-            classCodeByYearGrade.Clear(); // 用於存儲 year, grade 和 class 對應的 ID
-
-            foreach (ClassData data in classDataList)
-            {
-                // Debug.Log($"Year: {data.year}, Grade: {data.grade}, Class: {data.className}, Class Code: {data.classCode}");
-
-                // 添加學年到 yearsList，顯示格式： "學年 (Year)"
-                string yearDisplay = $"{data.year} 學年";
-                if (!yearsList.Contains(yearDisplay))
-                {
-                    yearsList.Add(yearDisplay);
-                }
-
-                string classInfo = $"{data.grade}年 {data.className}班";
-                if (!classesByYear.ContainsKey(data.year))
-                {
-                    classesByYear[data.year] = new List<string>();
-                }
-                if (!classesByYear[data.year].Contains(classInfo))
-                {
-                    classesByYear[data.year].Add(classInfo);
-                }
-
-                // 儲存 year, grade, class 對應的 classCode
-                if (!classCodeByYearGrade.ContainsKey(data.year))
-                {
-                    classCodeByYearGrade[data.year] = new Dictionary<string, string>();
-                }
-
-                string gradeClassKey = $"{data.grade}年 {data.className}班";
-                classCodeByYearGrade[data.year][gradeClassKey] = data.classCode;
-            }
-
-            // 將學年資料填充到 yearDrop
-            yearDrop.AddOptions(yearsList);
-
-            // 預設選擇第一個學年
-            if (yearsList.Count > 0)
-            {
-                yearDrop.value = 0;
-                YearDropdownValueChanged(yearDrop);
-            }
-        }
-        else
-        {
-            Debug.LogError("Failed to parse JSON data.");
-        }
-    }
-            
-    private void YearDropdownValueChanged(Dropdown dropdown)
-    {
-        string selectedYear = dropdown.options[dropdown.value].text.Split(' ')[0]; // 提取學年
-        // Debug.Log($"選擇的學年: {selectedYear}");
-
-        // 更新 classDrop 選項
-        if (classesByYear.ContainsKey(selectedYear))
-        {
-            List<string> classList = classesByYear[selectedYear];
-            classDrop.ClearOptions();
-            classDrop.AddOptions(classList);
-
-            // 預設選擇第一個班級
-            if (classList.Count > 0)
-            {
-                classDrop.value = 0;
-                ClassDropdownValueChanged(classDrop);
-            }
-        }
-        else
-        {
-            classDrop.ClearOptions();
-        }
-    }
-    
-    private void ClassDropdownValueChanged(Dropdown dropdown)
-    {
-        // 獲取選擇的學年和班級
-        string selectedYear = yearDrop.options[yearDrop.value].text.Split(' ')[0]; // 提取學年
-        string selectedClass = dropdown.options[dropdown.value].text; // 選中的班級（格式為 "幾年 幾班"）
-
-        // Debug.Log($"選擇的班級: {selectedClass} in year {selectedYear}");
-
-        // 找到對應的 ClassID 或 ID
-        if (classCodeByYearGrade.ContainsKey(selectedYear) && classCodeByYearGrade[selectedYear].ContainsKey(selectedClass))
-        {
-            ClassID = classCodeByYearGrade[selectedYear][selectedClass];
-            // Debug.Log($"對應的班級代號 (Class ID): {ClassID}");
-            // 在這裡執行後續邏輯，例如根據選中的班級 ID 進行操作
-        }
-        StartCoroutine(showStudentsData());
-    }
-    #endregion
-
-    #region Student
-    IEnumerator showStudentsData()
-    {
-        string folderName = SchoolDataID;
-        string fileName = ClassID + "_Student";
-        string classDataID = ClassID;
-        // Debug.Log("檢查" + folderName);
-
-        // Form to send to Google Apps Script
-        WWWForm form = new WWWForm();
-        form.AddField("method", "readStuBtnData");
-        form.AddField("folderName", folderName);
-        form.AddField("fileName", fileName);
-        form.AddField("classDataID", classDataID);
-
-        string url = "https://script.google.com/macros/s/AKfycbySw3nsep50fZXgUzkwgXckAx23qFMlgwtadLh-jpYsx2_jpT5tvWQZFsIdzKyqiZ4g/exec";
-
-        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Network or HTTP error: " + www.error);
-            }
-            else
-            {
-                string responseText = www.downloadHandler.text;
-                // Debug.Log("Received data: " + responseText);
-
-                // Parse the JSON into the dictionary
-                studentData = StudentParseJsonToDictionary(responseText);
-
-                // Fill dropdown with student names
-                FillStudentDropdown(studentData);
-            }
-        }
-    }
-
-    private Dictionary<string, string> StudentParseJsonToDictionary(string json)
-    {
-        var dict = new Dictionary<string, string>();
-        string pattern = "\"([^\"]+)\":\"([^\"]+)\"";
-        MatchCollection matches = Regex.Matches(json, pattern);
-
-        foreach (Match match in matches)
-        {
-            string key = match.Groups[1].Value;
-            string value = match.Groups[2].Value;
-            dict[key] = value;
-        }
-
-        return dict;
-    }
-
-    private void FillStudentDropdown(Dictionary<string, string> students)
-    {
-        studentDropdown.ClearOptions();
-        List<string> studentNames = students.Values.ToList();
-        studentDropdown.AddOptions(studentNames);
-        Loading_sign.SetActive(false);
-        StudentDropdownValueChanged(studentDropdown);
-    }
-
-    private void StudentDropdownValueChanged(Dropdown dropdown)
-    {
-        selectedStudentName = dropdown.options[dropdown.value].text;
-        selectedStudentID = studentData.FirstOrDefault(x => x.Value == selectedStudentName).Key;
-
-        // Debug.Log($"Selected Student: {selectedStudentName}, ID: {selectedStudentID}");
-        
-        Loading_sign.SetActive(false);
-    }
-    #endregion
-    
     #region UploadDataToGameManager
-
     void LoginButton()
     {
+        if (DropdownStudent.options.Count == 0) return;
         Loading_sign.SetActive(true);
         StartCoroutine(UploadDataAndLogin());
     }
-
+    void DisplayStudentInfo()
+    {
+        int studentIndex = DropdownStudent.value;
+        string schoolName = DropdownSchool.options[DropdownSchool.value].text;
+        string year = DropdownYear.options[DropdownYear.value].text;
+        string classID = DropdownClass.options[DropdownClass.value].text;
+        string[] selectedStudent = schoolData[schoolName][year][classID][studentIndex];
+        string studentID = selectedStudent[4];
+        string studentName = selectedStudent[5];
+        Debug.Log($"學號：{studentID}-{studentName}");
+    }
     IEnumerator UploadDataAndLogin()
     {
-        // 上傳資料到 GameManager
-        UploadDataToGameManager();
+        string schoolName = DropdownSchool.options[DropdownSchool.value].text;
+        string schoolID = schoolIDMapping.ContainsKey(schoolName) ? schoolIDMapping[schoolName] : "未知";
+        string year = DropdownYear.options[DropdownYear.value].text;
+        string classID = DropdownClass.options[DropdownClass.value].text;
+        int studentIndex = DropdownStudent.value;
 
+        if (schoolData.ContainsKey(schoolName) &&
+            schoolData[schoolName].ContainsKey(year) &&
+            schoolData[schoolName][year].ContainsKey(classID))
+        {
+            List<string[]> students = schoolData[schoolName][year][classID];
+
+            if (studentIndex < students.Count)
+            {
+                string[] selectedStudent = schoolData[schoolName][year][classID][studentIndex];
+                string studentID = selectedStudent[4];
+                string studentName = selectedStudent[5];
+                string TextResult = $"學校名稱: {schoolName}\n" +
+                                  $"學校代碼: {schoolID}\n" +
+                                  $"學年: {year}\n" +
+                                  $"班級: {classID}\n" +
+                                  $"學號: {studentID}\n" +
+                                  $"姓名: {studentName}";
+                Debug.Log(TextResult);
+                // 用 GameManager方法來上傳資料
+                UserDataManager.Instance.SetPlayerData(schoolID, classID, studentID, studentName, schoolName, year);
+            }
+        }
         // 等待一帧，確保資料已經處理完成
         yield return null;
 
@@ -792,12 +244,5 @@ public class Login : MonoBehaviour
         // 隱藏 LoadingUI
         Loading_sign.SetActive(false);
     }
-
-    void UploadDataToGameManager()
-    {
-        // 在這裡調用 GameManager 的 SetPlayerData 方法來上傳資料
-        UserDataManager.Instance.SetPlayerData(SchoolDataID, ClassID, selectedStudentID, selectedStudentName);
-    }
-    #endregion
+    #endregion 
 }
- 
