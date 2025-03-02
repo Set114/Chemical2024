@@ -31,8 +31,7 @@ PCMode.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
-    {
-      
+    {      
         //MenuUIManager.SharedChapterModeData = 1;
         switch (MenuUIManager.SharedChapterModeData) {
             case 0:
@@ -60,25 +59,19 @@ PCMode.SetActive(false);
             {
                 UserID.text = FindObjectOfType<UserDataManager>().currentPlayerID;
                 UserName.text = FindObjectOfType<UserDataManager>().currentPlayerName;
-
             }
             else
             {
                 UserID.text = "1234";
                 UserName.text = "Test";
             }
-            #region 暫存資料
-            DataInDeviceScript.SaveData4Teach.Add(UserID.text);
-            DataInDeviceScript.SaveData4Teach.Add(UserName.text);
-            DataInDeviceScript.SaveData4Test.Add(UserID.text);
-            DataInDeviceScript.SaveData4Test.Add(UserName.text);
-            DataInDeviceScript.SaveData6Teach.Add(UserID.text);
-            DataInDeviceScript.SaveData6Teach.Add(UserName.text);
-            DataInDeviceScript.SaveData6Test.Add(UserID.text);
-            DataInDeviceScript.SaveData6Test.Add(UserName.text);
+            #region 暫存資料  
+            string[] userData = { UserID.text, UserName.text };
+            int[] indices = { 6, 7, 10, 11 };
+            foreach (int index in indices)
+                DataInDeviceScript.SaveData[index].AddRange(userData);           
             #endregion
-        }
-       
+        }       
     }
     public void SelectTestMode() {
         MenuUIManager.SharedChapterModeData= 1;
@@ -115,23 +108,24 @@ PCMode.SetActive(false);
             Infos[i].SetActive(false);
         }
     }
-    public void Stage4RecordTeachTime() {
-        DataInDeviceScript.SaveData4Teach.Add(DateTime.Now.ToString());
-
+    public void Stage4RecordTeachTime(bool isStart)
+    { //教學4結束時間
+        DataInDeviceScript.SaveData[6].Add(DateTime.Now.ToString());
+        if (!isStart)
+            DataInDeviceScript.SaveData[6].Add("0");
     }
     public void Stage4PushToExcel()
-    {
-        DataInDeviceScript.AddDataTeach(0);
-
+    { //教學4
+        DataInDeviceScript.AddDataExcel(6);
     }
-    public void Stage6RecordTeachTime()
-    {
-        DataInDeviceScript.SaveData6Teach.Add(DateTime.Now.ToString());
-
+    public void Stage6RecordTeachTime(bool isStart)
+    { //教學6結束時間
+        DataInDeviceScript.SaveData[10].Add(DateTime.Now.ToString());
+        if (!isStart)
+            DataInDeviceScript.SaveData[10].Add("0");
     }
     public void Stage6PushToExcel()
-    {
-        DataInDeviceScript.AddDataTeach(2);
-
+    { //教學6
+        DataInDeviceScript.AddDataExcel(10);
     }
 }

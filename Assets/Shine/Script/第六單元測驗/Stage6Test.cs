@@ -39,17 +39,8 @@ public class Stage6Test : MonoBehaviour
     public int Score;
     public TMP_Text ScoreText;
     public TMP_Text[] Iteams;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int iUnitSheetIndex = 11;
     public void CheckIteam1()
     {
         for (int i = 0; i < Iteam1Ans.Length; i++)
@@ -179,32 +170,25 @@ public class Stage6Test : MonoBehaviour
     {
         for (int i = 0; i < Ans5State.Length; i++)
         {
+            Iteams[i].text = (i + 1) + "." + Ans5[i];
+            FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add(Iteams[i].text);
             if (Ans5State[i])
             {
                 Score += 20;
                 Iteams[i].color = Color.black;
+                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("20");
             }
             else
             {
                 Iteams[i].color = Color.red;
+                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("0");
             }
-            
-            
-           
-                Iteams[i].text = (i + 1) + "." + Ans5[i];
-            FindObjectOfType<DataInDevice>().SaveData6Test.Add(Ans5[i]);
+                
         }
 
         ScoreText.text = Score + "¤À";
-        if (Score < 60)
-        {
-            ScoreText.color = Color.red;
-        }
-        else
-        {
-            ScoreText.color = Color.black;
-        }
-        FindObjectOfType<DataInDevice>().AddDataTeach(3);
+        ScoreText.color = Score < 60 ?Color.red: Color.black;
 
+        FindObjectOfType<DataInDevice>().AddDataExcel(iUnitSheetIndex);
     }
 }

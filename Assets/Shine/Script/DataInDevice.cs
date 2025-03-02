@@ -1,3 +1,9 @@
+/*
+ * 增加其他單元，以及教學操作的次數
+ * 紀錄各單元的教學與測驗資料，並將資料寫入Excel檔案。
+ *
+ */
+
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,171 +11,105 @@ using UnityEngine;
 using UnityEngine.UI;
 using OfficeOpenXml;
 using System;
+using Unity.VisualScripting;
 
 public class DataInDevice : MonoBehaviour
 {
-    string DataPath;
-    public List<string> SaveData4Teach;
-    public List<string> SaveData4Test;
-    public List<string> SaveData6Teach;
-    public List<string> SaveData6Test;
-
+    private string filePath;
+    public List<string>[] SaveData = new List<string>[12];
+    private readonly string[] sSheetName = { "單元一 教學", "單元一 測驗", "單元二 教學", "單元二 測驗", 
+        "單元三 教學", "單元三 測驗", "單元四 教學", "單元四 測驗", "單元五 教學", "單元五 測驗", "單元六 教學", "單元六 測驗"};
+    private readonly int[] iSheetUnit = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
+    private readonly int[] iSheetSet = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 5 };
     private void Awake()
     {
-        Clear();
-    }
-    public void Clear() {
-        SaveData4Teach.Clear();
-        SaveData4Test.Clear();
-        SaveData6Teach.Clear();
-        SaveData6Test.Clear();
-    }
+        // 初始化並清空每個 List<string>
+        for (int i = 0; i < SaveData.Length; i++)
+        {
+            SaveData[i] = new List<string>(); // 初始化 List
+            SaveData[i].Clear(); // 清除 List (確保為空)
+        }
+    }    
     // Start is called before the first frame update
     void Start()
     {
-        DataPath = DateTime.Now.ToString("yyyyMMdd") +".xlsx";
-
+        string DataFileName = DateTime.Now.ToString("yyyyMMdd") +".xlsx";
+        #if PLATFORM_ANDROID
+                filePath = Path.Combine(Application.persistentDataPath, DataPath);
+        #elif PLATFORM_STANDALONE_WIN
+                filePath = Path.Combine(Application.streamingAssetsPath, DataFileName);
+        #endif
         WriteExcel();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void WriteExcel()
     {
-#if PLATFORM_ANDROID
-string P = Application.persistentDataPath;
-#elif PLATFORM_STANDALONE_WIN
-        string P = Application.streamingAssetsPath;
-#endif
         //直接創新的(會覆寫)
-        string filePath = Path.Combine(P, DataPath); 
         // 確保允許非商業用途的授權 (EPPlus 5+ 需要) 
         //ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // 建立或開啟 Excel 檔案 
         if (!File.Exists(filePath))
         {
-            FileInfo fileInfo = new FileInfo(filePath);
-            using (ExcelPackage package = new ExcelPackage(fileInfo))
-            {
-                //新增工作表 
-                //建立所有資料表的第一列
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("單元四 教學"); // 寫入資料 
-                worksheet.Cells[1, 1].Value = "學號";
-                worksheet.Cells[1, 2].Value = "姓名";
-                worksheet.Cells[1, 3].Value = "4-1開始時間";
-                worksheet.Cells[1, 4].Value = "4-1結束時間";
-                worksheet.Cells[1, 5].Value = "4-2開始時間";
-                worksheet.Cells[1, 6].Value = "4-2結束時間";
-                worksheet.Cells[1, 7].Value = "4-3開始時間";
-                worksheet.Cells[1, 8].Value = "4-3結束時間";
-                worksheet.Cells[1, 9].Value = "4-4開始時間";
-                worksheet.Cells[1, 10].Value = "4-4結束時間";
-                worksheet.Cells[1, 11].Value = "4-5開始時間";
-                worksheet.Cells[1, 12].Value = "4-5結束時間";
+            FileInfo fileInfo = new(filePath);
+            using ExcelPackage package = new(fileInfo);
+            //新增工作表，建立所有資料表的第一列
+            for (int i = 0; i < 12; i++) 
+                GetWorksheetContent(package.Workbook.Worksheets.Add(sSheetName[i]),
+                    iSheetUnit[i], iSheetSet[i], i % 2 == 0);
 
-                ExcelWorksheet worksheet2 = package.Workbook.Worksheets.Add("單元四 測驗"); // 寫入資料 
-                worksheet2.Cells[1, 1].Value = "學號";
-                worksheet2.Cells[1, 2].Value = "姓名";
-                worksheet2.Cells[1, 3].Value = "第1題答案";
-                worksheet2.Cells[1, 4].Value = "第2題答案";
-                worksheet2.Cells[1, 5].Value = "第3題答案";
-                worksheet2.Cells[1, 6].Value = "第4題答案";
-                worksheet2.Cells[1, 7].Value = "第5題答案";
-
-                ExcelWorksheet worksheet3 = package.Workbook.Worksheets.Add("單元六 教學"); // 寫入資料 
-                worksheet3.Cells[1, 1].Value = "學號";
-                worksheet3.Cells[1, 2].Value = "姓名";
-                worksheet3.Cells[1, 3].Value = "6-1開始時間";
-                worksheet3.Cells[1, 4].Value = "6-1結束時間";
-                worksheet3.Cells[1, 5].Value = "6-2開始時間";
-                worksheet3.Cells[1, 6].Value = "6-2結束時間";
-                worksheet3.Cells[1, 7].Value = "6-3開始時間";
-                worksheet3.Cells[1, 8].Value = "6-3結束時間";
-
-                ExcelWorksheet worksheet4 = package.Workbook.Worksheets.Add("單元六 測驗"); // 寫入資料 
-                worksheet4.Cells[1, 1].Value = "學號";
-                worksheet4.Cells[1, 2].Value = "姓名";
-                worksheet4.Cells[1, 3].Value = "第1題答案";
-                worksheet4.Cells[1, 4].Value = "第2題答案";
-                worksheet4.Cells[1, 5].Value = "第3題答案";
-                worksheet4.Cells[1, 6].Value = "第4題答案";
-                worksheet4.Cells[1, 7].Value = "第5題答案";
-
-                FileInfo file = new FileInfo(filePath);
-                package.SaveAs(file);
-                Debug.Log($"Excel 檔案已儲存於: {filePath}");
-            }
+            FileInfo file = new(filePath);
+            package.SaveAs(file);
+            Debug.Log($"Excel 檔案已儲存於: {filePath}");
         }
     }
-
-    //在其他單元中，呼叫這個函式以增加資料(資料用字串陣列傳入)
-    public void AddDataTeach(int Unit)
+    private void GetWorksheetContent(ExcelWorksheet worksheet, int iUnit, int iSets, bool isTeach)
     {
-#if PLATFORM_ANDROID
-string P = Application.persistentDataPath;
-#elif PLATFORM_STANDALONE_WIN
-        string P = Application.streamingAssetsPath;
-#endif
-        // 設定檔案路徑 
-        string filePath = Path.Combine(P, DataPath);
-        if (!File.Exists(filePath))
+        // 教學與測驗除學號與姓名之外標題不同，教學有開始時間、結束時間、次數，測驗有得分、答案。
+        int headerCount = isTeach ? iSets * 3 + 2 : iSets * 2 + 2;
+        for (int i = 0; i < headerCount; i++)
+            worksheet.Cells[1, i + 1].Value = GetHeaders(iUnit, i, isTeach);
+    }
+    private string GetHeaders(int iUnit, int headerIndex, bool isTeach)
+    {
+        if (headerIndex == 0)            return "學號";
+        else if (headerIndex == 1)       return "姓名";
+        else if (isTeach)
         {
-            Debug.LogError($"Excel 檔案不存在: {filePath}");
-            return;
+            int iQuotient = (headerIndex - 2) / 3 + 1;
+            int iRemainder = (headerIndex - 2) % 3;
+            if (iRemainder == 0)                return $"{iUnit}-{iQuotient}開始";
+            else if (iRemainder == 1)           return $"{iUnit}-{iQuotient}結束";
+            else                                return $"{iUnit}-{iQuotient}次數";
         }
+        else
+        {
+            int iQuotient = headerIndex / 2;
+            if (headerIndex % 2 == 1)   return $"{iUnit}-{iQuotient}得分";
+            else                        return $"{iUnit}-{iQuotient}答案";
+        }
+    }
+    //在其他單元中，呼叫這個函式以增加資料(資料用字串陣列傳入)
+    public void AddDataExcel(int tabIndex)
+    {
+        if (!File.Exists(filePath))            return;
+
+        Debug.Log($"Excel 檔案存在: {filePath}");
         // 設定授權（EPPlus 5+ 必需） 
         // ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
         // 開啟現有 Excel 檔案 
-        using (ExcelPackage package = new ExcelPackage(new FileInfo(filePath)))
+        using ExcelPackage package = new ExcelPackage(new FileInfo(filePath));
+        ExcelWorksheet worksheet = package.Workbook.Worksheets[sSheetName[tabIndex]]; // 取得第幾個工作表
+        if (worksheet == null)            return;
+
+        // 增加資料
+        Debug.Log(tabIndex + ":" + worksheet.Dimension.End.Row + "+" + worksheet.Dimension.End.Column);
+        // 計算新欄位的索引 最後一列+1
+        int newRow = worksheet.Dimension.End.Row + 1; // 新的列數，必須在最後一列的基礎上+1
+        for (int col = 0; col <= worksheet.Dimension.End.Column - 1; col++) // 總共有多少資料要填寫：學校+班級+姓名... 
         {
-            ExcelWorksheet worksheet = null;
-            switch (Unit)
-            {
-                case 0:
-                     worksheet = package.Workbook.Worksheets["單元四 教學"]; // 取得第幾個工作表 
-                    break;
-                case 1:
-                     worksheet = package.Workbook.Worksheets["單元四 測驗"]; // 取得第幾個工作表 
-                    break;
-                case 2:
-                     worksheet = package.Workbook.Worksheets["單元六 教學"]; // 取得第幾個工作表 
-                    break;
-                case 3:
-                     worksheet = package.Workbook.Worksheets["單元六 測驗"]; // 取得第幾個工作表 
-                    break;
-            }
-            if (worksheet == null)
-            {
-                Debug.LogError("無法找到工作表！");
-                return;
-            }
-            // 增加資料
-            Debug.Log(Unit + ":" + worksheet.Dimension.End.Row + "+"+worksheet.Dimension.End.Column);
-            int newRowIndex = worksheet.Dimension.End.Row + 1; // 計算新欄位的索引 最後一列+1
-            for (int col = 0; col <= worksheet.Dimension.End.Column-1; col++) // 總共有多少資料要填寫：學校+班級+姓名... 
-            {
-                switch (Unit) {
-                    case 0:
-                        worksheet.Cells[newRowIndex, col+1].Value = SaveData4Teach[col]; // 填入資料 
-                        break;
-                    case 1:
-                        worksheet.Cells[newRowIndex, col+1].Value = SaveData4Test[col]; // 填入資料 
-                        break;
-                    case 2:
-                        worksheet.Cells[newRowIndex, col+1].Value = SaveData6Teach[col]; // 填入資料 
-                        break;
-                    case 3:
-                        worksheet.Cells[newRowIndex, col+1].Value = SaveData6Test[col]; // 填入資料 
-                        break;
-                }
-            }
-            // 保存變更 
-            package.Save();
-            Debug.Log($"已更新 Excel 檔案: {filePath}");
+            worksheet.Cells[newRow, col + 1].Value = SaveData[tabIndex][col]; // 填入資料
         }
+        // 保存變更 
+        package.Save();
+        Debug.Log($"已更新 Excel 檔案: {filePath}");
     }
 }
