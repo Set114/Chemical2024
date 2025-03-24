@@ -4822,6 +4822,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &179287867900579059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5942781115707418136}
+  m_Layer: 0
+  m_Name: BottleStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5942781115707418136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179287867900579059}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.199, y: 0, z: -0.432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5743555228465077436}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245972715959303541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5072,6 +5103,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2742733046294467273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2236524321252445658}
+  m_Layer: 0
+  m_Name: BottleTiltPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2236524321252445658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742733046294467273}
+  m_LocalRotation: {x: -0, y: -0, z: -0.2632536, w: 0.9647267}
+  m_LocalPosition: {x: -0.301, y: 0.0213, z: -0.432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5743555228465077436}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2851841142618759512
 GameObject:
   m_ObjectHideFlags: 0
@@ -8857,7 +8919,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5587250527267303912}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.199, y: 0, z: -0.432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -9903,6 +9965,8 @@ Transform:
   - {fileID: 5743555229578195564}
   - {fileID: 5769349462169502959}
   - {fileID: 5587250527267303911}
+  - {fileID: 5942781115707418136}
+  - {fileID: 2236524321252445658}
   - {fileID: 7387688256729494083}
   - {fileID: 8038209184199684725}
   - {fileID: 8038209183476377598}
@@ -9922,6 +9986,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottle: {fileID: 5587250527267303912}
+  bottleStartPoint: {fileID: 5942781115707418136}
+  bottleTiltPoint: {fileID: 2236524321252445658}
   bottleCapPoint: {fileID: 3702061784989263658}
   testTubePoint: {fileID: 9158798156400740756}
   bottleCollisionInside: {fileID: 5421224366578353999}
@@ -10926,7 +10992,7 @@ MonoBehaviour:
   injectFilter: HCI_2-3
   isUnlimited: 0
   isFull: 0
-  targerRatio: 0
+  targerRatio: 0.33
   _whenInject:
     m_PersistentCalls:
       m_Calls: []
@@ -10934,6 +11000,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenFull:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2989143856646509242}
@@ -10948,9 +11017,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _whenReachTargerRatio:
-    m_PersistentCalls:
-      m_Calls: []
+      - m_Target: {fileID: 5769349462264871983}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls:
@@ -11953,7 +12031,7 @@ Transform:
   - {fileID: 585182507666353519}
   - {fileID: 5206034113731812776}
   m_Father: {fileID: 5743555228465077436}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8038209184199684724
 GameObject:
@@ -11993,7 +12071,7 @@ Transform:
   - {fileID: 7122119233811122168}
   - {fileID: 879363143218242229}
   m_Father: {fileID: 5743555228465077436}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8133075582974667701
 GameObject:
@@ -17927,7 +18005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_AnchorMax.x

@@ -9,6 +9,10 @@ public class Tutorial_2_3 : MonoBehaviour
     [Header("寶特瓶")]
     [Tooltip("寶特瓶")]
     [SerializeField] private GameObject bottle;
+    [Tooltip("寶特瓶起始位置")]
+    [SerializeField] private Transform bottleStartPoint;
+    [Tooltip("寶特瓶傾斜位置")]
+    [SerializeField] private Transform bottleTiltPoint;
     [Tooltip("瓶蓋位置")]
     [SerializeField] private Transform bottleCapPoint;
     [Tooltip("瓶內試管位置")]
@@ -173,6 +177,14 @@ public class Tutorial_2_3 : MonoBehaviour
     {
         switch (Status)
         {
+            case 2: //待試管放進寶特瓶內
+                if (isPC && sender.name == "TestTube_2-3_Clamp")
+                {
+                    bottle.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    bottle.transform.position = bottleTiltPoint.position;
+                    bottle.transform.rotation = bottleTiltPoint.rotation;
+                }
+                break;
             case 3: //套上氣球
                 if (sender.name == "Balloon_2-3")
                 {
@@ -280,6 +292,12 @@ public class Tutorial_2_3 : MonoBehaviour
             object_Step1.SetActive(false);
             object_Step2.SetActive(true);
             tweezers.transform.SetParent(object_Step1.transform);
+            if (isPC)
+            {
+                bottle.transform.position = bottleStartPoint.position;
+                bottle.transform.rotation = bottleStartPoint.rotation;
+                bottle.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            }
             Status++;
         }
     }

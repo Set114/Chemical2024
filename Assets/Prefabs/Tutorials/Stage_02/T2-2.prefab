@@ -5872,7 +5872,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4978853370882789768}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2443770710687082015
 MeshFilter:
@@ -5963,7 +5963,7 @@ Transform:
   - {fileID: 7822976801071817504}
   - {fileID: 1403280468749159073}
   m_Father: {fileID: 4978853370882789768}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2443770711059002071
 Rigidbody:
@@ -6270,7 +6270,7 @@ Transform:
   m_Children:
   - {fileID: 4863460068769865280}
   m_Father: {fileID: 4978853370882789768}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2443770711137991099
 BoxCollider:
@@ -7143,6 +7143,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4443788000484510461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595803375077435019}
+  m_Layer: 0
+  m_Name: BottleTiltPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595803375077435019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443788000484510461}
+  m_LocalRotation: {x: -0, y: -0, z: -0.2632536, w: 0.9647267}
+  m_LocalPosition: {x: -0.301, y: 0.0213, z: -0.432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4978853370882789768}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4817625048959529012
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,6 +7287,8 @@ Transform:
   - {fileID: 4355889618784683994}
   - {fileID: 6284393385820200545}
   - {fileID: 6377465165814513351}
+  - {fileID: 7260027321159832820}
+  - {fileID: 595803375077435019}
   - {fileID: 2443770711059002066}
   - {fileID: 6216877082677202611}
   - {fileID: 2443770711137991046}
@@ -7280,6 +7313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottle: {fileID: 2443770711059002077}
+  bottleStartPoint: {fileID: 7260027321159832820}
+  bottleTiltPoint: {fileID: 595803375077435019}
   bottleCap: {fileID: 2443770711137991041}
   bottleCapPoint: {fileID: 6846526789260944415}
   testTubePoint: {fileID: 1403280468749159073}
@@ -7893,7 +7928,7 @@ Transform:
   - {fileID: 6377465165821608248}
   - {fileID: 489436260696531340}
   m_Father: {fileID: 4978853370882789768}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3000592769220042543
 MonoBehaviour:
@@ -10078,7 +10113,7 @@ Transform:
   m_Children:
   - {fileID: 4404525128165740856}
   m_Father: {fileID: 4978853370882789768}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7528783253346362672
 MeshFilter:
@@ -10186,7 +10221,7 @@ MonoBehaviour:
   injectFilter: CalciumChloride_2-2
   isUnlimited: 0
   isFull: 0
-  targerRatio: 0
+  targerRatio: 0.33
   _whenInject:
     m_PersistentCalls:
       m_Calls: []
@@ -10194,6 +10229,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenFull:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenReachTargerRatio:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2590451868835017514}
@@ -10208,9 +10246,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _whenReachTargerRatio:
-    m_PersistentCalls:
-      m_Calls: []
+      - m_Target: {fileID: 4355889619828358938}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls:
@@ -16335,6 +16382,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &8177889043796950361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7260027321159832820}
+  m_Layer: 0
+  m_Name: BottleStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7260027321159832820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177889043796950361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.183, y: 0, z: -0.432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4978853370882789768}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8593908810786740137
 GameObject:
   m_ObjectHideFlags: 0
@@ -16581,7 +16659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 17a6ee0f692c18f4088ed984dfa33e80, type: 3}
       propertyPath: m_LocalScale.x
@@ -16953,7 +17031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17229,7 +17307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3884022730666044445, guid: affc1233119e5b946901d6fefd909b05, type: 3}
       propertyPath: m_AnchorMax.x
