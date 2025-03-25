@@ -19,8 +19,9 @@ public class QuestionManager : MonoBehaviour
     [Tooltip("正確標記")] [SerializeField] GameObject MarkCorrect;
     [Tooltip("錯誤標記")] [SerializeField] GameObject MarkWrong;
     [Tooltip("內容文字")] [SerializeField] QuestionData questionContent;
-    [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_Q_Question, UI_Q_Answer, UI_Q_Button01, UI_Q_Button02;
-    [Tooltip("答案圖片")][SerializeField] Image UI_Q_ButtonImage01, UI_Q_ButtonImage02;
+    [Tooltip("按鈕3")][SerializeField] GameObject button3;
+    [Tooltip("文字介面")] [SerializeField] TextMeshProUGUI UI_Q_Question, UI_Q_Answer, UI_Q_Button01, UI_Q_Button02, UI_Q_Button03;
+    [Tooltip("答案圖片")][SerializeField] Image UI_Q_ButtonImage01, UI_Q_ButtonImage02 , UI_Q_ButtonImage03;
     [Tooltip("答案提出者頭像")][SerializeField] GameObject userIcon0, userIcon1;
     [Tooltip("答案提出者頭像圖片")][SerializeField] Image userIconImage0, userIconImage1;
     [Header("結束UI")]
@@ -84,6 +85,7 @@ public class QuestionManager : MonoBehaviour
         AnswerCanvas.SetActive(false);
         MarkCorrect.SetActive(false);
         MarkWrong.SetActive(false);
+        button3.SetActive(false);
         UI_Q_Question.text = questionContent.questionContent[currentIndex].question;
         UI_Q_Button01.text = questionContent.questionContent[currentIndex].answer0Text;
         UI_Q_Button02.text = questionContent.questionContent[currentIndex].answer1Text;
@@ -110,6 +112,19 @@ public class QuestionManager : MonoBehaviour
                 UI_Q_ButtonImage02.gameObject.SetActive(true);
             }
         }
+
+        if (button3)
+        {
+            UI_Q_ButtonImage03.gameObject.SetActive(false);
+            Sprite image03 = questionContent.questionContent[currentIndex].answer2Image;
+            if (image03)
+            {
+                UI_Q_ButtonImage03.sprite = image03;
+                UI_Q_ButtonImage03.gameObject.SetActive(true);
+                button3.SetActive(true);
+            }
+        }
+
         //設定答案提出者頭像
         if (userIcon0)
         {

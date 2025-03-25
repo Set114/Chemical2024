@@ -38,7 +38,12 @@ public struct QuestionMapping  //�ݵ���ܮج[�c
     public string answer1Text;  //����2�����e��r
     public Sprite answer1Image; //答案2圖片
     public Sprite user1Icon;    //答案提出者2頭像
-    public int answerNumber;    //���T����        
+    [TextArea(3, 5)]
+    public string answer2Text;  //����3�����e��r
+    public Sprite answer2Image; //答案3圖片
+    public Sprite user2Icon;    //答案提出者3頭像
+
+    public int answerNumber;    //���T����     
 }
 
 [System.Serializable]

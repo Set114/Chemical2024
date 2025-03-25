@@ -21,7 +21,7 @@ public class Exam_2_3 : MonoBehaviour
     [Tooltip("試管架位置")]
     [SerializeField] private Transform testTubePoint;
     [Tooltip("試管架Trigger")]
-    [SerializeField] private BoxCollider testTubePointTrigger;
+    private BoxCollider testTubePointTrigger;
     [Tooltip("盤子內的碳粉")]
     [SerializeField] private GameObject tonerPowder;
     [Tooltip("盤子內的氧化銅粉")]
@@ -133,13 +133,14 @@ public class Exam_2_3 : MonoBehaviour
                     testTubePowderColor = Color.Lerp(testTubePowderColor, testTubePowderColor_final, processPercent);
                     // 更新物件的顏色
                     testTubePowder.liquidColor = testTubePowderColor;
-
+                    testTube.transform.localRotation = Quaternion.Euler(0f, 0f, -30f);
                     if (timer >= reactionTime)
                     {
                         testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
                         testTubePointTrigger.enabled = true;
                         hintManager.SwitchStep("E2_3_5");
                         timer = 0f;
+                        testTube.transform.localRotation = Quaternion.identity;
                         Status++;
                     }
                 }

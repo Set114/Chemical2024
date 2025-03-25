@@ -66,8 +66,6 @@ public class Tutorial_2_2 : MonoBehaviour
     [Header("UI")]
     [Tooltip("質量文字")]
     [SerializeField] private Text[] massTexts;
-    [Tooltip("粒子畫面")]
-    [SerializeField] private GameObject particlePage;
 
     private float timer = 0;
     private int Status = 0;
@@ -75,6 +73,7 @@ public class Tutorial_2_2 : MonoBehaviour
     private LevelObjManager levelObjManager;
     private AudioManager audioManager;          //音樂管理
     private HintManager hintManager;            //管理提示板
+    private MoleculaDisplay moleculaManager;    //管理分子螢幕
 
     private MouseController pcController;       //PC的控制器
     private bool isPC;                          //偵測是否是PC模式
@@ -92,9 +91,9 @@ public class Tutorial_2_2 : MonoBehaviour
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
+        moleculaManager = FindObjectOfType<MoleculaDisplay>();
 
         hintManager.gameObject.SetActive(true);
-        particlePage.SetActive(false);
 
         hintManager.SwitchStep("T2_2_1");
         kitchenScale.SetActive(false);
@@ -141,7 +140,8 @@ public class Tutorial_2_2 : MonoBehaviour
                 timer -= Time.deltaTime;
                 if (timer <= 0f)
                 {
-                    particlePage.SetActive(true);
+                    moleculaManager.ShowMoleculas(0);
+                    moleculaManager.PlayMoleculasAnimation();
                     hintManager.SwitchStep("T2_2_6");
                     Status++;
                 }

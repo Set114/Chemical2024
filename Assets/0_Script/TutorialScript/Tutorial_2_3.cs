@@ -72,8 +72,6 @@ public class Tutorial_2_3 : MonoBehaviour
     [Header("UI")]
     [Tooltip("步驟打勾圖示")]
     [SerializeField] private Text[] massTexts;
-    [Tooltip("粒子畫面")]
-    [SerializeField] private GameObject particlePage;
 
     private float timer = 0;
     private bool firstTimeWarning = true;       // 第一次抓取危險物品的通知
@@ -82,6 +80,7 @@ public class Tutorial_2_3 : MonoBehaviour
     private LevelObjManager levelObjManager;
     private AudioManager audioManager;          //音樂管理
     private HintManager hintManager;            //管理提示板
+    private MoleculaDisplay moleculaManager;    //管理分子螢幕
 
     private MouseController pcController;
     private bool isPC;
@@ -99,9 +98,9 @@ public class Tutorial_2_3 : MonoBehaviour
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
+        moleculaManager = FindObjectOfType<MoleculaDisplay>();
 
         hintManager.gameObject.SetActive(true);
-        particlePage.SetActive(false);
         object_Step1.SetActive(true);
         object_Step2.SetActive(false);
 
@@ -139,6 +138,8 @@ public class Tutorial_2_3 : MonoBehaviour
                 {
                     timer = reactionTime;
                     bottleLiquidColor = bottleLiquid.liquidColor;
+                    moleculaManager.ShowMoleculas(1);
+                    moleculaManager.PlayMoleculasAnimation();
                     Status++;
                 }
                 break;
@@ -157,7 +158,6 @@ public class Tutorial_2_3 : MonoBehaviour
                 timer -= Time.deltaTime;
                 if (timer <= 0f)
                 {
-                    particlePage.SetActive(true);
                     hintManager.SwitchStep("T2_3_6");
                     Status++;
                 }
@@ -420,6 +420,9 @@ public class Tutorial_2_3 : MonoBehaviour
                     scaleVale = weight_Bottle + weight_TestTube;
                     weightText.text = scaleVale.ToString("0") + "g";
                     weightTextDisplay.text = scaleVale.ToString("0") + "g";
+                    hintManager.SwitchStep("T2_3_8");
+                    //播放洩氣音效
+
                     Status++;
                 }
                 break;
@@ -436,7 +439,7 @@ public class Tutorial_2_3 : MonoBehaviour
     }
     private void EndTheTutorial()   //完成教學
     {
-        hintManager.SwitchStep("T2_3_8");
+        hintManager.SwitchStep("T2_3_9");
         hintManager.ShowNextButton(this.gameObject);
     }
 
