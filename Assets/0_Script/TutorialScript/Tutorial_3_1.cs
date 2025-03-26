@@ -22,20 +22,20 @@ public class Tutorial_3_1 : MonoBehaviour
     [Tooltip("經費文字")]
     [SerializeField] private Text myMoneyText;
     [Tooltip("商店原子數量文字")]
-    [SerializeField] private Text countText_shopC, countText_shopO2, countText_shopN2,
-        countText_shopH2, countText_shopFe;
+    [SerializeField] private Text countText_shopC, countText_shopO, countText_shopN,
+        countText_shopH, countText_shopFe;
 
     [Header("工作區")]
     [Tooltip("組合原子的工作區")]
     [SerializeField] private GameObject workSpace;
     [Tooltip("原子Prefab")]
-    [SerializeField] private GameObject atomC_Prefab, atomO2_Prefab, atomN2_Prefab,
-        atomH2_Prefab, atomFe_Prefab;
+    [SerializeField] private GameObject atomC_Prefab, atomO_Prefab, atomN_Prefab,
+        atomH_Prefab, atomFe_Prefab;
     [Tooltip("生成出的原子")]
-    private GameObject atomC, atomO2, atomN2, atomH2, atomFe;
+    private GameObject atomC, atomO, atomN, atomH, atomFe;
     [Tooltip("原子生成點")]
-    [SerializeField] private Transform atomC_Spawn, atomO2_Spawn, atomN2_Spawn,
-    atomH2_Spawn, atomFe_Spawn;
+    [SerializeField] private Transform atomC_Spawn, atomO_Spawn, atomN_Spawn,
+    atomH_Spawn, atomFe_Spawn;
 
     [Tooltip("工作區內存在的原子")]
     [SerializeField] private List<Atom> atoms_AreaA, atoms_AreaB,
@@ -44,13 +44,13 @@ public class Tutorial_3_1 : MonoBehaviour
     [SerializeField] private List<Atom> atomsAnswer_AreaA, atomsAnswer_AreaB,
         atomsAnswer_AreaC, atomsAnswer_AreaD;
     [Tooltip("工作區原子數量文字")]
-    [SerializeField] private Text countText_workC, countText_workO2, countText_workN2,
-    countText_workH2, countText_workFe;
+    [SerializeField] private Text countText_workC, countText_workO, countText_workN,
+    countText_workH, countText_workFe;
 
     private int count_C = 0;
-    private int count_O2 = 0;
-    private int count_N2 = 0;
-    private int count_H2 = 0;
+    private int count_O = 0;
+    private int count_N = 0;
+    private int count_H = 0;
     private int count_Fe = 0;
 
     [Header("UI")]
@@ -155,9 +155,9 @@ public class Tutorial_3_1 : MonoBehaviour
     private void CheckMyAtom()
     {
         count_C = 0;
-        count_O2 = 0;
-        count_N2 = 0;
-        count_H2 = 0;
+        count_O = 0;
+        count_N = 0;
+        count_H = 0;
         count_Fe = 0;
         foreach (Atom atom in myData.atoms_Buy)
         {
@@ -166,14 +166,14 @@ public class Tutorial_3_1 : MonoBehaviour
                 case "C":
                     count_C++;
                     break;
-                case "O2":
-                    count_O2++;
+                case "O":
+                    count_O++;
                     break;
-                case "N2":
-                    count_N2++;
+                case "N":
+                    count_N++;
                     break;
-                case "H2":
-                    count_H2++;
+                case "H":
+                    count_H++;
                     break;
                 case "Fe":
                     count_Fe++;
@@ -181,16 +181,16 @@ public class Tutorial_3_1 : MonoBehaviour
             }
         }
         countText_shopC.text = count_C.ToString();
-        countText_shopO2.text = count_O2.ToString();
-        countText_shopN2.text = count_N2.ToString();
-        countText_shopH2.text = count_H2.ToString();
+        countText_shopO.text = count_O.ToString();
+        countText_shopN.text = count_N.ToString();
+        countText_shopH.text = count_H.ToString();
         countText_shopFe.text = count_Fe.ToString();
         myMoneyText.text = myData.money.ToString();
 
         countText_workC.text = count_C.ToString();
-        countText_workO2.text = count_O2.ToString();
-        countText_workN2.text = count_N2.ToString();
-        countText_workH2.text = count_H2.ToString();
+        countText_workO.text = count_O.ToString();
+        countText_workN.text = count_N.ToString();
+        countText_workH.text = count_H.ToString();
         countText_workFe.text = count_Fe.ToString();
     }
 
@@ -207,34 +207,34 @@ public class Tutorial_3_1 : MonoBehaviour
             Destroy(atomC);
         }
 
-        if (atomO2 == null && count_O2 > 0)
+        if (atomO == null && count_O > 0)
         {
-            atomO2 = Instantiate(atomO2_Prefab, atomO2_Spawn);
-            atomO2.name = "O2";
+            atomO = Instantiate(atomO_Prefab, atomO_Spawn);
+            atomO.name = "O";
         }
-        else if (atomO2 != null && count_O2 < 1)
+        else if (atomO != null && count_O < 1)
         {
-            Destroy(atomO2);
-        }
-
-        if (atomN2 == null && count_N2 > 0)
-        {
-            atomN2 = Instantiate(atomN2_Prefab, atomN2_Spawn);
-            atomN2.name = "N2";
-        }
-        else if (atomN2 != null && count_N2 < 1)
-        {
-            Destroy(atomN2);
+            Destroy(atomO);
         }
 
-        if (atomH2 == null && count_H2 > 0)
+        if (atomN == null && count_N > 0)
         {
-            atomH2 = Instantiate(atomH2_Prefab, atomH2_Spawn);
-            atomH2.name = "H2";
+            atomN = Instantiate(atomN_Prefab, atomN_Spawn);
+            atomN.name = "N";
         }
-        else if (atomH2 != null && count_H2 < 1)
+        else if (atomN != null && count_N < 1)
         {
-            Destroy(atomH2);
+            Destroy(atomN);
+        }
+
+        if (atomH == null && count_H > 0)
+        {
+            atomH = Instantiate(atomH_Prefab, atomH_Spawn);
+            atomH.name = "H";
+        }
+        else if (atomH != null && count_H < 1)
+        {
+            Destroy(atomH);
         }
 
         if (atomFe == null && count_Fe > 0)
@@ -260,14 +260,14 @@ public class Tutorial_3_1 : MonoBehaviour
                 case "C":
                     atomC = null;
                     break;
-                case "O2":
-                    atomO2 = null;
+                case "O":
+                    atomO = null;
                     break;
-                case "N2":
-                    atomN2 = null;
+                case "N":
+                    atomN = null;
                     break;
-                case "H2":
-                    atomH2 = null;
+                case "H":
+                    atomH = null;
                     break;
                 case "Fe":
                     atomFe = null;
@@ -460,8 +460,8 @@ public class Tutorial_3_1 : MonoBehaviour
         foreach(AtomBall atom in atoms)
         {
             GameObject atomObj = atom.gameObject;
-            if (atomObj != atomC && atomObj != atomO2 && atomObj != atomN2
-                && atomObj != atomH2 && atomObj != atomFe)
+            if (atomObj != atomC && atomObj != atomO && atomObj != atomN
+                && atomObj != atomH && atomObj != atomFe)
             {
                 Atom result = myData.atoms_Buy.Find(atom => atom.name == atomObj.name);
                 if (result != null)
