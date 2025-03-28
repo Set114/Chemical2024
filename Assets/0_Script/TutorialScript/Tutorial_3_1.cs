@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +48,16 @@ public class Tutorial_3_1 : MonoBehaviour
     [Tooltip("工作區原子數量文字")]
     [SerializeField] private Text countText_workC, countText_workO, countText_workN,
     countText_workH, countText_workFe;
+
+    [Space]
+    [Tooltip("指定成品原子")]
+    [SerializeField] private string areaC1Atom, areaC2Atom, areaD1Atom, areaD2Atom;
+    [Tooltip("成品原子數量文字")]
+    [SerializeField] private Text countText_areaC1, countText_areaC2, countText_areaD1, countText_areaD2;
+    [Tooltip("成品原子半透明模型")]
+    [SerializeField] private GameObject emptyBall_areaC1, emptyBall_areaC2, emptyBall_areaD1, emptyBall_areaD2;
+    [Tooltip("成品原子模型")]
+    [SerializeField] private GameObject atomBall_areaC1, atomBall_areaC2, atomBall_areaD1, atomBall_areaD2;
 
     private int count_C = 0;
     private int count_O = 0;
@@ -242,7 +254,7 @@ public class Tutorial_3_1 : MonoBehaviour
             atomFe = Instantiate(atomFe_Prefab, atomFe_Spawn);
             atomFe.name = "Fe";
         }
-        else if (atomFe!= null && count_Fe < 1)
+        else if (atomFe != null && count_Fe < 1)
         {
             Destroy(atomFe);
         }
@@ -283,15 +295,18 @@ public class Tutorial_3_1 : MonoBehaviour
     }
 
     //回收原子
-    public void AtomReturn(string atomName)
+    public void AtomReturn(string atomName, int count)
     {
-        Atom result = atoms_Sell.Find(atom => atom.name == atomName);
-        if (result != null)
+        for (int i = 0; i < count; i++)
         {
-            myData.atoms_Buy.Add(result);
-            print("已回收：" + atomName);
+            Atom result = atoms_Sell.Find(atom => atom.name == atomName);
+            if (result != null)
+            {
+                myData.atoms_Buy.Add(result);
+                print("已回收：" + atomName);
+            }
+            SpawnAtom();
         }
-        SpawnAtom();
     }
 
 
@@ -311,11 +326,11 @@ public class Tutorial_3_1 : MonoBehaviour
         AtomBall atom = obj.GetComponent<AtomBall>();
         if (atom)
         {
-            atom.Grab(false); 
+            atom.Grab(false);
         }
     }
 
-    public void Reaction(string area, string atomName, bool enter)
+    public void Reaction(string area, string atomName, bool enter, int count)
     {
         List<Atom> atoms = new List<Atom>();
 
@@ -337,24 +352,31 @@ public class Tutorial_3_1 : MonoBehaviour
 
         if (enter)
         {
-            Atom result = atoms_Sell.Find(atom => atom.name == atomName);
-            if (result != null)
+            for (int i = 0; i < count; i++)
             {
-                atoms.Add(result);
-                print(atomName + " 已放入：" + area);
+                Atom result = atoms_Sell.Find(atom => atom.name == atomName);
+                if (result != null)
+                {
+                    atoms.Add(result);
+                    print(atomName + " 已放入：" + area);
+                }
             }
         }
         else
         {
-            Atom result = atoms.Find(atom => atom.name == atomName);
-            if (result != null)
+            for (int i = 0; i < count; i++)
             {
-                atoms.Remove(result);
-                print("已取出：" + atomName);
-            }
-            else
-            {
-                print("你沒有" + atomName + "可以取出");
+                Atom result = atoms.Find(atom => atom.name == atomName);
+                if (result != null)
+                {
+                    atoms.Remove(result);
+                    print("已取出：" + atomName);
+                }
+                else
+                {
+                    print("你沒有" + atomName + "可以取出");
+
+                }
             }
         }
     }
@@ -420,6 +442,148 @@ public class Tutorial_3_1 : MonoBehaviour
         }
     }
     */
+    //變更成品的原子數量
+    public void OnAreaCDButtonClicked(int index)
+    {
+        Atom result;
+        switch (index)
+        {
+            case -1:
+                result = atoms_AreaC.Find(atom => atom.name == areaC1Atom);
+                if (result != null)
+                    atoms_AreaC.Remove(result);
+                break;
+            case -2:
+                result = atoms_AreaC.Find(atom => atom.name == areaC2Atom);
+                if (result != null)
+                    atoms_AreaC.Remove(result);
+                break;
+            case -3:
+                result = atoms_AreaD.Find(atom => atom.name == areaD1Atom);
+                if (result != null)
+                    atoms_AreaD.Remove(result);
+                break;
+            case -4:
+                result = atoms_AreaD.Find(atom => atom.name == areaD2Atom);
+                if (result != null)
+                    atoms_AreaD.Remove(result);
+                break;
+            case 1:
+                result = atoms_Sell.Find(atom => atom.name == areaC1Atom);
+                if (result != null)
+                    atoms_AreaC.Add(result);
+                break;
+            case 2:
+                result = atoms_Sell.Find(atom => atom.name == areaC2Atom);
+                if (result != null)
+                    atoms_AreaC.Add(result);
+                break;
+            case 3:
+                result = atoms_Sell.Find(atom => atom.name == areaD1Atom);
+                if (result != null)
+                    atoms_AreaD.Add(result);
+                break;
+            case 4:
+                result = atoms_Sell.Find(atom => atom.name == areaD2Atom);
+                if (result != null)
+                    atoms_AreaD.Add(result);
+                break;
+        }
+        //更新顯示數量
+        int count_C1 = 0;
+        int count_C2 = 0;
+        int count_D1 = 0;
+        int count_D2 = 0;
+        foreach (Atom atom in atoms_AreaC)
+        {
+            if (atom.name == areaC1Atom)
+                count_C1++;
+            if (atom.name == areaC2Atom)
+                count_C2++;
+        }
+        if (count_C1 <= 0)
+        {
+            emptyBall_areaC1.SetActive(true);
+            atomBall_areaC1.SetActive(false);
+        }
+        else
+        {
+            emptyBall_areaC1.SetActive(false);
+            atomBall_areaC1.SetActive(true);
+            if (count_C1 == 1)
+            {
+                countText_areaC1.text = "";
+            }
+            else
+            {
+                countText_areaC1.text = count_C1.ToString();
+            }
+        }
+        if (count_C2 <= 0)
+        {
+            emptyBall_areaC2.SetActive(true);
+            atomBall_areaC2.SetActive(false);
+        }
+        else
+        {
+            emptyBall_areaC2.SetActive(false);
+            atomBall_areaC2.SetActive(true);
+            if (count_C2 == 1)
+            {
+                countText_areaC2.text = "";
+            }
+            else
+            {
+                countText_areaC2.text = count_C2.ToString();
+            }
+        }
+
+        foreach (Atom atom in atoms_AreaD)
+        {
+            if (atom.name == areaD1Atom)
+                count_D1++;
+            if (atom.name == areaD2Atom)
+                count_D2++;
+        }
+        if (count_D1 <= 0)
+        {
+            emptyBall_areaD1.SetActive(true);
+            atomBall_areaD1.SetActive(false);
+        }
+        else
+        {
+            emptyBall_areaD1.SetActive(false);
+            atomBall_areaD1.SetActive(true);
+            if (count_D1 == 1)
+            {
+                countText_areaD1.text = "";
+            }
+            else
+            {
+                countText_areaD1.text = count_D1.ToString();
+            }
+
+        }
+        if (count_D2 <= 0)
+        {
+            emptyBall_areaD2.SetActive(true);
+            atomBall_areaD2.SetActive(false);
+        }
+        else
+        {
+            emptyBall_areaD2.SetActive(false);
+            atomBall_areaD2.SetActive(true);
+            if (count_D2 == 1)
+            {
+                countText_areaD2.text = "";
+            }
+            else
+            {
+                countText_areaD2.text = count_D2.ToString();
+            }
+        }
+    }
+
     public void OnSubmitButtonClicked()
     {
         if(CheakAnswer(atomsAnswer_AreaA, atoms_AreaA)&& CheakAnswer(atomsAnswer_AreaB, atoms_AreaB)

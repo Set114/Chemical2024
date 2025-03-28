@@ -113,7 +113,9 @@ public class Tutorial_5_3 : MonoBehaviour
     {
         switch (Status)
         {
-            case 0: //等待葡萄糖倒入
+            case 0:
+                break;
+            case 1: //等待葡萄糖倒入
                 glucosePowderInWaterCurrent -= Time.deltaTime * glucoseMeltingSpeed;  //葡萄糖融化
                 //計算最小值，最後留指定比例作為沉澱物
                 glucosePowderInWaterCurrent = Mathf.Clamp(glucosePowderInWaterCurrent, glucosePowderInWaterAlready * glucoseUnmelting, 1f);
@@ -124,10 +126,10 @@ public class Tutorial_5_3 : MonoBehaviour
                 //濃度計算
                 concentration = Mathf.Lerp(concentrations[0], concentrations[1], glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting));
                 // 使用 Lerp 計算新的數值
-                valueA = Mathf.Lerp(valuesA[1], valuesA[2], GetValueA(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
+                valueA = Mathf.Lerp(valuesA[0], valuesA[1], GetValueA(glucosePowderInWaterMeltingAlready / glucoseUnmelting));
                 valueB = Mathf.Lerp(valuesB[1], valuesB[2], GetValueB(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
                 break;
-            case 1: //數值緩慢下降
+            case 2: //數值緩慢下降
                 glucosePowderInWaterCurrent -= Time.deltaTime * glucoseMeltingSpeed;  //葡萄糖融化
                 //計算最小值，最後留指定比例作為沉澱物
                 glucosePowderInWaterCurrent = Mathf.Clamp(glucosePowderInWaterCurrent, glucosePowderInWaterAlready * glucoseUnmelting, 1f);
@@ -152,7 +154,7 @@ public class Tutorial_5_3 : MonoBehaviour
                     Status++;
                 }
                 break;
-            case 2: //溶液達飽和
+            case 3: //溶液達飽和
 
                 break;
         }
@@ -169,6 +171,10 @@ public class Tutorial_5_3 : MonoBehaviour
     public void PourGlucosePowder()
     {
         if (Status == 0)
+        {
+            Status++;
+        }
+        if (Status == 1)
         {
             glucosePowderInWaterAlready += Time.deltaTime * glucosePourSpeed;
             glucosePowderInWaterCurrent += Time.deltaTime * glucosePourSpeed;
@@ -192,37 +198,6 @@ public class Tutorial_5_3 : MonoBehaviour
             }
         }
     }
-
-    /*
-    public void PourGlucosePowder()
-    {
-        if (Status == 0)
-        {
-            float size = glucosePowderInWater.transform.localScale.x;
-            size += Time.deltaTime * glucosePourSpeed;
-            size = Mathf.Clamp(size, 0f, 1f);
-            // 使用 Lerp 計算新的數值
-            valueA = Mathf.Lerp(valuesA[0], valuesA[1], size);
-            valueB = Mathf.Lerp(valuesB[0], valuesB[1], size);
-            concentration = Mathf.Lerp(concentrations[0], concentrations[1], size);
-
-            glucosePowderInWater.transform.localScale = new Vector3(size, size, size);
-            if (size >= 1f)
-            {
-                valueA = valuesA[1];
-                valueB = valuesB[1];
-                concentration = concentrations[1];
-                glucosePowder.SetActive(false);
-                glucosePowderInWater.SetActive(true);
-                particleSystem_glucose.SetActive(false);
-                timer = 0f;
-                moleculaManager.ShowMoleculas(2);
-                moleculaManager.PlayMoleculasAnimation();
-                Status++;
-            }
-        }
-    }
-    */
 
     float GetValueA(float percentage)
     {

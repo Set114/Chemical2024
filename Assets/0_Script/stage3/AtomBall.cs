@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AtomBall : MonoBehaviour
 {
     public bool isGrabbing = false;
     public bool isUsing = false;
+    public int count = 1;
+
+    public Text countText;
     private bool firstGrab = true;
     private Tutorial_3_1 tutorialObject;
     private Rigidbody myRb;
+
     private void Start()
     {
         tutorialObject = FindObjectOfType<Tutorial_3_1>();
         myRb= GetComponent<Rigidbody>();
         myRb.constraints = RigidbodyConstraints.FreezeAll;
+        SetAtomCount(1);
     }
 
     //抓取或鬆開時觸發
@@ -39,8 +44,21 @@ public class AtomBall : MonoBehaviour
     {
         if (other.CompareTag("TrashBin"))
         {
-            tutorialObject.AtomReturn(gameObject.name);
+            tutorialObject.AtomReturn(gameObject.name,count);
             Destroy(gameObject);
         }
+    }
+    public void SetAtomCount(int i)
+    {
+        count = i;
+        if (count > 1)
+        {
+            countText.text = count.ToString();
+        }
+        else
+        {
+            countText.text = "";
+        }
+
     }
 }
