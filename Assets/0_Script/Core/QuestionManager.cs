@@ -85,7 +85,8 @@ public class QuestionManager : MonoBehaviour
         AnswerCanvas.SetActive(false);
         MarkCorrect.SetActive(false);
         MarkWrong.SetActive(false);
-        button3.SetActive(false);
+        if(button3)
+            button3.SetActive(false);
         UI_Q_Question.text = questionContent.questionContent[currentIndex].question;
         UI_Q_Button01.text = questionContent.questionContent[currentIndex].answer0Text;
         UI_Q_Button02.text = questionContent.questionContent[currentIndex].answer1Text;
