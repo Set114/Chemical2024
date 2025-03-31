@@ -5889,6 +5889,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 500
   currCapacity: 300
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -5896,6 +5897,7 @@ MonoBehaviour:
   maxPourOutSpeed: 100
   injectFilter: 
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -5907,6 +5909,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &3872219141046265451
@@ -7855,6 +7860,18 @@ PrefabInstance:
     - target: {fileID: 1831944817, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831944818, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 789204465497917038, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619855315962730452, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 3619855315962730452, guid: 39bef1282b70ada4f85f17bcec5abcf4, type: 3}
       propertyPath: m_IsKinematic

@@ -126,7 +126,7 @@ public class Tutorial_5_3 : MonoBehaviour
                 //濃度計算
                 concentration = Mathf.Lerp(concentrations[0], concentrations[1], glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting));
                 // 使用 Lerp 計算新的數值
-                valueA = Mathf.Lerp(valuesA[0], valuesA[1], GetValueA(glucosePowderInWaterMeltingAlready / glucoseUnmelting));
+                valueA = Mathf.Lerp(valuesA[1], valuesA[2], GetValueA(glucosePowderInWaterMeltingAlready / glucoseUnmelting));
                 valueB = Mathf.Lerp(valuesB[1], valuesB[2], GetValueB(glucosePowderInWaterMeltingAlready / (1.0f - glucoseUnmelting)));
                 break;
             case 2: //數值緩慢下降

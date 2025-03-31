@@ -57,12 +57,14 @@ public class Tutorial_5_5 : MonoBehaviour
 
     private LevelObjManager levelObjManager;
     private HintManager hintManager;            //管理提示板
+    private MoleculaDisplay moleculaManager;    //管理分子螢幕
 
     // Start is called before the first frame update
     void Start()
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
         hintManager = FindObjectOfType<HintManager>();
+        moleculaManager = FindObjectOfType<MoleculaDisplay>();
 
         hintManager.gameObject.SetActive(true);
         hintManager.SwitchStep("T5_5_1");
@@ -80,6 +82,7 @@ public class Tutorial_5_5 : MonoBehaviour
         textB.text = valueB.ToString("0.00") + "mg/s";
         temperatureText.text = temperature.ToString("0.0");
         concentrationText.text = concentration.ToString("0.0");
+        moleculaManager.ShowMoleculas(4);
     }
 
     private void Update()
@@ -100,7 +103,6 @@ public class Tutorial_5_5 : MonoBehaviour
                 {
                     valueB = valuesB[1];
                     concentration = concentrations[1];
-                    hintManager.ShowNextButton(gameObject);
                     timer = 0f;
                     Status++;
                 }
@@ -147,6 +149,7 @@ public class Tutorial_5_5 : MonoBehaviour
                 Water.currCapacity = 400f;
                 Water100ml.currCapacity = 0f;
                 timer = 0f;
+                moleculaManager.PlayMoleculasAnimation();
                 Status++;
             }
         }

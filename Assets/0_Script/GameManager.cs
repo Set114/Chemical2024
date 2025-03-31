@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             SwitchToExamLevel();
         }
+        controlPanel.SetLessonListButton();
     }
 
     //  關卡開始------------可能要搬到上面

@@ -53,7 +53,6 @@ public class Tutorial_1_5 : MonoBehaviour
         switch (Status)
         {
             case 0: //等待點選酒精燈
-
                 break;
             case 1: //等待試管加熱
                 timer += Time.deltaTime;

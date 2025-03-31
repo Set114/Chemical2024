@@ -85,7 +85,7 @@ public class QuestionManager : MonoBehaviour
         AnswerCanvas.SetActive(false);
         MarkCorrect.SetActive(false);
         MarkWrong.SetActive(false);
-        if(button3)
+        if (button3 != null)
             button3.SetActive(false);
         UI_Q_Question.text = questionContent.questionContent[currentIndex].question;
         UI_Q_Button01.text = questionContent.questionContent[currentIndex].answer0Text;
@@ -114,7 +114,7 @@ public class QuestionManager : MonoBehaviour
             }
         }
 
-        if (button3)
+        if (button3 != null)
         {
             UI_Q_ButtonImage03.gameObject.SetActive(false);
             Sprite image03 = questionContent.questionContent[currentIndex].answer2Image;

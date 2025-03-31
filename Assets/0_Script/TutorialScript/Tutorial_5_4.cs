@@ -58,6 +58,7 @@ public class Tutorial_5_4 : MonoBehaviour
 
     private LevelObjManager levelObjManager;
     private AudioManager audioManager;          //音樂管理
+    private MoleculaDisplay moleculaManager;    //管理分子螢幕
     private HintManager hintManager;            //管理提示板
 
     // Start is called before the first frame update
@@ -65,6 +66,7 @@ public class Tutorial_5_4 : MonoBehaviour
     {
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
+        moleculaManager = FindObjectOfType<MoleculaDisplay>();
         hintManager = FindObjectOfType<HintManager>();
 
         hintManager.gameObject.SetActive(true);
@@ -83,6 +85,7 @@ public class Tutorial_5_4 : MonoBehaviour
         textB.text = valueB.ToString("0.00") + "mg/s";
         temperatureText.text = temperature.ToString("0.0");
         concentrationText.text = concentration.ToString("0.0");
+        moleculaManager.ShowMoleculas(3);
     }
 
     private void Update()
@@ -132,6 +135,7 @@ public class Tutorial_5_4 : MonoBehaviour
             cap.SetBool("cover", true);
             fire.SetActive(true);
             hintManager.SwitchStep("T5_4_2");
+            moleculaManager.PlayMoleculasAnimation();
             Status++;
         }
     }

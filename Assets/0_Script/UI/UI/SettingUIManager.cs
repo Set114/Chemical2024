@@ -67,13 +67,13 @@ public class SettingUIManager : MonoBehaviour
             {
                 studentname_txt.text = studentData;
                 studentid_txt.text = studentDataID;
-                chapterModeData = userDataManager.GetChapterMode();
             }
             else
             {
                 //Debug.Log("GameManager 實例的 studentData 為空。");
                 studentname_txt.text = "黃小美";
             }
+            chapterModeData = userDataManager.GetChapterMode();
         }
         else
         {
@@ -88,24 +88,6 @@ public class SettingUIManager : MonoBehaviour
         }
 
         BindButtonEvents();
-
-        lessonListButtons = new List<LessonListButton>();
-
-
-
-        foreach (DialogMapping data in questionManager.dialogContent.dialogContent)
-        {
-            LessonListButton btn = Instantiate(lessonListBtnPrefab, LearnBtns.transform).GetComponent<LessonListButton>();
-            lessonListButtons.Add(btn);
-            btn.SetLessonName(data.title);
-            int index = lessonListButtons.Count - 1;
-            btn.GetComponent<Button>().onClick.AddListener(() => OnLessonButtonClicked(index));
-
-            if (index >= gm.examIndex)
-            {
-                btn.transform.SetParent(TestBtns.transform);
-            }
-        }
     }
 
     private void BindButtonEvents()
@@ -134,6 +116,30 @@ public class SettingUIManager : MonoBehaviour
             modeButton_img.sprite = testMode_img;
             LearnBtns.SetActive(false);
             TestBtns.SetActive(true);
+        }
+    }
+    //設定關卡按鈕
+    public void SetLessonListButton()
+    {
+        foreach (GameObject btn in TestBtns.transform)
+        {
+            Destroy(btn);
+        }
+
+        lessonListButtons = new List<LessonListButton>();
+
+        foreach (DialogMapping data in questionManager.dialogContent.dialogContent)
+        {
+            LessonListButton btn = Instantiate(lessonListBtnPrefab, LearnBtns.transform).GetComponent<LessonListButton>();
+            lessonListButtons.Add(btn);
+            btn.SetLessonName(data.title);
+            int index = lessonListButtons.Count - 1;
+            btn.GetComponent<Button>().onClick.AddListener(() => OnLessonButtonClicked(index));
+
+            if (index >= gm.examIndex)
+            {
+                btn.transform.SetParent(TestBtns.transform);
+            }
         }
     }
 

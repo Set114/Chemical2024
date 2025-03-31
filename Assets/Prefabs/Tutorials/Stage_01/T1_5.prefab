@@ -48,7 +48,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 93626751169233855}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.03
   m_Height: 0.07
   m_Direction: 1
@@ -64,10 +64,10 @@ Rigidbody:
   m_Mass: 0.05
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &119400922978640740
 GameObject:
@@ -196,8 +196,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017550454035233316}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1, z: 0.7}
   m_Center: {x: 0, y: -0.33, z: 0}
@@ -36991,8 +36991,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7966672590792506233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.044}
-  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8644230308777145816}
@@ -37001,8 +37001,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.099533334, y: 0.07081}
-  m_SizeDelta: {x: 0.1, y: 0.14806}
+  m_AnchoredPosition: {x: -0.099533334, y: 0.06}
+  m_SizeDelta: {x: 0.03, y: 0.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7966672590792506236
 Canvas:
