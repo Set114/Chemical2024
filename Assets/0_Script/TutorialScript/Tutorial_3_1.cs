@@ -295,18 +295,15 @@ public class Tutorial_3_1 : MonoBehaviour
     }
 
     //回收原子
-    public void AtomReturn(string atomName, int count)
+    public void AtomReturn(string atomName)
     {
-        for (int i = 0; i < count; i++)
+        Atom result = atoms_Sell.Find(atom => atom.name == atomName);
+        if (result != null)
         {
-            Atom result = atoms_Sell.Find(atom => atom.name == atomName);
-            if (result != null)
-            {
-                myData.atoms_Buy.Add(result);
-                print("已回收：" + atomName);
-            }
-            SpawnAtom();
+            myData.atoms_Buy.Add(result);
+            print("已回收：" + atomName);
         }
+        SpawnAtom();
     }
 
 
@@ -330,7 +327,7 @@ public class Tutorial_3_1 : MonoBehaviour
         }
     }
 
-    public void Reaction(string area, string atomName, bool enter, int count)
+    public void Reaction(string area, string atomName, bool enter)
     {
         List<Atom> atoms = new List<Atom>();
 
@@ -352,33 +349,27 @@ public class Tutorial_3_1 : MonoBehaviour
 
         if (enter)
         {
-            for (int i = 0; i < count; i++)
+            Atom result = atoms_Sell.Find(atom => atom.name == atomName);
+            if (result != null)
             {
-                Atom result = atoms_Sell.Find(atom => atom.name == atomName);
-                if (result != null)
-                {
-                    atoms.Add(result);
-                    print(atomName + " 已放入：" + area);
-                }
+                atoms.Add(result);
+                print(atomName + " 已放入：" + area);
             }
         }
         else
         {
-            for (int i = 0; i < count; i++)
+            Atom result = atoms.Find(atom => atom.name == atomName);
+            if (result != null)
             {
-                Atom result = atoms.Find(atom => atom.name == atomName);
-                if (result != null)
-                {
-                    atoms.Remove(result);
-                    print("已取出：" + atomName);
-                }
-                else
-                {
-                    print("你沒有" + atomName + "可以取出");
-
-                }
+                atoms.Remove(result);
+                print("已取出：" + atomName);
             }
-        }
+            else
+            {
+                print("你沒有" + atomName + "可以取出");
+
+            }
+        }      
     }
 
     //標準答案跟玩家提交的答案做對比
@@ -586,8 +577,8 @@ public class Tutorial_3_1 : MonoBehaviour
 
     public void OnSubmitButtonClicked()
     {
-        if(CheakAnswer(atomsAnswer_AreaA, atoms_AreaA)&& CheakAnswer(atomsAnswer_AreaB, atoms_AreaB)
-            && CheakAnswer(atomsAnswer_AreaC, atoms_AreaC)&& CheakAnswer(atomsAnswer_AreaD, atoms_AreaD))
+        if (CheakAnswer(atomsAnswer_AreaA, atoms_AreaA) && CheakAnswer(atomsAnswer_AreaB, atoms_AreaB)
+            && CheakAnswer(atomsAnswer_AreaC, atoms_AreaC) && CheakAnswer(atomsAnswer_AreaD, atoms_AreaD))
         {
             correctPage.SetActive(true);
             workSpace.SetActive(false);
@@ -634,7 +625,6 @@ public class Tutorial_3_1 : MonoBehaviour
                 }
                 Destroy(atomObj);
             }
-
         }
     }
     public void OnNextLevelButtonClicked()

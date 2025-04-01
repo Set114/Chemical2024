@@ -406,7 +406,7 @@ public class MouseController : MonoBehaviour
                     break;
                 //------------Stage 3--------------
                 case "C":
-                case "F":
+                case "Fe":
                 case "H":
                 case "N":
                 case "O":
