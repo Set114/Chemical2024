@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,13 +49,17 @@ public class Tutorial_3_1 : MonoBehaviour
 
     [Space]
     [Tooltip("指定成品原子")]
-    [SerializeField] private string areaC1Atom, areaC2Atom, areaD1Atom, areaD2Atom;
-    [Tooltip("成品原子數量文字")]
-    [SerializeField] private Text countText_areaC1, countText_areaC2, countText_areaD1, countText_areaD2;
-    [Tooltip("成品原子半透明模型")]
-    [SerializeField] private GameObject emptyBall_areaC1, emptyBall_areaC2, emptyBall_areaD1, emptyBall_areaD2;
-    [Tooltip("成品原子模型")]
-    [SerializeField] private GameObject atomBall_areaC1, atomBall_areaC2, atomBall_areaD1, atomBall_areaD2;
+    [SerializeField] private List<Atom> areaCAtomSample, areaDAtomSample;
+    [Tooltip("指定成品原子Prefab")]
+    [SerializeField] private GameObject areaCAtomSamplePrefab, areaDAtomSamplePrefab;
+    [Tooltip("指定成品原子物件")]
+    [SerializeField] private List<GameObject> areaCAtomObjs, areaDAtomObjs;
+    [Tooltip("成品區域")]
+    [SerializeField] private Transform areaC, areaD;
+    [Tooltip("生成範圍最小、最大點")]
+    [SerializeField] private Vector3 spawnAreaCMin, spawnAreaCMax;
+    [Tooltip("生成範圍最小、最大點")]
+    [SerializeField] private Vector3 spawnAreaDMin, spawnAreaDMax;
 
     private int count_C = 0;
     private int count_O = 0;
@@ -436,142 +438,67 @@ public class Tutorial_3_1 : MonoBehaviour
     //變更成品的原子數量
     public void OnAreaCDButtonClicked(int index)
     {
-        Atom result;
+        Vector3 spawnPosition;
+        GameObject atomObj;
         switch (index)
         {
-            case -1:
-                result = atoms_AreaC.Find(atom => atom.name == areaC1Atom);
-                if (result != null)
-                    atoms_AreaC.Remove(result);
-                break;
-            case -2:
-                result = atoms_AreaC.Find(atom => atom.name == areaC2Atom);
-                if (result != null)
-                    atoms_AreaC.Remove(result);
-                break;
-            case -3:
-                result = atoms_AreaD.Find(atom => atom.name == areaD1Atom);
-                if (result != null)
-                    atoms_AreaD.Remove(result);
-                break;
-            case -4:
-                result = atoms_AreaD.Find(atom => atom.name == areaD2Atom);
-                if (result != null)
-                    atoms_AreaD.Remove(result);
-                break;
-            case 1:
-                result = atoms_Sell.Find(atom => atom.name == areaC1Atom);
-                if (result != null)
-                    atoms_AreaC.Add(result);
-                break;
-            case 2:
-                result = atoms_Sell.Find(atom => atom.name == areaC2Atom);
-                if (result != null)
-                    atoms_AreaC.Add(result);
-                break;
-            case 3:
-                result = atoms_Sell.Find(atom => atom.name == areaD1Atom);
-                if (result != null)
-                    atoms_AreaD.Add(result);
-                break;
-            case 4:
-                result = atoms_Sell.Find(atom => atom.name == areaD2Atom);
-                if (result != null)
-                    atoms_AreaD.Add(result);
-                break;
-        }
-        //更新顯示數量
-        int count_C1 = 0;
-        int count_C2 = 0;
-        int count_D1 = 0;
-        int count_D2 = 0;
-        foreach (Atom atom in atoms_AreaC)
-        {
-            if (atom.name == areaC1Atom)
-                count_C1++;
-            if (atom.name == areaC2Atom)
-                count_C2++;
-        }
-        if (count_C1 <= 0)
-        {
-            emptyBall_areaC1.SetActive(true);
-            atomBall_areaC1.SetActive(false);
-        }
-        else
-        {
-            emptyBall_areaC1.SetActive(false);
-            atomBall_areaC1.SetActive(true);
-            if (count_C1 == 1)
-            {
-                countText_areaC1.text = "";
-            }
-            else
-            {
-                countText_areaC1.text = count_C1.ToString();
-            }
-        }
-        if (count_C2 <= 0)
-        {
-            emptyBall_areaC2.SetActive(true);
-            atomBall_areaC2.SetActive(false);
-        }
-        else
-        {
-            emptyBall_areaC2.SetActive(false);
-            atomBall_areaC2.SetActive(true);
-            if (count_C2 == 1)
-            {
-                countText_areaC2.text = "";
-            }
-            else
-            {
-                countText_areaC2.text = count_C2.ToString();
-            }
-        }
+            case -1:    //C-
+                foreach (Atom atom in areaCAtomSample)
+                {
+                    atoms_AreaC.Remove(atom);
+                }
 
-        foreach (Atom atom in atoms_AreaD)
-        {
-            if (atom.name == areaD1Atom)
-                count_D1++;
-            if (atom.name == areaD2Atom)
-                count_D2++;
-        }
-        if (count_D1 <= 0)
-        {
-            emptyBall_areaD1.SetActive(true);
-            atomBall_areaD1.SetActive(false);
-        }
-        else
-        {
-            emptyBall_areaD1.SetActive(false);
-            atomBall_areaD1.SetActive(true);
-            if (count_D1 == 1)
-            {
-                countText_areaD1.text = "";
-            }
-            else
-            {
-                countText_areaD1.text = count_D1.ToString();
-            }
+                if (areaCAtomObjs.Count > 0)
+                {
+                    atomObj = areaCAtomObjs[areaCAtomObjs.Count - 1]; // 取得最後一個物件
+                    areaCAtomObjs.RemoveAt(areaCAtomObjs.Count - 1); // 從 List 移除
+                    Destroy(atomObj); // 銷毀遊戲物件
+                }
+                break;
+            case -2:    //D-
+                foreach (Atom atom in areaDAtomSample)
+                {
+                    atoms_AreaD.Remove(atom);
+                }
 
-        }
-        if (count_D2 <= 0)
-        {
-            emptyBall_areaD2.SetActive(true);
-            atomBall_areaD2.SetActive(false);
-        }
-        else
-        {
-            emptyBall_areaD2.SetActive(false);
-            atomBall_areaD2.SetActive(true);
-            if (count_D2 == 1)
-            {
-                countText_areaD2.text = "";
-            }
-            else
-            {
-                countText_areaD2.text = count_D2.ToString();
-            }
+                if (areaDAtomObjs.Count > 0)
+                {
+                    atomObj = areaDAtomObjs[areaDAtomObjs.Count - 1]; // 取得最後一個物件
+                    areaDAtomObjs.RemoveAt(areaDAtomObjs.Count - 1); // 從 List 移除
+                    Destroy(atomObj); // 銷毀遊戲物件
+                }
+                break;
+            case 1:    //C+
+                foreach (Atom atom in areaCAtomSample)
+                {
+                    atoms_AreaC.Add(atom);
+                }
+                spawnPosition = new Vector3(
+                    UnityEngine.Random.Range(spawnAreaCMin.x, spawnAreaCMax.x),
+                    UnityEngine.Random.Range(spawnAreaCMin.y, spawnAreaCMax.y),
+                    UnityEngine.Random.Range(spawnAreaCMin.z, spawnAreaCMax.z));      
+
+                atomObj = Instantiate(areaCAtomSamplePrefab);
+                atomObj.transform.SetParent(areaC);
+                atomObj.transform.localPosition = spawnPosition;
+                areaCAtomObjs.Add(atomObj);
+                break;
+            case 2:    //D+
+                foreach (Atom atom in areaDAtomSample)
+                {
+                    atoms_AreaD.Add(atom);
+                }
+                spawnPosition = new Vector3(
+                    UnityEngine.Random.Range(spawnAreaDMin.x, spawnAreaDMax.x),
+                    UnityEngine.Random.Range(spawnAreaDMin.y, spawnAreaDMax.y),
+                    UnityEngine.Random.Range(spawnAreaDMin.z, spawnAreaDMax.z));
+
+                atomObj = Instantiate(areaDAtomSamplePrefab);
+                atomObj.transform.SetParent(areaD);
+                atomObj.transform.localPosition = spawnPosition;
+
+                areaDAtomObjs.Add(atomObj);
+                break;
         }
     }
 
@@ -626,6 +553,8 @@ public class Tutorial_3_1 : MonoBehaviour
                 Destroy(atomObj);
             }
         }
+        atoms_AreaA = new List<Atom>();
+        atoms_AreaB = new List<Atom>();
     }
     public void OnNextLevelButtonClicked()
     {

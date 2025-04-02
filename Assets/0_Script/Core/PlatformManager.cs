@@ -38,7 +38,20 @@ public class PlatformManager : MonoBehaviour
     public void OnConfirmButtonClicked()
     {
         if (gm)
-            gm.enabled = true;
+        {
+            if (gm.currStage == 3)
+            {
+                Stage3TutorialUI stage3Tutorial = FindObjectOfType<Stage3TutorialUI>();
+                if (stage3Tutorial)
+                    stage3Tutorial.enabled = true;
+            }
+            else
+            {
+                gm.enabled = true;
+            }
+
+        }
+
         if (tutorialUI_pc)
             tutorialUI_pc.SetActive(false);
         if (tutorialUI_vr)

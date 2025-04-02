@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("預設關卡一開始是教學模式，0 = 教學 ，1 = 測驗")]
     private int gameMode = 0;
     [Tooltip("目前單元，需手動輸入")]
-    [SerializeField] private int currStage = 0;
+    public int currStage = 0;
     [Tooltip("目前關卡")]
     public int currLevel = 0;   //這個直接開放給其他物件使用，要正式一點就設定只能讀取
     [Tooltip("輸入測驗的第一個UI在第幾個levelUIs")]
