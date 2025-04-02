@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Drawing;
 
 //  負責管理題目介面
 public class QuestionManager : MonoBehaviour
@@ -27,6 +28,10 @@ public class QuestionManager : MonoBehaviour
     [Header("結束UI")]
     [Tooltip("教學結束介面")] [SerializeField] GameObject finishLearnCanvas;
     [Tooltip("測驗結束介面")] [SerializeField] GameObject finishExamCanvas;
+    [Tooltip("分數文字")][SerializeField] Text scoreText;
+    [Tooltip("答案文字")][SerializeField] Text answerText;
+    [Tooltip("已提交答案")][SerializeField] List<string> submittedAnswers;
+    [Tooltip("已提交答案是否正確")][SerializeField] List<bool> submittedCorrectly;
 
     int currentIndex;   //紀錄目前的編號
     bool isAnswer = false;  //紀錄是否已經答題，防呆用
@@ -58,6 +63,14 @@ public class QuestionManager : MonoBehaviour
         questionCanvas.SetActive(false);
         finishLearnCanvas.SetActive(false);
         finishExamCanvas.SetActive(false);
+        submittedAnswers = new List<string>();
+        submittedCorrectly = new List<bool>();
+
+        foreach(QuestionMapping question in questionContent.questionContent)
+        {
+            submittedAnswers.Add("未回答");
+            submittedCorrectly.Add(false);
+        }
     }
     //  顯示章節提問
     public void ShowQuestion(int index)
@@ -181,6 +194,7 @@ public class QuestionManager : MonoBehaviour
             {
                 audioManager.Stop();
                 audioManager.PlaySound(new SoundMessage(2, null, this.gameObject));
+                submittedCorrectly[currentIndex] = true;
             }
             else //答錯直接講解
             {
@@ -188,8 +202,21 @@ public class QuestionManager : MonoBehaviour
                 AnswerCanvas.SetActive(true);
                 MarkWrong.SetActive(true);
                 audioManager.PlayVoice(questionContent.questionContent[currentIndex].voiceAnswerName);
+                submittedCorrectly[currentIndex] = false;
                 if (!isPC)
                     TriggerHapticFeedback();
+            }
+            switch (answerNumber)
+            {
+                case 0:
+                    submittedAnswers[currentIndex] = questionContent.questionContent[currentIndex].answer0Text;
+                    break;
+                case 1:
+                    submittedAnswers[currentIndex] = questionContent.questionContent[currentIndex].answer1Text;
+                    break;
+                case 2:
+                    submittedAnswers[currentIndex] = questionContent.questionContent[currentIndex].answer2Text;
+                    break;
             }
         }
     }
@@ -226,15 +253,25 @@ public class QuestionManager : MonoBehaviour
     //結束測驗後，開啟選單
     public void ShowFinishExamUI()
     {
+        int correct = 0;
+        string answer = "";
+        for (int i = 0; i < questionContent.questionContent.Length; i++)
+        {
+            if (submittedCorrectly[i] == true)
+            {
+                correct++;
+                answer += (i + 1) + "." + submittedAnswers[i] + "\n";
+            }
+            else
+            {
+                answer += "<color=red>" + (i + 1) + "." + submittedAnswers[i] + "</color>\n";
+            }
+        }
+
+        float score = ((float)correct / (float)questionContent.questionContent.Length) * 100f;
+        scoreText.text = score.ToString("0")+"分";
+        answerText.text = answer;
         finishExamCanvas.SetActive(true);
-    }
-
-
-    //  切換關卡結束介面
-    public void SwitchLevelClearUI(bool isLearn)
-    {
-        finishLearnCanvas.SetActive(isLearn);
-        finishExamCanvas.SetActive(!isLearn);
     }
 
     //  按下確認按鈕

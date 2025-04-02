@@ -49,9 +49,7 @@ public class PlatformManager : MonoBehaviour
             {
                 gm.enabled = true;
             }
-
         }
-
         if (tutorialUI_pc)
             tutorialUI_pc.SetActive(false);
         if (tutorialUI_vr)
