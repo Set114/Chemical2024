@@ -16,17 +16,21 @@ public class Shine_GM : MonoBehaviour
     public GameObject[] Infos;
 
     public GameObject VRMode, PCMode;
+    public GameObject VRTeachMode, PCTeachMode;
     public DataInDevice DataInDeviceScript;
     private void Awake()
     {
 #if UNITY_STANDALONE_WIN
         VRMode.SetActive(false);
         PCMode.SetActive(true);
+        VRTeachMode.SetActive(false);
+        PCTeachMode.SetActive(true);
 #endif
 #if UNITY_ANDROID
         VRMode.SetActive(true);
 PCMode.SetActive(false);
-
+  VRTeachMode.SetActive(true);
+        PCTeachMode.SetActive(false);
 #endif
     }
     // Start is called before the first frame update
