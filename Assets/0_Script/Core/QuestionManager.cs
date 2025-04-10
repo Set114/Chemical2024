@@ -269,8 +269,10 @@ public class QuestionManager : MonoBehaviour
         }
 
         float score = ((float)correct / (float)questionContent.questionContent.Length) * 100f;
-        scoreText.text = score.ToString("0")+"分";
-        answerText.text = answer;
+        if (scoreText)
+            scoreText.text = score.ToString("0")+"分";
+        if (answerText)
+            answerText.text = answer;
         finishExamCanvas.SetActive(true);
     }
 

@@ -145,28 +145,24 @@ public class SettingUIManager : MonoBehaviour
 
     public void ChapterMode()
     {
-        int uidlevel = userDataManager.GetUid();
-        if (uidlevel != 3)
+        if (modeButton_img.sprite == learnMode_img)
         {
-            if (modeButton_img.sprite == learnMode_img)
-            {
-                modeButton_img.sprite = testMode_img;
-                chapterModeData = 1;
-                userDataManager.UpdateChapterMode(chapterModeData);
-                LearnBtns.SetActive(false);
-                TestBtns.SetActive(true);
-                gm.SwitchToExamLevel();
+            modeButton_img.sprite = testMode_img;
+            chapterModeData = 1;
+            userDataManager.UpdateChapterMode(chapterModeData);
+            LearnBtns.SetActive(false);
+            TestBtns.SetActive(true);
+            gm.SwitchToExamLevel();
 
-            }
-            else if (modeButton_img.sprite == testMode_img)
-            {
-                modeButton_img.sprite = learnMode_img;
-                chapterModeData = 0;
-                userDataManager.UpdateChapterMode(chapterModeData);
-                LearnBtns.SetActive(true);
-                TestBtns.SetActive(false);
-                RefreshScene();
-            }
+        }
+        else if (modeButton_img.sprite == testMode_img)
+        {
+            modeButton_img.sprite = learnMode_img;
+            chapterModeData = 0;
+            userDataManager.UpdateChapterMode(chapterModeData);
+            LearnBtns.SetActive(true);
+            TestBtns.SetActive(false);
+            RefreshScene();
         }
     }
 

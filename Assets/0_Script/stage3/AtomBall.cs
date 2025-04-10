@@ -13,22 +13,25 @@ public class AtomBall : MonoBehaviour
     private void Start()
     {
         tutorialObject = FindObjectOfType<Tutorial_3_1>();
-        myRb= GetComponent<Rigidbody>();
-        myRb.constraints = RigidbodyConstraints.FreezeAll;
+        myRb = GetComponent<Rigidbody>();
+        if (myRb)
+            myRb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     //抓取或鬆開時觸發
     public void Grab(bool isGrab)
     {
-        if (isGrab)
+        if (myRb)
         {
-            myRb.constraints = RigidbodyConstraints.FreezeAll;
+            if (isGrab)
+            {
+                myRb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+            else
+            {
+                myRb.constraints = RigidbodyConstraints.None;
+            }
         }
-        else
-        {
-            myRb.constraints = RigidbodyConstraints.None;
-        }
-
         isGrabbing = isGrab;
         if (isGrab && firstGrab)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class AtomDetection : MonoBehaviour
@@ -9,13 +10,24 @@ public class AtomDetection : MonoBehaviour
     {
         A, B, C, D
     }
-    [SerializeField] List<Transform> targetTransforms = new List<Transform>(); // 存放目標 Transform
+    [Tooltip("目標的原子")]
+    [SerializeField] private List<string> atoms_Target;
+    [Tooltip("目標的原子數量，超過就不再合成")]
+    [SerializeField] private int maxTargetCount;
+    [Tooltip("合成後的Prefab")]
+    [SerializeField] private GameObject resultPrefab;
+    [Tooltip("區域內的原子")]
+    [SerializeField] private List<GameObject> allAtoms;
+
+    [SerializeField] private float combineDistance = 0.5f;
+    [SerializeField] private float moveSpeed = 1f;
 
     private Tutorial_3_1 tutorialObject;
 
     private void Start()
     {
         tutorialObject = FindObjectOfType<Tutorial_3_1>();
+        allAtoms = new List<GameObject>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -27,10 +39,15 @@ public class AtomDetection : MonoBehaviour
             {
                 if (!atom.isUsing)
                 {
-                    PlaceObject(atom.transform);
+                    allAtoms.Add(atom.gameObject);
+                    TryCombine();
                     atom.isUsing = true;
                     tutorialObject.Reaction(area.ToString(), other.gameObject.name, true);
-                    other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    Rigidbody rb = other.GetComponent<Rigidbody>();
+                    if (rb)
+                    {
+                        rb.constraints = RigidbodyConstraints.FreezeAll;
+                    }
                 }
             }
         }
@@ -40,27 +57,114 @@ public class AtomDetection : MonoBehaviour
         AtomBall atom = other.GetComponent<AtomBall>();
         if (atom && atom.isUsing)
         {
+            allAtoms.Remove(atom.gameObject);
+            TryCombine();
             tutorialObject.Reaction(area.ToString(), atom.gameObject.name, false);
             //atom.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             atom.isUsing = false;
         }
     }
 
-    /// <summary>
-    /// 設定原子位置，若無匹配則隨機放置
-    /// </summary>
-    public void PlaceObject(Transform obj)
+    public void RemoveAllAtom()
     {
-        // 檢查名稱是否匹配，並確認該 Transform 沒有子物件
-        foreach (Transform target in targetTransforms)
+        allAtoms = new List<GameObject>();
+    }
+
+    private void TryCombine()
+    {
+        if (atoms_Target.Count <= 0)
+            return;
+
+        int count = 0;
+        foreach (GameObject obj in allAtoms)
         {
-            if (target.name == obj.name && target.childCount == 0)
-            {
-                obj.SetParent(target);
-                obj.localPosition = Vector3.zero; // 重置位置
-                return;
-            }
+            if (obj.name == resultPrefab.name)
+                count++;
         }
-        obj.SetParent(transform);
+        //超過目標的原子數量就不再合成
+        if (count >= maxTargetCount)
+            return;
+        List<GameObject> matchedObjects = FindMatchingObjects();
+
+        if (matchedObjects != null && matchedObjects.Count == atoms_Target.Count)
+        {
+            StartCoroutine(MoveTogetherAndCombine(matchedObjects));
+        }
+        else
+        {
+            Debug.Log("找不到符合條件的物件");
+        }
+    }
+    private List<GameObject> FindMatchingObjects()
+    {
+        // 複製一份條件名稱 List 來比對
+        List<string> needed = new List<string>(atoms_Target);
+        List<GameObject> matched = new List<GameObject>();
+
+        foreach (GameObject obj in allAtoms)
+        {
+            string objName = obj.name.Replace("(Clone)", "").Trim();
+
+            if (needed.Contains(objName))
+            {
+                matched.Add(obj);
+                needed.Remove(objName);
+            }
+
+            if (needed.Count == 0)
+                break;
+        }
+
+        return needed.Count == 0 ? matched : null;
+    }
+
+    private IEnumerator MoveTogetherAndCombine(List<GameObject> objectsToCombine)
+    {
+        Vector3 center = GetCenterPosition(objectsToCombine);
+        bool moving = true;
+
+        while (moving)
+        {
+            moving = false;
+
+            foreach (GameObject obj in objectsToCombine)
+            {
+                float dist = Vector3.Distance(obj.transform.position, center);
+                if (dist > combineDistance)
+                {
+                    Vector3 direction = (center - obj.transform.position).normalized;
+                    obj.transform.position += direction * moveSpeed * Time.deltaTime;
+                    moving = true;
+                }
+            }
+
+            yield return null;
+        }
+
+        // Combine 完成
+        Vector3 finalPos = GetCenterPosition(objectsToCombine);
+        GameObject result = Instantiate(resultPrefab, finalPos, Quaternion.identity);
+        result.name = result.name.Replace("(Clone)", "").Trim();
+
+        result.transform.SetParent(transform);
+
+        foreach (GameObject obj in objectsToCombine)
+        {
+            tutorialObject.Reaction(area.ToString(), obj.name, false);
+            allAtoms.Remove(obj);
+            Destroy(obj);
+        }
+
+        Debug.Log("合成完成！");
+    }
+
+    private Vector3 GetCenterPosition(List<GameObject> objs)
+    {
+        Vector3 sum = Vector3.zero;
+        foreach (GameObject obj in objs)
+        {
+            sum += obj.transform.position;
+        }
+        return sum / objs.Count;
     }
 }

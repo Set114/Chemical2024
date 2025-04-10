@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +49,7 @@ public class Tutorial_3_1 : MonoBehaviour
     countText_workH, countText_workFe;
 
     [Space]
+    //等號右側相關設定
     [Tooltip("指定成品原子")]
     [SerializeField] private List<Atom> areaCAtomSample, areaDAtomSample;
     [Tooltip("指定成品原子Prefab")]
@@ -60,6 +62,8 @@ public class Tutorial_3_1 : MonoBehaviour
     [SerializeField] private Vector3 spawnAreaCMin, spawnAreaCMax;
     [Tooltip("生成範圍最小、最大點")]
     [SerializeField] private Vector3 spawnAreaDMin, spawnAreaDMax;
+    [Tooltip("成品數量文字")]
+    [SerializeField] private Text areaC_CountText, areaD_CountText;
 
     private int count_C = 0;
     private int count_O = 0;
@@ -300,9 +304,47 @@ public class Tutorial_3_1 : MonoBehaviour
     public void AtomReturn(string atomName)
     {
         Atom result = atoms_Sell.Find(atom => atom.name == atomName);
+
         if (result != null)
         {
             myData.atoms_Buy.Add(result);
+            print("已回收：" + atomName);
+        }
+        else
+        {
+            switch (atomName)
+            {
+                case "N2":
+                    result = atoms_Sell.Find(atom => atom.name == "N");
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    break;
+                case "O2":
+                    result = atoms_Sell.Find(atom => atom.name == "O");
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    break;
+                case "H2":
+                    result = atoms_Sell.Find(atom => atom.name == "H");
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    break;
+                case "Fe2O3":
+                    result = atoms_Sell.Find(atom => atom.name == "Fe");
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    result = atoms_Sell.Find(atom => atom.name == "O");
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    myData.atoms_Buy.Add(result);
+                    break;
+                case "CO":
+                    result = atoms_Sell.Find(atom => atom.name == "C");
+                    myData.atoms_Buy.Add(result);
+                    result = atoms_Sell.Find(atom => atom.name == "O");
+                    myData.atoms_Buy.Add(result);
+                    break;
+            }
             print("已回收：" + atomName);
         }
         SpawnAtom();
@@ -357,6 +399,45 @@ public class Tutorial_3_1 : MonoBehaviour
                 atoms.Add(result);
                 print(atomName + " 已放入：" + area);
             }
+            else
+            {
+                switch (atomName)
+                {
+                    case "N2":
+                        result = atoms_Sell.Find(atom => atom.name == "N");
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        break;
+                    case "O2":
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        break;
+                    case "H2":
+                        result = atoms_Sell.Find(atom => atom.name == "H");
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        break;
+                    case "Fe2O3":
+                        result = atoms_Sell.Find(atom => atom.name == "Fe");
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        atoms.Add(result);
+                        break;
+                    case "CO":
+                        result = atoms_Sell.Find(atom => atom.name == "C");
+                        atoms.Add(result);
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Add(result);
+                        break;
+                }
+                print(atomName + " 已放入：" + area);
+                if (result == null)
+                    print("你沒有" + atomName + "可以取出"); ;
+            }
         }
         else
         {
@@ -368,8 +449,42 @@ public class Tutorial_3_1 : MonoBehaviour
             }
             else
             {
-                print("你沒有" + atomName + "可以取出");
-
+                switch (atomName)
+                {
+                    case "N2":
+                        result = atoms_Sell.Find(atom => atom.name == "N");
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        break;
+                    case "O2":
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        break;
+                    case "H2":
+                        result = atoms_Sell.Find(atom => atom.name == "H");
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        break;
+                    case "Fe2O3":
+                        result = atoms_Sell.Find(atom => atom.name == "Fe");
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        atoms.Remove(result);
+                        break;
+                    case "CO":
+                        result = atoms_Sell.Find(atom => atom.name == "C");
+                        atoms.Remove(result);
+                        result = atoms_Sell.Find(atom => atom.name == "O");
+                        atoms.Remove(result);
+                        break;
+                }
+                print("已取出：" + atomName);
+                if (result == null)
+                    print("你沒有" + atomName + "可以取出"); ;
             }
         }      
     }
@@ -454,6 +569,7 @@ public class Tutorial_3_1 : MonoBehaviour
                     areaCAtomObjs.RemoveAt(areaCAtomObjs.Count - 1); // 從 List 移除
                     Destroy(atomObj); // 銷毀遊戲物件
                 }
+                areaC_CountText.text = areaCAtomObjs.Count.ToString();
                 break;
             case -2:    //D-
                 foreach (Atom atom in areaDAtomSample)
@@ -467,6 +583,7 @@ public class Tutorial_3_1 : MonoBehaviour
                     areaDAtomObjs.RemoveAt(areaDAtomObjs.Count - 1); // 從 List 移除
                     Destroy(atomObj); // 銷毀遊戲物件
                 }
+                areaD_CountText.text = areaDAtomObjs.Count.ToString();
                 break;
             case 1:    //C+
                 foreach (Atom atom in areaCAtomSample)
@@ -482,6 +599,7 @@ public class Tutorial_3_1 : MonoBehaviour
                 atomObj.transform.SetParent(areaC);
                 atomObj.transform.localPosition = spawnPosition;
                 areaCAtomObjs.Add(atomObj);
+                areaC_CountText.text = areaCAtomObjs.Count.ToString();
                 break;
             case 2:    //D+
                 foreach (Atom atom in areaDAtomSample)
@@ -496,8 +614,8 @@ public class Tutorial_3_1 : MonoBehaviour
                 atomObj = Instantiate(areaDAtomSamplePrefab);
                 atomObj.transform.SetParent(areaD);
                 atomObj.transform.localPosition = spawnPosition;
-
                 areaDAtomObjs.Add(atomObj);
+                areaD_CountText.text = areaDAtomObjs.Count.ToString();
                 break;
         }
     }
@@ -552,6 +670,12 @@ public class Tutorial_3_1 : MonoBehaviour
                 }
                 Destroy(atomObj);
             }
+        }
+
+        AtomDetection[] atomDetections = FindObjectsOfType<AtomDetection>();
+        foreach (AtomDetection atomDetection in atomDetections)
+        {
+            atomDetection.RemoveAllAtom();
         }
         atoms_AreaA = new List<Atom>();
         atoms_AreaB = new List<Atom>();

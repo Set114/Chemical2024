@@ -160,6 +160,11 @@ public class MouseController : MonoBehaviour
                         case "H":
                         case "N":
                         case "O":
+                        case "N2":
+                        case "O2":
+                        case "H2":
+                        case "Fe2O3":
+                        case "CO":
                             planeDistance = 0.933f;
                             //selectedObject.GetComponent<Rigidbody>().isKinematic = true;
                             break;
@@ -410,6 +415,11 @@ public class MouseController : MonoBehaviour
                 case "H":
                 case "N":
                 case "O":
+                case "N2":
+                case "O2":
+                case "H2":
+                case "Fe2O3":
+                case "CO":
                     selectedObject.transform.parent = selectedObjectParent;
                     break;
                 //------------Stage 5--------------
