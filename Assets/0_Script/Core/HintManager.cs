@@ -74,6 +74,6 @@ public class HintManager : MonoBehaviour
     {
         nextButton.SetActive(false);
         hintPanel.SetActive(false);
-        Sender.SendMessage("CloseHint");
+        Sender.SendMessage("CloseHint", SendMessageOptions.DontRequireReceiver);
     }
 }
