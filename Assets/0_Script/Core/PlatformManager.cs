@@ -11,12 +11,14 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] private GameObject tutorialUI_vr;
 
     private GameManager gm;
+    private AudioManager audioManager;          //音樂管理
     bool isPC = false;
 
     // Start is called before the first frame update
     void Awake()
     {
         gm = GetComponent<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
 
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
         // �b�s�边���Ҷ}�Ҫ���
@@ -29,9 +31,25 @@ public class PlatformManager : MonoBehaviour
         vrController.SetActive(!isPC);
 
         if (tutorialUI_pc)
+        {
             tutorialUI_pc.SetActive(isPC);
+        }
         if (tutorialUI_vr)
+        {
             tutorialUI_vr.SetActive(!isPC);
+        }
+    }
+
+    private void Start()
+    {
+        if (isPC)
+        {
+            audioManager.PlayVoice("PC_Control");
+        }
+        else
+        {
+            audioManager.PlayVoice("VR_Control");
+        }
     }
 
     //按下操作教學確認按鈕

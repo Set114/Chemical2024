@@ -422,7 +422,7 @@ public class Tutorial_2_3 : MonoBehaviour
                     weightTextDisplay.text = scaleVale.ToString("0") + "g";
                     hintManager.SwitchStep("T2_3_8");
                     //播放洩氣音效
-
+                    audioManager.PlaySound(3);
                     Status++;
                 }
                 break;
