@@ -490,33 +490,23 @@ public class Tutorial_3_1 : MonoBehaviour
     }
 
     //標準答案跟玩家提交的答案做對比
-    private bool CheakAnswer(List<Atom> list1, List<Atom> list2)
+    private bool CheckAnswer(List<Atom> list1, List<Atom> list2)
     {
-        // 先檢查數量是否相同
-        //if (list1.Count != list2.Count) return false;
+        // 數量不同，直接 false
+        if (list1.Count != list2.Count) return false;
 
-        // 統計 list1 內每種名稱的數量
+        // 用名稱統計兩邊出現次數
         var list1Count = list1.GroupBy(a => a.name)
                               .ToDictionary(g => g.Key, g => g.Count());
 
-        // 統計 list2 內每種名稱的數量
         var list2Count = list2.GroupBy(a => a.name)
                               .ToDictionary(g => g.Key, g => g.Count());
 
-        // 檢查 list2 是否至少包含 list1 需要的種類與數量
-        foreach (var kvp in list1Count)
-        {
-            string atomName = kvp.Key;
-            int requiredCount = kvp.Value;
-
-            if (!list2Count.TryGetValue(atomName, out int availableCount) || availableCount < requiredCount)
-            {
-                return false; // 如果某種類在 list2 不足，直接回傳 false
-            }
-        }
-
-        return true; // list2 至少有 list1 需要的所有種類與數量
+        // 用 SequenceEqual 檢查兩邊的名稱與數量完全一致
+        return list1Count.OrderBy(kv => kv.Key)
+                         .SequenceEqual(list2Count.OrderBy(kv => kv.Key));
     }
+
     /*回收區塊內多餘的原子
     private void ExtraAtomsReturn(List<Atom> list1, List<Atom> list2)
     {
@@ -622,8 +612,8 @@ public class Tutorial_3_1 : MonoBehaviour
 
     public void OnSubmitButtonClicked()
     {
-        if (CheakAnswer(atomsAnswer_AreaA, atoms_AreaA) && CheakAnswer(atomsAnswer_AreaB, atoms_AreaB)
-            && CheakAnswer(atomsAnswer_AreaC, atoms_AreaC) && CheakAnswer(atomsAnswer_AreaD, atoms_AreaD))
+        if (CheckAnswer(atomsAnswer_AreaA, atoms_AreaA) && CheckAnswer(atomsAnswer_AreaB, atoms_AreaB)
+            && CheckAnswer(atomsAnswer_AreaC, atoms_AreaC) && CheckAnswer(atomsAnswer_AreaD, atoms_AreaD))
         {
             correctPage.SetActive(true);
             workSpace.SetActive(false);

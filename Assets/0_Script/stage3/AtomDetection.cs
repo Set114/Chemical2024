@@ -12,8 +12,6 @@ public class AtomDetection : MonoBehaviour
     }
     [Tooltip("目標的原子")]
     [SerializeField] private List<string> atoms_Target;
-    [Tooltip("目標的原子數量，超過就不再合成")]
-    [SerializeField] private int maxTargetCount;
     [Tooltip("合成後的Prefab")]
     [SerializeField] private GameObject resultPrefab;
     [Tooltip("區域內的原子")]
@@ -75,15 +73,6 @@ public class AtomDetection : MonoBehaviour
         if (atoms_Target.Count <= 0)
             return;
 
-        int count = 0;
-        foreach (GameObject obj in allAtoms)
-        {
-            if (obj.name == resultPrefab.name)
-                count++;
-        }
-        //超過目標的原子數量就不再合成
-        if (count >= maxTargetCount)
-            return;
         List<GameObject> matchedObjects = FindMatchingObjects();
 
         if (matchedObjects != null && matchedObjects.Count == atoms_Target.Count)
