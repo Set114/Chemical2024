@@ -96,7 +96,7 @@ public class Tutorial_1_5 : MonoBehaviour
     {
         if (Status > 0 && warningTestTube)
         {
-            audioManager.PlayVoice("W_Hot");
+            audioManager.PlayVoice("W_HotTube");
             warningTestTube = false;
         }
     }

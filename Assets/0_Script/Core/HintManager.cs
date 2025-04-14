@@ -56,6 +56,7 @@ public class HintManager : MonoBehaviour
     public void OnCloseBtnClicked()
     {
         hintPanel.SetActive(false);
+        nextButton.SetActive(false);
     }
 
     //  取得目前步驟
