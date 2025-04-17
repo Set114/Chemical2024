@@ -178,10 +178,13 @@ MonoBehaviour:
   Setting: {fileID: 0}
   LearnBtns: {fileID: 0}
   TestBtns: {fileID: 0}
+  Lesson_ListScroll: {fileID: 0}
   lessonListButtons: []
   lessonListBtnPrefab: {fileID: 0}
   bgmSlider: {fileID: 0}
   UIeffectSlider: {fileID: 0}
+  studentData: 
+  studentDataID: 
   chapterModeData: 0
 --- !u!114 &586625
 MonoBehaviour:
@@ -7214,6 +7217,50 @@ MonoBehaviour:
   unielf: 0
   ELF_1_1_Duration: 5
   unielfname: 
+--- !u!1 &1655916615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655916617}
+  - component: {fileID: 1655916616}
+  m_Layer: 0
+  m_Name: RecordExcel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1655916616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655916615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16adc44d9ffcaa341b9c6e58476412a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1655916617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655916615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669754203
 GameObject:
   m_ObjectHideFlags: 0
@@ -27148,7 +27195,7 @@ MonoBehaviour:
     volume: 1
     source: {fileID: 0}
   - name: E3_1_1
-    clip: {fileID: 8300000, guid: 8e3f0a989c0b67a49b270a871847b59a, type: 3}
+    clip: {fileID: 8300000, guid: ba835c4715afa4e6781195dccac2089a, type: 3}
     volume: 1
     source: {fileID: 0}
   - name: QA3_1
@@ -27655,9 +27702,9 @@ MonoBehaviour:
   hintPanel: {fileID: 4805565939683820460}
   tipsContent: {fileID: 11400000, guid: 715dac065232d434fb731fb0c299fbf5, type: 2}
   hintText: {fileID: 4805565939147562757}
+  hintStepText: {fileID: 0}
   minimizeButton: {fileID: 4805565940154965733}
   nextButton: {fileID: 4805565940277449749}
-  currStep: 0
 --- !u!224 &4805565939147562756
 RectTransform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Drawing;
+using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 
 //  負責管理題目介面
 public class QuestionManager : MonoBehaviour
@@ -189,6 +190,7 @@ public class QuestionManager : MonoBehaviour
         if (!isAnswer)  //防呆
         {
             isAnswer = true;
+            float score = (1 / (float)questionContent.questionContent.Length) * 100f;
             //答對先撥音效
             if (questionContent.questionContent[currentIndex].answerNumber == answerNumber)
             {
@@ -255,16 +257,21 @@ public class QuestionManager : MonoBehaviour
     {
         int correct = 0;
         string answer = "";
+        int stage = ((gm.currStage - 1) * 2) + gm.gameMode;
+        DataInDevice dataInDevice = FindObjectOfType<DataInDevice>();
         for (int i = 0; i < questionContent.questionContent.Length; i++)
         {
+            dataInDevice.SaveData[stage].Add(submittedAnswers[i]);
             if (submittedCorrectly[i] == true)
             {
                 correct++;
                 answer += (i + 1) + "." + submittedAnswers[i] + "\n";
+                dataInDevice.SaveData[stage].Add(((1 / (float)questionContent.questionContent.Length) * 100f).ToString("0"));
             }
             else
             {
                 answer += "<color=red>" + (i + 1) + "." + submittedAnswers[i] + "</color>\n";
+                dataInDevice.SaveData[stage].Add("0");
             }
         }
 
@@ -274,6 +281,7 @@ public class QuestionManager : MonoBehaviour
         if (answerText)
             answerText.text = answer;
         finishExamCanvas.SetActive(true);
+        dataInDevice.AddDataExcel(stage);
     }
 
     //  按下確認按鈕

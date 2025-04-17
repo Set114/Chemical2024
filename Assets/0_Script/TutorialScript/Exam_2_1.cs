@@ -50,6 +50,8 @@ public class Exam_2_1 : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
 
         hintManager.gameObject.SetActive(true);
+
+        hintManager.SetTotalStep(2);
         hintManager.SwitchStep("E2_1_1");
         ragMesh = rag.GetComponent<MeshRenderer>();
         rag.SetActive(false);

@@ -75,7 +75,6 @@ public class LevelObjManager : MonoBehaviour
         {
             case 0: //下一關
                 loading_sign.SetActive(true);
-                gm.LevelClear("我不知道這個Answer是啥"); // answer用意待確認
                 StartCoroutine(ShowFinishDialog());
                 break;
             case 1: //教學結束
@@ -87,6 +86,7 @@ public class LevelObjManager : MonoBehaviour
                 questionManager.ShowFinishExamUI();
                 break;
         }
+        gm.LevelClear();
     }
 
     //待移除
@@ -94,15 +94,7 @@ public class LevelObjManager : MonoBehaviour
     {
         //  播放最後的提示語音
         loading_sign.SetActive(true);
-
-        StartCoroutine(ShowHintDelay(answer));
-    }
-
-    IEnumerator ShowHintDelay(string answer)
-    {
-        yield return new WaitForSeconds(1f);
-        loading_sign.SetActive(false);
-        gm.LevelClear(answer);
+        //StartCoroutine(ShowHintDelay(answer));
     }
 
     IEnumerator ShowFinishDialog()

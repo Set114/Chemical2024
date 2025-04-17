@@ -70,6 +70,7 @@ public class Tutorial_2_2 : MonoBehaviour
     private float timer = 0;
     private int Status = 0;
 
+    private GameManager gm;
     private LevelObjManager levelObjManager;
     private AudioManager audioManager;          //音樂管理
     private HintManager hintManager;            //管理提示板
@@ -88,6 +89,7 @@ public class Tutorial_2_2 : MonoBehaviour
 #else
         isPC = false;
 #endif
+        gm = FindObjectOfType<GameManager>();
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
@@ -95,6 +97,7 @@ public class Tutorial_2_2 : MonoBehaviour
 
         hintManager.gameObject.SetActive(true);
 
+        hintManager.SetTotalStep(8);
         hintManager.SwitchStep("T2_2_1");
         kitchenScale.SetActive(false);
     }
@@ -116,6 +119,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (bottleAngle >= shakeThreshold)
                 {
                     audioManager.PlayVoice("W_BottleRotation");
+                    gm.GetMistake();
                     print("現在請勿傾倒寶特瓶。");
                     bottle.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
                     if (isPC)
@@ -317,6 +321,7 @@ public class Tutorial_2_2 : MonoBehaviour
             case "TestTube_2-2":
                 obj.SendMessage("Return", SendMessageOptions.DontRequireReceiver);
                 audioManager.PlayVoice("W_WrongLiquid");
+                gm.GetMistake();
                 break;
         }
     }
@@ -347,6 +352,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2" && obj.name != "SodiumCarbonate_2-2" && obj.name != "TestTube_2-2" && obj.name != "CalciumChloride_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -355,6 +361,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2" && obj.name != "Tweezers_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -363,6 +370,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -371,6 +379,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -379,6 +388,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -387,6 +397,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -395,6 +406,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -403,6 +415,7 @@ public class Tutorial_2_2 : MonoBehaviour
                 if (obj.name != "WaterBottle_2-2" && obj.name != "Cap_2-2")
                 {
                     audioManager.PlayVoice("W_WrongObject");
+                    gm.GetMistake();
                     if (isPC)
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
@@ -419,5 +432,6 @@ public class Tutorial_2_2 : MonoBehaviour
     void CloseHint()    //關閉提示視窗
     {
         levelObjManager.LevelClear(0);
+        hintManager.SetTotalStep(0);
     }
 }

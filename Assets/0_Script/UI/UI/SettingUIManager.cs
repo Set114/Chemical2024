@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static UnityEditor.PlayerSettings;
 
 public class SettingUIManager : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] Button logout_btn;
     [SerializeField] Button levlMenu_btn;
     [SerializeField] Button refresh_btn;
-
-
 
     [SerializeField] Button bgmMax_btn;
     [SerializeField] Button bgmMin_btn;    
@@ -38,6 +37,7 @@ public class SettingUIManager : MonoBehaviour
     [SerializeField] GameObject Setting;
     [SerializeField] GameObject LearnBtns;
     [SerializeField] GameObject TestBtns;
+    [SerializeField] ScrollRect Lesson_ListScroll;
     [SerializeField] private List<LessonListButton> lessonListButtons;
     [SerializeField] private GameObject lessonListBtnPrefab;
 
@@ -45,8 +45,8 @@ public class SettingUIManager : MonoBehaviour
     public Slider bgmSlider;
     public Slider UIeffectSlider;
 
-    private string studentData;
-    private string studentDataID;
+    public string studentData;
+    public string studentDataID;
     public int chapterModeData = 0;
 
     private GameManager gm;
@@ -72,6 +72,9 @@ public class SettingUIManager : MonoBehaviour
             {
                 //Debug.Log("GameManager 實例的 studentData 為空。");
                 studentname_txt.text = "黃小美";
+                studentData = "黃小美";
+                studentid_txt.text = "123456";
+                studentDataID = "123456";
             }
             chapterModeData = userDataManager.GetChapterMode();
         }
@@ -79,8 +82,11 @@ public class SettingUIManager : MonoBehaviour
         {
             //Debug.Log("GameManager 實例為空。");
             studentname_txt.text = "黃小美";
+            studentData = "黃小美";
+            studentid_txt.text = "123456";
+            studentDataID = "123456";
         }
-
+        
         // 學習模式切換
         if (modeButton_img != null)
         {
@@ -121,9 +127,9 @@ public class SettingUIManager : MonoBehaviour
     //設定關卡按鈕
     public void SetLessonListButton()
     {
-        foreach (GameObject btn in TestBtns.transform)
+        foreach (Transform child in TestBtns.transform)
         {
-            Destroy(btn);
+            Destroy(child.gameObject);
         }
 
         lessonListButtons = new List<LessonListButton>();
@@ -147,23 +153,35 @@ public class SettingUIManager : MonoBehaviour
     {
         if (modeButton_img.sprite == learnMode_img)
         {
-            modeButton_img.sprite = testMode_img;
             chapterModeData = 1;
             userDataManager.UpdateChapterMode(chapterModeData);
-            LearnBtns.SetActive(false);
-            TestBtns.SetActive(true);
             gm.SwitchToExamLevel();
-
         }
-        else if (modeButton_img.sprite == testMode_img)
+        else if(modeButton_img.sprite == testMode_img)
         {
-            modeButton_img.sprite = learnMode_img;
             chapterModeData = 0;
             userDataManager.UpdateChapterMode(chapterModeData);
+            gm.SwitchToLearnLevel();
+        }
+        UpdatePanelButtons();
+    }
+
+    public void UpdatePanelButtons()
+    {
+        chapterModeData = userDataManager.chapterMode;
+        if (chapterModeData == 1)
+        {
+            modeButton_img.sprite = testMode_img;
+            LearnBtns.SetActive(false);
+            TestBtns.SetActive(true);
+        }
+        else
+        {
+            modeButton_img.sprite = learnMode_img;
             LearnBtns.SetActive(true);
             TestBtns.SetActive(false);
-            RefreshScene();
         }
+        SetLessonListButton();
     }
 
     public void OnLessonButtonClicked(int level)
@@ -176,6 +194,7 @@ public class SettingUIManager : MonoBehaviour
     {
         Account.SetActive(false);
         Lesson_List.SetActive(true);
+        Lesson_ListScroll.verticalNormalizedPosition = 1f;
     }
 
     public void LessonList_Close()
@@ -226,7 +245,6 @@ public class SettingUIManager : MonoBehaviour
             modeButton_img.sprite = testMode_img;
             chapterModeData = 1;
             userDataManager.UpdateChapterMode(chapterModeData);
-
         }
         else if (modeButton_img.sprite == testMode_img)
         {
@@ -235,6 +253,7 @@ public class SettingUIManager : MonoBehaviour
             userDataManager.UpdateChapterMode(chapterModeData);
         }
     }
+
     public void SetStageText(string stage)
     {
         stage_txt.text = stage;

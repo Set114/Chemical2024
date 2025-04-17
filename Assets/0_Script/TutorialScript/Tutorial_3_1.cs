@@ -644,6 +644,7 @@ public class Tutorial_3_1 : MonoBehaviour
                     break;
             }
             questionManager.TriggerHapticFeedback();
+            gm.GetMistake();
         }
         //移除提交的原子球
         AtomBall[] atoms = FindObjectsOfType<AtomBall>();

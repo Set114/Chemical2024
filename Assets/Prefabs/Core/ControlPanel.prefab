@@ -3039,7 +3039,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -21.948, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.33200073, y: 1.0209045}
+  m_AnchoredPosition: {x: -0.33203125, y: 1.020874}
   m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3693480030853997582
@@ -3076,10 +3076,13 @@ MonoBehaviour:
   Setting: {fileID: 3693480029906192788}
   LearnBtns: {fileID: 3693480030241144790}
   TestBtns: {fileID: 3693480030772959964}
+  Lesson_ListScroll: {fileID: 3693480030886937103}
   lessonListButtons: []
   lessonListBtnPrefab: {fileID: 2283282918032861285, guid: 4710a0bc8686b47208df0ecd551bb095, type: 3}
   bgmSlider: {fileID: 3693480030006773770}
   UIeffectSlider: {fileID: 3693480030016028083}
+  studentData: 
+  studentDataID: 
   chapterModeData: 0
 --- !u!223 &3693480030853997581
 Canvas:
@@ -3125,7 +3128,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3693480030853997571
 MonoBehaviour:
   m_ObjectHideFlags: 0

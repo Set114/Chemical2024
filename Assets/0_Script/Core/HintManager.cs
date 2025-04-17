@@ -10,11 +10,12 @@ public class HintManager : MonoBehaviour
     [Tooltip("提示板")] [SerializeField] GameObject hintPanel;
     [Tooltip("提示訊息")] [SerializeField] TipsData tipsContent;
     [SerializeField] Text hintText;
+    [SerializeField] Text hintStepText;
     [Tooltip("縮小按鈕")] [SerializeField] GameObject minimizeButton;
     [Tooltip("結束按鈕")] [SerializeField] GameObject nextButton;
 
-    [Tooltip("目前步驟")]
-    [SerializeField] private int currStep = 1;
+    private int currStep = 0;
+    private int totalStep = 0;
 
     AudioManager audioManager;          //音樂管理
     GameObject Sender;
@@ -25,6 +26,8 @@ public class HintManager : MonoBehaviour
         hintPanel.SetActive(false);
         minimizeButton.SetActive(false);
         nextButton.SetActive(false);
+        if (hintStepText != null)
+            hintStepText.text = "";
     }
 
     //  切換步驟
@@ -41,28 +44,35 @@ public class HintManager : MonoBehaviour
 
         hintText.text = t.content;
         audioManager.PlayVoice(chapterName);
+        if (totalStep > 0)
+        {
+            currStep++;
+            SetStepText(currStep);
+        }
     }
-
-    /* 感覺完全沒用到的功能
-    //按下確認按鈕
-    public void OnConfirmBtnClicked()
-    {
-        CloseHintPanel();
-        gm.LevelStart();
-    }
-    */
 
     //  按下關閉按鈕
     public void OnCloseBtnClicked()
     {
         hintPanel.SetActive(false);
         nextButton.SetActive(false);
+        if (hintStepText != null)
+            hintStepText.text = "";
     }
 
-    //  取得目前步驟
-    public int GetCurrStep()
+    //設定步驟文字
+    public void SetStepText(int step)
     {
-        return currStep;
+        if (hintStepText == null)
+            return;
+        currStep = step;
+        hintStepText.text = currStep + " / " + totalStep;
+    }
+    //設定步驟文字
+    public void SetTotalStep(int step)
+    {
+        currStep = 0;
+        totalStep = step;
     }
 
     public void ShowNextButton(GameObject sender)

@@ -74,6 +74,7 @@ public class Exam_2_3 : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
 
         hintManager.gameObject.SetActive(true);
+        hintManager.SetTotalStep(5);
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
         weightTextDisplay.text = "0g";

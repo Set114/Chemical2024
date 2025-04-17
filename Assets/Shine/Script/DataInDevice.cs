@@ -20,7 +20,7 @@ public class DataInDevice : MonoBehaviour
     private readonly string[] sSheetName = { "單元一 教學", "單元一 測驗", "單元二 教學", "單元二 測驗", 
         "單元三 教學", "單元三 測驗", "單元四 教學", "單元四 測驗", "單元五 教學", "單元五 測驗", "單元六 教學", "單元六 測驗"};
     private readonly int[] iSheetUnit = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
-    private readonly int[] iSheetSet = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 5 };
+    private readonly int[] iSheetSet = { 6, 5, 3, 5, 1, 5, 5, 5, 5, 1, 3, 5 };
     private void Awake()
     {
         // 初始化並清空每個 List<string>
@@ -64,6 +64,12 @@ public class DataInDevice : MonoBehaviour
     {
         // 教學與測驗除學號與姓名之外標題不同，教學有開始時間、結束時間、次數，測驗有得分、答案。
         int headerCount = isTeach ? iSets * 3 + 2 : iSets * 2 + 2;
+        //  客製化單元三測驗格式
+        if (!isTeach && iUnit == 3)
+        {
+            headerCount = iSets * 3 + 2;
+        }
+
         for (int i = 0; i < headerCount; i++)
             worksheet.Cells[1, i + 1].Value = GetHeaders(iUnit, i, isTeach);
     }
@@ -75,15 +81,37 @@ public class DataInDevice : MonoBehaviour
         {
             int iQuotient = (headerIndex - 2) / 3 + 1;
             int iRemainder = (headerIndex - 2) % 3;
-            if (iRemainder == 0)                return $"{iUnit}-{iQuotient}開始";
-            else if (iRemainder == 1)           return $"{iUnit}-{iQuotient}結束";
-            else                                return $"{iUnit}-{iQuotient}次數";
+            if (iRemainder == 0) return $"{iUnit}-{iQuotient}開始";
+            else if (iRemainder == 1) return $"{iUnit}-{iQuotient}結束";
+            else
+            {
+                if (iUnit == 2)
+                {
+                    return $"{iUnit}-{iQuotient}操作錯誤次數";
+                }
+                else
+                {
+                    return $"{iUnit}-{iQuotient}次數";
+                }
+            }
         }
         else
         {
-            int iQuotient = headerIndex / 2;
-            if (headerIndex % 2 == 1)   return $"{iUnit}-{iQuotient}得分";
-            else                        return $"{iUnit}-{iQuotient}答案";
+            if(iUnit == 3)
+            {
+                //  客製化單元三測驗格式
+                int iQuotient = (headerIndex - 2) / 3 + 1;
+                int iRemainder = (headerIndex - 2) % 3;
+                if (iRemainder == 0) return $"{iUnit}-{iQuotient}開始";
+                else if (iRemainder == 1) return $"{iUnit}-{iQuotient}結束";
+                else return $"{iUnit}-{iQuotient}次數";
+            }
+            else
+            {
+                int iQuotient = headerIndex / 2;
+                if (headerIndex % 2 == 1) return $"{iUnit}-{iQuotient}得分";
+                else return $"{iUnit}-{iQuotient}答案";
+            }
         }
     }
     //在其他單元中，呼叫這個函式以增加資料(資料用字串陣列傳入)
@@ -106,7 +134,12 @@ public class DataInDevice : MonoBehaviour
         int newRow = worksheet.Dimension.End.Row + 1; // 新的列數，必須在最後一列的基礎上+1
         for (int col = 0; col <= worksheet.Dimension.End.Column - 1; col++) // 總共有多少資料要填寫：學校+班級+姓名... 
         {
-            worksheet.Cells[newRow, col + 1].Value = SaveData[tabIndex][col]; // 填入資料
+            //確認 col 沒有超出 SaveData[tabIndex] 的長度
+            if (SaveData[tabIndex] != null && col >= 0 && col < SaveData[tabIndex].Count)
+            {
+                if (SaveData[tabIndex][col] != null)
+                    worksheet.Cells[newRow, col + 1].Value = SaveData[tabIndex][col]; // 填入資料
+            }
         }
         // 保存變更 
         package.Save();

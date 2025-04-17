@@ -27,6 +27,7 @@ public class Exam_5_1 : MonoBehaviour
     private float timer = 0f;
     private int Status = 0;
 
+    private GameManager gm;
     private LevelObjManager levelObjManager;
     private QuestionManager questionManager;    //管理題目介面
     private AudioManager audioManager;
@@ -36,6 +37,7 @@ public class Exam_5_1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         levelObjManager = FindObjectOfType<LevelObjManager>();
         questionManager = FindObjectOfType<QuestionManager>();
         audioManager = FindObjectOfType<AudioManager>();
@@ -142,6 +144,7 @@ public class Exam_5_1 : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         questionManager.TriggerHapticFeedback();
+        gm.GetMistake();
         foreach (Card card in cardComparison)
         {
             card.FlipCard();

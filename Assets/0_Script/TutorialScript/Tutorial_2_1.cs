@@ -81,6 +81,8 @@ public class Tutorial_2_1 : MonoBehaviour
         hintManager = FindObjectOfType<HintManager>();
 
         hintManager.gameObject.SetActive(true);
+
+        hintManager.SetTotalStep(2);
         hintManager.SwitchStep("T2_1_1");
 
         fire_woodPowder.Stop();
