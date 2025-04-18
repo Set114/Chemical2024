@@ -243,9 +243,9 @@ public class QuestionManager : MonoBehaviour
     //結束該問題
     public void OnNextButtonClicked()
     {
+        audioManager.Stop();
         AnswerCanvas.SetActive(false);
         sender.SendMessage("FinishExam");
-        audioManager.Stop();
     }
 
     //結束教學後，開啟選單
