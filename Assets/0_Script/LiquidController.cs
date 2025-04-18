@@ -182,7 +182,6 @@ public class LiquidController : MonoBehaviour
             if (pourInto != injectFilter)
             {
                 _whenInjectWrongLiquid.Invoke();
-                print("wrong inject");
                 return;
             }
         }

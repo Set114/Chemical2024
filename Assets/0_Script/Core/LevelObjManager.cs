@@ -71,6 +71,8 @@ public class LevelObjManager : MonoBehaviour
         moleculaManager.CloseDisplay();
         zoomDisplay.CloseDisplay();
 
+        gm.LevelClear();
+
         switch (NextStageType)
         {
             case 0: //下一關
@@ -86,7 +88,6 @@ public class LevelObjManager : MonoBehaviour
                 questionManager.ShowFinishExamUI();
                 break;
         }
-        gm.LevelClear();
     }
 
     //待移除

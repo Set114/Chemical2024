@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,15 +13,19 @@ public class GameManager : MonoBehaviour
     public int currStage = 0;
     [Tooltip("目前關卡")]
     public int currLevel = 0;   //這個直接開放給其他物件使用，要正式一點就設定只能讀取
-    [Tooltip("輸入測驗的第一個UI在第幾個levelUIs")]
+    [Tooltip("輸入測驗在第幾個levelObj")]
     public int examIndex;
+    [Tooltip("總共有多少關")]
+    public int totalIndex = 0;
     [Tooltip("失誤次數")]
-    public int mistake = 0;
+    private int mistake = 0;
 
      [Tooltip("管理播放音效")]
     private AudioManager audioManager;
     [Tooltip("管理關卡物件")]
     private LevelObjManager levelObjManager;
+    [Tooltip("管理題目介面")]
+    private QuestionManager questionManager;
     [Tooltip("管理左上角控制板")]
     private SettingUIManager controlPanel;
 
@@ -40,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         controlPanel = FindObjectOfType<SettingUIManager>();
         levelObjManager = FindObjectOfType<LevelObjManager>();
+        questionManager = FindObjectOfType<QuestionManager>();
         audioManager = FindObjectOfType<AudioManager>();
 
         userDataManager = UserDataManager.Instance;
@@ -70,6 +77,33 @@ public class GameManager : MonoBehaviour
 
             int stage = ((currStage - 1) * 2) + gameMode;
             DataInDeviceScript.SaveData[stage].AddRange(userData);
+
+            int level;
+            if (gameMode == 0|| currStage==3)
+            {
+                if (currStage == 3)
+                {
+                    level = totalIndex - examIndex;
+                }
+                else
+                    level = examIndex;
+                for (int i = 0; i < level; i++)
+                {
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿開始時間");
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿結束時間");
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿次數");
+                }
+            }
+            else
+            {
+                level = questionManager.GetQuestionsLength();
+                for (int i = 0; i < level; i++)
+                {
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿答案");
+                    DataInDeviceScript.SaveData[stage].Add("得分");
+                }
+            }
+
         }
         if (currLevel < examIndex)
         {
@@ -84,6 +118,10 @@ public class GameManager : MonoBehaviour
         else
         {
             controlPanel.SetStageText(currStage + "-" + (currLevel + 1 - examIndex).ToString("0"));
+            if(currStage == 3)
+            {
+                RecordTeachTime(true);
+            }
         }
         controlPanel.LessonList_Close();
         mistake = 0;
@@ -93,6 +131,7 @@ public class GameManager : MonoBehaviour
     public void SwitchToLearnLevel()
     {
         userDataManager.UpdateChapterMode(0);
+        PushToExcel();
         gameMode = userDataManager.GetChapterMode();
         currLevel = 0;
         levelObjManager.SetLevel();
@@ -112,6 +151,7 @@ public class GameManager : MonoBehaviour
     //  切換到指定關卡
     public void SwitchLevel(int level)
     {
+        //在這邊處理跳關後的操作記錄
         currLevel = level;
         levelObjManager.SetLevel();
     }
@@ -119,19 +159,12 @@ public class GameManager : MonoBehaviour
     //  關卡結束 儲存資料以及切換關卡編號
     public void LevelClear()
     {
-        controlPanel.LevelClear(currLevel);
-        // answer用意待確認
-        currLevel++; 
-        //結束
-        if (gameMode == 0)
+        if (gameMode == 0 || currStage == 3)
         {
-            //learnDataManager.EndLevel();
             RecordTeachTime(false);
         }
-        else if (gameMode == 1)
-        {
-            testDataManager.EndLevel();
-        }
+        controlPanel.LevelClear(currLevel);
+        currLevel++; 
     }
 
     //  取得指定音效長度
@@ -177,11 +210,32 @@ public class GameManager : MonoBehaviour
     {
         int stage = ((currStage - 1) * 2) + gameMode;
 
-        DataInDeviceScript.SaveData[stage].Add(DateTime.Now.ToString());
-        if (!isStart)
-            DataInDeviceScript.SaveData[stage].Add(mistake.ToString("0"));
+        int level;
+        if (gameMode == 0)
+        {
+            level = currLevel + 1;
+        }
+        else
+        {
+            level = currLevel + 1 - examIndex;
+        }
+
+        int baseIndex = 2 + (level - 1) * 3;
+        int startIndex = baseIndex;      // 開始時間
+        int endIndex = baseIndex + 1;    // 結束時間
+        int countIndex = baseIndex + 2;  // 次數
+
+        if (isStart)
+        {
+            DataInDeviceScript.SaveData[stage][startIndex] = DateTime.Now.ToString();
+        }
+        else
+        {
+            DataInDeviceScript.SaveData[stage][endIndex] = DateTime.Now.ToString();
+            DataInDeviceScript.SaveData[stage][countIndex] = mistake.ToString("0");
+        }
     }
-    //  紀錄各單元的測驗資料
+    //  寫出資料
     public void PushToExcel()
     {
         int stage = ((currStage - 1) * 2) + gameMode;

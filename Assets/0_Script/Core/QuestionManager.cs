@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Drawing;
 using static Cinemachine.CinemachineTriggerAction.ActionSettings;
+using static Cinemachine.DocumentationSortingAttribute;
 
 //  負責管理題目介面
 public class QuestionManager : MonoBehaviour
@@ -261,17 +262,23 @@ public class QuestionManager : MonoBehaviour
         DataInDevice dataInDevice = FindObjectOfType<DataInDevice>();
         for (int i = 0; i < questionContent.questionContent.Length; i++)
         {
-            dataInDevice.SaveData[stage].Add(submittedAnswers[i]);
+
+            int offset = 2; // 學號＋姓名佔 0,1
+            int answerIndex = offset + i * 2;
+            int scoreIndex = answerIndex + 1;
+
+            dataInDevice.SaveData[stage][answerIndex] = submittedAnswers[i];
             if (submittedCorrectly[i] == true)
             {
                 correct++;
                 answer += (i + 1) + "." + submittedAnswers[i] + "\n";
-                dataInDevice.SaveData[stage].Add(((1 / (float)questionContent.questionContent.Length) * 100f).ToString("0"));
+                dataInDevice.SaveData[stage][scoreIndex] =
+                   ((1 / (float)questionContent.questionContent.Length) * 100f).ToString("0");
             }
             else
             {
                 answer += "<color=red>" + (i + 1) + "." + submittedAnswers[i] + "</color>\n";
-                dataInDevice.SaveData[stage].Add("0");
+                dataInDevice.SaveData[stage][scoreIndex] = "0";
             }
         }
 
@@ -303,11 +310,10 @@ public class QuestionManager : MonoBehaviour
     {
         gm.BackToMainMenu();
     }
-    /*
+    
     //  取得題目數量
     public int GetQuestionsLength()
     {
-        return dialogContent.Length;
+        return questionContent.questionContent.Length;
     }
-    */
 }
