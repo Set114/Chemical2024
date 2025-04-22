@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,7 @@ public class Exam_5_1 : MonoBehaviour
     private AudioManager audioManager;
     private TestDataManager testDataManager;
     private ControllerHaptics hapticsController;
+    private DataInDevice DataInDeviceScript;    // 紀錄各單元的教學與測驗資料
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,7 @@ public class Exam_5_1 : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         testDataManager = FindObjectOfType<TestDataManager>();
         hapticsController = FindObjectOfType<ControllerHaptics>();
+        DataInDeviceScript = FindObjectOfType<DataInDevice>();
 
         audioManager.PlayVoice("E5_1_1");
         startMenu.SetActive(true);
@@ -144,7 +147,6 @@ public class Exam_5_1 : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         questionManager.TriggerHapticFeedback();
-        gm.GetMistake();
         foreach (Card card in cardComparison)
         {
             card.FlipCard();
@@ -157,6 +159,9 @@ public class Exam_5_1 : MonoBehaviour
     {
         endMenu.SetActive(true);
         audioManager.PlayVoice("E5_1_2");
+        DataInDeviceScript.SaveData[9][2] = "配對完成秒數";
+        DataInDeviceScript.SaveData[9][3] = timer.ToString("0");
+        gm.isSaved = false;
         Status = 2;
     }
 
@@ -166,7 +171,7 @@ public class Exam_5_1 : MonoBehaviour
         // 初始化卡牌
         ShuffleCards();
         matchedCardsCount = 0;
-        
+
         timer = 0f; // 重置计时器值
         Status = 1;
     }

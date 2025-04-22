@@ -74,7 +74,7 @@ public class Exam_2_3 : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
 
         hintManager.gameObject.SetActive(true);
-        hintManager.SetTotalStep(5);
+        hintManager.SetTotalStep(4);
         hintManager.SwitchStep("E2_3_1");
         weightText.text = "0g";
         weightTextDisplay.text = "0g";
@@ -139,7 +139,7 @@ public class Exam_2_3 : MonoBehaviour
                     {
                         testTube.GetComponent<CollisionDetection>().targetName = "TestTube_point";
                         testTubePointTrigger.enabled = true;
-                        hintManager.SwitchStep("E2_3_5");
+                        hintManager.SwitchStep("E2_3_4");
                         timer = 0f;
                         testTube.transform.localRotation = Quaternion.identity;
                         Status++;
@@ -262,7 +262,7 @@ public class Exam_2_3 : MonoBehaviour
             cap.SetBool("cover", true);
             fire.SetActive(true);
 
-            hintManager.SwitchStep("E2_3_4");
+            hintManager.SwitchStep("E2_3_3");
             testTube.tag = "TweezersClamp";
             Status++;
         }

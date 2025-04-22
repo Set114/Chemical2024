@@ -289,6 +289,7 @@ public class QuestionManager : MonoBehaviour
             answerText.text = answer;
         finishExamCanvas.SetActive(true);
         dataInDevice.AddDataExcel(stage);
+        gm.isSaved = true;
     }
 
     //  按下確認按鈕

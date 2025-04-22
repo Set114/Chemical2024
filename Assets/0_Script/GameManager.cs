@@ -35,9 +35,9 @@ public class GameManager : MonoBehaviour
     private LearnDataManager learnDataManager;
     [Tooltip("紀錄學生的測驗資料")]
     private TestDataManager testDataManager;
-
     [Tooltip("紀錄各單元的教學與測驗資料")]
     private DataInDevice DataInDeviceScript;
+    public bool isSaved = false;
 
     [Tooltip("緩衝時間")]
     [SerializeField] private float defaultDelay = 3f;
@@ -96,14 +96,23 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                level = questionManager.GetQuestionsLength();
-                for (int i = 0; i < level; i++)
+                if (currStage == 5)
                 {
-                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿答案");
-                    DataInDeviceScript.SaveData[stage].Add("得分");
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿時間");
+                    DataInDeviceScript.SaveData[stage].Add("無紀錄＿次數");
+                }
+                else
+                {
+                    level = questionManager.GetQuestionsLength();
+                    for (int i = 0; i < level; i++)
+                    {
+                        DataInDeviceScript.SaveData[stage].Add("無紀錄＿答案");
+                        DataInDeviceScript.SaveData[stage].Add("無紀錄＿得分");
+
+                    }
                 }
             }
-
+            isSaved = false;
         }
         if (currLevel < examIndex)
         {
@@ -234,17 +243,20 @@ public class GameManager : MonoBehaviour
             DataInDeviceScript.SaveData[stage][endIndex] = DateTime.Now.ToString();
             DataInDeviceScript.SaveData[stage][countIndex] = mistake.ToString("0");
         }
+        isSaved = false;
     }
     //  寫出資料
     public void PushToExcel()
     {
         int stage = ((currStage - 1) * 2) + gameMode;
         DataInDeviceScript.AddDataExcel(stage);
+        isSaved = true;
     }
 
     public void BackToMainMenu()
     {
-        PushToExcel();
+        if (!isSaved)
+            PushToExcel();
         MenuUIManager.shouldOpenMenu = true;
         SceneManager.LoadScene("MainMenu");
     }

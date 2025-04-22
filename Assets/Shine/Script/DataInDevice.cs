@@ -117,6 +117,7 @@ public class DataInDevice : MonoBehaviour
     //在其他單元中，呼叫這個函式以增加資料(資料用字串陣列傳入)
     public void AddDataExcel(int tabIndex)
     {
+        print("save");
         if (!File.Exists(filePath))            return;
 
         Debug.Log($"Excel 檔案存在: {filePath}");
