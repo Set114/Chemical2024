@@ -76,26 +76,26 @@ public class Level4_1 : MonoBehaviour
                             TotalO2UI[i].SetActive(false);
                             CUIObject[i].SetActive(false);
                             TotalCO2UI.Add(CO2UIPrefab);
-                            Infos[1].SetActive(true);
+                            Infos[2].SetActive(true);
                             StartCoroutine(WaitFinish());
                         }
                         //沒有開啟加熱器
                         else {
                             if (TotalO2.Count < CObject.Length && !ClickHeaterObj) {
-                                Infos[3].SetActive(true);
+                                Infos[4].SetActive(true);
                             }
                             else {
                                 
                                     if (ClickHeaterObj && TotalO2.Count < CObject.Length)
                                     {
                                         //出現語音解說3
-                                        Infos[2].SetActive(true);
+                                        Infos[3].SetActive(true);
 
                                 }
                                 if (!ClickHeaterObj&& TotalO2.Count >= CObject.Length)
                                     {
                                         //出現語音解說1
-                                        Infos[0].SetActive(true);
+                                        Infos[1].SetActive(true);
 
                                 }
                             }
@@ -140,6 +140,7 @@ public class Level4_1 : MonoBehaviour
     {
 
         PartitionObj.SetBool("Click", ClickPartitionObj = !ClickPartitionObj);
+        Infos[0].SetActive(false);
 
 
     }
@@ -154,10 +155,11 @@ public class Level4_1 : MonoBehaviour
     }
 
     public void ReButton() {
-        Infos[0].SetActive(false);
+        Infos[0].SetActive(true);
         Infos[1].SetActive(false);
         Infos[2].SetActive(false);
         Infos[3].SetActive(false);
+        Infos[4].SetActive(false);
         ObjTips.SetActive(true);
 
         // 清除O和CO2
@@ -183,7 +185,7 @@ public class Level4_1 : MonoBehaviour
 
     }
     IEnumerator WaitFinish() {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(3f);
         Finish4_1.SetActive(true);
     }
 

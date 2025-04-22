@@ -39,6 +39,7 @@ public class Stage4_5 : MonoBehaviour
             MarbleUIs[i].SetActive(false);
             MarbleInfos[i].SetActive(false);
         }
+        MarbleInfos[3].SetActive(true);
         for (int j = 0; j < Hs.Length; j++) {
             Hs[j].GetComponent<MoveTowards2>().Reset();
             CO2s[j].GetComponent<MoveTowards2>().Reset();

@@ -14,7 +14,7 @@ public class Statge4_4 : MonoBehaviour
     public Sprite CheckSprite, DefaultSprite;
     public Image[] AtomImages;
 
-    public GameObject Finish;
+    public GameObject[] FinishUI;
     [Header("­»")]
     public Transform Fragrant;
     public Vector3 FragrantPos;
@@ -44,6 +44,8 @@ public class Statge4_4 : MonoBehaviour
 
             AtomImages[j].sprite = DefaultSprite;
         }
+        AtomInfo[0].SetActive(true);
+
         Fragrant.position = FragrantPos;
         Fragrant.eulerAngles = FragrantAngle;
         for (int i = 0; i < AtomObjs.Length; i++)

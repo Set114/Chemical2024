@@ -23,14 +23,10 @@ public class Shine_GM : MonoBehaviour
 #if UNITY_STANDALONE_WIN
         VRMode.SetActive(false);
         PCMode.SetActive(true);
-        VRTeachMode.SetActive(false);
-        PCTeachMode.SetActive(true);
 #endif
 #if UNITY_ANDROID
         VRMode.SetActive(true);
 PCMode.SetActive(false);
-  VRTeachMode.SetActive(true);
-        PCTeachMode.SetActive(false);
 #endif
     }
     // Start is called before the first frame update
@@ -44,6 +40,14 @@ PCMode.SetActive(false);
                 ELF.SetActive(true);
                 Lesson_ListTeach.SetActive(true);
                 Lesson_ListTest.SetActive(false);
+                #if UNITY_STANDALONE_WIN
+                    VRTeachMode.SetActive(false);
+                    PCTeachMode.SetActive(true);
+                #endif
+                #if UNITY_ANDROID
+                  VRTeachMode.SetActive(true);
+                   PCTeachMode.SetActive(false);
+                #endif
                 break;
             case 1:
                 TestMode.SetActive(true);

@@ -13,6 +13,9 @@ public class TouchMarbles : MonoBehaviour
             Stage4_5Obj.CupMarbles[0].SetActive(true);
             Stage4_5Obj.MarbleUIs[0].SetActive(true);
             Stage4_5Obj.MarbleInfos[0].SetActive(true);
+            Stage4_5Obj.MarbleInfos[3].SetActive(false);
+            Stage4_5Obj.MarbleInfos[1].SetActive(false);
+            Stage4_5Obj.MarbleInfos[2].SetActive(false);
             StartCoroutine(Wait());
 
         }
@@ -23,6 +26,9 @@ public class TouchMarbles : MonoBehaviour
             Stage4_5Obj.CupMarbles[1].SetActive(true);
             Stage4_5Obj.MarbleUIs[1].SetActive(true);
             Stage4_5Obj.MarbleInfos[1].SetActive(true);
+            Stage4_5Obj.MarbleInfos[3].SetActive(false);
+            Stage4_5Obj.MarbleInfos[0].SetActive(false);
+            Stage4_5Obj.MarbleInfos[2].SetActive(false);
             StartCoroutine(Wait());
         }
         if (hit.GetComponent<Collider>().name == "PowderyMarble")
@@ -32,6 +38,9 @@ public class TouchMarbles : MonoBehaviour
             Stage4_5Obj.CupMarbles[2].SetActive(true);
             Stage4_5Obj.MarbleUIs[2].SetActive(true);
             Stage4_5Obj.MarbleInfos[2].SetActive(true);
+            Stage4_5Obj.MarbleInfos[3].SetActive(false);
+            Stage4_5Obj.MarbleInfos[1].SetActive(false);
+            Stage4_5Obj.MarbleInfos[0].SetActive(false);
             StartCoroutine(Wait());
         }
     }
@@ -41,7 +50,7 @@ public class TouchMarbles : MonoBehaviour
         for (int i = 0; i < Stage4_5Obj.CupMarbles.Length; i++) {
             Stage4_5Obj.CupMarbles[i].SetActive(false);
             Stage4_5Obj.MarbleUIs[i].SetActive(false);
-            Stage4_5Obj.MarbleInfos[i].SetActive(false);
+            //Stage4_5Obj.MarbleInfos[i].SetActive(false);
         }
         if (!Stage4_5Obj.TableMarbles[0].active&& !Stage4_5Obj.TableMarbles[1].active && !Stage4_5Obj.TableMarbles[2].active) {
             Stage4_5Obj.Finished.SetActive(true);

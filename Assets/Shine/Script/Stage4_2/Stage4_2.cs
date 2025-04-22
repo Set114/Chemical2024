@@ -13,8 +13,9 @@ public class Stage4_2 : MonoBehaviour
     public Animator LeftAnim;
     public Animator RightAnim;
     public bool isLeft, isRight;
-    public GameObject Finish4_2;
+    public GameObject[] Finish4_2Button;
     public bool[] State;
+    public AlcoholLamp AlcoholLamp;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +25,19 @@ public class Stage4_2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (State[0]&& State[1]&& State[2])
         {
-            Finish4_2.SetActive(true);
+            Finish4_2Button[0].SetActive(true);
+            Finish4_2Button[1].SetActive(true);
+            Finish4_2Button[2].SetActive(true);
+
         }
         else {
-            Finish4_2.SetActive(false);
+            Finish4_2Button[0].SetActive(false);
+            Finish4_2Button[1].SetActive(false);
+            Finish4_2Button[2].SetActive(false);
+
         }
     }
     public void GetObj(int i) {
@@ -53,6 +61,15 @@ public class Stage4_2 : MonoBehaviour
     }
 
     public void ReButton() {
+        AlcoholLamp.Copper_L.SetTrigger("Reset");
+        AlcoholLamp.Copper_R.SetTrigger("Reset");
+        AlcoholLamp.Copper.SetTrigger("Reset");
+        AlcoholLamp.MagnesiumTime = 0;
+        AlcoholLamp.ZincTime = 0;
+        AlcoholLamp.InfoObj[1].SetActive(false);
+        AlcoholLamp.InfoObj[0].SetActive(true);
+        AlcoholLamp.InfoObj[2].SetActive(false);
+        AlcoholLamp.InfoObj[3].SetActive(false);
         for (int i = 0; i < Spoons.Length; i++) {
             Spoons[i].SetActive(true);
             Spoons[i].transform.GetChild(0).gameObject.SetActive(true);
@@ -72,11 +89,6 @@ public class Stage4_2 : MonoBehaviour
         }
         isRight = false;
         isLeft = false;
-        FindObjectOfType<AlcoholLamp>().Copper_L.SetTrigger("Reset");
-        FindObjectOfType<AlcoholLamp>().Copper_R.SetTrigger("Reset");
-        FindObjectOfType<AlcoholLamp>().Copper.SetTrigger("Reset");
-        FindObjectOfType<AlcoholLamp>().MagnesiumTime = 0;
-        FindObjectOfType<AlcoholLamp>().ZincTime = 0;
 
     }
 }

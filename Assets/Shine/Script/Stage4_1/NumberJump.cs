@@ -24,7 +24,7 @@ public class NumberJump : MonoBehaviour
         if (Temp < 400&&FindObjectOfType<Level4_1>().ClickHeaterObj)
         {
             Temp += 25;
-            TempText.text =Temp+ "C<sup>o</sup>";
+            TempText.text =Temp+ "<sup>o</sup>C";
             ColorTemp -= Temp;
             CarbonMaterial1.color = new Color32(255, (byte)ColorTemp, (byte)ColorTemp, 255);
             CarbonMaterial2.color = new Color32(255, (byte)ColorTemp, (byte)ColorTemp, 255);

@@ -38,17 +38,27 @@ public class AlcoholLamp : MonoBehaviour
         if (Hit.GetComponent<Collider>().tag == "Magnesium")
         {
             InvokeRepeating("MagnesiumTiming", 0, 1);
-            InfoObj[0].SetActive(true);
+            InfoObj[1].SetActive(true);
+            InfoObj[0].SetActive(false);
+            InfoObj[2].SetActive(false);
+            InfoObj[3].SetActive(false);
+
         }
         if (Hit.GetComponent<Collider>().tag == "Zinc")
         {
             InvokeRepeating("ZincTiming", 0, 1);
-            InfoObj[1].SetActive(true);
-
+            InfoObj[2].SetActive(true);
+            InfoObj[0].SetActive(false);
+            InfoObj[1].SetActive(false);
+            InfoObj[3].SetActive(false);
         }
         if (Hit.GetComponent<Collider>().tag == "Copper")
         {
-            InfoObj[2].SetActive(true);
+            InfoObj[3].SetActive(true);
+            InfoObj[0].SetActive(false);
+            InfoObj[2].SetActive(false);
+            InfoObj[1].SetActive(false);
+
             Copper_L.SetTrigger("ChangeColor");
             Copper_R.SetTrigger("ChangeColor");
             StartCoroutine(WaitCopper());
@@ -95,13 +105,12 @@ public class AlcoholLamp : MonoBehaviour
     }
     IEnumerator WaitMagnesium()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         Magnesium_L.SetActive(false);
         Magnesium_R.SetActive(false);
         Magnesium.SetActive(true);
         if (FindObjectOfType<Stage4_2>().isLeft) FindObjectOfType<Stage4_2>().isLeft = false;
         if (FindObjectOfType<Stage4_2>().isRight) FindObjectOfType<Stage4_2>().isRight = false;
-        InfoObj[0].SetActive(false);
         FindObjectOfType<Stage4_2>().State[0] = true;
 
     }
@@ -134,21 +143,20 @@ public class AlcoholLamp : MonoBehaviour
     }
     IEnumerator WaitZinc()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         Zinc_L.SetActive(false);
         Zinc_R.SetActive(false);
         Zinc.SetActive(true);
         if (FindObjectOfType<Stage4_2>().isLeft) FindObjectOfType<Stage4_2>().isLeft = false;
         if (FindObjectOfType<Stage4_2>().isRight) FindObjectOfType<Stage4_2>().isRight = false;
-        InfoObj[1].SetActive(false);
         FindObjectOfType<Stage4_2>().State[1] = true;
 
     }
     #endregion
     IEnumerator WaitCopper()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         CopperCheckUI.SetActive(true);
 
         Copper_LObj.SetActive(false);
@@ -158,7 +166,6 @@ public class AlcoholLamp : MonoBehaviour
 
         if (FindObjectOfType<Stage4_2>().isLeft) FindObjectOfType<Stage4_2>().isLeft = false;
         if (FindObjectOfType<Stage4_2>().isRight) FindObjectOfType<Stage4_2>().isRight = false;
-        InfoObj[2].SetActive(false);
         FindObjectOfType<Stage4_2>().State[2] = true;
     }
 

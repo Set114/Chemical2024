@@ -16,7 +16,7 @@ public class Stage4_3 : MonoBehaviour
     public Vector3[] SaveDeskObjsPos;
     public Vector3[] SaveDeskObjsAng;
 
-    public GameObject Finish;
+    public GameObject[] FinishButtons;
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,7 +37,9 @@ public class Stage4_3 : MonoBehaviour
             DeskObjs[i].SetActive(true);
             ObjToggles[i].isOn = false;
             Tips[i].SetActive(false);
+            FinishButtons[i].SetActive(false);
         }
+        Tips[5].SetActive(true);
         BalloonNoAir.SetActive(false);
         Balloon.SetActive(false);
         ParticleEffects.SetActive(false);
@@ -63,7 +65,12 @@ public class Stage4_3 : MonoBehaviour
         }
     }
     IEnumerator Effective(int ObjID) {
-        Tips[ObjID].SetActive(true);
+        for (int i = 0; i < DeskObjs.Length; i++)
+        {
+            Tips[i].SetActive(false);
+        }
+            Tips[ObjID].SetActive(true);
+        Tips[5].SetActive(false);
         ObjToggles[ObjID].isOn = true;
         ParticleEffects.SetActive(true);
         BalloonNoAir.SetActive(true);
@@ -71,7 +78,7 @@ public class Stage4_3 : MonoBehaviour
         BalloonNoAir.SetActive(false);
         Balloon.SetActive(true);
         yield return new WaitForSeconds(5f);
-        Tips[ObjID].SetActive(false);
+       // Tips[ObjID].SetActive(false);
         ParticleEffects.SetActive(false);
         Balloon.SetActive(false);
         TubeObjs[ObjID].SetActive(false);
@@ -79,11 +86,15 @@ public class Stage4_3 : MonoBehaviour
     }
     IEnumerator UnEffective(int ObjID)
     {
+        for (int i = 0; i < DeskObjs.Length; i++)
+        {
+            Tips[i].SetActive(false);
+        }
         Tips[ObjID].SetActive(true);
         ObjToggles[ObjID].isOn = true;
         BalloonNoAir.SetActive(true);
         yield return new WaitForSeconds(5f);
-        Tips[ObjID].SetActive(false);
+       // Tips[ObjID].SetActive(false);
         BalloonNoAir.SetActive(false);
         TubeObjs[ObjID].SetActive(false);
         CheckAnswer();
@@ -95,7 +106,10 @@ public class Stage4_3 : MonoBehaviour
 
         if (ObjToggles[0].isOn && ObjToggles[1].isOn && ObjToggles[2].isOn && ObjToggles[3].isOn && ObjToggles[4].isOn)
         {
-            Finish.SetActive(true);
+            for (int i = 0; i < DeskObjs.Length; i++)
+            {
+                FinishButtons[i].SetActive(true);
+            }
         }
     }
 
