@@ -17,6 +17,7 @@ public class NumberJump : MonoBehaviour
         CarbonMaterial1.color = new Color32(255, 255, 255, 255);
         CarbonMaterial2.color = new Color32(255, 255, 255, 255);
         metal.color = new Color32(255, 255, 255, 255);
+        Temp = 25;
         TempText.text = Temp + "<sup>o</sup>C";
 
     }
@@ -42,11 +43,11 @@ public class NumberJump : MonoBehaviour
             metal.color = new Color32(252, 58, 58, 255);
 
         }
-        if (!FindObjectOfType<Level4_1>().ClickHeaterObj)
+       /* if (!FindObjectOfType<Level4_1>().ClickHeaterObj)
         {
             CancelInvoke("AddTemp");
             OriginalTemp();
-        }
+        }*/
     }
  
     // Update is called once per frame
@@ -55,5 +56,10 @@ public class NumberJump : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L)) {
             StartAddTemp();
         }
+         if (!FindObjectOfType<Level4_1>().ClickHeaterObj)
+      {
+          CancelInvoke("AddTemp");
+          OriginalTemp();
+      }
     }
 }

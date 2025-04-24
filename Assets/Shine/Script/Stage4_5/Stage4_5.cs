@@ -14,6 +14,16 @@ public class Stage4_5 : MonoBehaviour
 
     public Vector3[] TableMarblesPos;
     public GameObject Finished,ReButtonUI;
+    //紀錄開始時間
+    private void OnEnable()
+    {
+        FindObjectOfType<Shine_GM>().StartTimes4_L[4] = System.DateTime.Now.ToString();
+    }
+    public void FinishRecord()
+    {
+        FindObjectOfType<Shine_GM>().EndTimes4_L[4] = System.DateTime.Now.ToString();
+        FindObjectOfType<Shine_GM>().Save4LearnDataExcel();
+    }
     private void Awake()
     {
         TableMarblesPos[0] = TableMarbles[0].transform.position;

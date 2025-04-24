@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Level4_1 : MonoBehaviour
 {
     [Header("O2的Prefab")]
@@ -35,6 +34,20 @@ public class Level4_1 : MonoBehaviour
     [Header("4-1教學結束")]
     public GameObject Finish4_1;
     public GameObject ObjTips;
+
+    bool isRecordData;
+    //紀錄開始時間
+    private void OnEnable()
+    {
+        FindObjectOfType<Shine_GM>().StartTimes4_L[0]= System.DateTime.Now.ToString();
+    }
+    //紀錄結束時間與錯誤次數
+    public void FinishRecord()
+    {
+        FindObjectOfType<Shine_GM>().EndTimes4_L[0] = System.DateTime.Now.ToString();
+        FindObjectOfType<Shine_GM>().Counts4_L[0] = FindObjectOfType<Shine_GM>().ErrorNumber4_1 +"";
+
+    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -79,12 +92,18 @@ public class Level4_1 : MonoBehaviour
                             CUIObject[i].SetActive(false);
                             TotalCO2UI.Add(CO2UIPrefab);
                             Infos[2].SetActive(true);
+                            if (!isRecordData)
+                            {
+                                FinishRecord();
+                                isRecordData = true;
+                            }
                             StartCoroutine(WaitFinish());
                         }
                         //沒有開啟加熱器
                         else {
                             if (TotalO2.Count < CObject.Length && !ClickHeaterObj) {
                                 Infos[4].SetActive(true);
+
                             }
                             else {
                                 
@@ -149,7 +168,8 @@ public class Level4_1 : MonoBehaviour
     //加熱器
     public void Heater()
     {
-       // HeaterText.SetActive(ClickHeaterObj = !ClickHeaterObj);
+        // HeaterText.SetActive(ClickHeaterObj = !ClickHeaterObj);
+        ClickHeaterObj = !ClickHeaterObj;
         if (ClickHeaterObj)
         {
             FindObjectOfType<NumberJump>().StartAddTemp();
@@ -157,6 +177,8 @@ public class Level4_1 : MonoBehaviour
     }
 
     public void ReButton() {
+        ClickHeaterObj = false;
+        FindObjectOfType<NumberJump>().OriginalTemp();
         Infos[0].SetActive(true);
         Infos[1].SetActive(false);
         Infos[2].SetActive(false);
@@ -175,8 +197,7 @@ public class Level4_1 : MonoBehaviour
         ClickPartitionObj = false;
         PartitionObj.SetBool("Click", ClickPartitionObj);
 
-        ClickHeaterObj = false;
-        FindObjectOfType<NumberJump>().OriginalTemp();
+
         
        // HeaterText.SetActive(ClickHeaterObj);
 
@@ -235,7 +256,14 @@ public class Level4_1 : MonoBehaviour
     }
     private void OnDisable()
     {
-        Finish4_1Obj();
+        for (int i = 0; i < TotalO2.Count; i++)
+        {
+            TotalO2[i].SetActive(false);
+        }
+        for (int k = 0; k < TotalCO2.Count; k++)
+        {
+            TotalCO2[k].SetActive(false);
+        }
         Infos[0].SetActive(false);
         Infos[1].SetActive(false);
         Infos[2].SetActive(false);

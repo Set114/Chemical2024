@@ -17,6 +17,13 @@ public class Stage4_3 : MonoBehaviour
     public Vector3[] SaveDeskObjsAng;
 
     public GameObject[] FinishButtons;
+    bool isRecordData;
+
+    //紀錄開始時間
+    private void OnEnable()
+    {
+        FindObjectOfType<Shine_GM>().StartTimes4_L[2] = System.DateTime.Now.ToString();
+    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -109,6 +116,11 @@ public class Stage4_3 : MonoBehaviour
             for (int i = 0; i < DeskObjs.Length; i++)
             {
                 FinishButtons[i].SetActive(true);
+            }
+            if (!isRecordData)
+            {
+                FindObjectOfType<Shine_GM>().EndTimes4_L[2] = System.DateTime.Now.ToString();
+                isRecordData = true;
             }
         }
     }

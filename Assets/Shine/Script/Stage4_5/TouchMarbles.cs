@@ -55,7 +55,7 @@ public class TouchMarbles : MonoBehaviour
         if (!Stage4_5Obj.TableMarbles[0].active&& !Stage4_5Obj.TableMarbles[1].active && !Stage4_5Obj.TableMarbles[2].active) {
             Stage4_5Obj.Finished.SetActive(true);
             Stage4_5Obj.ReButtonUI.SetActive(true);
-
+            Stage4_5Obj.FinishRecord();
         }
     }
 }

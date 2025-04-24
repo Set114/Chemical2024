@@ -16,10 +16,13 @@ public class Stage4_2 : MonoBehaviour
     public GameObject[] Finish4_2Button;
     public bool[] State;
     public AlcoholLamp AlcoholLamp;
-    // Start is called before the first frame update
-    void Start()
+
+    bool isRecordData;
+
+    //紀錄開始時間
+    private void OnEnable()
     {
-        
+        FindObjectOfType<Shine_GM>().StartTimes4_L[1] = System.DateTime.Now.ToString();
     }
 
     // Update is called once per frame
@@ -31,7 +34,11 @@ public class Stage4_2 : MonoBehaviour
             Finish4_2Button[0].SetActive(true);
             Finish4_2Button[1].SetActive(true);
             Finish4_2Button[2].SetActive(true);
-
+            if (!isRecordData)
+            {
+                FindObjectOfType<Shine_GM>().EndTimes4_L[1] = System.DateTime.Now.ToString();
+                isRecordData = true;
+            }
         }
         else {
             Finish4_2Button[0].SetActive(false);

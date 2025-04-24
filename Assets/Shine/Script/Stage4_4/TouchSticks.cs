@@ -79,6 +79,7 @@ public class TouchSticks : MonoBehaviour
         IncenseSticks = null;
         this.gameObject.SetActive(false);
         if (Statge4_4Obj.AtomImages[0].sprite == Statge4_4Obj.CheckSprite && Statge4_4Obj.AtomImages[1].sprite == Statge4_4Obj.CheckSprite && Statge4_4Obj.AtomImages[2].sprite == Statge4_4Obj.CheckSprite) {
+            Statge4_4Obj.FinishRecord();
             Statge4_4Obj.FinishUI[0].SetActive(true);
             Statge4_4Obj.FinishUI[1].SetActive(true);
             Statge4_4Obj.FinishUI[2].SetActive(true);

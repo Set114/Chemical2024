@@ -18,6 +18,14 @@ public class Shine_GM : MonoBehaviour
     public GameObject VRMode, PCMode;
     public GameObject VRTeachMode, PCTeachMode;
     public DataInDevice DataInDeviceScript;
+
+    //紀錄資料
+    string[] inputRow;
+
+    public string[] StartTimes4_L={ "無紀錄＿開始時間", "無紀錄＿開始時間", "無紀錄＿開始時間", "無紀錄＿開始時間", "無紀錄＿開始時間" };
+    public string[] EndTimes4_L = { "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間" };
+    public string[] Counts4_L = { "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數" };
+    public int ErrorNumber4_1;
     private void Awake()
     {
 #if UNITY_STANDALONE_WIN
@@ -74,10 +82,10 @@ PCMode.SetActive(false);
                 UserName.text = "Test";
             }
             #region 暫存資料  
-            string[] userData = { UserID.text, UserName.text };
-            int[] indices = { 6, 7, 10, 11 };
-            foreach (int index in indices)
-                DataInDeviceScript.SaveData[index].AddRange(userData);           
+            //string[] userData = { UserID.text, UserName.text };
+            //int[] indices = { 6, 7, 10, 11 };
+            //foreach (int index in indices)
+            //DataInDeviceScript.SaveData[index].AddRange(userData);           
             #endregion
         }       
     }
@@ -116,7 +124,22 @@ PCMode.SetActive(false);
             Infos[i].SetActive(false);
         }
     }
-    public void Stage4RecordTeachTime(bool isStart)
+
+    public void Save4LearnDataExcel()
+    {
+        var inputRow = new string[]
+        {
+        UserID.text, UserName.text , StartTimes4_L[0],  EndTimes4_L[0],Counts4_L[0],StartTimes4_L[1],EndTimes4_L[1],Counts4_L[1],
+        StartTimes4_L[2],EndTimes4_L[2],Counts4_L[2], StartTimes4_L[3],EndTimes4_L[3],Counts4_L[3], StartTimes4_L[4], EndTimes4_L[4],Counts4_L[4]
+        };
+
+        int tabIndex = 6; // 單元四 教學
+        var dataManager = FindObjectOfType<DataInDevice>();
+        dataManager.SaveData[tabIndex] = new List<string>(inputRow);
+        dataManager.AddDataExcel(tabIndex);
+    }
+
+   /* public void Stage4RecordTeachTime(bool isStart)
     { //教學4結束時間
         DataInDeviceScript.SaveData[6].Add(DateTime.Now.ToString());
         if (!isStart)
@@ -135,5 +158,5 @@ PCMode.SetActive(false);
     public void Stage6PushToExcel()
     { //教學6
         DataInDeviceScript.AddDataExcel(10);
-    }
+    }*/
 }
