@@ -38,6 +38,8 @@ public class Level4_1 : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        FindObjectOfType<NumberJump>().OriginalTemp();
+
     }
 
     // Update is called once per frame
@@ -147,7 +149,7 @@ public class Level4_1 : MonoBehaviour
     //¥[¼ö¾¹
     public void Heater()
     {
-        HeaterText.SetActive(ClickHeaterObj = !ClickHeaterObj);
+       // HeaterText.SetActive(ClickHeaterObj = !ClickHeaterObj);
         if (ClickHeaterObj)
         {
             FindObjectOfType<NumberJump>().StartAddTemp();
@@ -174,8 +176,9 @@ public class Level4_1 : MonoBehaviour
         PartitionObj.SetBool("Click", ClickPartitionObj);
 
         ClickHeaterObj = false;
-        FindObjectOfType<NumberJump>().Clear();
-        HeaterText.SetActive(ClickHeaterObj);
+        FindObjectOfType<NumberJump>().OriginalTemp();
+        
+       // HeaterText.SetActive(ClickHeaterObj);
 
     }
     public void CreateCO2(Vector3 pos) {
@@ -229,5 +232,14 @@ public class Level4_1 : MonoBehaviour
         }
         TotalCO2.Clear();
         TotalCO2UI.Clear();
+    }
+    private void OnDisable()
+    {
+        Finish4_1Obj();
+        Infos[0].SetActive(false);
+        Infos[1].SetActive(false);
+        Infos[2].SetActive(false);
+        Infos[3].SetActive(false);
+        Infos[4].SetActive(false);
     }
 }

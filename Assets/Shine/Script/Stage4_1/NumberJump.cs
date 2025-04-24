@@ -11,13 +11,18 @@ public class NumberJump : MonoBehaviour
     public Material CarbonMaterial1, CarbonMaterial2, metal;
     int ColorTemp=255;
     // Start is called before the first frame update
- 
 
+    public void OriginalTemp()
+    {
+        CarbonMaterial1.color = new Color32(255, 255, 255, 255);
+        CarbonMaterial2.color = new Color32(255, 255, 255, 255);
+        metal.color = new Color32(255, 255, 255, 255);
+        TempText.text = Temp + "<sup>o</sup>C";
+
+    }
 
     public void StartAddTemp() {
-        CarbonMaterial1.color = new Color32(255, 255, 255, 255);
-        CarbonMaterial2.color = new Color32(255, 255,255, 255);
-        metal.color = new Color32(255, 255, 255, 255);
+        OriginalTemp();
         InvokeRepeating("AddTemp", 0f, 0.1f);
     }
     void AddTemp() {
@@ -40,17 +45,10 @@ public class NumberJump : MonoBehaviour
         if (!FindObjectOfType<Level4_1>().ClickHeaterObj)
         {
             CancelInvoke("AddTemp");
-            Clear();
+            OriginalTemp();
         }
     }
-    public void Clear() {
-        Temp = 25;
-        TempText.text = "";
-        CarbonMaterial1.color = new Color32(255, 255, 255, 255);
-        CarbonMaterial2.color = new Color32(255, 255, 255, 255);
-        metal.color = new Color32(255, 255, 255, 255);
-
-    }
+ 
     // Update is called once per frame
     void Update()
     {
