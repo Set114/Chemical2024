@@ -40,6 +40,8 @@ public class Tutorial_1_2 : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        gasCan = GameObject.Find("GAS").GetComponent<Blowtorch>();
+
         levelObjManager = FindObjectOfType<LevelObjManager>();
         audioManager = FindObjectOfType<AudioManager>();
         hintManager = FindObjectOfType<HintManager>();
