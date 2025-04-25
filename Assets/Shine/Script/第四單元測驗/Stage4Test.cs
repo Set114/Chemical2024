@@ -39,13 +39,26 @@ public class Stage4Test : MonoBehaviour
     public TMP_Text[] Iteams;
 
     private int iUnitSheetIndex = 7;
-    public void CheckIteam1() {
+    public void CheckIteam1(string ObjName) {
+        switch (ObjName) {
+            case "Leaves":
+                Ans5[0] = "¾ð¸­";
+                break;
+            case "Hay":
+                Ans5[0] = "°®¯ó";
+                break;
+
+            case "Branches":
+                Ans5[0] = "¾ðªK";
+                break;
+
+        }
         for (int i = 0; i < Iteam1Ans.Length; i++) {
             if (Iteam1Ans[i].active) {
-                if (Iteam1Ans[i].transform.parent.gameObject.name == "Hay") {
+                if (ObjName == "Hay") {
                     Ans5State[0] = true;
                 }
-                Ans5[0] = Iteam1Ans[i].transform.parent.gameObject.name;
+              
             }
         }
         if (Ans5State[0])
@@ -165,42 +178,28 @@ public class Stage4Test : MonoBehaviour
 
     public void Final() {
         for (int i = 0; i < Ans5State.Length; i++) {
-            if (Ans5[0]!=null) // ²Ä¤@ÃD¯S®í³B²z
-            {
-                switch (Ans5[0]) {
-                    case "Leaves":
-                        Iteams[0].text =  "1.¾ð¸­";
-                        break;
-
-                    case "Hay":
-                        Iteams[0].text =  "1.°®¯ó°ï";
-                        break;
-
-                    case "Branches":
-                        Iteams[0].text = "1.¾ðªK";
-                        break;
-                }
-            }
-            if (i>0)
+   
+           // if (i>0)
                 Iteams[i].text = (i+1) + "." + Ans5[i];
 
-            FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add(Iteams[i].text);
+            FindObjectOfType<Shine_GM>().TestAns4[i]=Iteams[i].text;
             if (Ans5State[i])
             {
                 Score += 20;
                 Iteams[i].color = Color.black;
-                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("20");
+                FindObjectOfType<Shine_GM>().TestScroe4[i]="20";
             }
             else
             {
                 Iteams[i].color = Color.red;
-                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("0");
+                FindObjectOfType<Shine_GM>().TestScroe4[i]="0";
             }
         }
 
         ScoreText.text = Score + "¤À";
         ScoreText.color = Score < 60 ? Color.red : Color.black;
 
-        FindObjectOfType<DataInDevice>().AddDataExcel(iUnitSheetIndex);
+        //FindObjectOfType<DataInDevice>().AddDataExcel(iUnitSheetIndex);
+        FindObjectOfType<Shine_GM>().Save4TestDataExcel();
     }
 }

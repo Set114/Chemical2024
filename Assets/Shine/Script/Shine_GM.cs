@@ -26,6 +26,8 @@ public class Shine_GM : MonoBehaviour
     public string[] EndTimes4_L = { "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間" };
     public string[] Counts4_L = { "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數" };
     public int ErrorNumber4_1;
+    public string[] TestAns4 = { "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項" };
+    public string[] TestScroe4 = { "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數" };
     private void Awake()
     {
 #if UNITY_STANDALONE_WIN
@@ -138,25 +140,36 @@ PCMode.SetActive(false);
         dataManager.SaveData[tabIndex] = new List<string>(inputRow);
         dataManager.AddDataExcel(tabIndex);
     }
+    public void Save4TestDataExcel()
+    {
+        var inputRow = new string[]
+        {
+        UserID.text, UserName.text , TestAns4[0],TestScroe4[0], TestAns4[1],TestScroe4[1], TestAns4[2],TestScroe4[2], TestAns4[3],TestScroe4[3], TestAns4[4],TestScroe4[4]
+        };
 
-   /* public void Stage4RecordTeachTime(bool isStart)
-    { //教學4結束時間
-        DataInDeviceScript.SaveData[6].Add(DateTime.Now.ToString());
-        if (!isStart)
-            DataInDeviceScript.SaveData[6].Add("0");
+        int tabIndex =7; // 單元四 測驗
+        var dataManager = FindObjectOfType<DataInDevice>();
+        dataManager.SaveData[tabIndex] = new List<string>(inputRow);
+        dataManager.AddDataExcel(tabIndex);
     }
-    public void Stage4PushToExcel()
-    { //教學4
-        DataInDeviceScript.AddDataExcel(6);
-    }
-    public void Stage6RecordTeachTime(bool isStart)
-    { //教學6結束時間
-        DataInDeviceScript.SaveData[10].Add(DateTime.Now.ToString());
-        if (!isStart)
-            DataInDeviceScript.SaveData[10].Add("0");
-    }
-    public void Stage6PushToExcel()
-    { //教學6
-        DataInDeviceScript.AddDataExcel(10);
-    }*/
+    /* public void Stage4RecordTeachTime(bool isStart)
+     { //教學4結束時間
+         DataInDeviceScript.SaveData[6].Add(DateTime.Now.ToString());
+         if (!isStart)
+             DataInDeviceScript.SaveData[6].Add("0");
+     }
+     public void Stage4PushToExcel()
+     { //教學4
+         DataInDeviceScript.AddDataExcel(6);
+     }
+     public void Stage6RecordTeachTime(bool isStart)
+     { //教學6結束時間
+         DataInDeviceScript.SaveData[10].Add(DateTime.Now.ToString());
+         if (!isStart)
+             DataInDeviceScript.SaveData[10].Add("0");
+     }
+     public void Stage6PushToExcel()
+     { //教學6
+         DataInDeviceScript.AddDataExcel(10);
+     }*/
 }
