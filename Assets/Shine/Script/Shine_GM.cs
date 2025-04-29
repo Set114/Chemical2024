@@ -28,6 +28,8 @@ public class Shine_GM : MonoBehaviour
     public int ErrorNumber4_1;
     public string[] TestAns4 = { "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項" };
     public string[] TestScroe4 = { "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數" };
+    public string[] TestAns6 = { "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項" };
+    public string[] TestScroe6 = { "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數" };
     private void Awake()
     {
 #if UNITY_STANDALONE_WIN
@@ -148,6 +150,18 @@ PCMode.SetActive(false);
         };
 
         int tabIndex =7; // 單元四 測驗
+        var dataManager = FindObjectOfType<DataInDevice>();
+        dataManager.SaveData[tabIndex] = new List<string>(inputRow);
+        dataManager.AddDataExcel(tabIndex);
+    }
+    public void Save6TestDataExcel()
+    {
+        var inputRow = new string[]
+        {
+        UserID.text, UserName.text , TestAns6[0],TestScroe6[0], TestAns6[1],TestScroe6[1], TestAns6[2],TestScroe6[2], TestAns6[3],TestScroe6[3], TestAns6[4],TestScroe6[4]
+        };
+
+        int tabIndex = 11; // 單元六 測驗
         var dataManager = FindObjectOfType<DataInDevice>();
         dataManager.SaveData[tabIndex] = new List<string>(inputRow);
         dataManager.AddDataExcel(tabIndex);

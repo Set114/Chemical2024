@@ -171,24 +171,26 @@ public class Stage6Test : MonoBehaviour
         for (int i = 0; i < Ans5State.Length; i++)
         {
             Iteams[i].text = (i + 1) + "." + Ans5[i];
-            FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add(Iteams[i].text);
+            FindObjectOfType<Shine_GM>().TestAns6[i] = Iteams[i].text;
             if (Ans5State[i])
             {
                 Score += 20;
                 Iteams[i].color = Color.black;
-                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("20");
+                FindObjectOfType<Shine_GM>().TestScroe6[i] = "20";
             }
             else
             {
                 Iteams[i].color = Color.red;
-                FindObjectOfType<DataInDevice>().SaveData[iUnitSheetIndex].Add("0");
+                FindObjectOfType<Shine_GM>().TestScroe6[i] = "0";
             }
-                
+
         }
 
         ScoreText.text = Score + "¤À";
         ScoreText.color = Score < 60 ?Color.red: Color.black;
 
-        FindObjectOfType<DataInDevice>().AddDataExcel(iUnitSheetIndex);
+        //FindObjectOfType<DataInDevice>().AddDataExcel(iUnitSheetIndex);
+        FindObjectOfType<Shine_GM>().Save6TestDataExcel();
+
     }
 }
