@@ -12,6 +12,8 @@ public class Water : MonoBehaviour
     public GameObject[] TackObjs;
     public Vector3[] RecordObjs;
     public GameObject Final;
+    GameObject Acidic;
+    GameObject Alkaline;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,8 @@ public class Water : MonoBehaviour
         TackObjs[0].GetComponent<Shine_MouseController>().Reset();
         TackObjs[1].GetComponent<Shine_MouseController>().Reset();
         TackObjs[2].GetComponent<Shine_MouseController>().Reset();
+        Destroy(Acidic);
+        Destroy(Alkaline);
 
     }
     private void OnTriggerEnter(Collider other)
@@ -91,12 +95,15 @@ public class Water : MonoBehaviour
             Auid.SetColor("_EdgeColor", new Color32(255,100,0,255));
             Auid.SetColor("_GlowColor", new Color32(255, 100, 0, 255));*/
             Watermaterial.SetColor("_Color", new Color32(255, 100, 0, 64));
-
-            ChemicalImage[1].SetActive(true);
             ChemicalImage[0].SetActive(false);
-            ChemicalImage[2].SetActive(false);
+            Acidic = Instantiate(ChemicalImage[1])as GameObject;
+            Acidic.transform.parent= ChemicalImage[0].transform.parent;
+            Acidic.transform.localScale = Vector3.one;
+            Acidic.transform.localRotation = ChemicalImage[0].transform.localRotation;
+            Acidic.transform.localPosition = ChemicalImage[0].transform.localPosition;
 
-        }
+            Acidic.SetActive(true);
+         }
         if (other.gameObject.name == "Potassium")
         {
             //Material pota = this.gameObject.GetComponent<Renderer>().material;
@@ -106,12 +113,19 @@ public class Water : MonoBehaviour
             pota.SetColor("_BottomColor", Color.yellow);
             pota.SetColor("_EdgeColor", Color.yellow);
             pota.SetColor("_GlowColor", Color.yellow);*/
-            ChemicalImage[1].SetActive(false);
-            ChemicalImage[0].SetActive(false);
-            ChemicalImage[2].SetActive(true);
+         
             InfoUI[0].SetActive(false);
             InfoUI[1].SetActive(true);
+
+            Alkaline = Instantiate(ChemicalImage[2]) as GameObject;
+            Alkaline.transform.parent = ChemicalImage[0].transform.parent;
+            Alkaline.transform.localScale = Vector3.one;
+            Alkaline.transform.localRotation = ChemicalImage[0].transform.localRotation;
+            Alkaline.transform.localPosition = ChemicalImage[0].transform.localPosition;
+            Acidic.SetActive(false);
+            Alkaline.SetActive(true);
             StartCoroutine(FinalCheck());
+
         }
     }
 
