@@ -26,6 +26,12 @@ public class Shine_GM : MonoBehaviour
     public string[] EndTimes4_L = { "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間" };
     public string[] Counts4_L = { "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數" };
     public int ErrorNumber4_1;
+
+    public string[] StartTimes6_L = { "無紀錄＿開始時間", "無紀錄＿開始時間", "無紀錄＿開始時間" };
+    public string[] EndTimes6_L = { "無紀錄＿結束時間", "無紀錄＿結束時間", "無紀錄＿結束時間" };
+    public string[] Counts6_L = { "無紀錄＿次數", "無紀錄＿次數", "無紀錄＿次數"};
+    public int ErrorNumber6_1;
+
     public string[] TestAns4 = { "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項" };
     public string[] TestScroe4 = { "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數", "無紀錄＿分數" };
     public string[] TestAns6 = { "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項", "無紀錄＿選項" };
@@ -150,6 +156,18 @@ PCMode.SetActive(false);
         };
 
         int tabIndex =7; // 單元四 測驗
+        var dataManager = FindObjectOfType<DataInDevice>();
+        dataManager.SaveData[tabIndex] = new List<string>(inputRow);
+        dataManager.AddDataExcel(tabIndex);
+    }
+    public void Save6LearnDataExcel()
+    {
+        var inputRow = new string[]
+        {
+        UserID.text, UserName.text , StartTimes6_L[0],  EndTimes6_L[0],Counts6_L[0],StartTimes6_L[1],EndTimes6_L[1],Counts6_L[1],
+        StartTimes6_L[2],EndTimes6_L[2],Counts6_L[2]};
+
+        int tabIndex = 10; // 單元六 教學
         var dataManager = FindObjectOfType<DataInDevice>();
         dataManager.SaveData[tabIndex] = new List<string>(inputRow);
         dataManager.AddDataExcel(tabIndex);

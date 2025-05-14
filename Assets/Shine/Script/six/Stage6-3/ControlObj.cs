@@ -24,7 +24,11 @@ public class ControlObj : MonoBehaviour
     {
         OriginalPosY = transform.localPosition.y;
     }
+    private void Start()
+    {
+        FindObjectOfType<Shine_GM>().StartTimes6_L[2] = System.DateTime.Now.ToString();
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -216,6 +220,8 @@ public class ControlObj : MonoBehaviour
         if (isOpen && isUp)
         {
             Final.SetActive(true);
+            FindObjectOfType<Shine_GM>().EndTimes6_L[2] = System.DateTime.Now.ToString();
+
         }
     }
 }

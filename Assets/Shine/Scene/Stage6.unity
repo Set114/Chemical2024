@@ -32770,6 +32770,19 @@ MonoBehaviour:
   - "\u7121\u7D00\u9304\uFF3F\u6B21\u6578"
   - "\u7121\u7D00\u9304\uFF3F\u6B21\u6578"
   ErrorNumber4_1: 0
+  StartTimes6_L:
+  - "\u7121\u7D00\u9304\uFF3F\u958B\u59CB\u6642\u9593"
+  - "\u7121\u7D00\u9304\uFF3F\u958B\u59CB\u6642\u9593"
+  - "\u7121\u7D00\u9304\uFF3F\u958B\u59CB\u6642\u9593"
+  EndTimes6_L:
+  - "\u7121\u7D00\u9304\uFF3F\u7D50\u675F\u6642\u9593"
+  - "\u7121\u7D00\u9304\uFF3F\u7D50\u675F\u6642\u9593"
+  - "\u7121\u7D00\u9304\uFF3F\u7D50\u675F\u6642\u9593"
+  Counts6_L:
+  - "\u7121\u7D00\u9304\uFF3F\u6B21\u6578"
+  - "\u7121\u7D00\u9304\uFF3F\u6B21\u6578"
+  - "\u7121\u7D00\u9304\uFF3F\u6B21\u6578"
+  ErrorNumber6_1: 0
   TestAns4:
   - "\u7121\u7D00\u9304\uFF3F\u9078\u9805"
   - "\u7121\u7D00\u9304\uFF3F\u9078\u9805"
@@ -44153,19 +44166,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 704759188}
         m_TargetAssemblyTypeName: Shine_GM, Assembly-CSharp
-        m_MethodName: Stage6RecordTeachTime
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 704759188}
-        m_TargetAssemblyTypeName: Shine_GM, Assembly-CSharp
-        m_MethodName: Stage6PushToExcel
+        m_MethodName: Save6LearnDataExcel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

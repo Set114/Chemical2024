@@ -18,6 +18,7 @@ public class Water : MonoBehaviour
         RecordObjs[0] = TackObjs[0].transform.position;
         RecordObjs[1] = TackObjs[1].transform.position;
         RecordObjs[2] = TackObjs[2].transform.position;
+        FindObjectOfType<Shine_GM>().StartTimes6_L[0] = System.DateTime.Now.ToString();
     }
 
     // Update is called once per frame
@@ -118,6 +119,8 @@ public class Water : MonoBehaviour
         yield return new WaitForSeconds(6f);
         if (!TackObjs[0].active && !TackObjs[1].active && !TackObjs[2].active) {
             Final.SetActive(true);
+            FindObjectOfType<Shine_GM>().EndTimes6_L[0] = System.DateTime.Now.ToString();
+
         }
     }
     

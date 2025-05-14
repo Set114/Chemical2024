@@ -21,6 +21,7 @@ public class Stage6_2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<Shine_GM>().StartTimes6_L[1] = System.DateTime.Now.ToString();
 
     }
 
@@ -77,6 +78,8 @@ public class Stage6_2 : MonoBehaviour
         if (MinTemp && MaxTemp)
         {
             Final.SetActive(true);
+            FindObjectOfType<Shine_GM>().EndTimes6_L[1] = System.DateTime.Now.ToString();
+
         }
     }
     public void ReButton() {
