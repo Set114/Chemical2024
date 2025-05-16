@@ -80,7 +80,7 @@ public class Water : MonoBehaviour
             Watermaterial.SetColor("_Color", new Color32(255, 235, 4, 64));
 
             ChemicalImage[0].SetActive(true);
-            PotassiumCollider.enabled = true;
+            PotassiumCollider.enabled = false;
             AcidCollider.enabled = true;
             InfoUI[0].SetActive(true);
 
@@ -101,7 +101,8 @@ public class Water : MonoBehaviour
             Acidic.transform.localScale = Vector3.one;
             Acidic.transform.localRotation = ChemicalImage[0].transform.localRotation;
             Acidic.transform.localPosition = ChemicalImage[0].transform.localPosition;
-
+            PotassiumCollider.enabled = true;
+            AcidCollider.enabled = false;
             Acidic.SetActive(true);
          }
         if (other.gameObject.name == "Potassium")
