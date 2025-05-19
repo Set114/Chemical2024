@@ -4970,6 +4970,7 @@ GameObject:
   - component: {fileID: 463444395128744573}
   - component: {fileID: 6493850353933336967}
   - component: {fileID: 5172353749923198547}
+  - component: {fileID: 8408768133338882631}
   m_Layer: 0
   m_Name: Tweezers_1-7
   m_TagString: Pickable
@@ -5091,10 +5092,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4404730015143004095}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4404730015143004095}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -5219,6 +5244,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.012, z: 0.075}
   m_Center: {x: 0, y: 0, z: -0.06}
+--- !u!114 &8408768133338882631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686039343060827697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3321464697496993005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,6 +5423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6a6bc143e27df4abadaf3ac21c4971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweezers: {fileID: 4404730015143004095}
   dryIce: {fileID: 7997783678073492042}
   smoke_dryIce: {fileID: 3938583064274044661}
   bubble_dryIce: {fileID: 2109868076}
@@ -10855,6 +10893,7 @@ GameObject:
   - component: {fileID: 7078739628856254171}
   - component: {fileID: 7078739628856254148}
   - component: {fileID: 7078739628856254149}
+  - component: {fileID: 3363196847177631508}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Pickable
@@ -11138,6 +11177,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &3363196847177631508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078739628856254151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7997783678073492042
 GameObject:
   m_ObjectHideFlags: 0
@@ -11151,6 +11202,7 @@ GameObject:
   - component: {fileID: 2896181747908179721}
   - component: {fileID: 7078739630642818845}
   - component: {fileID: 8466584560562027033}
+  - component: {fileID: 6921939905004989991}
   m_Layer: 0
   m_Name: DryIce
   m_TagString: TweezersClamp
@@ -11272,6 +11324,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.009935254, z: 0.01}
   m_Center: {x: 0, y: -0.000032372773, z: 0}
+--- !u!114 &6921939905004989991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997783678073492042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8438033702688341877
 GameObject:
   m_ObjectHideFlags: 0

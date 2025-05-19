@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Drawing;
-using static Cinemachine.CinemachineTriggerAction.ActionSettings;
-using static Cinemachine.DocumentationSortingAttribute;
 
 //  負責管理題目介面
 public class QuestionManager : MonoBehaviour
@@ -42,7 +39,7 @@ public class QuestionManager : MonoBehaviour
     //--System
     private GameManager gm;
     private LevelObjManager levelManager;
-    private AudioManager audioManager;                      //音樂管理
+    [SerializeField]private AudioManager audioManager;                      //音樂管理
     private ControllerHaptics controllerHaptics;            //處理手把震動
     private bool isPC;
     private void Awake()

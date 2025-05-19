@@ -906,6 +906,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 1}
   maxCapacity: 100
   currCapacity: 0
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -913,6 +914,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: BakingSoda_2-4
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -5863,6 +5865,7 @@ GameObject:
   - component: {fileID: 2233553971867589123}
   - component: {fileID: 2233553971867589122}
   - component: {fileID: 2233553971867589133}
+  - component: {fileID: 5547163203187225019}
   m_Layer: 0
   m_Name: BakingSoda_2-4
   m_TagString: Pickable
@@ -5904,6 +5907,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 1}
   maxCapacity: 100
   currCapacity: 100
+  ratio: 0
   stream: {fileID: 2233553971728608154}
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
@@ -5911,6 +5915,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -6108,6 +6113,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07, y: 0.01449603, z: 0.07}
   m_Center: {x: 0, y: 0.007248015, z: 0}
+--- !u!114 &5547163203187225019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2233553971867589134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2233553972044301391
 GameObject:
   m_ObjectHideFlags: 0
@@ -7395,6 +7412,18 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &8639973214562703492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106684098442772716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5590452084012030550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 02abc57529a5c40f298fe9e57dec3a86, type: 3}

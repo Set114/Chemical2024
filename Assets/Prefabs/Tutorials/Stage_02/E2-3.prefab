@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37c96f72148d4f81a0ddb07b0688bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweezers: {fileID: 6838465980487610293}
   testTubeToner: {fileID: 1749829231001361356}
   testTubeCopperOxide: {fileID: 7973196110885749179}
   testTubePowderColor_final: {r: 0.603, g: 0.21448395, b: 0.07679717, a: 1}
@@ -504,6 +505,7 @@ GameObject:
   - component: {fileID: 6147055571004998447}
   - component: {fileID: 7973196110885749179}
   - component: {fileID: 6440958407493492275}
+  - component: {fileID: 6126623756717596284}
   m_Layer: 0
   m_Name: TestTube_CopperOxide_2-6
   m_TagString: Untagged
@@ -688,6 +690,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 257893074903362644}
   targetName: 
   sendObj: 1
+--- !u!114 &6126623756717596284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310550162130365405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1473475703868501999
 GameObject:
   m_ObjectHideFlags: 0
@@ -26137,6 +26151,7 @@ GameObject:
   - component: {fileID: 6838465979782168620}
   - component: {fileID: 6838465979782168621}
   - component: {fileID: 6838465979782168622}
+  - component: {fileID: 1946287606729011141}
   m_Layer: 0
   m_Name: Toner_2-6
   m_TagString: Pickable
@@ -26396,6 +26411,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07, y: 0.01449603, z: 0.07}
   m_Center: {x: 0, y: 0.007248015, z: 0}
+--- !u!114 &1946287606729011141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838465979782168608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6838465979798531271
 GameObject:
   m_ObjectHideFlags: 0
@@ -36390,6 +36417,7 @@ GameObject:
   - component: {fileID: 6838465980068599551}
   - component: {fileID: 6838465980068599536}
   - component: {fileID: 6838465980068599537}
+  - component: {fileID: 5849914526828894947}
   m_Layer: 0
   m_Name: CopperOxide_2-6
   m_TagString: Pickable
@@ -36649,6 +36677,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07, y: 0.01449603, z: 0.07}
   m_Center: {x: 0, y: 0.007248015, z: 0}
+--- !u!114 &5849914526828894947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838465980068599539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6838465980193441719
 GameObject:
   m_ObjectHideFlags: 0
@@ -36917,6 +36957,7 @@ GameObject:
   - component: {fileID: 6838465980487610280}
   - component: {fileID: 6838465980487610281}
   - component: {fileID: 6838465980487610282}
+  - component: {fileID: 31424603607349468}
   m_Layer: 0
   m_Name: Tweezers_2-6
   m_TagString: Pickable
@@ -37038,10 +37079,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6838465980487610293}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6838465980487610293}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -37166,6 +37231,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.012, z: 0.075}
   m_Center: {x: 0, y: 0, z: -0.06}
+--- !u!114 &31424603607349468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838465980487610284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6838465980522730685
 GameObject:
   m_ObjectHideFlags: 0
@@ -37351,6 +37428,7 @@ GameObject:
   - component: {fileID: 6838465980632390161}
   - component: {fileID: 1749829231001361356}
   - component: {fileID: 6838465980632390163}
+  - component: {fileID: 6525231439971146232}
   m_Layer: 0
   m_Name: TestTube_Toner_2-6
   m_TagString: Untagged
@@ -37535,6 +37613,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 257893074903362644}
   targetName: 
   sendObj: 1
+--- !u!114 &6525231439971146232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838465980632390165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6838465980690211779
 GameObject:
   m_ObjectHideFlags: 0

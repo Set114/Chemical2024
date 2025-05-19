@@ -7457,6 +7457,7 @@ GameObject:
   - component: {fileID: 3810797919557156340}
   - component: {fileID: 3810797919557156339}
   - component: {fileID: 1409276815341749782}
+  - component: {fileID: 5896524508126038717}
   m_Layer: 0
   m_Name: HCI_2-3
   m_TagString: Pickable
@@ -7768,6 +7769,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10077159, y: 0.12894173, z: 0.09461353}
   m_Center: {x: -0.0030709058, y: 0.06443087, z: 0}
+--- !u!114 &5896524508126038717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810797919557156337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3810797919677592191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7990,6 +8003,7 @@ GameObject:
   - component: {fileID: 5769349461390181503}
   - component: {fileID: 5769349461390181490}
   - component: {fileID: 8609956204785123182}
+  - component: {fileID: 6138256129164414361}
   m_Layer: 0
   m_Name: SodiumCarbonate_2-3
   m_TagString: Pickable
@@ -8301,6 +8315,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10077159, y: 0.12894173, z: 0.09461353}
   m_Center: {x: -0.0030709058, y: 0.06443087, z: 0}
+--- !u!114 &6138256129164414361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275398462447174004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4621550238091996552
 GameObject:
   m_ObjectHideFlags: 0
@@ -8413,6 +8439,7 @@ GameObject:
   - component: {fileID: 5895655789251473337}
   - component: {fileID: 5743555228046862133}
   - component: {fileID: 5895655789251473318}
+  - component: {fileID: 8646161856452682277}
   m_Layer: 0
   m_Name: RubberBand_2-3
   m_TagString: Pickable
@@ -8693,6 +8720,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 5743555228465077439}
   targetName: Cap_Point
   sendObj: 1
+--- !u!114 &8646161856452682277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4860612003391466855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4876539651047791992
 GameObject:
   m_ObjectHideFlags: 0
@@ -10004,7 +10043,7 @@ MonoBehaviour:
   balloonMaxSize: 1
   object_Step1: {fileID: 8038209184199684724}
   object_Step2: {fileID: 8038209183476377585}
-  tweezers: {fileID: 5743555228797103420}
+  tweezers: {fileID: 5028231028548443162}
   weightText: {fileID: 3366517919563182863}
   weightTextDisplay: {fileID: 4331931695240838296}
   scaleVale: 0
@@ -10030,6 +10069,7 @@ GameObject:
   - component: {fileID: 5028231028548443165}
   - component: {fileID: 356422170649063118}
   - component: {fileID: 7781393608292491192}
+  - component: {fileID: 2487764116366973124}
   m_Layer: 0
   m_Name: Tweezers_2-3
   m_TagString: Pickable
@@ -10163,9 +10203,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5028231028548443162}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5028231028548443162}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -10290,6 +10354,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.012, z: 0.075}
   m_Center: {x: 0, y: 0, z: -0.06}
+--- !u!114 &2487764116366973124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5743555228797103420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5743555229565096641
 GameObject:
   m_ObjectHideFlags: 0
@@ -10614,6 +10690,7 @@ GameObject:
   - component: {fileID: 2067846667187242922}
   - component: {fileID: 2067846667187242923}
   - component: {fileID: 1663227943899869723}
+  - component: {fileID: 966590438320987859}
   m_Layer: 0
   m_Name: Balloon_2-3
   m_TagString: Pickable
@@ -10846,6 +10923,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.03, z: 0.15}
   m_Center: {x: 0, y: 0.012, z: -0.08}
+--- !u!114 &966590438320987859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793589655314195717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7122119233811356632
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,6 +126,10 @@ public class SettingUIManager : MonoBehaviour
     //設定關卡按鈕
     public void SetLessonListButton()
     {
+        foreach (Transform child in LearnBtns.transform)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (Transform child in TestBtns.transform)
         {
             Destroy(child.gameObject);

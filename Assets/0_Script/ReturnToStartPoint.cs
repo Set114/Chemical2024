@@ -9,6 +9,7 @@ public class ReturnToStartPoint : MonoBehaviour
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     private XRGrabInteractable xrGrab;
+
     private void Awake()
     {
         initialParent = transform.parent;
@@ -16,7 +17,15 @@ public class ReturnToStartPoint : MonoBehaviour
         initialRotation = transform.rotation;
         xrGrab = GetComponent<XRGrabInteractable>();
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        //當物件掉到地上時
+        if(collision.gameObject.name == "Ground")
+        {
+            Return();
+        }
+    }
+    //回歸原位
     public void Return()
     {
         if (xrGrab)

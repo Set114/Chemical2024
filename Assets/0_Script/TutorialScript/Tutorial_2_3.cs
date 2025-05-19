@@ -51,9 +51,9 @@ public class Tutorial_2_3 : MonoBehaviour
     [Tooltip("前半部需要顯示的物件")]
     [SerializeField] private GameObject object_Step1;
     [Tooltip("後半部需要顯示的物件")]
-    [SerializeField] private GameObject object_Step2;   
+    [SerializeField] private GameObject object_Step2;
     [Tooltip("鑷子")]
-    [SerializeField] private GameObject tweezers;
+    [SerializeField] private Tweezers tweezers;
 
     [Header("質量設定")]
     [Tooltip("磅秤文字")]
@@ -343,6 +343,10 @@ public class Tutorial_2_3 : MonoBehaviour
             audioManager.PlayVoice("W_HCI");
             firstTimeWarning = false;
         }
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(true);
+        }
         //該步驟如果去觸碰其他物件，給予警告語音。
         switch (Status)
         {
@@ -451,6 +455,16 @@ public class Tutorial_2_3 : MonoBehaviour
                 break;
         }
     }
+
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
+    {
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(false);
+        }
+    }
+
     private void EndTheTutorial()   //完成教學
     {
         hintManager.SwitchStep("T2_3_9");

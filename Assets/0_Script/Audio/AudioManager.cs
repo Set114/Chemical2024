@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 [Serializable]
 public class Sound
@@ -45,23 +43,16 @@ public class AudioManager : MonoBehaviour
     public Sound[] SoundList;
 
     public static AudioManager instance;
-    [SerializeField] private AudioSource bgmSource; // 獨立的 AudioSource 變數，用於播放背景音樂
-    [SerializeField] private AudioSource voiceSource; // 獨立的 AudioSource 變數，用於播放音效
+    public AudioSource bgmSource; // 獨立的 AudioSource 變數，用於播放背景音樂
+    public AudioSource voiceSource; // 獨立的 AudioSource 變數，用於播放音效
     [SerializeField] private GameObject soundSource; //音效物件
     public AudioClip bgmClip; // 用於儲存背景音樂的 AudioClip
 
     private SettingUIManager controlPanel;      //左上角控制板
-    [SerializeField] private Slider soundsSlider; // 用於控制音效音量的滑塊
-    [SerializeField] private Slider bgmSlider; // 用於控制背景音樂音量的滑塊
+    public Slider soundsSlider; // 用於控制音效音量的滑塊
+    public Slider bgmSlider; // 用於控制背景音樂音量的滑塊
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
         if (soundsSlider == null || bgmSlider == null)
         {
             controlPanel = FindObjectOfType<SettingUIManager>();
@@ -72,25 +63,47 @@ public class AudioManager : MonoBehaviour
             }
         }
 
-    /*foreach (Sound s in Sounds)
-    {
-        if (s.name == "BackgroundMusic")
+        if (instance != null && instance != this)
         {
-            // 如果Sound是BackgroundMusic，不做处理
-            continue;
-        }
-        else
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
-    }*/
+            instance.Sounds = Sounds;
+            instance.BGMList = BGMList;
+            instance.VoiceList = VoiceList;
+            instance.SoundList = SoundList;
 
-    // 初始化背景音樂的AudioSource
-    bgmSource.clip = bgmClip;
+            soundsSlider.value = instance.voiceSource.volume;
+            soundsSlider.onValueChanged.AddListener(instance.AdjustSoundsVolume);
+            instance.soundsSlider = soundsSlider;
+
+            bgmSlider.value = instance.bgmSource.volume;
+            bgmSlider.onValueChanged.AddListener(instance.AdjustBGMVolume);
+            instance.bgmSlider = bgmSlider;
+
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        /*foreach (Sound s in Sounds)
+        {
+            if (s.name == "BackgroundMusic")
+            {
+                // 如果Sound是BackgroundMusic，不做处理
+                continue;
+            }
+            else
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+            }
+        }*/
+
+        // 初始化背景音樂的AudioSource
+        bgmSource.clip = bgmClip;
         bgmSource.loop = true;
         bgmSource.volume = 0.5f; // 設置初始音量
 
@@ -239,7 +252,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // 調整所有音效的音量
-    private void AdjustSoundsVolume(float volume)
+    public void AdjustSoundsVolume(float volume)
     {
         voiceSource.volume = volume;
         /*foreach (Sound s in Sounds)
@@ -252,11 +265,26 @@ public class AudioManager : MonoBehaviour
     }
 
     // 調整背景音樂的音量
-    private void AdjustBGMVolume(float volume)
+    public void AdjustBGMVolume(float volume)
     {
         if (bgmSource != null)
         {
             bgmSource.volume = volume;
+        }
+    }
+
+    //繼承音量設定
+    public void GetVolumeSetting(float seVolume, float bgmVolume)
+    {
+        if (voiceSource != null)
+        {
+            soundsSlider.value = seVolume;
+            voiceSource.volume = seVolume;
+        }
+        if (bgmSource != null)
+        {
+            bgmSlider.value = bgmVolume;
+            bgmSource.volume = bgmVolume;
         }
     }
 }

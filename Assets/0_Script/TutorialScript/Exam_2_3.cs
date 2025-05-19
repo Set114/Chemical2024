@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Exam_2_3 : MonoBehaviour
 {
     [Header("實驗道具")]
+    [Tooltip("鑷子")]
+    [SerializeField] private Tweezers tweezers;
     [Tooltip("試管")]
     private GameObject testTube;
     [Tooltip("試管內粉末")]
@@ -252,6 +254,18 @@ public class Exam_2_3 : MonoBehaviour
                     testTube.SetActive(true);
                 }
                 break;
+        }
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(true);
+        }
+    }
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
+    {
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(false);
         }
     }
     public void OnAlcoholLampTouched()

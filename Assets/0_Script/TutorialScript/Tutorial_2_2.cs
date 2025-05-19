@@ -45,7 +45,7 @@ public class Tutorial_2_2 : MonoBehaviour
     [Tooltip("試管架")]
     [SerializeField] private GameObject testTubeRack;
     [Tooltip("鑷子")]
-    [SerializeField] private GameObject tweezers;
+    [SerializeField] private Tweezers tweezers;
 
     [Header("質量設定")]
     [Tooltip("磅秤")]
@@ -206,7 +206,7 @@ public class Tutorial_2_2 : MonoBehaviour
                     Beaker_SodiumCarbonate.SetActive(false);
                     Beaker_CalciumChloride.SetActive(false);
                     testTubeRack.SetActive(false);
-                    tweezers.SetActive(false);
+                    tweezers.gameObject.SetActive(false);
 
                     kitchenScale.SetActive(true);
                     scaleVale = 0f;
@@ -344,6 +344,10 @@ public class Tutorial_2_2 : MonoBehaviour
     //抓取物件時觸發
     public void Grab(GameObject obj)
     {
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(true);
+        }
         //該步驟如果去觸碰其他物件，給予警告語音。
         switch (Status)
         {
@@ -420,6 +424,15 @@ public class Tutorial_2_2 : MonoBehaviour
                         pcController.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 }
                 break;
+        }
+    }
+
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
+    {
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(false);
         }
     }
 

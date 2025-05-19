@@ -146,6 +146,11 @@ public class MenuUIManager : MonoBehaviour
 
     void LearnMode()
     {
+        //目前AudioManager改為DontDestroyOnLoad，不適用單元四、單元六
+        if (chapterData == 4 || chapterData == 6)
+        {
+            Destroy(audioManager.gameObject);
+        }
         // 設置章節模式和場景名稱
         chapterModeData = 0;
 
@@ -160,6 +165,11 @@ public class MenuUIManager : MonoBehaviour
 
     void TestMode()
     {
+        //目前AudioManager改為DontDestroyOnLoad，不適用單元四、單元六
+        if (chapterData == 4 || chapterData == 6)
+        {
+            Destroy(audioManager.gameObject);
+        }
         // 設置章節模式和場景名稱
         chapterModeData = 1;
 

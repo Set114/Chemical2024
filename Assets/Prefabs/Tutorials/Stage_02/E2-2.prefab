@@ -10599,6 +10599,7 @@ GameObject:
   - component: {fileID: 2290951452704055240}
   - component: {fileID: 2290951452704055241}
   - component: {fileID: 2290951452704055242}
+  - component: {fileID: 7238538812746688601}
   m_Layer: 0
   m_Name: BakingSoda_2-5
   m_TagString: Pickable
@@ -10640,6 +10641,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 1}
   maxCapacity: 100
   currCapacity: 100
+  ratio: 0
   stream: {fileID: 2290951452438243193}
   minPourOutAngle: 0
   maxPourOutAngle: 0.75
@@ -10647,6 +10649,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10
   injectFilter: 
   isUnlimited: 1
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -10658,6 +10661,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &2290951452704055240
@@ -10841,6 +10847,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07, y: 0.01449603, z: 0.07}
   m_Center: {x: 0, y: 0.007248015, z: 0}
+--- !u!114 &7238538812746688601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290951452704055236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2290951452894700576
 GameObject:
   m_ObjectHideFlags: 0
@@ -10896,6 +10914,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 1}
   maxCapacity: 100
   currCapacity: 0
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -10903,6 +10922,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: BakingSoda_2-5
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -10926,6 +10946,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2290951452940936597

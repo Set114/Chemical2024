@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Exam_1_1 : MonoBehaviour
 {
+    [Tooltip("鑷子")]
+    [SerializeField] private Tweezers tweezers;
     [Tooltip("乾冰")]
     [SerializeField] private GameObject dryIce;
     [Tooltip("乾冰特效")]
@@ -194,53 +196,20 @@ public class Exam_1_1 : MonoBehaviour
         }
     }
 
-    //  以下是原先紀錄測驗資料的流程，待修改
-    /*
-    //控制結算
-    void Close_controler()
+    //抓取物件時觸發
+    public void Grab(GameObject obj)
     {
-        StartCoroutine(WaitAndStartNextLevel());
-    }
-
-    private IEnumerator WaitAndStartNextLevel()
-    {
-        if (count == 0)
+        if (obj == tweezers.gameObject)
         {
-            loading_sign.SetActive(true);
-            TestDataEnd(() => {
-                Q2MarkShow();
-                TestDataStart(1);
-                loading_sign.SetActive(false);
-            });
+            tweezers.Grab(true);
         }
-        else if (count == 1)
-        {
-            loading_sign.SetActive(true);
-            TestDataEnd(() => {
-                TestDataStart(2);
-                iceBlockCollisionStage1UI.T213ShowUI();
-                loading_sign.SetActive(false);
-            });
-        }
-        else if (count == 2)
-        {
-            //levelEndSequence.EndLevel(false,false, 1f, 2f, 1f, "1", () => {iceBlockCollisionStage1UI.TestUIShow();});
-            levelObjManager.LevelClear("1", "");
-        }
-        count++;
-        yield return null;
     }
-    public void TestDataStart(int countindex)
+    //鬆開物件時觸發
+    public void Release(GameObject obj)
     {
-        testDataManager.StartLevel();
-        testDataManager.GetsId(countindex);
+        if (obj == tweezers.gameObject)
+        {
+            tweezers.Grab(false);
+        }
     }
-
-    public void TestDataEnd(Action callback)
-    {
-        testDataManager.CompleteLevel();
-        testDataManager.EndLevelWithCallback(callback);
-        // testDataManager.EndLevel();
-    }
-    */
 }

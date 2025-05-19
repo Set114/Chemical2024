@@ -117,6 +117,7 @@
     <Compile Include="Assets/FMETP_STREAM/FMNetwork/Scripts/LargeFileDecoder.cs" />
     <Compile Include="Assets/3_Model/Props/Security Systems/Free Version/Scripts/FreebieCameraHookupScript.cs" />
     <Compile Include="Assets/0_Script/stage3/calculateManager.cs" />
+    <Compile Include="Assets/Shine/Script/Stage4_1/AddErrorCount.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/FillCameraBackground.cs" />
     <Compile Include="Assets/0_Script/Core/MouseController.cs" />
     <Compile Include="Assets/0_Script/Script/ButtonInteraction3.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Assets/0_Script/Script/ButtonInteraction.cs" />
     <Compile Include="Assets/0_Script/Maybe Useless/AnimationController/FeAniAnimationController.cs" />
     <Compile Include="Assets/3_Model/Props/Security Systems/Free Version/Scripts/ObjectRotator.cs" />
+    <Compile Include="Assets/Shine/Script/six/FloatUpDown.cs" />
     <Compile Include="Assets/JMO Assets/Cartoon FX (legacy)/Demo/Assets/CFX_Demo_RandomDirectionTranslate.cs" />
     <Compile Include="Assets/0_Script/Script/CubeSphereInteraction.cs" />
     <Compile Include="Assets/3_Model/Layer lab/3D Casual Character/Demo/Scripts/UI/PartsUI.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Assets/0_Script/Script/GlucoseScaleCube.cs" />
     <Compile Include="Assets/0_Script/Script/OpenObject.cs" />
     <Compile Include="Assets/0_Script/TutorialScript/Exam_2_1.cs" />
+    <Compile Include="Assets/Shine/Script/six/TouchObj.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/SocketIO/FM_IO/Encoder.cs" />
     <Compile Include="Assets/0_Script/Maybe Useless/Weighing.cs" />
     <Compile Include="Assets/0_Script/Script/ParticleCollider.cs" />
@@ -275,6 +278,7 @@
     <Compile Include="Assets/3_Model/Props/Security Systems/Free Version/Scripts/TabletInput.cs" />
     <Compile Include="Assets/Pc Player/Script/ControllerMovement3D.cs" />
     <Compile Include="Assets/Shine/Script/Stage4_1/ObjNameTip.cs" />
+    <Compile Include="Assets/Shine/Script/six/UIMoveUpDown.cs" />
     <Compile Include="Assets/0_Script/Script/BlendShapeControl.cs" />
     <Compile Include="Assets/0_Script/Maybe Useless/GasCan.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/Interactive/WorldSpaceButton/OffScreenTrigger.cs" />
@@ -294,6 +298,7 @@
     <Compile Include="Assets/YiHua/Level_tips_UI.cs" />
     <Compile Include="Assets/0_Script/UI/Stage0/LogInSystem.cs" />
     <Compile Include="Assets/0_Script/stage3/AtomBall.cs" />
+    <Compile Include="Assets/Shine/Script/six/UIFollowTarget.cs" />
     <Compile Include="Assets/YiHua/Test_tube.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMCore/Scripts/Features/Interactive/WorldSpaceButton/WorldToScreenSpace.cs" />
     <Compile Include="Assets/0_Script/UI/Stage0/ReadDatas.cs" />
@@ -376,6 +381,7 @@
     <Compile Include="Assets/0_Script/TutorialScript/Tutorial_5_3.cs" />
     <Compile Include="Assets/0_Script/Script/ShowCapOnFireCollision.cs" />
     <Compile Include="Assets/0_Script/stage3/Stage3TutorialUI.cs" />
+    <Compile Include="Assets/Shine/Script/six/MoveToTarget.cs" />
     <Compile Include="Assets/FMETP_STREAM/FMWebSocket/Scripts/SocketIO/FM_IO/Decoder.cs" />
     <Compile Include="Assets/Shine/Script/第四單元測驗/Stage4Test.cs" />
     <Compile Include="Assets/0_Script/Core/ZoomDisplay.cs" />
@@ -1471,6 +1477,10 @@
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit">
       <HintPath>Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">

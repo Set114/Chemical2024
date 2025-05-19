@@ -153,7 +153,7 @@ public class Tutorial_1_2 : MonoBehaviour
     //抓取物件時觸發
     public void Grab(GameObject obj)
     {
-        if (obj == gasCan)
+        if (obj == gasCan.gameObject)
         {
             if (firstTimeWarning)
             {
@@ -166,7 +166,7 @@ public class Tutorial_1_2 : MonoBehaviour
     //鬆開物件時觸發
     public void Release(GameObject obj)
     {
-        if (obj == gasCan)
+        if (obj == gasCan.gameObject)
         {
             gasCan.Grab(false);
         }

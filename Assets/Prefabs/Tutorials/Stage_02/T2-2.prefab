@@ -6249,6 +6249,7 @@ GameObject:
   - component: {fileID: 2443770711137991098}
   - component: {fileID: 2443770711137991045}
   - component: {fileID: 6377465165403777407}
+  - component: {fileID: 6498098898973744776}
   m_Layer: 0
   m_Name: Cap_2-2
   m_TagString: Pickable
@@ -6480,6 +6481,18 @@ MonoBehaviour:
   tutorialObject: {fileID: 4978853370882789769}
   targetName: Cap_Point
   sendObj: 1
+--- !u!114 &6498098898973744776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443770711137991041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2443770711366786776
 GameObject:
   m_ObjectHideFlags: 0
@@ -7327,7 +7340,7 @@ MonoBehaviour:
   Beaker_SodiumCarbonate: {fileID: 6284393385820619329}
   Beaker_CalciumChloride: {fileID: 6377465165814513348}
   testTubeRack: {fileID: 2443770710687082011}
-  tweezers: {fileID: 5714907145928359318}
+  tweezers: {fileID: 3000592769220042543}
   kitchenScale: {fileID: 5321312002598277351}
   weightText: {fileID: 7822976799675959831}
   weightTextDisplay: {fileID: 5018601751234635500}
@@ -7903,6 +7916,7 @@ GameObject:
   - component: {fileID: 3000592769220042536}
   - component: {fileID: 7534986516147285499}
   - component: {fileID: 549142291936812173}
+  - component: {fileID: 6823046251778251988}
   m_Layer: 0
   m_Name: Tweezers_2-2
   m_TagString: Pickable
@@ -8037,9 +8051,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3000592769220042543}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3000592769220042543}
+        m_TargetAssemblyTypeName: Tweezers, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -8164,6 +8202,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.012, z: 0.075}
   m_Center: {x: 0, y: 0, z: -0.06}
+--- !u!114 &6823046251778251988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714907145928359318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6284393385820619329
 GameObject:
   m_ObjectHideFlags: 0
@@ -8179,6 +8229,7 @@ GameObject:
   - component: {fileID: 4355889618551146314}
   - component: {fileID: 4355889618551146311}
   - component: {fileID: 1954377313633074267}
+  - component: {fileID: 7545046244782803739}
   m_Layer: 0
   m_Name: SodiumCarbonate_2-2
   m_TagString: Pickable
@@ -8491,6 +8542,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10077159, y: 0.12894173, z: 0.09461353}
   m_Center: {x: -0.0030709058, y: 0.06443087, z: 0}
+--- !u!114 &7545046244782803739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284393385820619329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6377465164140052866
 GameObject:
   m_ObjectHideFlags: 0
@@ -9546,6 +9609,7 @@ GameObject:
   - component: {fileID: 6377465165814513345}
   - component: {fileID: 6377465165814513350}
   - component: {fileID: 9218063109878367523}
+  - component: {fileID: 2071033597783413731}
   m_Layer: 0
   m_Name: CalciumChloride_2-2
   m_TagString: Pickable
@@ -9858,6 +9922,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10077159, y: 0.12894173, z: 0.09461353}
   m_Center: {x: -0.0030709058, y: 0.06443087, z: 0}
+--- !u!114 &2071033597783413731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377465165814513348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6cd3bd35e142ada6dc346136ab288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6377465165821608249
 GameObject:
   m_ObjectHideFlags: 0

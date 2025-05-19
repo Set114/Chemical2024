@@ -26373,6 +26373,7 @@ MonoBehaviour:
   answerText: {fileID: 0}
   submittedAnswers: []
   submittedCorrectly: 
+  audioManager: {fileID: 0}
 --- !u!222 &2497192226235985825
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27152,19 +27153,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3385617890250005705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3385617890250005709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc9abad409ecc5247a1c06fafc195189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmSlider: {fileID: 0}
 --- !u!114 &3385617890250005706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27283,7 +27271,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3385617890250005707}
   - component: {fileID: 3385617890250005706}
-  - component: {fileID: 3385617890250005705}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged

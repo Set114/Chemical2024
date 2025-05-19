@@ -15,6 +15,7 @@ public class Tweezers : MonoBehaviour
     private Transform clampingObjParent;//夾取中的物件的元父物件
     private RigidbodyConstraints constraints;
 
+    private bool isGrab = false;
     private bool isPC;
 
     private void Start()
@@ -32,29 +33,31 @@ public class Tweezers : MonoBehaviour
 
     private void Update()
     {
-        if (isPC)
+        if (isGrab)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (isPC)
             {
-                Clamp(true);
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Clamp(true);
+                }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    Clamp(false);
+                }
             }
-            else if (Input.GetMouseButtonUp(1))
+            else
             {
-                Clamp(false);
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Clamp(true);
+                }
+                else if (Input.GetButtonUp("Fire1"))
+                {
+                    Clamp(false);
+                }
             }
         }
-        else
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Clamp(true);
-            }
-            else if (Input.GetButtonUp("Fire1"))
-            {
-                Clamp(false);
-            }
-        }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,6 +74,15 @@ public class Tweezers : MonoBehaviour
             readyToClampObj = null;
         }
         Clamp(false);
+    }
+
+    public void Grab(bool grab)
+    {
+        isGrab = grab;
+        if (!isGrab)
+        {
+            Clamp(false);
+        }
     }
 
     public void Clamp(bool clamp)
