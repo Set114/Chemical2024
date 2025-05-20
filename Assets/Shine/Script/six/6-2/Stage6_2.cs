@@ -26,6 +26,7 @@ public class Stage6_2 : MonoBehaviour
     void Start()
     {
         FindObjectOfType<Shine_GM>().StartTimes6_L[1] = System.DateTime.Now.ToString();
+        Info[0].SetActive(true);
 
     }
 
@@ -79,6 +80,8 @@ public class Stage6_2 : MonoBehaviour
         i = 2;
         //i = Mathf.Clamp(i, 0, 2);
         Info[0].SetActive(false);
+        Info[1].SetActive(true);
+
         YallowLight.GetComponent<Light>().color = Color.yellow;
         ChemicaImage[0].SetActive(false);
         ChemicaObj[0].SetActive(false);
@@ -114,15 +117,15 @@ public class Stage6_2 : MonoBehaviour
     }
     IEnumerator FinalCheck()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         MinTemp = true;
 
-        if (MinTemp && MaxTemp)
-        {
+       // if (MinTemp && MaxTemp)
+        //{
             Final.SetActive(true);
             FindObjectOfType<Shine_GM>().EndTimes6_L[1] = System.DateTime.Now.ToString();
 
-        }
+        //}
     }
     public void ReButton() {
         for (int k = 0; k < ChemicaObj.Length; k++) {
@@ -134,7 +137,7 @@ public class Stage6_2 : MonoBehaviour
         TempText.text = 0 + "C<sup>o</sup>";
 
         TempUI.SetActive(false);
-        Info[0].SetActive(false);
+        Info[0].SetActive(true);
         Info[1].SetActive(false);
         ObjTips.SetActive(true);
         Destroy(ChemicaObjHot);

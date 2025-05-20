@@ -7,9 +7,9 @@ public class ControlObj : MonoBehaviour
     public bool ControlUp, ControlDown;
     public float Speed;
 
-    public GameObject[] H2, N2, NH3;
-    public GameObject[] H2UI, N2UI, NH3UI;
-
+    //public GameObject[] H2, N2, NH3;
+    //public GameObject[] H2UI, N2UI, NH3UI;
+    public GameObject[] State3D,StateUI;
     public float Rate;
     public float OriginalPosY;
     public bool isOpen;
@@ -27,12 +27,13 @@ public class ControlObj : MonoBehaviour
     private void Start()
     {
         FindObjectOfType<Shine_GM>().StartTimes6_L[2] = System.DateTime.Now.ToString();
+        InfoUI[0].SetActive(true);
 
     }
     // Update is called once per frame
     void Update()
     {
-        Rate =( transform.localPosition.y / OriginalPosY)*100;
+      /*  Rate =( transform.localPosition.y / OriginalPosY)*100;
         if (isOpen)
         {
             if (Rate > 99f & Rate < 100f)
@@ -146,13 +147,25 @@ public class ControlObj : MonoBehaviour
                 N2UI[0].SetActive(true);
                if(!isDown) isDown = true;
             }
-        }
-        if (ControlUp)
+        }*/
+        if (ControlUp&& isDown)
         {
+            
             InfoUI[0].SetActive(false);
             if (transform.localPosition.y < 1.172405f)
             {
                 transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + Speed, transform.localPosition.z);
+                State3D[0].SetActive(false);
+                State3D[1].SetActive(false);
+                State3D[2].SetActive(true);
+                StateUI[0].SetActive(false);
+                StateUI[1].SetActive(false);
+                StateUI[2].SetActive(true);
+                InfoUI[1].SetActive(true);
+                if (InfoUI[1].active)
+                {
+                    StartCoroutine(FinalCheck());
+                }
             }
         }
         if (ControlDown)
@@ -161,8 +174,16 @@ public class ControlObj : MonoBehaviour
             if (transform.localPosition.y > 1.0913f)
             {
                 transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - Speed, transform.localPosition.z);
+                State3D[0].SetActive(false);
+                State3D[1].SetActive(true);
+                State3D[2].SetActive(false);
+                StateUI[0].SetActive(false);
+                StateUI[1].SetActive(true);
+                StateUI[2].SetActive(false);
+                isDown = true;
+              
             }
-          
+
         }
     }
     public void ControlUpObj(bool state) {
@@ -176,52 +197,51 @@ public class ControlObj : MonoBehaviour
     public void Open()
     {
         isOpen = true;
-        DeplayData();
-        InfoUI[0].SetActive(true);
+        //DeplayData();
+        StateUI[0].SetActive(true);
+        State3D[0].SetActive(true);
+
     }
-     void DeplayData() {
-        for (int i = 0; i < H2.Length; i++) {
-            H2[i].SetActive(true);
-            N2[i].SetActive(true);
-            H2UI[i].SetActive(true);
-            N2UI[i].SetActive(true);
-            NH3[i].SetActive(false);
-            NH3UI[i].SetActive(false);
-        }
-        NH3[0].SetActive(true);
-        NH3UI[0].SetActive(true);
+    void DeplayData() {
+        /* for (int i = 0; i < H2.Length; i++) {
+             H2[i].SetActive(true);
+             N2[i].SetActive(true);
+             H2UI[i].SetActive(true);
+             N2UI[i].SetActive(true);
+             NH3[i].SetActive(false);
+             NH3UI[i].SetActive(false);
+         }
+         NH3[0].SetActive(true);
+         NH3UI[0].SetActive(true);*/
+      
     }
 
     public void ReButton()
     {
-        for (int i = 0; i < H2.Length; i++)
+        for (int i = 0; i < State3D.Length; i++)
         {
-            H2[i].SetActive(false);
-            N2[i].SetActive(false);
-            H2UI[i].SetActive(false);
-            N2UI[i].SetActive(false);
-            NH3[i].SetActive(false);
-            NH3UI[i].SetActive(false);
+            State3D[i].SetActive(false);
+            StateUI[i].SetActive(false);
         }
         isOpen = false;
         transform.localPosition = new Vector3(transform.localPosition.x,OriginalPosY, transform.localPosition.z);
         isDown = false;
         isUp = false;
         Final.SetActive(false);
-        InfoUI[0].SetActive(false);
+        InfoUI[0].SetActive(true);
         InfoUI[1].SetActive(false);
         ObjTips.SetActive(true);
 
     }
     IEnumerator FinalCheck()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
-        if (isOpen && isUp)
-        {
+        //if (isOpen && isUp)
+        //{
             Final.SetActive(true);
             FindObjectOfType<Shine_GM>().EndTimes6_L[2] = System.DateTime.Now.ToString();
 
-        }
+       // }
     }
 }

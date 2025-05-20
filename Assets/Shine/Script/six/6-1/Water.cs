@@ -131,7 +131,7 @@ public class Water : MonoBehaviour
     }
 
     IEnumerator FinalCheck() {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3f);
         if (!TackObjs[0].active && !TackObjs[1].active && !TackObjs[2].active) {
             Final.SetActive(true);
             FindObjectOfType<Shine_GM>().EndTimes6_L[0] = System.DateTime.Now.ToString();
