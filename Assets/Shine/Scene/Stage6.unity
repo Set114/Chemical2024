@@ -64332,6 +64332,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   Tag: Pickable
+--- !u!114 &1567046254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567046247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ffc71a43b1a9a49a21c805ff55ccf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1572207111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: f10a79f37ff522b4280e2844332bef77, type: 3}
@@ -81023,7 +81035,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050668740}
   m_LocalRotation: {x: -0, y: -0.2640112, z: -0, w: 0.9645196}
-  m_LocalPosition: {x: 0, y: 0, z: 1.36}
+  m_LocalPosition: {x: 0, y: 0, z: 1.25}
   m_LocalScale: {x: 0.0056637637, y: 0.0046190764, z: 0.0029904437}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -81035,7 +81047,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -30.616, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.341, y: 0.978}
+  m_AnchoredPosition: {x: -0.526, y: 0.978}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050668746
@@ -101642,6 +101654,7 @@ GameObject:
   - component: {fileID: 3270718037073182563}
   - component: {fileID: 3270718037073182565}
   - component: {fileID: 3270718037073182566}
+  - component: {fileID: 3270718037073182567}
   m_Layer: 0
   m_Name: Potassium
   m_TagString: potassium
@@ -101903,6 +101916,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   Tag: potassium
+--- !u!114 &3270718037073182567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270718037072945985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ffc71a43b1a9a49a21c805ff55ccf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3270718037896468170
 GameObject:
   m_ObjectHideFlags: 0
@@ -101919,6 +101944,7 @@ GameObject:
   - component: {fileID: 3270718037899856588}
   - component: {fileID: 3270718037899856590}
   - component: {fileID: 3270718037899856591}
+  - component: {fileID: 3270718037899856592}
   m_Layer: 0
   m_Name: Acid
   m_TagString: acid
@@ -102230,6 +102256,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedObject: {fileID: 0}
   Tag: acid
+--- !u!114 &3270718037899856592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270718037896468170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ffc71a43b1a9a49a21c805ff55ccf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &3358060934425256620
 MeshFilter:
   m_ObjectHideFlags: 0

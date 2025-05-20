@@ -29,13 +29,16 @@ public class Water : MonoBehaviour
         
     }
     public void ReButton() {
-        TackObjs[0].transform.position = RecordObjs[0];
-        TackObjs[1].transform.position = RecordObjs[1];
-        TackObjs[2].transform.position = RecordObjs[2];
+       // TackObjs[0].transform.position = RecordObjs[0];
+       // TackObjs[1].transform.position = RecordObjs[1];
+        //TackObjs[2].transform.position = RecordObjs[2];
 
         TackObjs[0].SetActive(true);
         TackObjs[1].SetActive(true);
         TackObjs[2].SetActive(true);
+        TackObjs[0].GetComponent<ResetPosition>().ResetTransform();
+        TackObjs[1].GetComponent<ResetPosition>().ResetTransform();
+        TackObjs[2].GetComponent<ResetPosition>().ResetTransform();
 
         ChemicalImage[0].SetActive(false);
         ChemicalImage[1].SetActive(false);
@@ -47,8 +50,8 @@ public class Water : MonoBehaviour
         TackObjs[1].GetComponent<Collider>().enabled = false;
         TackObjs[2].GetComponent<Collider>().enabled = false;
 
-        TackObjs[1].transform.localEulerAngles = Vector3.zero;
-        TackObjs[2].transform.localEulerAngles = Vector3.zero;
+      //  TackObjs[1].transform.localEulerAngles = Vector3.zero;
+      //  TackObjs[2].transform.localEulerAngles = Vector3.zero;
 
        /* Watermaterial.SetColor("_SpecColor", Color.white);
         Watermaterial.SetColor("_TopColor", Color.white);
