@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 public class AtomDetection : MonoBehaviour
 {
     [SerializeField] private Area area;

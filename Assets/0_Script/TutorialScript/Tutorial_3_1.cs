@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,6 @@ public class Tutorial_3_1 : MonoBehaviour
     [Tooltip("商店原子數量文字")]
     [SerializeField] private Text countText_shopC, countText_shopO, countText_shopN,
         countText_shopH, countText_shopFe;
-
     [Header("工作區")]
     [Tooltip("組合原子的工作區")]
     [SerializeField] private GameObject workSpace;
@@ -47,7 +45,6 @@ public class Tutorial_3_1 : MonoBehaviour
     [Tooltip("工作區原子數量文字")]
     [SerializeField] private Text countText_workC, countText_workO, countText_workN,
     countText_workH, countText_workFe;
-
     [Space]
     //等號右側相關設定
     [Tooltip("指定成品原子")]
@@ -80,7 +77,9 @@ public class Tutorial_3_1 : MonoBehaviour
     [SerializeField] private GameObject clearPage;
     [Tooltip("測驗過關頁面文字")]
     [SerializeField] private Text clearText;
-
+    [Space]
+    [Tooltip("需要解釋氧為何不能只放單顆氧原子")]
+    [SerializeField] private bool needExplainO2 = false;
     private GameManager gm;
     private LevelObjManager levelObjManager;
     private QuestionManager questionManager;    //管理題目介面
@@ -382,6 +381,11 @@ public class Tutorial_3_1 : MonoBehaviour
                 break;
             case "B":
                 atoms = atoms_AreaB;
+                if (atomName == "O" && needExplainO2)
+                {
+                    audioManager.PlayVoice("W_O2");
+                    needExplainO2 = false;
+                }
                 break;
             case "C":
                 atoms = atoms_AreaC;
