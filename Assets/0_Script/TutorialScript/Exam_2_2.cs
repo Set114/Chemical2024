@@ -45,7 +45,7 @@ public class Exam_2_2 : MonoBehaviour
 
         bakingSodaPowderInWater.transform.localScale = new Vector3(0f, 0f, 0f);
         tv.SetActive(true);
-        hintManager.SetTotalStep(3);
+        hintManager.SetTotalStep(2);
         audioManager.PlayVoice("E2_2_1");
         objects.SetActive(false);
 

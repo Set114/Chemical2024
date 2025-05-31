@@ -423,7 +423,9 @@ public class MouseController : MonoBehaviour
                     selectedObject.transform.parent = selectedObjectParent;
                     break;
                 //------------Stage 5--------------
-                case "Cap_5-2":                
+                case "Cap_5-2":
+                    selectedObject.transform.parent = selectedObjectParent;
+                    selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     break;
                 case "Glucose_5-3":
                 case "Water100ml_5-5":

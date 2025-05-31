@@ -105,8 +105,6 @@ public class Tutorial_5_2 : MonoBehaviour
         if (sender.name == "Cap_5-2")
         {
             //打開瓶蓋
-            if(!isPC)
-                sender.GetComponent<Rigidbody>().isKinematic = false;
             moleculaManager.PlayMoleculasAnimation();
             timer = 0;
             Status++;

@@ -989,7 +989,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4874464004768016333}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1540,6 +1552,7 @@ MonoBehaviour:
   liquidColor: {r: 1, g: 1, b: 1, a: 0.2}
   maxCapacity: 700
   currCapacity: 400
+  ratio: 0
   stream: {fileID: 0}
   minPourOutAngle: 0
   maxPourOutAngle: 0
@@ -1547,6 +1560,7 @@ MonoBehaviour:
   maxPourOutSpeed: 10000
   injectFilter: 
   isUnlimited: 0
+  isFull: 0
   targerRatio: 0
   _whenInject:
     m_PersistentCalls:
@@ -1558,6 +1572,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _whenReachTargerRatio:
+    m_PersistentCalls:
+      m_Calls: []
+  _whenInjectWrongLiquid:
     m_PersistentCalls:
       m_Calls: []
 --- !u!136 &4874464005714530404
