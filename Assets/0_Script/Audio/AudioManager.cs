@@ -51,6 +51,9 @@ public class AudioManager : MonoBehaviour
     private SettingUIManager controlPanel;      //左上角控制板
     public Slider soundsSlider; // 用於控制音效音量的滑塊
     public Slider bgmSlider; // 用於控制背景音樂音量的滑塊
+
+    static public float soundsSliderValue, bgmSliderValue, AudioSourceLength;
+
     void Awake()
     {
         if (soundsSlider == null || bgmSlider == null)
@@ -121,7 +124,10 @@ public class AudioManager : MonoBehaviour
             bgmSlider.value = 0.5f; // 設置初始值
             bgmSlider.onValueChanged.AddListener(delegate { AdjustBGMVolume(bgmSlider.value); });
         }
+        Record();
     }
+
+    
 
     //用來撥放語音的
     public void PlayVoice(string chapterName)
@@ -138,7 +144,12 @@ public class AudioManager : MonoBehaviour
             voiceSource.volume = soundsSlider.value * s.volume;
         voiceSource.Play();
     }
-
+    void Record() {
+        soundsSliderValue = soundsSlider.value;
+        bgmSliderValue = bgmSlider.value;
+        //AudioSourceLength= bgmSource.clip.length;
+        //Debug.Log("AudioSourceLength:"+bgmSource.clip.length);
+    }
     //用來撥放音效的
     public void PlaySound(int index)
     {
@@ -185,6 +196,7 @@ public class AudioManager : MonoBehaviour
          }*/
         voiceSource.volume = 1f; // 設置音量為最大
         soundsSlider.value = 1f; // 在循環外設置 Slider 的值為最大音量
+        Record(); 
     }
 
     // 關閉遊戲音效
@@ -200,6 +212,7 @@ public class AudioManager : MonoBehaviour
 
         voiceSource.volume = 0; // 設置音量為0
         soundsSlider.value = 0f; // 在循環外設置 Slider 的值為0音量
+        Record();
     }
 
     // 關閉背景音樂
@@ -262,6 +275,7 @@ public class AudioManager : MonoBehaviour
                 s.source.volume = volume;
             }
         }*/
+        Record(); 
     }
 
     // 調整背景音樂的音量
@@ -271,6 +285,7 @@ public class AudioManager : MonoBehaviour
         {
             bgmSource.volume = volume;
         }
+        Record();
     }
 
     //繼承音量設定
@@ -286,5 +301,6 @@ public class AudioManager : MonoBehaviour
             bgmSlider.value = bgmVolume;
             bgmSource.volume = bgmVolume;
         }
+        Record();
     }
 }

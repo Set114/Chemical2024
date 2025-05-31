@@ -160,6 +160,10 @@ public class Level4_1 : MonoBehaviour
     public void Partition()
     {
 
+
+        if (TotalO2.Count < 0 || !ClickHeaterObj) {
+            Infos[5].SetActive(true);
+        }
         PartitionObj.SetBool("Click", ClickPartitionObj = !ClickPartitionObj);
         Infos[0].SetActive(false);
 
@@ -184,6 +188,8 @@ public class Level4_1 : MonoBehaviour
         Infos[2].SetActive(false);
         Infos[3].SetActive(false);
         Infos[4].SetActive(false);
+        Infos[5].SetActive(false);
+
         ObjTips.SetActive(true);
 
         // ²M°£O©MCO2
