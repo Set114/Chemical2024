@@ -161,7 +161,7 @@ public class Level4_1 : MonoBehaviour
     {
 
 
-        if (TotalO2.Count < 0 || !ClickHeaterObj) {
+        if (TotalO2.Count < 0&& !ClickHeaterObj) {
             Infos[5].SetActive(true);
         }
         PartitionObj.SetBool("Click", ClickPartitionObj = !ClickPartitionObj);
