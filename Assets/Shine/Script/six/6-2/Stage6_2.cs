@@ -22,14 +22,63 @@ public class Stage6_2 : MonoBehaviour
     public GameObject ChemicaObjHot, ChemicaObjCold;
     public GameObject ChemicaImageHot, ChemicaImageCold;
 
+    public Material CarbonMaterial1;
+
+    //溫度跳動
+     int startValue=0;
+     int endValue = 0;
+    public float duration = 1.5f; // 數字變動時間（秒）
+
     // Start is called before the first frame update
     void Start()
     {
         FindObjectOfType<Shine_GM>().StartTimes6_L[1] = System.DateTime.Now.ToString();
         Info[0].SetActive(true);
-
+        OriginalTemp();
+    }
+    public void OriginalTemp()
+    {
+        CarbonMaterial1.color = new Color32(255, 255, 255, 255);
+        //TempText.text = 25 + "<sup>o</sup>C";
+        if (startValue == 25)
+        {
+            startValue = 100;
+            endValue = 25;
+            StartCounting();
+        }
+    }
+    public void HotTemp()
+    {
+        CarbonMaterial1.color = new Color32(255, 0, 0, 255);
+        //TempText.text = 100 + "<sup>o</sup>C";
+        startValue = 25;
+        endValue = 100;
+         StartCounting();
+    }
+    public void StartCounting()
+    {
+        StartCoroutine(CountToTarget());
     }
 
+    IEnumerator CountToTarget()
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            int currentValue = Mathf.RoundToInt(Mathf.Lerp(startValue, endValue, t));
+
+            if (TempText != null)
+                TempText.text = currentValue.ToString() + "<sup>o</sup>C";
+
+
+
+            yield return null;
+        }
+            TempText.text = endValue.ToString() + "<sup>o</sup>C";
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -71,7 +120,7 @@ public class Stage6_2 : MonoBehaviour
 
         //ChemicaObj[1].SetActive(true);
         //ChemicaImage[1].SetActive(true);
-        TempText.text =100 + "C<sup>o</sup>";
+        HotTemp();
 
     }
     //降溫
@@ -105,7 +154,7 @@ public class Stage6_2 : MonoBehaviour
         ChemicaImageCold.transform.localPosition = ChemicaImage[0].transform.localPosition;
         ChemicaImageCold.SetActive(true);
 
-        TempText.text =0+ "C<sup>o</sup>";
+        OriginalTemp();
         StartCoroutine(FinalCheck());
 
 /*        if (i == 0)
@@ -134,7 +183,7 @@ public class Stage6_2 : MonoBehaviour
         }
         YallowLight.GetComponent<Light>().color = Color.yellow;
         YallowLight.SetActive(false);
-        TempText.text = 0 + "C<sup>o</sup>";
+        TempText.text = 25 + "C<sup>o</sup>";
 
         TempUI.SetActive(false);
         Info[0].SetActive(true);

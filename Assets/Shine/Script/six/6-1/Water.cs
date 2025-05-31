@@ -14,6 +14,7 @@ public class Water : MonoBehaviour
     public GameObject Final;
     GameObject Acidic;
     GameObject Alkaline;
+    public Animator Liquid;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,8 @@ public class Water : MonoBehaviour
 
         InfoUI[0].SetActive(false);
         InfoUI[1].SetActive(false);
+        InfoUI[2].SetActive(false);
+
         TackObjs[0].GetComponent<Collider>().enabled = true;
         TackObjs[1].GetComponent<Collider>().enabled = false;
         TackObjs[2].GetComponent<Collider>().enabled = false;
@@ -107,7 +110,12 @@ public class Water : MonoBehaviour
             PotassiumCollider.enabled = true;
             AcidCollider.enabled = false;
             Acidic.SetActive(true);
-         }
+            InfoUI[0].SetActive(false);
+            InfoUI[1].SetActive(false);
+            InfoUI[2].SetActive(true);
+            Liquid.SetTrigger("Add");
+
+        }
         if (other.gameObject.name == "Potassium")
         {
             //Material pota = this.gameObject.GetComponent<Renderer>().material;
@@ -120,6 +128,7 @@ public class Water : MonoBehaviour
          
             InfoUI[0].SetActive(false);
             InfoUI[1].SetActive(true);
+            InfoUI[2].SetActive(false);
 
             Alkaline = Instantiate(ChemicalImage[2]) as GameObject;
             Alkaline.transform.parent = ChemicalImage[0].transform.parent;
@@ -128,7 +137,10 @@ public class Water : MonoBehaviour
             Alkaline.transform.localPosition = ChemicalImage[0].transform.localPosition;
             Acidic.SetActive(false);
             Alkaline.SetActive(true);
+            Liquid.SetTrigger("Add");
+
             StartCoroutine(FinalCheck());
+
 
         }
     }
