@@ -7,6 +7,7 @@ public class TouchBrAceticAcid : MonoBehaviour
     public GameObject[] CloseObj;
     public GameObject[] OpenObj;
     public Animator Ani;
+    public GameObject QA;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,12 @@ public class TouchBrAceticAcid : MonoBehaviour
             {
                 OpenObj[i].SetActive(true);
             }
+            StartCoroutine(Wait());
         }
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3f);
+        QA.SetActive(true);
     }
 }

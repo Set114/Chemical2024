@@ -51,7 +51,7 @@ public class Water : MonoBehaviour
         InfoUI[0].SetActive(false);
         InfoUI[1].SetActive(false);
         InfoUI[2].SetActive(false);
-
+        InfoUI[3].SetActive(false);
         TackObjs[0].GetComponent<Collider>().enabled = true;
         TackObjs[1].GetComponent<Collider>().enabled = false;
         TackObjs[2].GetComponent<Collider>().enabled = false;
@@ -92,6 +92,7 @@ public class Water : MonoBehaviour
             PotassiumCollider.enabled = false;
             AcidCollider.enabled = true;
             InfoUI[0].SetActive(true);
+            InfoUI[3].SetActive(false);
 
         }
         if (other.gameObject.name == "Acid")
@@ -116,6 +117,8 @@ public class Water : MonoBehaviour
             InfoUI[0].SetActive(false);
             InfoUI[1].SetActive(false);
             InfoUI[2].SetActive(true);
+            InfoUI[3].SetActive(false);
+
             Liquid.SetTrigger("Add");
 
         }
@@ -132,6 +135,7 @@ public class Water : MonoBehaviour
             InfoUI[0].SetActive(false);
             InfoUI[1].SetActive(true);
             InfoUI[2].SetActive(false);
+            InfoUI[3].SetActive(false);
 
             Alkaline = Instantiate(ChemicalImage[2]) as GameObject;
             Alkaline.transform.parent = ChemicalImage[0].transform.parent;

@@ -166,6 +166,9 @@ public class ControlObj : MonoBehaviour
                     StateUI[0].SetActive(false);
                     StateUI[1].SetActive(false);
                     StateUI[2].SetActive(true);
+                    InfoUI[0].SetActive(false);
+                    InfoUI[2].SetActive(false);
+                    InfoUI[3].SetActive(false);
                     InfoUI[1].SetActive(true);
                     if (InfoUI[1].active)
                     {
@@ -185,6 +188,10 @@ public class ControlObj : MonoBehaviour
                     StateUI[0].SetActive(false);
                     StateUI[1].SetActive(true);
                     StateUI[2].SetActive(false);
+                    InfoUI[0].SetActive(false);
+                    InfoUI[2].SetActive(false);
+                    InfoUI[3].SetActive(true);
+
                     isDown = true;
 
                 }
@@ -212,6 +219,9 @@ public class ControlObj : MonoBehaviour
             //DeplayData();
             StateUI[0].SetActive(true);
             State3D[0].SetActive(true);
+            InfoUI[0].SetActive(false);
+            InfoUI[2].SetActive(true);
+
         }
     }
     void DeplayData() {
@@ -242,6 +252,8 @@ public class ControlObj : MonoBehaviour
         Final.SetActive(false);
         InfoUI[0].SetActive(true);
         InfoUI[1].SetActive(false);
+        InfoUI[2].SetActive(false);
+        InfoUI[3].SetActive(false);
         ObjTips.SetActive(true);
 
     }

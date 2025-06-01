@@ -31,10 +31,10 @@ public class Stage6_2 : MonoBehaviour
     public float duration = 1.5f; // 數字變動時間（秒）
 
     // Start is called before the first frame update
-    void AWake()
+    void Awake()
     {
         FindObjectOfType<Shine_GM>().StartTimes6_L[1] = System.DateTime.Now.ToString();
-        Info[0].SetActive(true);
+        //Info[0].SetActive(true);
         OriginalTemp();
     }
     public void OriginalTemp()
@@ -93,7 +93,8 @@ public class Stage6_2 : MonoBehaviour
             YallowLight.SetActive(true);
             ChemicaObj[0].SetActive(true);
             ChemicaImage[0].SetActive(true);
-
+            Info[2].SetActive(false);
+            Info[0].SetActive(true);
 
         }
     }
@@ -103,6 +104,8 @@ public class Stage6_2 : MonoBehaviour
         {
             i = 1;
             Info[0].SetActive(false);
+            Info[3].SetActive(true);
+
             YallowLight.GetComponent<Light>().color = Color.red;
             ChemicaImage[0].SetActive(false);
             ChemicaObj[0].SetActive(false);
@@ -140,6 +143,7 @@ public class Stage6_2 : MonoBehaviour
             //i = Mathf.Clamp(i, 0, 2);
             Info[0].SetActive(false);
             Info[1].SetActive(true);
+            Info[3].SetActive(false);
 
             YallowLight.GetComponent<Light>().color = Color.yellow;
             ChemicaImage[0].SetActive(false);
@@ -197,8 +201,11 @@ public class Stage6_2 : MonoBehaviour
         TempText.text = 25 + "C<sup>o</sup>";
 
         TempUI.SetActive(false);
-        Info[0].SetActive(true);
+        Info[0].SetActive(false);
         Info[1].SetActive(false);
+        Info[2].SetActive(false);
+        Info[3].SetActive(false);
+
         ObjTips.SetActive(true);
         Destroy(ChemicaObjHot);
         Destroy(ChemicaObjCold);

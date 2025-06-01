@@ -7,6 +7,7 @@ public class TouchBr2 : MonoBehaviour
     public GameObject[] CloseObj;
     public GameObject[] OpenObj;
     public Animator Ani;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -33,4 +34,5 @@ public class TouchBr2 : MonoBehaviour
             }
         }
     }
+   
 }
