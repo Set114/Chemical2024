@@ -33,174 +33,183 @@ public class ControlObj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      /*  Rate =( transform.localPosition.y / OriginalPosY)*100;
-        if (isOpen)
+        /*  Rate =( transform.localPosition.y / OriginalPosY)*100;
+          if (isOpen)
+          {
+              if (Rate > 99f & Rate < 100f)
+              {
+                  DeplayData();
+                  if (isDown&&!isUp)
+                  {
+                      InfoUI[1].SetActive(true);
+
+                      isUp = true;
+                      StartCoroutine(FinalCheck());
+                  }
+              }
+              if (Rate > 98f & Rate < 99f)
+              {
+                  for (int i = 0; i < H2.Length - 4; i++)
+                  {
+                      H2[i].SetActive(false);
+                      N2[i].SetActive(false);
+                      H2UI[i].SetActive(false);
+                      N2UI[i].SetActive(false);
+                      NH3[i].SetActive(true);
+                      NH3UI[i].SetActive(true);
+                  }
+                  for (int j = 5; j > H2.Length - 4; j--)
+                  {
+                      H2[j].SetActive(true);
+                      N2[j].SetActive(true);
+                      H2UI[j].SetActive(true);
+                      N2UI[j].SetActive(true);
+                      NH3[j].SetActive(false);
+                      NH3UI[j].SetActive(false);
+                  }
+              }
+              if (Rate > 97f & Rate < 98f)
+              {
+                  for (int i = 0; i < H2.Length - 3; i++)
+                  {
+                      H2[i].SetActive(false);
+                      N2[i].SetActive(false);
+                      H2UI[i].SetActive(false);
+                      N2UI[i].SetActive(false);
+                      NH3[i].SetActive(true);
+                      NH3UI[i].SetActive(true);
+                  }
+                  for (int j = 5; j > H2.Length - 3; j--)
+                  {
+                      H2[j].SetActive(true);
+                      N2[j].SetActive(true);
+                      H2UI[j].SetActive(true);
+                      N2UI[j].SetActive(true);
+                      NH3[j].SetActive(false);
+                      NH3UI[j].SetActive(false);
+                  }
+              }
+              if (Rate > 96f & Rate < 97f)
+              {
+                  for (int i = 0; i < H2.Length - 2; i++)
+                  {
+                      H2[i].SetActive(false);
+                      N2[i].SetActive(false);
+                      H2UI[i].SetActive(false);
+                      N2UI[i].SetActive(false);
+                      NH3[i].SetActive(true);
+                      NH3UI[i].SetActive(true);
+                  }
+                  for (int j = 5; j > H2.Length - 2; j--)
+                  {
+                      H2[j].SetActive(true);
+                      N2[j].SetActive(true);
+                      H2UI[j].SetActive(true);
+                      N2UI[j].SetActive(true);
+                      NH3[j].SetActive(false);
+                      NH3UI[j].SetActive(false);
+                  }
+              }
+              if (Rate > 95f & Rate < 96f)
+              {
+                  for (int i = 0; i < H2.Length-1; i++)
+                  {
+                      H2[i].SetActive(false);
+                      N2[i].SetActive(false);
+                      H2UI[i].SetActive(false);
+                      N2UI[i].SetActive(false);
+                      NH3[i].SetActive(true);
+                      NH3UI[i].SetActive(true);
+                  }
+                  for (int j = 5; j > H2.Length - 1; j--) {
+                      H2[j].SetActive(true);
+                      N2[j].SetActive(true);
+                      H2UI[j].SetActive(true);
+                      N2UI[j].SetActive(true);
+                      NH3[j].SetActive(false);
+                      NH3UI[j].SetActive(false);
+                  }
+              }
+              if (Rate < 95f)
+              {
+                  for (int i = 0; i < H2.Length; i++)
+                  {
+                      H2[i].SetActive(false);
+                      N2[i].SetActive(false);
+                      H2UI[i].SetActive(false);
+                      N2UI[i].SetActive(false);
+                      NH3[i].SetActive(true);
+                      NH3UI[i].SetActive(true);
+                  }
+                  H2[0].SetActive(true);
+                  N2[0].SetActive(true);
+                  H2UI[0].SetActive(true);
+                  N2UI[0].SetActive(true);
+                 if(!isDown) isDown = true;
+              }
+          }*/
+        if (!Final.active)
         {
-            if (Rate > 99f & Rate < 100f)
+            if (ControlUp && isDown)
             {
-                DeplayData();
-                if (isDown&&!isUp)
+
+                InfoUI[0].SetActive(false);
+                if (transform.localPosition.y < 1.172405f)
                 {
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + Speed, transform.localPosition.z);
+                    State3D[0].SetActive(false);
+                    State3D[1].SetActive(false);
+                    State3D[2].SetActive(true);
+                    StateUI[0].SetActive(false);
+                    StateUI[1].SetActive(false);
+                    StateUI[2].SetActive(true);
                     InfoUI[1].SetActive(true);
+                    if (InfoUI[1].active)
+                    {
+                        StartCoroutine(FinalCheck());
+                    }
+                }
+            }
+            if (ControlDown)
+            {
+                InfoUI[0].SetActive(false);
+                if (transform.localPosition.y > 1.0913f)
+                {
+                    transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - Speed, transform.localPosition.z);
+                    State3D[0].SetActive(false);
+                    State3D[1].SetActive(true);
+                    State3D[2].SetActive(false);
+                    StateUI[0].SetActive(false);
+                    StateUI[1].SetActive(true);
+                    StateUI[2].SetActive(false);
+                    isDown = true;
 
-                    isUp = true;
-                    StartCoroutine(FinalCheck());
                 }
-            }
-            if (Rate > 98f & Rate < 99f)
-            {
-                for (int i = 0; i < H2.Length - 4; i++)
-                {
-                    H2[i].SetActive(false);
-                    N2[i].SetActive(false);
-                    H2UI[i].SetActive(false);
-                    N2UI[i].SetActive(false);
-                    NH3[i].SetActive(true);
-                    NH3UI[i].SetActive(true);
-                }
-                for (int j = 5; j > H2.Length - 4; j--)
-                {
-                    H2[j].SetActive(true);
-                    N2[j].SetActive(true);
-                    H2UI[j].SetActive(true);
-                    N2UI[j].SetActive(true);
-                    NH3[j].SetActive(false);
-                    NH3UI[j].SetActive(false);
-                }
-            }
-            if (Rate > 97f & Rate < 98f)
-            {
-                for (int i = 0; i < H2.Length - 3; i++)
-                {
-                    H2[i].SetActive(false);
-                    N2[i].SetActive(false);
-                    H2UI[i].SetActive(false);
-                    N2UI[i].SetActive(false);
-                    NH3[i].SetActive(true);
-                    NH3UI[i].SetActive(true);
-                }
-                for (int j = 5; j > H2.Length - 3; j--)
-                {
-                    H2[j].SetActive(true);
-                    N2[j].SetActive(true);
-                    H2UI[j].SetActive(true);
-                    N2UI[j].SetActive(true);
-                    NH3[j].SetActive(false);
-                    NH3UI[j].SetActive(false);
-                }
-            }
-            if (Rate > 96f & Rate < 97f)
-            {
-                for (int i = 0; i < H2.Length - 2; i++)
-                {
-                    H2[i].SetActive(false);
-                    N2[i].SetActive(false);
-                    H2UI[i].SetActive(false);
-                    N2UI[i].SetActive(false);
-                    NH3[i].SetActive(true);
-                    NH3UI[i].SetActive(true);
-                }
-                for (int j = 5; j > H2.Length - 2; j--)
-                {
-                    H2[j].SetActive(true);
-                    N2[j].SetActive(true);
-                    H2UI[j].SetActive(true);
-                    N2UI[j].SetActive(true);
-                    NH3[j].SetActive(false);
-                    NH3UI[j].SetActive(false);
-                }
-            }
-            if (Rate > 95f & Rate < 96f)
-            {
-                for (int i = 0; i < H2.Length-1; i++)
-                {
-                    H2[i].SetActive(false);
-                    N2[i].SetActive(false);
-                    H2UI[i].SetActive(false);
-                    N2UI[i].SetActive(false);
-                    NH3[i].SetActive(true);
-                    NH3UI[i].SetActive(true);
-                }
-                for (int j = 5; j > H2.Length - 1; j--) {
-                    H2[j].SetActive(true);
-                    N2[j].SetActive(true);
-                    H2UI[j].SetActive(true);
-                    N2UI[j].SetActive(true);
-                    NH3[j].SetActive(false);
-                    NH3UI[j].SetActive(false);
-                }
-            }
-            if (Rate < 95f)
-            {
-                for (int i = 0; i < H2.Length; i++)
-                {
-                    H2[i].SetActive(false);
-                    N2[i].SetActive(false);
-                    H2UI[i].SetActive(false);
-                    N2UI[i].SetActive(false);
-                    NH3[i].SetActive(true);
-                    NH3UI[i].SetActive(true);
-                }
-                H2[0].SetActive(true);
-                N2[0].SetActive(true);
-                H2UI[0].SetActive(true);
-                N2UI[0].SetActive(true);
-               if(!isDown) isDown = true;
-            }
-        }*/
-        if (ControlUp&& isDown)
-        {
-            
-            InfoUI[0].SetActive(false);
-            if (transform.localPosition.y < 1.172405f)
-            {
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + Speed, transform.localPosition.z);
-                State3D[0].SetActive(false);
-                State3D[1].SetActive(false);
-                State3D[2].SetActive(true);
-                StateUI[0].SetActive(false);
-                StateUI[1].SetActive(false);
-                StateUI[2].SetActive(true);
-                InfoUI[1].SetActive(true);
-                if (InfoUI[1].active)
-                {
-                    StartCoroutine(FinalCheck());
-                }
-            }
-        }
-        if (ControlDown)
-        {
-            InfoUI[0].SetActive(false);
-            if (transform.localPosition.y > 1.0913f)
-            {
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - Speed, transform.localPosition.z);
-                State3D[0].SetActive(false);
-                State3D[1].SetActive(true);
-                State3D[2].SetActive(false);
-                StateUI[0].SetActive(false);
-                StateUI[1].SetActive(true);
-                StateUI[2].SetActive(false);
-                isDown = true;
-              
-            }
 
+            }
         }
     }
     public void ControlUpObj(bool state) {
-        ControlUp = state;
+      
+            ControlUp = state;
+        
     }
     public void ControlDownObj(bool state)
     {
-        ControlDown = state;
+       
+            ControlDown = state;
+        
     }
     //¶}¾÷
     public void Open()
     {
-        isOpen = true;
-        //DeplayData();
-        StateUI[0].SetActive(true);
-        State3D[0].SetActive(true);
-
+        if (!Final.active)
+        {
+            isOpen = true;
+            //DeplayData();
+            StateUI[0].SetActive(true);
+            State3D[0].SetActive(true);
+        }
     }
     void DeplayData() {
         /* for (int i = 0; i < H2.Length; i++) {
