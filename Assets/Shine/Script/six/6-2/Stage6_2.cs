@@ -23,14 +23,15 @@ public class Stage6_2 : MonoBehaviour
     public GameObject ChemicaImageHot, ChemicaImageCold;
 
     public Material CarbonMaterial1;
-
+    public GameObject FinishedUI;
+    public Sprite FinishedSprite;
     //溫度跳動
-     int startValue=0;
+    int startValue =0;
      int endValue = 0;
     public float duration = 1.5f; // 數字變動時間（秒）
 
     // Start is called before the first frame update
-    void Start()
+    void AWake()
     {
         FindObjectOfType<Shine_GM>().StartTimes6_L[1] = System.DateTime.Now.ToString();
         Info[0].SetActive(true);
@@ -92,6 +93,8 @@ public class Stage6_2 : MonoBehaviour
             YallowLight.SetActive(true);
             ChemicaObj[0].SetActive(true);
             ChemicaImage[0].SetActive(true);
+
+
         }
     }
     //加溫
@@ -180,6 +183,7 @@ public class Stage6_2 : MonoBehaviour
         //{
             Final.SetActive(true);
             FindObjectOfType<Shine_GM>().EndTimes6_L[1] = System.DateTime.Now.ToString();
+        FinishedUI.GetComponent<Image>().sprite = FinishedSprite;
 
         //}
     }

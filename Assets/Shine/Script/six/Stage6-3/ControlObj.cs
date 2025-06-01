@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlObj : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ControlObj : MonoBehaviour
     public GameObject Final;
 
     public GameObject ObjTips;
+    public GameObject FinishedUI;
+    public Sprite FinishedSprite;
 
     // Start is called before the first frame update
     void Awake()
@@ -250,7 +253,8 @@ public class ControlObj : MonoBehaviour
         //{
             Final.SetActive(true);
             FindObjectOfType<Shine_GM>().EndTimes6_L[2] = System.DateTime.Now.ToString();
+        FinishedUI.GetComponent<Image>().sprite = FinishedSprite;
 
-       // }
+        // }
     }
 }
