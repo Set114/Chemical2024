@@ -27,7 +27,7 @@ public class ControlSound : MonoBehaviour
 
         int result = Mathf.RoundToInt(Mathf.Lerp(-40f, 0f, AudioManager.soundsSliderValue));
         SFXSlider.value = result;
-
+        bgmSource.time = AudioManager.AudioSourceLength;
        /* // 確保 clip 存在且合法
         if (bgmSource != null && bgmSource.clip != null)
         {

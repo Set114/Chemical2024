@@ -147,7 +147,7 @@ public class AudioManager : MonoBehaviour
     void Record() {
         soundsSliderValue = soundsSlider.value;
         bgmSliderValue = bgmSlider.value;
-        //AudioSourceLength= bgmSource.clip.length;
+        AudioSourceLength= bgmSource.time;
         //Debug.Log("AudioSourceLength:"+bgmSource.clip.length);
     }
     //用來撥放音效的
